@@ -1,0 +1,48 @@
+.content .row .card1 i{
+    color: white;
+    font-size: 2.5rem;
+    margin: 1rem;
+    padding: 1rem;
+}
+.content .row .card1 p{
+    font-family: 'Lato', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: .1rem;
+}
+.content .row .card1 a{
+    font-family: 'Lato', sans-serif;
+    font-size: 2.5rem;
+    text-decoration: none;
+    letter-spacing: .1rem;
+    color: #F15336;
+}
+.content .row .card1 .fa-building-o{
+    background-color: #27BEEE;
+    border-radius: .5rem;
+    margin: 1rem;
+    padding: 1.5rem;
+}
+.content .row .card1 .fa-check-square-o{
+    background-color: #2769EE;
+    border-radius: .5rem;
+    margin: 1rem;
+    padding: 1.5rem;
+}
+.content .row .card1 .fa-money{
+    background-color: #BEC747;
+    border-radius: .5rem;
+    margin: 1rem;
+    padding: 1.5rem;
+}
+main .card1 .card-body h5{
+    font-size: 3rem;
+    color: white;
+}
+main .card1{
+    border: 1px solid #212130;
+    border-radius: .9rem;
+    background-color: #212130;
+}
+main .container-fluid1{
+    margin: 2rem;
+}

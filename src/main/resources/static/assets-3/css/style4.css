@@ -1,0 +1,41 @@
+
+	.sidebar-content .sidebar-nav .fa-user-circle-o{
+		font-size: 4rem;
+		vertical-align: middle;
+	}
+	.sidebar-content .sidebar-nav .fa-angle-down{
+		font-size: 1.8rem;
+	}
+	.sidebar .sidebar-nav .sidebar-item .first {
+		height: 90px !important; 
+	}
+	.container-fluid0 .row .col-lg-6 h5{
+		font-size: 20px;
+		color: #A4A4A4;
+	}
+
+
+	table{
+		border: 0px solid #212130;
+		color: white;
+		background-color: #212130;
+		line-height: 1rem;
+		border-radius: 1.5rem;
+	}
+	main .csv{
+		float: right;
+		padding: 1.4rem;
+		background-color: #F15336;
+		font-weight: bold;
+		border-radius: .5rem;
+	}
+	main .csv a{
+		color: white;
+		text-decoration: none;
+	}
+	@media(max-width: 767px){
+		.dataTables_wrapper .dataTables_filter label{
+			float: left !important;
+			margin-top: 1rem !important;
+		}
+	}

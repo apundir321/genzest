@@ -1,0 +1,54 @@
+    body{
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    form .row{
+        margin-top: 1rem;
+        padding: 5rem;
+    }
+    form{
+        width: 100%;
+        margin: 2rem;
+        padding: 5rem;
+    }
+    form select option{
+        padding: 5rem;
+        margin: 2rem;
+    }
+    .row2 button{
+        margin-top: 3rem;
+        width: 9rem;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 1.6rem;
+        background-color: #212130;
+        border: 1px solid #494963;
+    }
+    .row2 button a{
+        color: white;
+        text-decoration: none;
+    }
+    .row2 button:hover{
+        background-color: #494963;
+    }
+    .row2{
+        text-align: center;
+    }
+    body{
+        background-color: #17171E !important;
+    }
+    form h4{
+        color: white;
+        padding: 1rem;
+        font-weight: bold;
+    }
+    form .row input[type=text]{
+        padding: 2rem;
+    }
+    form .row select{
+        height: 4rem;
+    }
+    .modal h5{
+        font-size: 1.9rem;
+        font-weight: bold;
+    }

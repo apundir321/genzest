@@ -1,0 +1,86 @@
+
+.navbar .navbar-collapse ul li{
+   font-size: 20px;
+   margin: 1.6rem;
+   font-family: 'Lato', sans-serif;
+}
+.navbar .navbar-collapse ul li a{
+    text-decoration: none;
+    color: #F15336;
+}
+.navbar .navbar-collapse ul li i{
+    color: #A1A1A1;
+}
+
+
+
+.input-icons i {
+    position: absolute;
+    text-align: right;
+    margin-top: -3rem;
+    margin-left: 1rem;
+    font-size: 2.3rem;
+}
+  
+.input-icons {
+    width: 75%;
+    margin-bottom: 10px;
+    margin-left: 10rem;
+    text-align: right;
+}
+  
+.icon {
+    padding: 10px;
+    min-width: 40px;
+}
+  
+.input-field {
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    align-items: center;
+    border-radius: 2rem;
+    border: none;
+    margin-left: 5rem;
+    background-color: #17171E;
+}
+
+/* sm */
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar .navbar-collapse a{
+      display: none;
+  }
+ }
+
+/* xs */
+@media (max-width: 767px){
+    .navbar .input-icons{
+        display: none;
+    }
+    main .container-fluid .col-lg-3{
+        border-right: none
+    }
+    .navbar .navbar-collapse i{
+        display: flex !important;
+        visibility: visible;
+    }
+    .navbar .dropdown-toggle{
+		visibility: visible !important;
+		display: block !important;
+ 		}
+}
+
+.navbar .dropdown-menu{
+    background-color: #212130;
+}
+nav .sidebar-nav .top span{
+    color: white;
+    text-align: center;
+    align-items: center;
+}
+.content .container-fluid .col-md-3 img{
+    width: 90px;
+    height: 90px;
+    margin: .5rem;
+    padding: .5rem;
+}
