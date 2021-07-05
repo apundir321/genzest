@@ -147,60 +147,42 @@
 			height: 800px;
 		}
 	}
-    
-        /* sm */
-        @media (min-width: 768px) and (max-width: 991px) {
-            table{
-            overflow: auto;
-            display: block;
-        }
-        } 
-
-        /* xs */
-        @media (max-width: 767px) {
-            table{
-            overflow: auto;
-            display: block;
-        }
-        }
-        .sidebar .sidebar-nav .sidebar-item a {
+    .sidebar .sidebar-nav .sidebar-item a {
     height: 55px;
 }
 </style>
 <script>
-var dataSet = new Array();
-<c:forEach items="${jobs}" var="job" varStatus="status">
-jobArray = new Array();
-jobArray.push('${job.id}');
-jobArray.push('${job.jobName}');
-jobArray.push('${job.jobCode}');
-jobArray.push('${job.category.categoryName}');
-jobArray.push('${job.noOfVacancy}');
-jobArray.push('${job.employer.employerName}');
-jobArray.push('${job.status}');
-jobArray.push('${job.createdBy.firstName}');
-jobArray.push('${job.createdDate}');
-jobArray.push('------');
-jobArray.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-pencil"/></a>');
 
-dataSet.push(jobArray);
+var dataSet = new Array();
+<c:forEach items="${profiles}" var="profile" varStatus="status">
+employer = new Array();
+employer.push('${profile.id}');
+employer.push('${profile.firstName}');
+employer.push('${profile.email}');
+employer.push('${profile.mobileNo}');
+employer.push('${profile.dob}');
+employer.push('${profile.gender}');
+employer.push('${profile.course}');
+employer.push('${profile.city}');
+employer.push('<a href="edit_stud.html?profileId=${profile.id}"><i class="fa fa-pencil"/></a>');
+dataSet.push(employer);
 </c:forEach>
-	var dataSet12 = [
-       [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	var dataSet1 = [
+    [ "2", "Heny", "xyz@gmail.com", "9098765432", "25/51/997", "Male", "BE", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "12", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "10", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "8", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "6", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "4", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "3", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "5", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "7", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "9", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
+    [ "11", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ],
     // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "1", "Developer", "D1241", "CSE", "10", "Flybunch", "Open", "Flybunch", "26/05/2021", "----" ]
+    [ "1", "Den", "abc@gmail.com", "9098765432", "25/51/998", "Male", "BA", "Delhi","Updated", "26/05/2021", "----" ]
     // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
     // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
     // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
@@ -246,31 +228,17 @@ $(document).ready(function() {
     $('#example').DataTable( {
         data: dataSet,
         columns: [
-			{ title: "Id" },
-            { title: "Job" },
-            { title: "Job Code" },
-            { title: "Category" },
-            { title: "Vacancy" },
-            { title: "Company" },
-            { title: "Status" },
-			{ title: "Created By" },
-			{ title: "Created Date" },
-			{ title: "Action" },
-			{
-				 title: "Edit"
-			}
-//             {
-//                 data: null,
-//                 className: "dt-center editor-edit",
-//                 defaultContent: '<a href="editjobs-genz.html"><i class="fa fa-pencil"/></a>',
-//                 orderable: false
-//             },
-//             {
-//                 data: null,
-//                 className: "dt-center editor-delete",
-//                 defaultContent: '<i class="fa fa-trash"/>',
-//                 orderable: false
-//             }
+        { title: "Id" },
+            { title: "Name" },
+            { title: "Email" },
+            { title: "Phone" },
+            { title: "DOB" },
+            { title: "Gender" },
+            { title: "Course" },
+			{ title: "City" },
+            {
+               title: "Edit"
+            }
         ],
 		
     } );
@@ -298,7 +266,7 @@ $(document).ready(function() {
 					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
             		</a></li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
 					</a></li>
 
@@ -307,14 +275,14 @@ $(document).ready(function() {
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="#"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
+					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="#"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
+					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
                     </a></li>
 
-                    <li class="sidebar-item">
+                    <li class="sidebar-item active">
                     <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span>
                     </a></li>
 
@@ -345,6 +313,22 @@ $(document).ready(function() {
 				
 				</ul>
 
+				<!-- DOWNLOAD APP TRANSPARENT BOX -->
+				<!-- <div class="container">
+					<div class="centered">
+						<b class="dot">.....</b><br>
+						<a href="#"><b>Download our App</b></a><br>
+						<b class="dot" >.....</b>
+						<br>
+						<a class="blurtext">
+							Become a part of GenZest by Downloading our App
+						</a>
+					</div>
+				  </div> -->
+				<!-- DOWNLOAD APP TRANSPARENT BOX -->
+
+				<!-- <h4><b>Genzest Admin</b></h4>
+				<p>© 2021 All Rights Reserved</p> -->
 			</div>
 		</nav>
 
@@ -368,7 +352,7 @@ $(document).ready(function() {
                 }
               }
             }
-            </script>
+        </script>
 
 		<div class="main">
 			<!-- ---------------TOP BAR-------------- -->
@@ -376,9 +360,9 @@ $(document).ready(function() {
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-1/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Jobs/ Openings</b></h4>
+			   <h4><b>Student</b></h4>
 
-			  <div class="navbar-collapse collapse">
+			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
 							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
@@ -456,7 +440,7 @@ $(document).ready(function() {
                        <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
                    </div>
                </div>   -->
-               <button class="csv"><a href="editjobs-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
+               <button class="csv"><a href="studedit-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
                <table id="example" class="display" width="100%"></table>
            </main>
 

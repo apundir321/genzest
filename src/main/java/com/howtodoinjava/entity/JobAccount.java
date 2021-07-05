@@ -57,11 +57,11 @@ public class JobAccount {
 	
 	private int vacancyForOther;
 	
-	@NotNull
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date effectiveFrom;
 	
-	@NotNull
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date effectiveTill;
 	

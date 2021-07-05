@@ -20,12 +20,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.howtodoinjava.dao.UserProfileRepository;
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobType;
+import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.UserProfile;
 
 
 @Repository
@@ -49,6 +52,9 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 	
 	@Autowired
 	TimeSlotRepo timeSlotRepo;
+	
+	@Autowired
+	UserProfileRepository userRepo;
 	
 	@Override
 	public List<JobAccount> findJobsByJobCriterias(SearchJobs searchJob) {
@@ -141,5 +147,39 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 	      List<Object[]> resultList = typedQuery.getResultList();
 	      return resultList;
 	  }
+	
+	
+//	@Override
+	public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate) {
+		// TODO Auto-generated method stub
+		 CriteriaBuilder cb = em.getCriteriaBuilder();
+		    CriteriaQuery<UserProfile> cq = cb.createQuery(UserProfile.class);
+		    
+		    Root<UserProfile> job = cq.from(UserProfile.class);
+		    List<Predicate> predicates = new ArrayList<>();
+		    
+		    if (!StringUtils.isEmpty(searchCandidate.getJobCategory())) {
+		    	Category category = categoryRepo.findById(Integer.parseInt(searchCandidate.getJobCategory())).get();
+		        predicates.add(cb.equal(job.get("category"), category));
+		    }
+		    
+		    if (!StringUtils.isEmpty(searchCandidate.getEmployerName())) {
+		    	Optional<Employer> employer = employerRepo.findById(Integer.parseInt(searchCandidate.getEmployerName()));
+		        predicates.add(cb.equal(job.get("employer"), employer.get()));
+		    }
+		    if (!StringUtils.isEmpty(searchCandidate.getJobType())) {
+		    	JobType jobType = jobTypeRepo.findById(Integer.parseInt(searchCandidate.getJobType())).get();
+		        predicates.add(cb.equal(job.get("jobType"), jobType));
+		    }
+		    if (!StringUtils.isEmpty(searchCandidate.getTimeSlot())) {
+		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchCandidate.getTimeSlot())).get();
+		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
+		    }
+		    cq.where(predicates.toArray(new Predicate[0]));
+
+		    return em.createQuery(cq).getResultList();
+
+	}
+
 
 }

@@ -1,4 +1,7 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -161,7 +164,7 @@
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>John Rambo</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
             		</a>
 				</li>
@@ -236,7 +239,7 @@
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
 				<!-- <h4><b>Genzest Admin</b></h4>
-				<p>© 2021 All Rights Reserved</p> -->
+				<p>Â© 2021 All Rights Reserved</p> -->
 			</div>
 		</nav>
 
@@ -270,20 +273,10 @@
                </a>
 			   <h4><b>Dashboard</b></h4>
 
-			   <div style="max-width:350px; margin:auto">
-					<div class="input-icons">
-						<input class="input-field" type="text">
-						<i style="color: #6E6E6E;" class="fa fa-search" aria-hidden="true"></i>
-					</div>
-				</div>
-
-				<div class="navbar-collapse collapse">
+			  <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
-							<i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;<a href=""> Notification </a>
-						</li>
-						<li class="nav-item">
-							<i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<a href=""> Settings </a>
+							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
 						</li>
 						<li class="nav-item dropdown">
 						
@@ -310,7 +303,7 @@
                             <div class="card-body">
                               <i class="fa fa-users align-middle"></i> 
                               <p class="card-text"><a href="#">Total Employer</a></p>
-                              <h5>10</h5>
+                              <h5>${employersCount}</h5>
                             </div>
                           </div>
                         </div>
@@ -319,7 +312,7 @@
                             <div class="card-body">
                               <i class="fa fa-smile-o align-middle"></i>
                               <p class="card-text"><a href="#">Total Student</a></p>
-                              <h5>38</h5>
+                              <h5>${studentCount}</h5>
                             </div>
                           </div>
                         </div>
@@ -328,7 +321,7 @@
                               <div class="card-body">
                                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                                 <p class="card-text"><a href="#">Active Jobs</a></p>
-                                <h5>9</h5>
+                                <h5>${jobsCount}</h5>
                               </div>
                             </div>
                         </div>
@@ -337,7 +330,7 @@
                               <div class="card-body">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                                 <p class="card-text"><a href="#">Job Type</a></p>
-                                <h5>4</h5>
+                                <h5>${jobTypeCount}</h5>
                               </div>
                             </div>
                         </div>
@@ -345,8 +338,8 @@
                             <div class="card1">
                               <div class="card-body">
                                 <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                <p class="card-text"><a href="#">Incomplete Student</a></p>
-                                <h5>22</h5>
+                                <p class="card-text"><a href="#">Courses</a></p>
+                                <h5>${courseCount}</h5>
                               </div>
                             </div>
                         </div>
@@ -365,52 +358,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row" id="th">Banking & Insurance</th>
-                                        <td>4</td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">Billing</th>
-                                        <td>1</td>
-                                    
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">Customer Service</th>
-                                        <td colspan="2">4</td>
-                            
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">Designing</th>
-                                        <td colspan="2">1</td>
-                                    
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">Finance & Accouting</th>
-                                        <td colspan="2">3</td>
-                                    
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">Healthcare</th>
-                                        <td colspan="2">1</td>
-                                    
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">HR</th>
-                                        <td colspan="2">7</td>
-                                
-                                    </tr>
-                                    <tr>
-                                        <th scope="row" id="th">Manufacturing</th>
-                                        <td colspan="2">2</td>
-                                    
-                                    </tr>
-                                    <tr>
-                                        <th class="last" scope="row" id="th">Sales & Marketing</th>
-                                        <td class="last" colspan="2">7</td>
-                                    
-                                    </tr>
-                                    </tbody>
+                                   <c:forEach var="catCount" items="${categoriesCountJobs}">
+										<tr>
+											<th scope="row" id="th">${catCount.category}</th>
+											<td>${catCount.value}</td>
+											
+										</tr>
+										</c:forEach>
+                                                                        </tbody>
                                 </table>
                             </div>
                         </div>

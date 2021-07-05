@@ -68,7 +68,7 @@
           <!-- Remind Passowrd -->
           <div id="formFooter">
 <!--             <a class="underlineHover" href="signup.html">Forgot Password?</a>&nbsp;&nbsp;&nbsp; -->
-            <a class="underlineHover" href="signup.html">SignUp</a>
+            <a class="underlineHover" href="/signup.html">SignUp</a>
           </div>
       
         </div>

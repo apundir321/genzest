@@ -35,11 +35,6 @@
 
 <script src="//code.jquery.com/jquery-3.5.1.js"></script>
 <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<!-- <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 
@@ -48,10 +43,9 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
-
 <style>
     .main{
-        height: 2200px;
+        height: 1000px;
     }
        /* xs */
         @media (max-width: 767px) {
@@ -126,6 +120,15 @@
             /* padding: 1.5rem; */
             width: auto !important;
         }
+        .log{
+            background-color: #212130;
+            border-radius: 10px;
+            padding: 0px;
+            width: 100%;
+        }
+        .main{
+            height: 1100px;
+        }
     }
 
     .dropbtn {
@@ -174,11 +177,23 @@
 
         .show {display: block;}
 
-        .sidebar .sidebar-nav .sidebar-item a {
-            height: 60px;
+        .colbox h4{
+            color: #bebbbb;
         }
-        .sidebar .sidebar-nav .sidebar-item a {
-    height: 55px;
+        .log{
+            background-color: #212130;
+            border-radius: 10px;
+            padding: 45px;
+            width: 70%;
+        }
+</style>
+
+
+   <style>
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
 }
 </style>
 
@@ -186,221 +201,80 @@
 
 <body>
 	<div class="wrapper">
-<!--         <nav id="sidebar" class="sidebar js-sidebar"> -->
-<!-- 			<div class="sidebar-content js-simplebar"> -->
-<!-- 				<a href="index.html"><img src="assets-1/img/icons/Genzest Logo.png" alt="" class="img-responsive logo"></a></a> -->
+      
 
-
-<!-- 				<ul class="sidebar-nav"> -->
-<!-- 				<br> -->
-
-<!-- 				    <li class="sidebar-item top"> -->
-<!-- 					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>John Rambo</b><i class="fa fa-angle-down" aria-hidden="true"></i></span> -->
-<!-- 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p> -->
-<!--             		</a> -->
-<!-- 				</li> -->
-
-<!-- 					<li class="sidebar-item"> -->
-<!-- 					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span> -->
-<!--             		</a></li> -->
-
-<!-- 					<li class="sidebar-item"> -->
-<!-- 					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span> -->
-<!-- 					</a></li> -->
-
-<!-- 					<li class="sidebar-item"> -->
-<!-- 					<a class="sidebar-link" href="selectedstud-genz.html"><i class="fa fa-user-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Selected Student</b></span> -->
-<!-- 					</a></li> -->
-
-<!-- 					<li class="sidebar-item"> -->
-<!-- 					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span> -->
-<!-- 					</a></li> -->
-
-<!-- 					<li class="sidebar-item active"> -->
-<!-- 					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span> -->
-<!--                     </a></li> -->
-
-<!--                     <li class="sidebar-item"> -->
-<!--                     <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span> -->
-<!--                     </a></li> -->
-
-<!--                     <li class="sidebar-item"> -->
-<!--                     <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span> -->
-<!--                     </a></li> -->
-
-<!--                     <li class="sidebar-item"> -->
-<!--                     <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span> -->
-<!--                     </a></li> -->
-
-<!--                     <li class="sidebar-item"> -->
-<!--                         <div class="dropdown"> -->
-<!--                             <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button> -->
-<!--                             <div id="myDropdown" class="dropdown-content"> -->
-<!--                                 <a href="access-right-genz.html">Access Right</a> -->
-<!--                                 <a href="team-genz.html">Team</a> -->
-<!--                                 <a href="category-genz.html">Category</a> -->
-<!--                                 <a href="jobtype-genz.html">Job Types</a> -->
-<!--                                 <a href="timeslot-genz.html">Time Slot</a> -->
-<!--                                 <a href="bloodgrp-genz.html">Blood Group</a> -->
-<!--                                 <a href="course-genz.html">Courses</a> -->
-<!--                                 <a href="vehicle-genz.html">Vehicle Type</a> -->
-<!--                                 <a href="citystate-genz.html">City Country State</a> -->
-<!--                             </div> -->
-<!--                           </div> -->
-<!--                     </li> -->
-				
-<!-- 				</ul> -->
-
-<!-- 				DOWNLOAD APP TRANSPARENT BOX -->
-<!-- 				<div class="container">
-<!-- 					<div class="centered"> -->
-<!-- 						<b class="dot">.....</b><br> -->
-<!-- 						<a href="#"><b>Download our App</b></a><br> -->
-<!-- 						<b class="dot" >.....</b> -->
-<!-- 						<br> -->
-<!-- 						<a class="blurtext"> -->
-<!-- 							Become a part of GenZest by Downloading our App -->
-<!-- 						</a> -->
-<!-- 					</div> -->
-<!-- 				  </div> --> -->
-<!-- 				DOWNLOAD APP TRANSPARENT BOX -->
-
-<!-- 				<h4><b>Genzest Admin</b></h4>
-<!-- 				<p>© 2021 All Rights Reserved</p> --> -->
-<!-- 			</div> -->
-<!-- 		</nav> -->
-
-        <script>
-            /* When the user clicks on the button, 
-            toggle between hiding and showing the dropdown content */
-            function myFunction() {
-              document.getElementById("myDropdown").classList.toggle("show");
-            }
-            
-            // Close the dropdown if the user clicks outside of it
-            window.onclick = function(event) {
-              if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                  var openDropdown = dropdowns[i];
-                  if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                  }
-                }
-              }
-            }
-            </script>
-
-
-		<div class="main">
+		<div class="main" style="padding-top: 50px">
 			<!-- ---------------TOP BAR-------------- -->
-			<nav class="navbar navbar-expand">
-				<a class="sidebar-toggle js-sidebar-toggle">
-					<img src="assets-2/img/icons/Shape@1X (3).png">
-               </a>
-			   <h4><b>Employer</b></h4>
-
-			   <div style="max-width:350px; margin:auto">
-					<div class="input-icons">
-						<input class="input-field" type="text">
-						<i style="color: #6E6E6E;" class="fa fa-search" aria-hidden="true"></i>
-					</div>
-				</div>
-
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item">
-							<i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;<a href=""> Notification </a>
-						</li>
-						<li class="nav-item">
-							<i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<a href=""> Settings </a>
-						</li>
-						<li class="nav-item dropdown">
-						
-						
-						</li>
-					</ul>
-				</div>
-				<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-				</a>
-				
-				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth">Genzest Login</button>
-					<button class="btn-fifth">Recruiter Login</button>
-					<button class="btn-sixth">Student Login</button>
-				</div> 
-			</nav>
+			
 
 			<main class="content">
 			
                 <div class="row two">
                     <div class="container-fluid">
-                        <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <div id="profile-container">
-                                <image id="profileImage" src="http://lorempixel.com/100/100" />
-                            </div>
-                            <input id="imageUpload" type="file" name="profile_photo" placeholder="Photo" required="" capture>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <h4>General profile (data once entered can not be altered)</h4>
-                        </div> -->
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="back" style="float: right; margin: 1rem;"><a href="employer-genz.html">Back  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
+                            <button class="back" style="float: right; margin: 1rem;"><a href="/login.html">Login  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
                         </div>
                     </div>
                 </div>
 				
-                <div class="container-fluid">
-                   <form:form action="/signup.html" method="post" modelAttribute="userDto">
-                       
-                        <div class="form-group">
+                <div class="container log shadow">
+                    <form:form action="/signup.html" modelAttribute="userDto">
+                    <div class="form-row" style="text-align: center">
+                    <h4 style="font-size: 22px;color: #F15336;">Create Genzest Account</h4>
+                    </div>
+                       <div class="form-row" style="padding-top: 10px">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
                             <h4>First Name <span>*</span></h4>
-                            <form:input type="text" path="firstName" placeholder="First Name" class="form-control" />
-                            <form:errors path="firstName"></form:errors>
-                          </div><br/>
-                         <div class="form-group">
+                            <form:input type="text" placeholder="First Name" class="form-control" path="firstName"/>
+                            <form:errors path="firstName" cssClass="error"></form:errors>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
                             <h4>Last Name <span>*</span></h4>
-                            <form:input type="text" path="lastName" placeholder="LastName" class="form-control"/>
-                            <form:errors path="lastName"></form:errors>
-                          </div><br/>
-                          <div class="form-group">
-                            <h4>Email <span>*</span></h4>
-                            <form:input class="form-control" path="email"  placeholder="Enter Email" id="example-email-input"/>
-                             <form:errors path="email"></form:errors>
-                         </div><br/>
-                         <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Parent's Name <span>*</span></h4>
-                            <input name="firstname" placeholder="First Name" class="form-control" type="text">
-                          </div> -->
-                        <div class="form-group">
-                            <h4>Mobile No <span>*</span></h4>
-                            <form:input class="form-control" path="phoneNo"  placeholder="Mobile No" id="example-tel-input"/>
-                         </div>
-                         <div class="form-group">
+                            <form:input type="text" placeholder="Last Name" class="form-control" path="lastName"/>
+                            <form:errors path="lastName" cssClass="error"></form:errors>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
+                           <h4>Email <span>*</span></h4>
+                           <form:input type="email" placeholder="email" class="form-control" path="email"/>
+                           <form:errors path="email" cssClass="error"></form:errors>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
+                           <h4>Mobile No <span>*</span></h4>
+                           <form:input class="form-control" type="tel" placeholder="Mobile No" id="example-tel-input" path="phoneNo" />
+                           <form:errors path="phoneNo" cssClass="error"></form:errors>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
                             <h4>Password <span>*</span></h4>
-                            <form:input class="form-control" path="password" placeholder="Password" id="example-tel-input"/>
-                         </div>
-                        <div class="form-group">
+                            <form:input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" path="password"/>
+                            <form:errors path="password" cssClass="error"></form:errors>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
                             <h4>Confirm Password <span>*</span></h4>
-                            <form:input class="form-control" path="matchingPassword" placeholder="Confirm Password" id="example-tel-input"/>
-                         </div>
-                   
-                         <div class="form-group">
-                            <button type="submit">Save</button>
+                            <form:input type="confirmpassword" class="form-control" path="matchingPassword" id="exampleInputPassword1" placeholder="Confirm Password"/>
+                            <form:errors path="matchingPassword" cssClass="error"></form:errors>
+                        </div>                    
+                       </div>
+
+                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+                            <button type="submit">Sign Up</button>
                          </div>
                      </form:form>
                </div>
-                <br>
 			</main>
 
 		</div>
 	</div>
 	
-	<script type="text/javascript">
+		<script type="text/javascript">
 	$(document).ready(function(){
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
 	});
 	
@@ -412,4 +286,4 @@
 
 </body>
 
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg3plcpnl0184'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>
+</html>

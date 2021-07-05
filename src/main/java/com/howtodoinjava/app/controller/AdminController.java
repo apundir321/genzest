@@ -35,10 +35,12 @@ import com.howtodoinjava.dao.UserRepository;
 import com.howtodoinjava.domain.CategoryRepo;
 import com.howtodoinjava.domain.CourseRepo;
 import com.howtodoinjava.domain.EmployerRepo;
+import com.howtodoinjava.domain.JobAccountCustomRepo;
 import com.howtodoinjava.domain.JobAccountRepo;
 import com.howtodoinjava.domain.JobTypeRepo;
 import com.howtodoinjava.domain.TimeSlotRepo;
 import com.howtodoinjava.entity.Category;
+import com.howtodoinjava.entity.CategoryCount;
 import com.howtodoinjava.entity.CourseType;
 import com.howtodoinjava.entity.DayPreference;
 import com.howtodoinjava.entity.Employer;
@@ -48,6 +50,7 @@ import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobTimeSlot;
+import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 
 @Controller
@@ -76,6 +79,9 @@ public class AdminController {
 	
 	@Autowired
 	UserProfileRepository userprofileRepo;
+	
+	@Autowired
+	JobAccountCustomRepo jobAccountCustomRepo;
 
 	@RequestMapping("/category-genz.html")
 	public String category(Map<String, Object> model) {
@@ -84,6 +90,58 @@ public class AdminController {
 			model.put("categories", categories);
 		}
 		return "admin/category-genz";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET,value = "/selectedstud-genz.html")
+	public String selectedStud( Map<String, Object> model) {
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		model.put("category", new Category());
+		return "admin/selectedstud-genz";
+	}
+	
+	@RequestMapping("/edit_stud.html")
+	public String edit(Map<String, Object> model,@RequestParam String profileId) {
+		model.put("message", "HowToDoInJava Reader !!");
+		UserProfile profile = null;
+		List<CourseType> courses = null;
+		List<Employer> employers = null;
+		List<Category> categories = null;
+		try {
+			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+			User user = userRepo.findByEmail(authentication.getName());
+			model.put("user", user);
+			profile = userprofileRepo.findById(Integer.parseInt(profileId)).get();
+			courses = courseRepo.findAll();
+			employers = employerRepo.findAll();
+			categories = categoryRepo.findAll();
+			System.out.println(profile + "  *****");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		model.put("profile", profile);
+		model.put("courses", courses);
+		model.put("employers", employers);
+		model.put("categories", categories);
+		model.put("dayPreference",new DayPreference());
+		model.put("timeSlots", timeSlotRepo.findAll());
+		return "admin/edit_genz";
+	}
+	
+	@RequestMapping(method = RequestMethod.GET,value = "/stud-genz.html")
+	public String student_genz( Map<String, Object> model) {
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		List<UserProfile> userProfiles = (List<UserProfile>) userprofileRepo.findAll();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		model.put("profiles", userProfiles);
+		return "admin/stud-genz";
 	}
 	
 	@RequestMapping(method = RequestMethod.GET,value = "/category-edit-genz.html")
@@ -100,7 +158,26 @@ public class AdminController {
 //			model.put("category", categoryRepo.save(category));
 //
 //		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		model.put("category", new Category());
+		return "admin/category-edit-genz";
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET,value = "/editCategory.html")
+	public String editCategoryQuery(Map<String, Object> model,
+			@RequestParam(required = false) String categoryId) {
+		if (categoryId != null) {
+			Optional<Category> categoryEntity = categoryRepo.findById(Integer.parseInt(categoryId));
+			if (categoryEntity.isPresent()) {
+				model.put("category", categoryEntity.get());
+			}
+		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/category-edit-genz";
 	}
 
@@ -122,6 +199,9 @@ public class AdminController {
 			model.put("category", categoryRepo.save(category));
 			model.put("successMessage", "Category created");
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/category-edit-genz";
 	}
 
@@ -132,12 +212,18 @@ public class AdminController {
 		if (jobTypes.size() > 0) {
 			model.put("jobTypes", jobTypes);
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/jobtype-genz";
 	}
 
 	@RequestMapping("/jobtype-edit-genz.html")
 	public String editJobType(Map<String, Object> model) {
 		model.put("jobType",new JobType());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/jobtype-edit-genz";
 	}
 	
@@ -160,6 +246,9 @@ public class AdminController {
 			model.put("jobType", jobTypeRepo.save(jobType));
 			model.put("successMessage", "Job Type created");
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/jobtype-edit-genz";
 	}
 
@@ -171,11 +260,38 @@ public class AdminController {
 		if (courseTypes.size() > 0) {
 			model.put("courseTypes", courseTypes);
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/course-genz";
 	}
 	
 	@RequestMapping("/genzest-d.html")
 	public String showAdminPage(Map<String, Object> model) {
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		model.put("courseCount", courseRepo.count());
+		model.put("employersCount", employerRepo.count());
+		model.put("categoriesCount", categoryRepo.count());
+		model.put("dayPreference",new DayPreference());
+		model.put("timeSlotsCount", timeSlotRepo.count());
+		model.put("studentCount", userprofileRepo.count());
+		model.put("jobsCount", jobAccountRepo.count());
+		model.put("jobTypeCount", jobTypeRepo.count());
+		List<Object[]> categoryJobs = jobAccountCustomRepo.findJobAcountByCateory();
+		
+		List<CategoryCount> counts = new ArrayList<>();
+		for(Object[] obj : categoryJobs)
+		{
+			CategoryCount count = new CategoryCount();
+			Category cat = (Category) obj[0];
+			count.category = cat.getCategoryName();
+			count.value = (Long)obj[1];
+			counts.add(count);
+		}
+		
+		model.put("categoriesCountJobs", counts);
 		
 		return "admin/genzest-d";
 	}
@@ -185,7 +301,11 @@ public class AdminController {
 	@RequestMapping("/course-edit-genz.html")
 	public String editCourseType(Map<String, Object> model) {
 		model.put("courseType",new CourseType());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/course-edit-genz";
+		
 	}
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/course-edit-genz.html")
@@ -207,6 +327,9 @@ public class AdminController {
 			model.put("successMessage", "Course created");
 
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/course-edit-genz";
 	}
 	
@@ -227,6 +350,9 @@ public class AdminController {
 			model.put("timeSlot", timeSlotRepo.save(timeSlot));
 			model.put("successMessage", "Time slot created");
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/timeslot-edit-genz";
 	}
 
@@ -239,6 +365,9 @@ public class AdminController {
 		if (timeSlots.size() > 0) {
 			model.put("timeSlots", timeSlots);
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/timeslot-genz";
 	}
 	
@@ -269,6 +398,9 @@ public class AdminController {
 		model.put("timeSlots", timeSlots);
 		model.put("jobs", jobs);
 		model.put("searchJob", new SearchJobs());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/searchjobs-genz";
 	}
 	
@@ -303,6 +435,9 @@ public class AdminController {
 		model.put("timeSlots", timeSlots);
 		model.put("jobs",jobs);
 		model.put("searchJob", new SearchJobs());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/searchjobs-genz";
 	}
 	
@@ -312,6 +447,9 @@ public class AdminController {
 	public String editTimeSlot(Map<String, Object> model) {
 		System.out.println("***********88");
 		model.put("timeSlot",new TimeSlot());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/timeslot-edit-genz";
 	}
 	
@@ -340,6 +478,9 @@ public class AdminController {
 //		if (employers.size() > 0) {
 			model.put("employers", employers);
 //		}
+			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+			User user = userRepo.findByEmail(authentication.getName());
+			model.put("user", user);
 		return "admin/employer-genz";
 	}
 	
@@ -347,8 +488,28 @@ public class AdminController {
 	public String employerEdit(Map<String, Object> model) {
 		System.out.println("***********7777");
 		model.put("employer",new Employer());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/emp-edit-genz";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET,value = "/editEmployer.html")
+	public String editEmployer( Map<String, Object> model,
+			@RequestParam(required = false) String employerId) {
+		
+		System.out.println("***********88(((((((((((9");
+		if (employerId != null) {
+			Optional<Employer> employerEntity = employerRepo.findById(Integer.parseInt(employerId));
+			if (employerEntity.isPresent()) {
+				model.put("employer", employerEntity.get());
+			}
+		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		return "admin/emp-edit-genz";
+	}
+		
 	
 	@RequestMapping(method = RequestMethod.POST,value = "/emp-edit-genz.html")
 	public String editTimeSlot(@Valid @ModelAttribute("employer") Employer employer, BindingResult result, Map<String, Object> model,
@@ -369,6 +530,9 @@ public class AdminController {
 			
 
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/emp-edit-genz";
 	}
 	
@@ -399,6 +563,9 @@ public class AdminController {
 		model.put("timeSlots", timeSlots);
 		model.put("profiles", profiles);
 		model.put("searchCandidate", new SearchCandidate());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/search-candidate";
 	}
 	
@@ -419,7 +586,7 @@ public class AdminController {
 			categories = categoryRepo.findAll();
 			jobTypes = jobTypeRepo.findAll();
 			timeSlots = timeSlotRepo.findAll();
-			profiles = (List<UserProfile>) userprofileRepo.findAll();
+			profiles = (List<UserProfile>) jobAccountCustomRepo.findProfileByProfileCriterias(searchCandidate);
 			
 			
 		} catch (Exception e) {
@@ -434,6 +601,9 @@ public class AdminController {
 		model.put("timeSlots", timeSlots);
 		model.put("profiles",profiles);
 		model.put("searchJob", new SearchJobs());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/search-candidate";
 	}
 
@@ -447,7 +617,9 @@ public class AdminController {
 		List<JobAccount> jobs = new ArrayList<JobAccount>();
 		jobs = jobAccountRepo.findAll();
 		model.put("jobs",jobs);
-		
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/jobs-genz";
 	}
 	
@@ -462,7 +634,9 @@ public class AdminController {
 		model.put("timeSlots",timeSlots);
 		model.put("categories",categories);
 		model.put("employers",employers);
-		
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/editjobs";
 	}
 	
@@ -486,6 +660,9 @@ public class AdminController {
 		model.put("categories",categories);
 		model.put("employers",employers);
 		model.put("jobTimeSlot", new JobTimeSlot());
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/updatejobs";
 	}
 	
@@ -529,6 +706,9 @@ public class AdminController {
 //			userProfileRepo.save(profile);
 //		}
 //		
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		response.sendRedirect("/jobs-genz.html");
 	}
 	
@@ -574,7 +754,7 @@ public class AdminController {
 //				account.getTimeSlots().add(slot1.get());
 //				
 				int serialNumber = (int) ((Math.random() * (100 - 1)) + 1);
-				String jobCode = account.getEmployer().getEmployerName()+"_"+account.getCity()+"_"+account.getCategory().getCategoryName()+"_"+account.getCreatedDate().getMonth()+account.getCreatedDate().getDate()+account.getCreatedDate().getYear()+"_"+serialNumber;
+				String jobCode = account.getEmployer().getClientCode()+"_"+account.getCity()+"_"+account.getCategory().getCategoryCode()+"_"+account.getCreatedDate().getMonth()+account.getCreatedDate().getDate()+account.getCreatedDate().getYear()+"_"+serialNumber;
 				
 				
 				account.setJobCode(jobCode);
@@ -585,6 +765,9 @@ public class AdminController {
 //			jobAccount.setCreatedBy(userRepo.findById(2L).get());
 			model.put("successMessage", "Job Created!");
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/editjobs";
 	}
 	
@@ -598,6 +781,9 @@ public class AdminController {
 			// TODO Auto-generated catch block
 			return "admin/updatejobs";
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		return "admin/jobs-genz";
 		
 	}

@@ -176,8 +176,7 @@ form .searchjobs {
 
 					<li class="sidebar-item top"><a class="sidebar-link first"
 						href="index.html"><i class="fa fa-user-circle-o align-middle"
-							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>John
-									Rambo</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 							<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
 					</a></li>
 
@@ -277,20 +276,15 @@ form .searchjobs {
 					<b>Search Candidate</b>
 				</h4>
 
-				<div style="max-width: 350px; margin: auto">
-					<div class="input-icons">
-						<input class="input-field" type="text"> <i
-							style="color: #6E6E6E;" class="fa fa-search" aria-hidden="true"></i>
-					</div>
-				</div>
-
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						<li class="nav-item"><i class="fa fa-bell-o"
-							aria-hidden="true"></i>&nbsp;<a href=""> Notification </a></li>
-						<li class="nav-item"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<a
-							href=""> Settings </a></li>
-						<li class="nav-item dropdown"></li>
+						<li class="nav-item">
+							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
+						</li>
+						<li class="nav-item dropdown">
+						
+						
+						</li>
 					</ul>
 				</div>
 				<a class="nav-link dropdown-toggle d-none d-sm-inline-block"
@@ -368,7 +362,7 @@ form .searchjobs {
 								Gender <span>*</span>
 							</h4>
 							<form:select class="form-control" path="gender">
-								<form:option class="first-op" value="">Select</option>
+								<form:option class="first-op" value="">Select</form:option>
 									<form:option value="Male"></form:option>
 									<form:option value="Female"></form:option>
 									<form:option value="Others"></form:option>
@@ -443,8 +437,7 @@ form .searchjobs {
 									<td>${profile.bloodGroup}</td>
 									<td>${profile.city}</td>
 									<td>${profile.havePc}</td>
-									<td><a
-										href="/showCandidateProfile?profileId=${profile.id}">View</a></td>
+									<td><a href="edit_stud.html?profileId=${profile.id}">View</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

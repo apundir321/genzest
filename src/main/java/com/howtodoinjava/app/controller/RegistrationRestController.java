@@ -64,10 +64,20 @@ public class RegistrationRestController {
 
     // Registration
     @PostMapping("/user/registration")
-    public GenericResponse registerUserAccount(@RequestBody @Valid final UserDto accountDto, final HttpServletRequest request) {
+    public GenericResponse registerUserAccount(@RequestBody @Valid final UserDto accountDto, final HttpServletRequest request) throws Exception {
         LOGGER.debug("Registering user account with information: {}", accountDto);
         boolean isRecruiter = request.getParameter("recruiter")==null?false:true;
         final User registered = userService.registerNewUserAccount(accountDto,isRecruiter);
+//        userService.addUserLocation(registered, getClientIP(request));
+      //  eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
+        return new GenericResponse("success");
+    }
+    
+    @PostMapping("/user/admin/registration")
+    public GenericResponse registerAdmin(@RequestBody @Valid final UserDto accountDto, final HttpServletRequest request) throws Exception {
+        LOGGER.debug("Registering user account with information: {}", accountDto);
+        boolean isRecruiter = request.getParameter("recruiter")==null?false:true;
+        final User registered = userService.registerAdminAccount(accountDto,isRecruiter);
 //        userService.addUserLocation(registered, getClientIP(request));
       //  eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
         return new GenericResponse("success");

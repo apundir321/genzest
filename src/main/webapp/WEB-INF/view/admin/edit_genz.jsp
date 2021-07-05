@@ -143,101 +143,70 @@ table thead {
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a href="index.html"><img
-					src="assets-2/img/icons/Genzest Logo.png" alt=""
-					class="img-responsive logo"></a></a>
+				<a href="index.html"><img src="assets-1/img/icons/Genzest Logo.png" alt="" class="img-responsive logo"></a></a>
 
 
+				<ul class="sidebar-nav">
+				<br>
 
-<ul class="sidebar-nav">
-					<br>
-
-					<li class="sidebar-item top"><a class="sidebar-link first"
-						href="index.html"><i class="fa fa-user-circle-o align-middle"
-							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-							<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
-					</a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="genzest-d.html"><i class="align-middle"
-							data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
-					</a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="jobs-genz.html"><i class="fa fa-building-o align-middle"
-							style="font-size: 19px"></i> <span class="align-middle"><b>Jobs/
-									Openings</b></span> </a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="selectedstud-genz.html"><i
-							class="fa fa-user-o align-middle" style="font-size: 19px"></i> <span
-							class="align-middle"><b>Selected Student</b></span> </a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="earning-genz.html"><i class="fa fa-money align-middle"
-							aria-hidden="true" style="font-size: 19px"></i> <span
-							class="align-middle"><b>Student Earning</b></span> </a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="employer-genz.html"><i class="fa fa-users align-middle"
-							aria-hidden="true" style="font-size: 19px"></i> <span
-							class="align-middle"><b>Employer</b></span> </a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="stud-genz.html"><i class="fa fa-smile-o align-middle"
-							aria-hidden="true" style="font-size: 19px"></i> <span
-							class="align-middle"><b>Student</b></span> </a></li>
-
-					<li class="sidebar-item active"><a class="sidebar-link"
-						href="searchcandi-genz.html"><i
-							class="fa fa-search align-middle" style="font-size: 19px"></i> <span
-							class="align-middle"><b>Search Candidate</b></span> </a></li>
-
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="searchjobs-genz.html"><i
-							class="fa fa-magic align-middle" aria-hidden="true"
-							style="font-size: 19px"></i> <span class="align-middle"><b>Search
-									Job</b></span> </a></li>
+				    <li class="sidebar-item top">
+					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
+            		</a>
+				</li>
 
 					<li class="sidebar-item">
-						<div class="dropdown">
-							<button onclick="myFunction()" class="dropbtn">
-								<i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-								Master <i class="fa fa-caret-down" aria-hidden="true"></i>
-							</button>
-							<div id="myDropdown" class="dropdown-content">
-								<a href="access-right-genz.html">Access Right</a> <a
-									href="team-genz.html">Team</a> <a href="category-genz.html">Category</a>
-								<a href="jobtype-genz.html">Job Types</a> <a
-									href="timeslot-genz.html">Time Slot</a> <a
-									href="bloodgrp-genz.html">Blood Group</a> <a
-									href="course-genz.html">Courses</a> <a href="vehicle-genz.html">Vehicle
-									Type</a> <a href="citystate-genz.html">City Country State</a>
-							</div>
-						</div>
-					</li>
+					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
+            		</a></li>
 
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
+					</a></li>
+
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="selectedstud-genz.html"><i class="fa fa-user-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Selected Student</b></span>
+					</a></li>
+
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
+					</a></li>
+
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
+                    </a></li>
+
+                    <li class="sidebar-item active">
+                    <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span>
+                    </a></li>
+
+                    <li class="sidebar-item">
+                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
+                    </a></li>
+
+                    <li class="sidebar-item">
+                    <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
+                    </a></li>
+
+
+				
 				</ul>
 
-			</div>
-		</nav>
-
-
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-				<div class="container">
+				<!-- <div class="container">
 					<div class="centered">
-						<b class="dot">.....</b><br> <a href="#"><b>Download
-								our App</b></a><br> <b class="dot">.....</b> <br> <a
-							class="blurtext"> Become a part of GenZest by Downloading our
-							App </a>
+						<b class="dot">.....</b><br>
+						<a href="#"><b>Download our App</b></a><br>
+						<b class="dot" >.....</b>
+						<br>
+						<a class="blurtext">
+							Become a part of GenZest by Downloading our App
+						</a>
 					</div>
-				</div>
+				  </div> -->
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
-				<h4>
-					<b>Genzest Admin</b>
-				</h4>
-				<p>© 2021 All Rights Reserved</p>
+				<!-- <h4><b>Genzest Admin</b></h4>
+				<p>© 2021 All Rights Reserved</p> -->
 			</div>
 		</nav>
 
@@ -273,94 +242,109 @@ table thead {
 			</nav>
 
 			<main class="content">
-
+	<form:form action="/updateProfile.html" method="post"
+					modelAttribute="profile" enctype="multipart/form-data">
+					<div class="form-row">
 			<div class="row two">
 				<div class="container-fluid">
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div id="profile-container">
-							<image id="profileImage" src="http://lorempixel.com/100/100" />
+							<image id="profileImage" src="/getProfilePic/${profile.profilePicFileName}" />
 						</div>
-						<input id="imageUpload" type="file" name="profile_photo"
-							placeholder="Photo" required="" capture>
+<!-- 						<input id="imageUpload" type="file" name="profilepic" -->
+<!-- 							placeholder="Photo" capture> -->
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<h4>General profile (data once entered can not be altered)</h4>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<button class="back" style="float: right; margin: 1rem;">
-							<a href="profile.html">Back <i
-								class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
-						</button>
-					</div>
+<!-- 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> -->
+<!-- 						<h4>General profile (data once entered can not be altered)</h4> -->
+<!-- 					</div> -->
+<!-- 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> -->
+<!-- 						<button class="back" style="float: right; margin: 1rem;"> -->
+<!-- 							<a href="profile.html">Back <i -->
+<!-- 								class="fa fa-chevron-circle-left" aria-hidden="true"></i></a> -->
+<!-- 						</button> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 
 			<div class="container-fluid">
-				<form:form action="/updateProfile.html" method="post"
-					modelAttribute="profile" enctype="multipart/form-data">
-					<div class="form-row">
+			
 					
 					<form:input path="id" placeholder="First Name"
-								class="form-control" type="hidden" />
+								class="form-control" type="hidden" disabled="true" />
+								
+								
+								<form:input path="profilePicFileName" placeholder="First Name"
+								class="form-control" type="hidden" disabled="true"/>
+								
+								
+								<form:input path="studentIdFileName" placeholder="First Name"
+								class="form-control" type="hidden" disabled="true" />
+								
+								
+								<form:input path="aadharFileName" placeholder="First Name"
+								class="form-control" type="hidden" disabled="true"/>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								First Name <span>*</span>
 							</h4>
 							<form:input path="firstName" placeholder="First Name"
-								class="form-control" type="text"  disabled="true"/>
+								class="form-control" type="text" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Last Name <span>*</span>
 							</h4>
 							<form:input path="lastName" placeholder="Last Name"
-								class="form-control" type="text" />
+								class="form-control" type="text" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Email <span>*</span>
 							</h4>
 							<form:input class="form-control" path="email"
-								placeholder="Drop Your Mail Id" id="example-email-input" />
+								placeholder="Drop Your Mail Id" id="example-email-input" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Parent's Name <span>*</span>
 							</h4>
 							<form:input path="parentsName" placeholder="Parents Name"
-								class="form-control" type="text" />
+								class="form-control" type="text" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Mobile No <span>*</span>
 							</h4>
 							<form:input class="form-control" path="mobileNo"
-								placeholder="Mobile no" id="example-tel-input" />
+								placeholder="Mobile no" id="example-tel-input" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Alternate Mobile No <span>*</span>
 							</h4>
 							<form:input class="form-control" path="alternateMobileNo"
-								placeholder="Mobile no" id="example-tel-input" />
+								placeholder="Mobile no" id="example-tel-input" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Gender <span>*</span>
 							</h4>
-							<form:select path="gender" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Male">Male</form:option>
-								<form:option value="Female">Female</form:option>
-								<form:option value="Other">Other</form:option>
-							</form:select>
+<%-- 							<form:select path="gender" class="form-control" > --%>
+<%-- 								<form:option class="first-op" value="">Select</form:option> --%>
+<%-- 								<form:option value="Male">Male</form:option> --%>
+<%-- 								<form:option value="Female">Female</form:option> --%>
+<%-- 								<form:option value="Other">Other</form:option> --%>
+<%-- 							</form:select> --%>
+							
+							<form:input class="form-control" path="gender"
+								placeholder="gender" id="example-tel-input" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Date of Birth <span>*</span>
 							</h4>
 							<form:input class="form-control" path="dob"
-								placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
+								placeholder="MM/DD/YYYY" id="birthday" name="birthday" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -379,13 +363,17 @@ table thead {
                              <option>Sales & Marketing</option>
                            </select> -->
 
-							<form:select class="form-control" path="course">
-								<form:option value="">Select</form:option>
-								<c:forEach var="course" items="${courses}">
-									<form:option value="${course.id}"
-										label="${course.courseTypeName}" />
-								</c:forEach>
-							</form:select>
+<%-- 							<form:select class="form-control" path="course"> --%>
+<%-- 								<form:option value="">Select</form:option> --%>
+<%-- 								<c:forEach var="course" items="${courses}"> --%>
+<%-- 									<form:option value="${course.id}" --%>
+<%-- 										label="${course.courseTypeName}" /> --%>
+<%-- 								</c:forEach> --%>
+<%-- 							</form:select> --%>
+
+							<form:input class="form-control" path="course"
+								placeholder="course" id="birthday" name="birthday" disabled="true"/>
+							
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -432,38 +420,38 @@ table thead {
 								Address Line 1 <span>*</span>
 							</h4>
 							<form:input id="address-line1" path="addressLine1" type="text"
-								placeholder="Address line 1" class="form-control" />
+								placeholder="Address line 1" class="form-control" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Address Line 2 <span>*</span>
 							</h4>
 							<form:input id="address-line2" path="addressLine2" type="text"
-								placeholder="Address line 2" class="form-control" />
+								placeholder="Address line 2" class="form-control" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>Address Line 3</h4>
 							<form:input id="address-line3" path="addressLine3" type="text"
-								placeholder="Address line 3" class="form-control" />
+								placeholder="Address line 3" class="form-control"  disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>Street No</h4>
 							<form:input id="street-no" path="streetNo" type="text"
-								placeholder="Street No" class="form-control" />
+								placeholder="Street No" class="form-control" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Locality <span>*</span>
 							</h4>
-							<input id="locality" path="locality" type="text"
-								placeholder="Locality" class="form-control" />
+							<form:input id="locality" path="locality" type="text"
+								placeholder="Locality" class="form-control" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Landmark <span>*</span>
 							</h4>
-							<input id="landmark" path="landmark" type="text"
-								placeholder="Landmark" class="form-control">
+							<form:input id="landmark" path="landmark" type="text"
+								placeholder="Landmark" class="form-control" disabled="true"/>
 						</div>
 						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
 						<!--                             <h4> Country <span>*</span></h4> -->
@@ -474,14 +462,14 @@ table thead {
 								Postal Code <span>*</span>
 							</h4>
 							<form:input id="postal-code" path="postalCode" type="text"
-								placeholder="zip or postal code" class="form-control" />
+								placeholder="zip or postal code" class="form-control" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Collage Name <span>*</span>
 							</h4>
 							<form:input id="collage-name" path="collegeName" type="text"
-								placeholder="Collage-name" class="form-control" />
+								placeholder="Collage-name" class="form-control" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -489,7 +477,7 @@ table thead {
 							</h4>
 							<form:input class="form-control" type="date"
 								placeholder="MM/DD/YYYY" id="birthday"
-								path="degreeCollegeCompletionDate" />
+								path="degreeCollegeCompletionDate" disabled="true"/>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -556,6 +544,10 @@ table thead {
 												label="${category.categoryName}" />
 										</c:forEach>
 									</form:select>
+<!-- 									<h4 style="color: #f15336">Selected: </h4><h4>${profile.category.categoryName}</h4> -->
+									<c:if test="${not empty profile.category.categoryName}">
+									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.category.categoryName}</span> </h4>
+									</c:if>
 								</div>
 
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
@@ -569,6 +561,9 @@ table thead {
 										<form:option value="Field Job">Field Job</form:option>
 										<form:option value="Office Job">Office Job</form:option>
 									</form:select>
+									<c:if test="${not empty profile.preference}">
+									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.preference}</span> </h4>
+									</c:if>
 								</div>
 
 							</div>
@@ -578,56 +573,66 @@ table thead {
 					<div class="container-fluid">
 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Your Verification Details</h4>
+							<h4>Verification Details</h4>
 						</div>
 
 					</div>
 				</div>
 					<div class="form-row">
+					<c:if test="${not empty profile.aadharFileName}">
 						<div class="col-lg-4">
 							<div class="input-group">
 								<h4>
 									Aadhar Card <span>*</span>
 								</h4>
-								<div class="custom-file">
-									<input type="file" name="aadhar" class="custom-file-input"
-										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-									<!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-								</div>
+<!-- 								<div class="custom-file"> -->
+<!-- 									<input type="file" name="aadhar" class="custom-file-input" -->
+<!-- 										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> -->
+<!-- 									<label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+<!-- 								</div> -->
+						<div id="profile-container">
+							<image id="profileImage" src="/getProfilePic/${profile.aadharFileName}" />
+						</div>
 							</div>
 						</div>
+						</c:if>
+						<c:if test="${not empty profile.studentIdFileName}">
 						<div class="col-lg-4">
 							<div class="input-group">
 								<h4>
 									Student Id <span>*</span>
 								</h4>
-								<div class="custom-file">
-									<input type="file" name="studentId" class="custom-file-input"
-										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-									<!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-								</div>
+<!-- 								<div class="custom-file"> -->
+<!-- 									<input type="file" name="studentId" class="custom-file-input" -->
+<!-- 										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> -->
+<!-- 									<label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+<!-- 								</div> -->
+						<div id="profile-container">
+							<image id="profileImage" src="/getProfilePic/${profile.studentIdFileName}" />
+						</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Status <span>*</span>
-							</h4>
-							<select class="form-control">
-								<option class="first-op">Select</option>
-								<option>Active</option>
-								<option>In-Active</option>
-							</select>
-						</div>
+						</c:if>
+<!-- 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
+<!-- 							<h4> -->
+<!-- 								Status <span>*</span> -->
+<!-- 							</h4> -->
+<!-- 							<select class="form-control"> -->
+<!-- 								<option class="first-op">Select</option> -->
+<!-- 								<option>Active</option> -->
+<!-- 								<option>In-Active</option> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
 					</div>
 			
 			</div>
 							
 							
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button type="submit">Save</button>
-                        </div> 
+<!--                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!--                             <button type="submit">Save</button> -->
+<!--                         </div>  -->
 						</div>
-				</form:form>
+				
 			</div>
 
 
@@ -639,85 +644,84 @@ table thead {
 					<div class="container-fluid">
 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Your Payment Details</h4>
+							<h4>Payment Details</h4>
 						</div>
 
 					</div>
 				</div>
-				<form>
+				
 					<div class="form-row">
 
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
 							<h4>
 								Payment Method <span>*</span>
 							</h4>
-							<select class="form-control">
-								<option class="first-op">Select</option>
-								<option>Bank Account</option>
-								<option>Wallet</option>
-							</select>
+							<form:select class="form-control" path="paymentMethod">
+								<form:option class="first-op" value="">Select</form:option>
+								<form:option value="Bank Account"></form:option>
+								<form:option value="Wallet"></form:option>
+							</form:select>
 						</div>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
-					<div class="form-row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-							<button>Save</button>
-						</div>
-					</div>
-				</form>
+<!-- 					<div class="form-row"> -->
+<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!-- 							<button type="submit">Save</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+				
 			</div>
+			
+			</form:form>
 
 			<div class="container-fluid">
 				<div class="row two">
 					<div class="container-fluid">
 
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Your Availability (You may provide convenient day and
-								timeslots when you are free for doing a job)</h4>
-						</div>
+					
 
 					</div>
 				</div>
-				<form>
 					<div class="form-row">
-						<form>
-							<div class="form-row">
+<%-- 						<form:form action="/updatePreferences.html" method="post" --%>
+<%-- 					modelAttribute="dayPreference"> --%>
+<!-- 							<div class="form-row"> -->
 
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Days <span>*</span>
-									</h4>
+<!-- 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
+<!-- 									<h4> -->
+<!-- 										Days <span>*</span> -->
+<!-- 									</h4> -->
 
-									<select class="form-control">
-										<option class="first-op">Select</option>
-										<option>Monday</option>
-										<option>Tuesday</option>
-										<option>Wednesday</option>
-										<option>Thrusday</option>
-										<option>Friday</option>
-										<option>Saturday</option>
-										<option>Sunday</option>
-									</select>
-								</div>
+<%-- 									<form:select class="form-control" path="day"> --%>
+<%-- 										<form:option class="first-op" value="">Select</form:option> --%>
+<%-- 										<form:option value="Monday"></form:option> --%>
+<%-- 										<form:option value="Tuesday"></form:option> --%>
+<%-- 										<form:option value="Wednesday"></form:option> --%>
+<%-- 										<form:option value="Thrusday"></form:option> --%>
+<%-- 										<form:option value="Friday"></form:option> --%>
+<%-- 										<form:option value="Saturday"></form:option> --%>
+<%-- 										<form:option value="Sunday"></form:option> --%>
+<%-- 									</form:select> --%>
+<!-- 								</div> -->
 
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Time-Slots <span>*</span>
-									</h4>
-									<select class="form-control">
-										<option class="first-op">Select</option>
-										<option>After 6pm</option>
-										<option>4pm - 6pm</option>
-										<option>12pm - 4pm</option>
-										<option>8am - 12pm</option>
-									</select>
-								</div>
+<!-- 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
+<!-- 									<h4> -->
+<!-- 										Time-Slots <span>*</span> -->
+<!-- 									</h4> -->
+<%-- 									<form:select class="form-control" path="timeSlot"> --%>
+<%-- 										<form:option value="">Select</form:option> --%>
+<%-- 										<c:forEach var="timeSlot" items="${timeSlots}"> --%>
+<%-- 											<form:option value="${timeSlot.id}" --%>
+<%-- 												label="${timeSlot.timeSlotName}" /> --%>
+<%-- 										</c:forEach> --%>
+<%-- 									</form:select> --%>
+<!-- 								</div> -->
 
-							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button onclick="myCreateFunction()" type="submit">Add</button>
-							</div>
-						</form>
+<!-- 							</div> -->
+<!-- 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!-- 								<button onclick="myCreateFunction()" type="submit">Add</button> -->
+<!-- 							</div> -->
+<%-- 						</form:form> --%>
 						<br />
 						<br />
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
@@ -729,10 +733,12 @@ table thead {
 									</tr>
 								</thead>
 								<tbody>
+								<c:forEach var="dayPreference" items="${profile.preferences}">
 									<tr>
-										<th scope="row">Tuesday</th>
-										<td>After 6pm</td>
+										<th scope="row">${dayPreference.day}</th>
+										<td>${dayPreference.timeSlot.timeSlotName}</td>
 									</tr>
+									</c:forEach>
 								</tbody>
 								<!-- <tr>
                                     <td>Row1 cell1</td>
@@ -742,9 +748,9 @@ table thead {
 							<br>
 
 							<!-- <button onclick="myCreateFunction()">Create row</button> -->
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button onclick="myDeleteFunction()">Delete row</button>
-							</div>
+<!-- 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!-- 								<button onclick="myDeleteFunction()">Delete row</button> -->
+<!-- 							</div> -->
 
 							<script>
                                 function myCreateFunction() {
@@ -764,7 +770,7 @@ table thead {
 						</div>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
-				</form>
+				
 			</div>
 			</main>
 

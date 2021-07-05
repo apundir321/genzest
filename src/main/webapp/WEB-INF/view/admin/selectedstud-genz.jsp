@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,60 +147,55 @@
 			height: 800px;
 		}
 	}
-    
-        /* sm */
-        @media (min-width: 768px) and (max-width: 991px) {
-            table{
-            overflow: auto;
-            display: block;
-        }
-        } 
+     /* sm */
+    @media (min-width: 768px) and (max-width: 991px) {
+        table{
+        overflow: auto;
+        display: block;
+    }
+  } 
 
-        /* xs */
-        @media (max-width: 767px) {
-            table{
-            overflow: auto;
-            display: block;
-        }
-        }
-        .sidebar .sidebar-nav .sidebar-item a {
+    /* xs */
+    @media (max-width: 767px) {
+        table{
+        overflow: auto;
+        display: block;
+    }
+  }
+    .dataTables_wrapper table td {
+    padding: 2rem;
+    text-align: center;
+}
+    main .row1, .row2{
+        text-align: center;
+        color: #F15336;
+    }
+    main .row1 h4, .row2 h4{
+        font-weight: bold;
+        font-size: 2rem;
+        padding: 1rem;
+    }
+    .sidebar .sidebar-nav .sidebar-item a {
     height: 55px;
 }
 </style>
 <script>
-var dataSet = new Array();
-<c:forEach items="${jobs}" var="job" varStatus="status">
-jobArray = new Array();
-jobArray.push('${job.id}');
-jobArray.push('${job.jobName}');
-jobArray.push('${job.jobCode}');
-jobArray.push('${job.category.categoryName}');
-jobArray.push('${job.noOfVacancy}');
-jobArray.push('${job.employer.employerName}');
-jobArray.push('${job.status}');
-jobArray.push('${job.createdBy.firstName}');
-jobArray.push('${job.createdDate}');
-jobArray.push('------');
-jobArray.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-pencil"/></a>');
-
-dataSet.push(jobArray);
-</c:forEach>
-	var dataSet12 = [
-       [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	   [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	var dataSet = [
+    //    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
     // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "1", "Developer", "D1241", "CSE", "10", "Flybunch", "Open", "Flybunch", "26/05/2021", "----" ]
+    // [ "1", "Developer", "D1241", "CSE", "10", "Flybunch", "Open", "Flybunch", "26/05/2021", "----" ]
     // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
     // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
     // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
@@ -247,30 +242,101 @@ $(document).ready(function() {
         data: dataSet,
         columns: [
 			{ title: "Id" },
-            { title: "Job" },
             { title: "Job Code" },
+            { title: "Employer" },
             { title: "Category" },
-            { title: "Vacancy" },
-            { title: "Company" },
-            { title: "Status" },
-			{ title: "Created By" },
-			{ title: "Created Date" },
-			{ title: "Action" },
-			{
-				 title: "Edit"
-			}
-//             {
-//                 data: null,
-//                 className: "dt-center editor-edit",
-//                 defaultContent: '<a href="editjobs-genz.html"><i class="fa fa-pencil"/></a>',
-//                 orderable: false
-//             },
-//             {
-//                 data: null,
-//                 className: "dt-center editor-delete",
-//                 defaultContent: '<i class="fa fa-trash"/>',
-//                 orderable: false
-//             }
+            { title: "Job Name" },
+            { title: "Rate" },
+            { title: "Required Slot" },
+			{ title: "Candidate" },
+			{ title: "Email" },
+			{ title: "Phone" },
+            { title: "DOB" },
+            { title: "Action" }
+   
+        ],
+		
+    } );
+} );
+</script>
+
+<script>
+	var dataSet1 = [
+    //    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	//    [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+    // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
+    // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
+    // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
+    [ "1", "30SMKL12221", "Henny", "HR", "Job2", "180.00", "4pm - 6pm", "A B", "abc@gmail.com", "9098765432", "26/05/1998", "----" ]
+    // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
+    // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
+    // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
+    // [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
+];
+
+
+
+    
+
+ 
+    // Edit record
+    $('#example1').on('click', 'td.editor-edit', function (e) {
+        e.preventDefault();
+ 
+        editor.edit( $(this).closest('tr'), {
+            title: 'Edit record',
+            buttons: 'Update'
+        } );
+    } );
+ 
+    // Delete a record
+    $('#example1').on('click', 'td.editor-delete', function (e) {
+        e.preventDefault();
+ 
+        editor.remove( $(this).closest('tr'), {
+            title: 'Delete record',
+            message: 'Are you sure you wish to remove this record?',
+            buttons: 'Delete'
+        } );
+    } );
+ 
+$(document).ready(function() {
+    $('#example1').DataTable( {
+        data: dataSet1,
+        columns: [
+			{ title: "Id" },
+            { title: "Job Code" },
+            { title: "Employer" },
+            { title: "Category" },
+            { title: "Job Name" },
+            { title: "Rate" },
+            { title: "Required Slot" },
+			{ title: "Candidate" },
+			{ title: "Email" },
+			{ title: "Phone" },
+            { title: "DOB" },
+            { title: "Action" },
+            {
+                data: null,
+                className: "dt-center editor-edit",
+                defaultContent: '<a href="wallet-genz.html"><i style="margin:-1rem;" class="fa fa-pencil"/></a>',
+                orderable: false
+            },
+            {
+                data: null,
+                className: "dt-center editor-delete",
+                defaultContent: '<i class="fa fa-trash"/>',
+                orderable: false
+            }
         ],
 		
     } );
@@ -298,20 +364,20 @@ $(document).ready(function() {
 					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
             		</a></li>
 
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
 					</a></li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 					<a class="sidebar-link" href="selectedstud-genz.html"><i class="fa fa-user-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Selected Student</b></span>
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="#"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
+					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="#"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
+					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
                     </a></li>
 
                     <li class="sidebar-item">
@@ -344,7 +410,6 @@ $(document).ready(function() {
                     </li>
 				
 				</ul>
-
 			</div>
 		</nav>
 
@@ -376,9 +441,9 @@ $(document).ready(function() {
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-1/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Jobs/ Openings</b></h4>
+			   <h4><b>Selected Student</b></h4>
 
-			  <div class="navbar-collapse collapse">
+			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
 							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
@@ -456,8 +521,89 @@ $(document).ready(function() {
                        <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
                    </div>
                </div>   -->
-               <button class="csv"><a href="editjobs-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
+               <!-- <button class="csv"><a href="editjobs-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button> -->
+               <div class="row1">
+                   <div class="col-lg-12">
+                       <h4>Selected Student</h4>
+                   </div>
+               </div>
                <table id="example" class="display" width="100%"></table>
+               <br>
+               <div class="row2">
+                    <div class="col-lg-12">
+                        <h4>Present Student</h4>
+                    </div>
+                </div>
+               <table id="example1" class="display1" width="100%"></table>
+               <!-- <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Job Code</th>
+                    <th scope="col">Employer</th>
+                    <th scope="col">Job Type</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">No of Vacancy</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Valid Till</th>
+                    <th scope="col">View</th>
+                    <th scope="col">Apply</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">001</th>
+                    <td>Henny</td>
+                    <td>Remote/ Online Job</td>
+                    <td>8am - 5pm</td>
+                    <td>Billing</td>
+                    <td>5</td>
+                    <td>Gurgaon</td>
+                    <td>6/20/2021</td>
+                    <td><a href="">View</a></td>
+                    <td><div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                       Apply
+                      </label>
+                    </div></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">002</th>
+                    <td>Den</td>
+                    <td>Office Job</td>
+                    <td>9:30am - 6:30pm</td>
+                    <td>Customer Service</td>
+                    <td>3</td>
+                    <td>Gurgaon</td>
+                    <td>6/20/2021</td>
+                    <td><a href="">View</a></td>
+                    <td><div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                       Apply
+                      </label>
+                    </div></td>
+                  </tr>
+                  <tr style="border-bottom: none;">
+                    <th scope="row">003</th>
+                    <td>Jay</td>
+                    <td>Field Job</td>
+                    <td>12pm - 8pm</td>
+                    <td>Designing</td>
+                    <td>8</td>
+                    <td>Gurgaon</td>
+                    <td>6/20/2021</td>
+                    <td><a href="">View</a></td>
+                    <td><div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                      <label class="form-check-label" for="defaultCheck1">
+                       Apply
+                      </label>
+                    </div></td>
+                  </tr>
+                </tbody>
+              </table> -->
            </main>
 
 		

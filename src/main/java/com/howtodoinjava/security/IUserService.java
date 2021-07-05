@@ -15,7 +15,9 @@ import com.howtodoinjava.model.VerificationToken;
 
 public interface IUserService {
 
-    User registerNewUserAccount(UserDto accountDto,boolean isRecuiter) throws com.howtodoinjava.error.UserAlreadyExistException;
+    User registerNewUserAccount(UserDto accountDto,boolean isRecuiter) throws Exception;
+    
+    public User registerAdminAccount(final UserDto accountDto,boolean isRecuiter) throws Exception;
 
     User getUser(String verificationToken);
 

@@ -30,6 +30,8 @@ public class Category {
 	@NotEmpty
 	private String categoryStatus;
 	private Date createdDate;
+	@NotEmpty
+	private String categoryCode;
 	
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "created_by")
@@ -78,6 +80,14 @@ public class Category {
 
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 }

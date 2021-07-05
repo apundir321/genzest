@@ -27,6 +27,8 @@ public class JobApplication {
 	@JoinColumn(name = "applicant_id")
 	private User applicant;
 	
+	private String status;
+	
 	public long getId() {
 		return id;
 	}
@@ -50,6 +52,12 @@ public class JobApplication {
 	}
 	public void setApplicant(User applicant) {
 		this.applicant = applicant;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

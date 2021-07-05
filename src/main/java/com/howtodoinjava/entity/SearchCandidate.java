@@ -8,6 +8,7 @@ public class SearchCandidate {
 	private String employerName;
 	private String city;
 	private String state;
+	private String gender;
 	public String getJobCategory() {
 		return jobCategory;
 	}
@@ -43,6 +44,12 @@ public class SearchCandidate {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }

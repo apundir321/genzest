@@ -55,6 +55,7 @@ import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
+import com.howtodoinjava.security.UserService;
 import com.howtodoinjava.service.AWSS3Service;
 import com.howtodoinjava.service.UserProfileService;
 
@@ -84,6 +85,10 @@ public class IndexController {
 
 	@Autowired
 	UserProfileService userService;
+	
+	
+	@Autowired
+	UserService uService;
 
 	@Autowired
 	UserProfileRepository userProfileRepo;
@@ -277,14 +282,23 @@ public class IndexController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/signup.html")
-	public String submit(@Valid @ModelAttribute("userDto") UserDto userDto,BindingResult result, Map<String, Object> model)
+	public String submit(HttpServletRequest request,HttpServletResponse response,@Valid @ModelAttribute("userDto") UserDto userDto,BindingResult result, Map<String, Object> model)
 			throws Exception {
-		
-		if(result.hasErrors())
+		User registered = null;
+		if(result.hasErrors())	
 		{
 			return "signup";
 		}
-				return "signup";
+		
+		boolean isRecruiter = request.getParameter("recruiter")==null?false:true;
+		try {
+			registered = uService.registerNewUserAccount(userDto,isRecruiter);	
+			model.put("successMessage", "User registered");
+		} catch (Exception e) {
+			
+			model.put("errorMessage", e.getMessage());
+		}
+		return "signup";
 	}
 
 

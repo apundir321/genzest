@@ -164,7 +164,7 @@
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>John Rambo</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
             		</a>
 				</li>
@@ -273,20 +273,10 @@
                </a>
 			   <h4><b>Dashboard</b></h4>
 
-			   <div style="max-width:350px; margin:auto">
-					<div class="input-icons">
-						<input class="input-field" type="text">
-						<i style="color: #6E6E6E;" class="fa fa-search" aria-hidden="true"></i>
-					</div>
-				</div>
-
-				<div class="navbar-collapse collapse">
+			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
-							<i class="fa fa-bell-o" aria-hidden="true"></i>&nbsp;<a href=""> Notification </a>
-						</li>
-						<li class="nav-item">
-							<i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<a href=""> Settings </a>
+							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
 						</li>
 						<li class="nav-item dropdown">
 						
@@ -385,11 +375,6 @@
                             <form:input path="dateTo" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
                          </div>
                         
-                        <div class="form-row last">
-                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
-                              <button type="submit">Get Data</button>
-                          </div>
-                        </div>
                         
                         <div class="form-row last">
                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
@@ -413,13 +398,13 @@
                             <th scope="col">No of Vacancy</th>
                             <th scope="col">City</th>
                             <th scope="col">Date of Job</th>
-                            <th scope="col">Apply</th>
+                            <th scope="col">View</th>
                           </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="job" items="${jobs}"> 
                          <tr> 
-                            <th scope="row">${job.id}</th>
+                            <th scope="row">${job.jobCode}</th>
                             <td>${job.employer.employerName}</td>
                             <td>${job.jobName}</td>
                             <td>${job.timeSlot.timeSlotName}</td>
