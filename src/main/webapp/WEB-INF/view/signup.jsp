@@ -203,7 +203,7 @@
 	<div class="wrapper">
       
 
-		<div class="main" style="padding-top: 50px">
+		<div class="main">
 			<!-- ---------------TOP BAR-------------- -->
 			
 
@@ -250,13 +250,14 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
                             <h4>Confirm Password <span>*</span></h4>
-                            <form:input type="confirmpassword" class="form-control" path="matchingPassword" id="exampleInputPassword1" placeholder="Confirm Password"/>
+                            <form:input type="password" class="form-control" path="matchingPassword" id="exampleInputPassword2" placeholder="Confirm Password"/>
                             <form:errors path="matchingPassword" cssClass="error"></form:errors>
+                            <div id="confirmMessage" class="error"></div>
                         </div>                    
                        </div>
 
                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button type="submit">Sign Up</button>
+                            <button type="submit" onclick="return Validate()">Sign Up</button>
                          </div>
                      </form:form>
                </div>
@@ -264,6 +265,21 @@
 
 		</div>
 	</div>
+	
+	
+	<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("exampleInputPassword1").value;
+        var confirmPassword = document.getElementById("exampleInputPassword2").value;
+        if(password && confirmPassword){
+        if (password != confirmPassword) {
+        	document.getElementById("confirmMessage").innerHTML = "Password not matched"; 
+            return false;
+        }
+        }
+        return true;
+    }
+</script>
 	
 		<script type="text/javascript">
 	$(document).ready(function(){
