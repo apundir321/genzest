@@ -3,7 +3,6 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.howtodoinjava</groupId>
 	<artifactId>spring-boot-demo</artifactId>
-	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-boot-demo Maven Webapp</name>
 	<url>http://maven.apache.org</url>
@@ -11,6 +10,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.1</version>
+		<relativePath/>
 	</parent>
 	<properties>
 		<java.version>1.8</java.version>
@@ -99,11 +99,6 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
-   <groupId>com.amazonaws</groupId>
-   <artifactId>aws-java-sdk</artifactId>
-   <version>1.11.133</version>
-</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
@@ -141,4 +136,20 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	
+	<build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>repackage</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+      </plugins>
+    </build>
 </project>

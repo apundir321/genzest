@@ -1,4 +1,9 @@
 
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +64,21 @@
 </style>
 
 <script>
-	var dataSet = [
+
+var dataSet = new Array();
+<c:forEach items="${earnings}" var="earning" varStatus="status">
+courseType = new Array();
+courseType.push('${earning.id}');
+courseType.push('${earning.jobAccount.employer.employerName}');
+courseType.push('${earning.jobAccount.rate}');
+courseType.push('${earning.totalHours} Hours');
+courseType.push('${earning.totalEarning}');
+courseType.push('${earning.totalPaid}');
+courseType.push('<a style='color:white'; href=''>Raise a query</a>');
+
+dataSet.push(courseType);
+</c:forEach>
+	var dataSet1 = [
     //    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "---" ],
 	//    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "---" ],
 	//    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "---" ],
@@ -203,7 +222,7 @@ $(function(){
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
 				<h4><b>Genzest Admin</b></h4>
-				<p>© 2021 All Rights Reserved</p>
+				<p>Â© 2021 All Rights Reserved</p>
 			</div>
 		</nav>
 
@@ -239,46 +258,38 @@ $(function(){
 			<main class="content">
 				<div class="container-fluid top1">
 					<div class="row">
-						<form>
+						<form:form action="searchEarning.html" method="post" modelAttribute="jobEarning">
 							<div class="form-row">
 
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchjobs">
 									<h4>Job Id</h4>
-									<select class="form-control">
-									  <option class="first-op">Select</option> 
-									</select>
+									<form:select class="form-control" path="jobId">
+									  <form:option class="first-op" value="">Select</form:option> 
+									  <c:forEach var="earning" items="${earnings}">  
+                            			<form:option  value="${earning.jobAccount.id}" label="${earning.jobAccount.jobCode}" />
+                            		  </c:forEach>
+									</form:select>
 								</div>
 
 							  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchjobs">
 								<h4>Employer</h4>
-								<select class="form-control">
-								  <option class="first-op">Select</option> 
-								  <option>Den</option>
-								  <option>Fem</option>
-								  <option>Henny</option>
-								  <option>Jay</option>
-								  <option>Sam</option>
-								  <option>Joe</option>
-								  <option>Knowl</option>
-								</select>
+								  <form:select class="form-control" path="employerName">
+                            <form:option value="">Select</form:option>
+                            <c:forEach var="employer" items="${employers}">  
+                            <form:option  value="${employer.id}" label="${employer.employerName}" />
+                            </c:forEach>
+                            </form:select>
 							  </div>
 							 
-							  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-								<h4>Date From</h4>
-								<div>
-								  <!-- <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input"> -->
-								  <input id="TxtFrom" class="form-control" type="date" placeholder="Date From">
-								  <!-- <input id="TxtTo" class="form-control" type="date"  placeholder="Date To"> -->
-								</div>
-							  </div>
-							  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-								<h4>Date To</h4>
-								<div>
-								  <!-- <input class="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input"> -->
-								  <!-- <input id="TxtFrom" class="form-control" type="date" placeholder="Date From"> -->
-								  <input id="TxtTo" class="form-control" type="date"  placeholder="Date To">
-								</div>
-							  </div>
+							   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <h4>Date From <span>*</span></h4>
+                            <form:input path="dateFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                         </div>
+
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <h4>Date To <span>*</span></h4>
+                            <form:input path="dateTo" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                         </div>
 							  <div class="col-lg-12 col-md-12 col-sm-12">
 								<div class="row last">
 									<div class="col lastcol">
@@ -289,7 +300,7 @@ $(function(){
 
 							</div>
 						   
-						  </form>
+						  </form:form>
 					</div>
 				</div>
 				 <!-- <div id="example_wrapper" class="dataTables_wrapper no-footer">

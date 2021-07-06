@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
+import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.UserProfileRepository;
 import com.howtodoinjava.dao.UserRepository;
 import com.howtodoinjava.domain.CategoryRepo;
@@ -51,8 +52,10 @@ import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
+import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 import com.howtodoinjava.security.UserService;
@@ -85,6 +88,10 @@ public class IndexController {
 
 	@Autowired
 	UserProfileService userService;
+	
+	
+	@Autowired
+	JobEarningRepo jobEarningRepo;
 	
 	
 	@Autowired
@@ -161,6 +168,10 @@ public class IndexController {
 		model.put("message", "HowToDoInJava Reader !!");
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
+		List<JobEarning> earnings = jobEarningRepo.findByApplicantUser(user);
+		model.put("earnings", earnings);
+		model.put("employers",employerRepo.findAll());
+		model.put("jobEarning", new SearchJobEarning());
 //		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(userRepo.findByEmail(authentication.getName()));
 //		model.put("appliedJobsCount", appliedJobs.size());
 //		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile().getCategory());
@@ -489,8 +500,18 @@ public class IndexController {
 	
 		return ResponseEntity.ok()
 					.contentType(MediaType.IMAGE_PNG)
-					.header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\"" + name + "\"")
 					.body(downloadInputStream.toByteArray());	
 	}
+	
+	
+//	@RequestMapping(value="/logout", method=RequestMethod.GET)  
+//    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {  
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
+//        if (auth != null){      
+//           new SecurityContextLogoutHandler().logout(request, response, auth);  
+//        }  
+//         return "login1";  
+//     }  
+	
 
 }
