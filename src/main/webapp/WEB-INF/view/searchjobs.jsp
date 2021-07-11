@@ -280,7 +280,7 @@
                         <tbody>
                         <c:forEach var="job" items="${jobs}"> 
                          <tr> 
-                            <th scope="row">${job.id}</th>
+                            <th scope="row">${job.jobCode}</th>
                             <td>${job.employer.employerName}</td>
                             <td>${job.jobName}</td>
                             <td><c:forEach var="timeSlot" items="${job.timeSlots}">${timeSlot.timeSlotName}   </c:forEach></td>
@@ -322,7 +322,6 @@
                 ids += checkboxes[i].value + ",";
             }
         }
-        alert(ids);
         location.href = "/applyJob?jobId="+ids;
     }
 	</script>

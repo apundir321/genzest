@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
+import com.howtodoinjava.dao.JobApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.UserProfileRepository;
 import com.howtodoinjava.dao.UserRepository;
@@ -54,6 +55,7 @@ import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.JobApplication;
 import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
@@ -266,13 +268,29 @@ public class IndexController {
 		model.put("message", "HowToDoInJava Reader !!");
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
+		List<Integer> appliedJobIds = new ArrayList<>();
 		try {
 			courses = courseRepo.findAll();
 			employers = employerRepo.findAll();
 			categories = categoryRepo.findAll();
 			jobTypes = jobTypeRepo.findAll();
 			timeSlots = timeSlotRepo.findAll();
-			jobs = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile().getCategory());
+			List<JobAccount>  jobsAccount = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile().getCategory());
+			
+			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
+			for(JobAccountApplication accountApplication : jobApplications)
+			{
+				appliedJobIds.add(accountApplication.getJob().getId());
+			}			
+			
+			for(JobAccount jobAccount : jobsAccount)
+			{
+				if(!appliedJobIds.contains(jobAccount.getId()))
+				{
+					jobs.add(jobAccount);
+				}
+			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -325,23 +343,40 @@ public class IndexController {
 		List<Category> categories = null;
 		List<JobType> jobTypes = null;
 		List<TimeSlot> timeSlots = null;
-		List<JobAccount> jobs = null;
+		List<JobAccount> jobs = new ArrayList<>();
+		List<Integer> appliedJobIds = new ArrayList<>();
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		try {
 			courses = courseRepo.findAll();
 			employers = employerRepo.findAll();
 			categories = categoryRepo.findAll();
 			jobTypes = jobTypeRepo.findAll();
-			timeSlots = timeSlotRepo.findAll();
-			jobs = jobAccountCustomRepo.findJobsByJobCriterias(searchJob);
+			timeSlots = timeSlotRepo.findAll(); 
+			
+			List<JobAccount>  jobsAccount = jobAccountCustomRepo.findJobsByJobCriterias(searchJob);
+			
+			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
+			for(JobAccountApplication accountApplication : jobApplications)
+			{
+				appliedJobIds.add(accountApplication.getJob().getId());
+			}			
+			
+			for(JobAccount jobAccount : jobsAccount)
+			{
+				if(!appliedJobIds.contains(jobAccount.getId()))
+				{
+					jobs.add(jobAccount);
+				}
+			}
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
-		model.put("user", user);
+		
 		model.put("courses", courses);
 		model.put("employers", employers);
 		model.put("categories", categories);
