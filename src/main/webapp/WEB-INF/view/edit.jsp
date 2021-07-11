@@ -50,6 +50,22 @@
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script> -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	
+	
+	    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+
+
+   <style>
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+</style>
 
 <style>
 .main {
@@ -434,27 +450,15 @@ table thead {
 							<input id="locality" path="locality" type="text"
 								placeholder="Locality" class="form-control" />
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Landmark <span>*</span>
-							</h4>
-							<input id="landmark" path="landmark" type="text"
-								placeholder="Landmark" class="form-control">
-						</div>
+						
 						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
 						<!--                             <h4> Country <span>*</span></h4> -->
 						<!--                             <input id="country" name="country" type="text" placeholder="country" class="form-control"> -->
 						<!--                          </div> -->
+						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
-								Postal Code <span>*</span>
-							</h4>
-							<form:input id="postal-code" path="postalCode" type="text"
-								placeholder="zip or postal code" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Collage Name <span>*</span>
+								College Name <span>*</span>
 							</h4>
 							<form:input id="collage-name" path="collegeName" type="text"
 								placeholder="Collage-name" class="form-control" />
@@ -471,13 +475,12 @@ table thead {
 							<h4>
 								State <span>*</span>
 							</h4>
-							<form:select path="state" class="form-control">
+							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
 								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Andra Pradesh</form:option>
-								<form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-								<form:option value="Assam">Assam</form:option>
-								<form:option value="Bihar">Bihar</form:option>
-								<form:option value="Chhattisgarh">Chhattisgarh</form:option>
+									<c:forEach var="state" items="${states}">
+									<form:option value="${state[1]}"
+										label="${state[1]}" />
+								</c:forEach>
 							</form:select>
 
 						</div>
@@ -485,15 +488,25 @@ table thead {
 							<h4>
 								City <span>*</span>
 							</h4>
-							<form:select path="city" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Gurgaon</form:option>
-								<form:option value="Andra Pradesh">Indore</form:option>
-								<form:option value="Arunachal Pradesh">Kolkata</form:option>
-								<form:option value="Assam">Pune</form:option>
-								<form:option value="Bihar">Mumbai</form:option>
-								<form:option value="Chhattisgarh">Delhi</form:option>
+							<form:select path="city"  id="cityDropDown" class="form-control">
+								<option value="">Select</option>
 							</form:select>
+						</div>
+						
+						
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								Postal Code <span>*</span>
+							</h4>
+							<form:input id="postal-code" path="postalCode" type="text"
+								placeholder="zip or postal code" class="form-control" />
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								Landmark <span>*</span>
+							</h4>
+							<input id="landmark" path="landmark" type="text"
+								placeholder="Landmark" class="form-control">
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -729,9 +742,7 @@ table thead {
 							<br>
 
 							<!-- <button onclick="myCreateFunction()">Create row</button> -->
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button onclick="myDeleteFunction()">Delete row</button>
-							</div>
+							
 
 							<script>
                                 function myCreateFunction() {
@@ -778,6 +789,41 @@ table thead {
         fasterPreview( this );
     });
     </script>
+    
+   <script>
+function myFunction() {
+  var x = document.getElementById("editState").value;
+  $.ajax({
+		type: 'GET',
+		url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
+		success: function(result) {
+			var s = '';
+			for(var i = 0; i < result.length; i++) {
+				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+			}
+			console.log(s);
+			$('#cityDropDown').html(s);
+		}
+	});
+}
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	
+	$(document).ready(function(){
+		<c:if test="${not empty warningMessage}">
+		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	</script>
 
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>

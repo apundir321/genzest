@@ -383,34 +383,27 @@
                             <form:input id="business" name="business" type="text" path="natureOfbuisness" placeholder="Nature Of Business" class="form-control"/>
                          </div>
                         
+ 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								State <span>*</span>
+							</h4>
+							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
+								<form:option class="first-op" value="">Select</form:option>
+									<c:forEach var="state" items="${states}">
+									<form:option value="${state[1]}"
+										label="${state[1]}" />
+								</c:forEach>
+							</form:select>
 
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>State <span>*</span></h4>
-                          <form:select  path="state" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Andra Pradesh</form:option>
-                               <form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-                               <form:option value="Assam">Assam</form:option>
-                               <form:option value="Bihar">Bihar</form:option>
-                               <form:option value="Chhattisgarh">Chhattisgarh</form:option>
-                             </form:select>
-                             
-                             
-                         </div>
-                     
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>City <span>*</span></h4>
-                            <form:select path="city" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Gurgaon</form:option>
-                               <form:option value="Andra Pradesh">Indore</form:option>
-                               <form:option value="Arunachal Pradesh">Kolkata</form:option>
-                               <form:option value="Assam">Pune</form:option>
-                               <form:option value="Bihar">Mumbai</form:option>
-                               <form:option value="Chhattisgarh">Delhi</form:option>
-                             </form:select>
-                         </div>
-
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								City <span>*</span>
+							</h4>
+							<form:select path="city"  id="cityDropDown" class="form-control">
+								<option value="">Select</option>
+							</form:select>
+						</div>
                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
                             <h4> Postal Code <span>*</span></h4>
                              <form:input id="postal-code" name="postal-code" path="postalCode" placeholder="zip or postal code" class="form-control"/>
@@ -441,6 +434,7 @@
                      </form:form>
                </div>
                 <br>
+                <c:if test="${showLocations}">
                <div class="container-fluid">
                 <div class="row two">
                     <div class="container-fluid">
@@ -451,19 +445,30 @@
                         
                     </div>
                 </div>
-                <form>
+                <form:form action="/updateLocations.html" method="post">
                     <div class="form-row">
-                        
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                                <h4>Location Name <span></span></h4>
-                                <select class="form-control" required>
-                                <option value="">Select</option> 
-                                <option value="After 6pm">Delhi</option>
-                                <option value="4pm - 6pm">Mumbai</option>
-                                <option value="12pm - 4pm">Gurgaon</option>
-                                <option value="8am - 12pm">Bangalore</option>
-                                </select>
-                            </div>
+                        <input id="empId" name="empId" type="hidden" value="${employer.id}" placeholder="Client Code" class="form-control"/>
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								State <span>*</span>
+							</h4>
+							<select  id="editStateLocation" class="form-control" onchange="myFunction1()">
+								<option class="first-op" value="">Select</option>
+									<c:forEach var="state" items="${states}">
+									<option value="${state[1]}">${state[1]}</option>
+								</c:forEach>
+							</select>
+
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								City <span>*</span>
+							</h4>
+							<select  name="cityLocation"  id="cityDropDownLocation" class="form-control">
+								<option value="">Select</option>
+							<select>
+						</div>
+
                            
                     </div>
                     <br/><br/>
@@ -476,12 +481,14 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                       <c:forEach var="location" items="${employer.locations}">	
                                         <tr>
-<%--                                         	 <c:forEach var="timeSlot" items="${jobAccount.timeSlots}">	 --%>
-                                          <th scope="row">WIP</th>
-                                          <td>Delhi</td>
-<%--                                           </c:forEach> --%>
+                                        	
+                                          <th scope="row">${employer.clientCode}</th>
+                                          <td>${location.location}</td>
+                                         
                                         </tr>
+                                         </c:forEach>
                                       </tbody>
                                     <!-- <tr>
                                     <td>Row1 cell1</td>
@@ -490,37 +497,69 @@
                                 </table>
                                <br>
                                 
-                                <script>
-                                function myCreateFunction() {
-                                    var table = document.getElementById("myTable");
-                                    var row = table.insertRow(0);
-                                    var cell1 = row.insertCell(0);
-                                    var cell2 = row.insertCell(1);
-                                    cell1.innerHTML = "Tuesday";
-                                    cell2.innerHTML = "After 6pm";
-                                }
-                                
-                                function myDeleteFunction() {
-                                    document.getElementById("myTable").deleteRow(0);
-                                }
-                                </script>
+
                                 
                          </div> 
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
                         <button type="submit">Save</button>
                      </div>
-                </form>
+                </form:form>
             </div>
+            </c:if>
 
 			</main>
 
 		</div>
 	</div>
 	
+		       <script>
+function myFunction() {
+  var x = document.getElementById("editState").value;
+  $.ajax({
+		type: 'GET',
+		url: '${pageContext.request.contextPath }/loadCitiesByState/' + x,
+		success: function(result) {
+			var s = '';
+			for(var i = 0; i < result.length; i++) {
+				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+			}
+			console.log(s);
+			$('#cityDropDown').html(s);
+		}
+	});
+}
+
+
+function myFunction1() {
+	  var x = document.getElementById("editStateLocation").value;
+	  $.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath }/loadCitiesByState/' + x,
+			success: function(result) {
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+					s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+				}
+				console.log(s);
+				$('#cityDropDownLocation').html(s);
+			}
+		});
+	}
+</script>
+	
 	<script type="text/javascript">
 	$(document).ready(function(){
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	
+	$(document).ready(function(){
+		<c:if test="${not empty warningMessage}">
+		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
 		</c:if>
 	});
 	

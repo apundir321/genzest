@@ -1,16 +1,24 @@
 package com.howtodoinjava;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.howtodoinjava.dao.JobCategoryRepo;
+import com.howtodoinjava.domain.CategoryRepo;
+import com.howtodoinjava.entity.Category;
 
 
 @SpringBootApplication
 public class SpringBootWebApplication extends SpringBootServletInitializer {
+	
+	
+	@Autowired
+	CategoryRepo jobCategoryRepo;
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -19,5 +27,13 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SpringBootWebApplication.class, args);
-	}    
+	}  
+	
+	@PostConstruct
+	public void init()
+	{
+		System.out.println(jobCategoryRepo.getStatesByCountryId("100").size());
+		System.out.println(jobCategoryRepo.getCitiesByState("739").size());
+		
+	}
 }

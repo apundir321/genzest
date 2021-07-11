@@ -491,6 +491,17 @@ table thead {
 								<form:option value="Bihar">Bihar</form:option>
 								<form:option value="Chhattisgarh">Chhattisgarh</form:option>
 							</form:select>
+							<c:choose>
+										<c:when test="${not empty profile.state}">
+    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.state}</span> </h4>
+  										</c:when>
+										
+										<c:otherwise>
+   											<h4 style="color: #f15336">
+											Selected: <span style="color: #A4A4A4;">Not Selected</span>
+										</h4>
+  										</c:otherwise>
+									</c:choose>
 
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
@@ -506,6 +517,18 @@ table thead {
 								<form:option value="Bihar">Mumbai</form:option>
 								<form:option value="Chhattisgarh">Delhi</form:option>
 							</form:select>
+							
+							<c:choose>
+										<c:when test="${not empty profile.city}">
+    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.city}</span> </h4>
+  										</c:when>
+										
+										<c:otherwise>
+   											<h4 style="color: #f15336">
+											Selected: <span style="color: #A4A4A4;">Not Selected</span>
+										</h4>
+  										</c:otherwise>
+									</c:choose>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -545,9 +568,18 @@ table thead {
 										</c:forEach>
 									</form:select>
 <!-- 									<h4 style="color: #f15336">Selected: </h4><h4>${profile.category.categoryName}</h4> -->
-									<c:if test="${not empty profile.category.categoryName}">
-									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.category.categoryName}</span> </h4>
-									</c:if>
+									
+									<c:choose>
+										<c:when test="${not empty profile.category.categoryName}">
+    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.category.categoryName}</span> </h4>
+  										</c:when>
+										
+										<c:otherwise>
+   											<h4 style="color: #f15336">
+											Selected: <span style="color: #A4A4A4;">Not Selected</span>
+										</h4>
+  										</c:otherwise>
+									</c:choose>
 								</div>
 
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
@@ -561,9 +593,19 @@ table thead {
 										<form:option value="Field Job">Field Job</form:option>
 										<form:option value="Office Job">Office Job</form:option>
 									</form:select>
-									<c:if test="${not empty profile.preference}">
-									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.preference}</span> </h4>
-									</c:if>
+									<c:choose>
+										<c:when test="${not empty profile.preference}">
+    										<h4 style="color: #f15336">
+											Selected: <span style="color: #A4A4A4;">${profile.preference}</span>
+										</h4>
+  										</c:when>
+										
+										<c:otherwise>
+   											<h4 style="color: #f15336">
+											Selected: <span style="color: #A4A4A4;">Not Selected</span>
+										</h4>
+  										</c:otherwise>
+									</c:choose>
 								</div>
 
 							</div>
@@ -661,6 +703,17 @@ table thead {
 								<form:option value="Bank Account"></form:option>
 								<form:option value="Wallet"></form:option>
 							</form:select>
+							<c:choose>
+										<c:when test="${not empty profile.paymentMethod}">
+    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.paymentMethod}</span> </h4>
+  										</c:when>
+										
+										<c:otherwise>
+   											<h4 style="color: #f15336">
+											Selected: <span style="color: #A4A4A4;">Not Selected</span>
+										</h4>
+  										</c:otherwise>
+									</c:choose>
 						</div>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
@@ -724,6 +777,7 @@ table thead {
 <%-- 						</form:form> --%>
 						<br />
 						<br />
+						<c:if test="${profile.preferences.size() > 0 }"> 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
 							<table id="myTable">
 								<thead>
@@ -768,6 +822,7 @@ table thead {
                                 </script>
 
 						</div>
+						</c:if>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
 				

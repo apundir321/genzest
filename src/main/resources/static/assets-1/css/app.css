@@ -260,6 +260,8 @@ thead,
 tr {
   /* border: 0 solid; */
   border-color: inherit;
+  padding: 10px !important;
+  font-size:12px
 }
 label {
   display: inline-block;
@@ -10739,6 +10741,7 @@ a.sidebar-link svg {
 .table tr {
   border-color: #A4A4A4;
   border-radius: 2rem;
+  font-size:12px;
 }
 .table > tbody > tr > td {
   vertical-align: middle;

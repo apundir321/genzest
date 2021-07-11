@@ -394,13 +394,13 @@
                             <h4>Vacancy for Male <span>*</span></h4>
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                    <button type="button" class="quantity-left-minus-male btn btn-danger btn-number"  data-type="minus" data-field="">
                                         <span class="glyphicon glyphicon-minus"></span>
                                     </button>
                                 </span>
-                                <form:input type="text" path="vacancyForMale" id="quantity" name="quantity" class="form-control input-number" min="1" max="100"/>
+                                <form:input type="text" path="vacancyForMale" id="quantity_male" name="quantity" class="form-control input-number" min="1" max="100"/>
                                 <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                    <button type="button" class="quantity-right-plus-male btn btn-success btn-number" data-type="plus" data-field="">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </span>
@@ -411,13 +411,13 @@
                             <h4>Vacancy for Female <span>*</span></h4>
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                    <button type="button" class="quantity-left-minus-female btn btn-danger btn-number"  data-type="minus" data-field="">
                                     <span class="glyphicon glyphicon-minus"></span>
                                     </button>
                                 </span>
-                                <form:input type="text" path="vacancyForFemale" id="quantity" name="quantity" class="form-control input-number" min="1" max="100"/>
+                                <form:input type="text" path="vacancyForFemale" id="quantity_female" name="quantity" class="form-control input-number" min="1" max="100"/>
                                 <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                    <button type="button" class="quantity-right-plus-female btn btn-success btn-number" data-type="plus" data-field="">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </span>
@@ -428,13 +428,13 @@
                             <h4>Vacancy for Any Other <span>*</span></h4>
                             <div class="input-group">
                                 <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                    <button type="button" class="quantity-left-minus-other btn btn-danger btn-number"  data-type="minus" data-field="">
                                     <span class="glyphicon glyphicon-minus"></span>
                                     </button>
                                 </span>
-                                <form:input type="text" path="vacancyForOther" id="quantity" name="quantity" class="form-control input-number" min="1" max="100"/>
+                                <form:input type="text" path="vacancyForOther" id="quantity_other" name="quantity" class="form-control input-number" min="1" max="100"/>
                                 <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                    <button type="button" class="quantity-right-plus-other btn btn-success btn-number" data-type="plus" data-field="">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </span>
@@ -462,37 +462,33 @@
                             <h4> Locality <span>*</span></h4>
                             <form:input id="locality" name="locality" type="text" placeholder="Locality" class="form-control" path="locality"/>
                          </div>
-                     
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>City <span>*</span></h4>
-                            <form:select path="city" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Gurgaon</form:option>
-                               <form:option value="Andra Pradesh">Indore</form:option>
-                               <form:option value="Arunachal Pradesh">Kolkata</form:option>
-                               <form:option value="Assam">Pune</form:option>
-                               <form:option value="Bihar">Mumbai</form:option>
-                               <form:option value="Chhattisgarh">Delhi</form:option>
-                             </form:select>
-                         </div>
                          
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								State <span>*</span>
+							</h4>
+							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
+								<form:option class="first-op" value="">Select</form:option>
+									<c:forEach var="state" items="${states}">
+									<form:option value="${state[1]}"
+										label="${state[1]}" />
+								</c:forEach>
+							</form:select>
+
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								City <span>*</span>
+							</h4>
+							<form:select path="city"  id="cityDropDown" class="form-control">
+								<option value="">Select</option>
+							</form:select>
+						</div>                         
                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
                             <h4> Postal Code <span>*</span></h4>
                              <form:input id="postal-code" name="postal-code" path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
                          </div>
-                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>State <span>*</span></h4>
-                          <form:select  path="state" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Andra Pradesh</form:option>
-                               <form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-                               <form:option value="Assam">Assam</form:option>
-                               <form:option value="Bihar">Bihar</form:option>
-                               <form:option value="Chhattisgarh">Chhattisgarh</form:option>
-                             </form:select>
-                             
-                             
-                         </div>
+                         
                      
                       
                       
@@ -503,7 +499,7 @@
 
                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
                             <h4> Job Code </h4>
-                           <form:input path="jobCode" width="100%" type="text" style="padding: 1rem; width: 100%;"/>
+                           <form:input path="jobCode" width="100%" type="text" style="padding: 1rem; width: 100%;" disabled="true"/>
                          </div>
                        </div>
 
@@ -651,6 +647,119 @@
             
         });
     </script>
+    
+    
+      <script>
+        $(document).ready(function(){
+
+        var quantitiy=0;
+        $('.quantity-right-plus-female').click(function(e){
+                
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity_female').val());
+                
+                // If is not undefined
+                    
+                    $('#quantity_female').val(quantity + 1);
+
+                
+                    // Increment
+                
+            });
+
+            $('.quantity-left-minus-female').click(function(e){
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity_female').val());
+                
+                // If is not undefined
+            
+                    // Increment
+                    if(quantity>0){
+                    $('#quantity_female').val(quantity - 1);
+                    }
+            });
+            
+        });
+    </script>
+    
+    
+      <script>
+        $(document).ready(function(){
+
+        var quantitiy=0;
+        $('.quantity-right-plus-male').click(function(e){
+                
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity_male').val());
+                
+                // If is not undefined
+                    
+                    $('#quantity_male').val(quantity + 1);
+
+                
+                    // Increment
+                
+            });
+
+            $('.quantity-left-minus-male').click(function(e){
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity_male').val());
+                
+                // If is not undefined
+            
+                    // Increment
+                    if(quantity>0){
+                    $('#quantity_male').val(quantity - 1);
+                    }
+            });
+            
+        });
+    </script>
+    
+      <script>
+        $(document).ready(function(){
+
+        var quantitiy=0;
+        $('.quantity-right-plus-other').click(function(e){
+                
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity_other').val());
+                
+                // If is not undefined
+                    
+                    $('#quantity_other').val(quantity + 1);
+
+                
+                    // Increment
+                
+            });
+
+            $('.quantity-left-minus-other').click(function(e){
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity_other').val());
+                
+                // If is not undefined
+            
+                    // Increment
+                    if(quantity>0){
+                    $('#quantity_other').val(quantity - 1);
+                    }
+            });
+            
+        });
+    </script>
 	<script>
 		$(document).ready( function () {
 			$('#table_id').DataTable();
@@ -672,6 +781,25 @@
         fasterPreview( this );
     });
     </script>
+    
+       <script>
+function myFunction() {
+  var x = document.getElementById("editState").value;
+  $.ajax({
+		type: 'GET',
+		url: '${pageContext.request.contextPath }/loadCitiesByState/' + x,
+		success: function(result) {
+			var s = '';
+			for(var i = 0; i < result.length; i++) {
+				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+			}
+			console.log(s);
+			$('#cityDropDown').html(s);
+		}
+	});
+}
+</script>
 
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>

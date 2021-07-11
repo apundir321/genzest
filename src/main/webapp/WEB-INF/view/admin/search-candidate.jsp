@@ -1,43 +1,55 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Genzest">
-<meta name="author" content="Genzest">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Genzest">
+	<meta name="author" content="Genzest">
+	
 
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
+	<title>Genzest</title>
+
+	<link href="assets-1/css/app.css" rel="stylesheet">
+    
+
+	<link href="assets-1/css/style.css" rel="stylesheet">
+	<link href="assets-1/css/style2.css" rel="stylesheet">
+
+  
+	<link href="assets-2/css/app.css" rel="stylesheet">
+
+	<link href="assets-2/css/style.css" rel="stylesheet">
+	<link href="assets-2/css/style2.css" rel="stylesheet">
+	<link href="assets-2/css/style3.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
-<title>Genzest</title>
+	<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<link href="assets-1/css/app.css" rel="stylesheet">
-<link href="assets-1/css/student-d.css" rel="stylesheet">
-
-<link href="assets-1/css/style.css" rel="stylesheet">
-<link href="assets-1/css/style2.css" rel="stylesheet">
-
-<link
-	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-	rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  
+  <script src="//code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  
+  
+  
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 <style>
 .sidebar-content .sidebar-nav .fa-user-circle-o {
@@ -160,6 +172,121 @@ form .searchjobs {
 	height: 55px;
 }
 </style>
+
+<script>
+
+
+
+var dataSet = new Array();
+<c:forEach items="${profiles}" var="profile" varStatus="status">
+jobArray = new Array();
+jobArray.push('${profile.id}');
+jobArray.push('${profile.firstName}');
+jobArray.push('${profile.dob}');
+jobArray.push('${profile.email}');
+jobArray.push('${profile.mobileNo}');
+jobArray.push('${profile.gender}');
+jobArray.push('${profile.course}');
+jobArray.push('${profile.city}');
+jobArray.push('${profile.havePc}');
+jobArray.push('<a href="edit_stud.html?profileId=${profile.id}">View</a>');
+
+
+dataSet.push(jobArray);
+</c:forEach>
+	var dataSet1 = [
+    [ "002", "Den", "Office Job", "8am-5am", "Designing", "4", "Gurgaon", "6/20/2021", "----" ],
+	  //  [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+    // // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
+    // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
+    // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
+    [ "001", "Henny", "Remote/Online Job", "8am-5am", "Billing", "5", "Gurgaon", "6/20/2021", "----" ]
+    // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
+    // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
+    // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
+    // [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
+];
+
+
+
+    
+
+    // New record
+    $('a.editor-create').on('click', function (e) {
+        e.preventDefault();
+ 
+        editor.create( {
+            title: 'Create new record',
+            buttons: 'Add'
+        } );
+    } );
+ 
+    // Edit record
+    $('#example').on('click', 'td.editor-edit', function (e) {
+        e.preventDefault();
+ 
+        editor.edit( $(this).closest('tr'), {
+            title: 'Edit record',
+            buttons: 'Update'
+        } );
+    } );
+ 
+    // Delete a record
+    $('#example').on('click', 'td.editor-delete', function (e) {
+        e.preventDefault();
+ 
+        editor.remove( $(this).closest('tr'), {
+            title: 'Delete record',
+            message: 'Are you sure you wish to remove this record?',
+            buttons: 'Delete'
+        } );
+    } );
+ 
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            data: dataSet,
+            columns: [
+            	{ title: "S No." },
+    			{ title: "Name" },
+                { title: "Dob" },
+                { title: "Email" },
+                { title: "Phone" },
+                { title: "Gender" },
+                { title: "Course" },
+                { title: "City" },
+    			{ title: "Computer" },
+    			{
+    				 title: "view"
+    			}
+    			
+    			
+    			
+//                 {
+//                     data: null,
+//                     className: "dt-center editor-edit",
+//                     defaultContent: '<a href="editjobs-genz.html"><i class="fa fa-pencil"/></a>',
+//                     orderable: false
+//                 },
+//                 {
+//                     data: null,
+//                     className: "dt-center editor-delete",
+//                     defaultContent: '<i class="fa fa-trash"/>',
+//                     orderable: false
+//                 }
+            ],
+    		
+        } );
+    } );
+</script>
 </head>
 
 <body>
@@ -368,32 +495,27 @@ form .searchjobs {
 									<form:option value="Others"></form:option>
 									</form:select>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-							<h4>State</h4>
-							<form:select path="state" class="form-control">
+						 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								State <span>*</span>
+							</h4>
+							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
 								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Andra Pradesh</form:option>
-								<form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-								<form:option value="Assam">Assam</form:option>
-								<form:option value="Bihar">Bihar</form:option>
-								<form:option value="Chhattisgarh">Chhattisgarh</form:option>
+									<c:forEach var="state" items="${states}">
+									<form:option value="${state[1]}"
+										label="${state[1]}" />
+								</c:forEach>
 							</form:select>
+
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								City <span>*</span>
 							</h4>
-							<form:select path="city" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Gurgaon</form:option>
-								<form:option value="Andra Pradesh">Indore</form:option>
-								<form:option value="Arunachal Pradesh">Kolkata</form:option>
-								<form:option value="Assam">Pune</form:option>
-								<form:option value="Bihar">Mumbai</form:option>
-								<form:option value="Chhattisgarh">Delhi</form:option>
+							<form:select path="city"  id="cityDropDown" class="form-control">
+								<option value="">Select</option>
 							</form:select>
 						</div>
-
 					</div>
 					<div class="form-row last">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
@@ -402,47 +524,50 @@ form .searchjobs {
 					</div>
 				</form:form>
 
-				<c:if test="${profiles.size() > 0 }">
+<%-- 				<c:if test="${profiles.size() > 0 }"> --%>
 
 
-					<table class="table">
-						<thead>
+<!-- 					<table class="table"> -->
+<!-- 						<thead> -->
 
-							<tr>
-								<th scope="col">S No.</th>
-								<th scope="col">Name</th>
-								<th scope="col">Dob</th>
-								<th scope="col">Email</th>
-								<th scope="col">Phone</th>
-								<th scope="col">Gender</th>
-								<th scope="col">Course</th>
-								<th scope="col">Vehicle</th>
-								<th scope="col">Blood Group</th>
-								<th scope="col">City</th>
-								<th scope="col">Computer</th>
-								<th scope="col">View</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="profile" items="${profiles}">
-								<tr>
-									<th scope="row">${profile.id}</th>
-									<td>${profile.firstName}</td>
-									<td>${profile.dob}</td>
-									<td>${profile.email}</td>
-									<td>${profile.mobileNo}</td>
-									<td>${profile.gender}</td>
-									<td>${profile.course}</td>
-									<td>${profile.vehicleType}</td>
-									<td>${profile.bloodGroup}</td>
-									<td>${profile.city}</td>
-									<td>${profile.havePc}</td>
-									<td><a href="edit_stud.html?profileId=${profile.id}">View</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</c:if>
+<!-- 							<tr> -->
+<!-- 								<th scope="col">S No.</th> -->
+<!-- 								<th scope="col">Name</th> -->
+<!-- 								<th scope="col">Dob</th> -->
+<!-- 								<th scope="col">Email</th> -->
+<!-- 								<th scope="col">Phone</th> -->
+<!-- 								<th scope="col">Gender</th> -->
+<!-- 								<th scope="col">Course</th> -->
+<!-- 								<th scope="col">Vehicle</th> -->
+<!-- 								<th scope="col">Blood Group</th> -->
+<!-- 								<th scope="col">City</th> -->
+<!-- 								<th scope="col">Computer</th> -->
+<!-- 								<th scope="col">View</th> -->
+<!-- 							</tr> -->
+<!-- 						</thead> -->
+<!-- 						<tbody> -->
+<%-- 							<c:forEach var="profile" items="${profiles}"> --%>
+<!-- 								<tr> -->
+<%-- 									<th scope="row">${profile.id}</th> --%>
+<%-- 									<td>${profile.firstName}</td> --%>
+<%-- 									<td>${profile.dob}</td> --%>
+<%-- 									<td>${profile.email}</td> --%>
+<%-- 									<td>${profile.mobileNo}</td> --%>
+<%-- 									<td>${profile.gender}</td> --%>
+<%-- 									<td>${profile.course}</td> --%>
+<%-- 									<td>${profile.vehicleType}</td> --%>
+<%-- 									<td>${profile.bloodGroup}</td> --%>
+<%-- 									<td>${profile.city}</td> --%>
+<%-- 									<td>${profile.havePc}</td> --%>
+<%-- 									<td><a href="edit_stud.html?profileId=${profile.id}">View</a></td> --%>
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+<!-- 						</tbody> -->
+<!-- 					</table> -->
+<div style="margin-top: 35%">
+ <table id="example" class="display" width="100%"></table>
+ </div>
+<%-- 				</c:if> --%>
 
 			</div>
 
@@ -451,6 +576,54 @@ form .searchjobs {
 
 		</div>
 	</div>
+
+<script>
+function myFunction() {
+	  var x = document.getElementById("editState").value;
+	  $.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
+			success: function(result) {
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+					s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+				}
+				console.log(s);
+				$('#cityDropDown').html(s);
+			}
+		});
+	}
+	</script>
+	
+	
+	
+			<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	$(".success").click(function(){
+		toastr.success('We do have the Kapua suite available.', 'Success Alert', {timeOut: 5000})
+	});
+
+
+	$(".error").click(function(){
+		toastr.error('You Got Error', 'Inconceivable!', {timeOut: 5000})
+	});
+
+
+	$(".info").click(function(){
+		toastr.info('It is for your kind information', 'Information', {timeOut: 5000})
+	});
+
+
+	$(".warning").click(function(){
+		toastr.warning('It is for your kind warning', 'Warning', {timeOut: 5000})
+	});
+</script>
 
 	<script src="assets-1/js/app.js"></script>
 

@@ -19,10 +19,17 @@
 	<title>Genzest</title>
 
 	<link href="assets-1/css/app.css" rel="stylesheet">
-    <link href="assets-1/css/student-d.css" rel="stylesheet">
+    
 
 	<link href="assets-1/css/style.css" rel="stylesheet">
 	<link href="assets-1/css/style2.css" rel="stylesheet">
+
+  
+	<link href="assets-2/css/app.css" rel="stylesheet">
+
+	<link href="assets-2/css/style.css" rel="stylesheet">
+	<link href="assets-2/css/style2.css" rel="stylesheet">
+	<link href="assets-2/css/style3.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,6 +37,23 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+	<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  
+  <script src="//code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  
+  
+  
+  
+<!--       <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script> -->
+<!--     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+  
 
 <style>
 	.sidebar-content .sidebar-nav .fa-user-circle-o{
@@ -46,44 +70,6 @@
 		font-size: 20px;
 		color: #A4A4A4;
 	}
-    main .card1{
-        margin-bottom: 2rem;
-    }
-    main .card1 .fa-users{
-        background-color: #2769EE;
-        border-radius: .5rem;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2.5rem;
-    }
-    main .card1 .fa-smile-o{
-        background-color: #BEC747;
-        border-radius: .5rem;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2.5rem;
-    }
-    main .card1 .fa-newspaper-o{
-        background-color: #27BEEE;
-        border-radius: .5rem;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2.5rem;
-    }
-    main .card1 .fa-file-text-o{
-        background-color: #DF2C57;
-        border-radius: .5rem;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2.5rem;
-    }
-    main .card1 .fa-thumbs-o-down{
-        background-color: #EE9827;
-        border-radius: .5rem;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2.5rem;
-    }
 
     .dropbtn {
         background-color: #212130;
@@ -147,10 +133,160 @@
 			height: 800px;
 		}
 	}
+ 
+
+    .last .lastcol button{
+        padding: 1.2rem;
+        background-color: #F15336;
+		font-weight: bold;
+		border-radius: .5rem;
+        color: white;
+        font-size: 1.5rem;
+        width: 14rem;
+        border: none;
+        text-align: center;
+    }
+    .last .lastcol{
+        padding: 2rem;
+        text-align: center;
+    }
+   form{
+       padding: 1.5rem;
+   }
+   form .searchjobs{
+       margin-bottom: 30px;
+   }
+  
+   /* sm */
+  @media (min-width: 768px) and (max-width: 991px) {
+    table{
+     overflow: auto;
+     display: block;
+   }
+  } 
+
+  /* xs */
+  @media (max-width: 767px) {
+    table{
+     overflow: auto;
+     display: block;
+   }
+  }
   .sidebar .sidebar-nav .sidebar-item a {
     height: 55px;
 }
 </style>
+<script>
+
+
+
+var dataSet = new Array();
+<c:forEach items="${jobs}" var="job" varStatus="status">
+jobArray = new Array();
+jobArray.push('${job.id}');
+jobArray.push('${job.jobName}');
+jobArray.push('${job.jobCode}');
+jobArray.push('${job.category.categoryName}');
+jobArray.push('${job.noOfVacancy}');
+jobArray.push('${job.employer.employerName}');
+jobArray.push('${job.status}');
+jobArray.push('${job.createdBy.firstName}');
+jobArray.push('${job.createdDate}');
+
+jobArray.push('<a href="/showJobProfile?jobId=${job.id}">View</a>');
+
+dataSet.push(jobArray);
+</c:forEach>
+	var dataSet1 = [
+    [ "002", "Den", "Office Job", "8am-5am", "Designing", "4", "Gurgaon", "6/20/2021", "----" ],
+	  //  [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+    // // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
+    // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
+    // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
+    [ "001", "Henny", "Remote/Online Job", "8am-5am", "Billing", "5", "Gurgaon", "6/20/2021", "----" ]
+    // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
+    // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
+    // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
+    // [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
+];
+
+
+
+    
+
+    // New record
+    $('a.editor-create').on('click', function (e) {
+        e.preventDefault();
+ 
+        editor.create( {
+            title: 'Create new record',
+            buttons: 'Add'
+        } );
+    } );
+ 
+    // Edit record
+    $('#example').on('click', 'td.editor-edit', function (e) {
+        e.preventDefault();
+ 
+        editor.edit( $(this).closest('tr'), {
+            title: 'Edit record',
+            buttons: 'Update'
+        } );
+    } );
+ 
+    // Delete a record
+    $('#example').on('click', 'td.editor-delete', function (e) {
+        e.preventDefault();
+ 
+        editor.remove( $(this).closest('tr'), {
+            title: 'Delete record',
+            message: 'Are you sure you wish to remove this record?',
+            buttons: 'Delete'
+        } );
+    } );
+ 
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            data: dataSet,
+            columns: [
+    			{ title: "Id" },
+                { title: "Job" },
+                { title: "Job Code" },
+                { title: "Category" },
+                { title: "Vacancy" },
+                { title: "Company" },
+                { title: "Status" },
+    			{ title: "Created By" },
+    			{ title: "Created Date" },
+    			{
+    				 title: "view"
+    			}
+//                 {
+//                     data: null,
+//                     className: "dt-center editor-edit",
+//                     defaultContent: '<a href="editjobs-genz.html"><i class="fa fa-pencil"/></a>',
+//                     orderable: false
+//                 },
+//                 {
+//                     data: null,
+//                     className: "dt-center editor-delete",
+//                     defaultContent: '<i class="fa fa-trash"/>',
+//                     orderable: false
+//                 }
+            ],
+    		
+        } );
+    } );
+</script>
 </head>
 
 <body>
@@ -164,33 +300,14 @@
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>John Rambo</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
             		</a>
 				</li>
 
-        
-
-					<li class="sidebar-item active">
+					<li class="sidebar-item">
 					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
             		</a></li>
-
-                <li class="sidebar-item">
-                  <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                    <div id="myDropdown" class="dropdown-content">
-                      <a href="access-right-genz.html">Access Right</a>
-                              <a href="team-genz.html">Team</a>
-                              <a href="category-genz.html">Category</a>
-                              <a href="jobtype-genz.html">Job Types</a>
-                              <a href="timeslot-genz.html">Time Slot</a>
-                              <a href="bloodgrp-genz.html">Blood Group</a>
-                              <a href="course-genz.html">Courses</a>
-                              <a href="vehicle-genz.html">Vehicle Type</a>
-                              <a href="citystate-genz.html">City Country State</a>
-                    </div>
-                  </div>
-              </li>
 
 					<li class="sidebar-item">
 					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
@@ -206,22 +323,36 @@
 
 					<li class="sidebar-item">
 					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
-           </a></li>
+                    </a></li>
 
-            <li class="sidebar-item">
-            <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span>
-            </a></li>
+                        <li class="sidebar-item">
+                        <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span>
+                        </a></li>
 
-            <li class="sidebar-item">
-            <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
-            </a></li>
+                        <li class="sidebar-item">
+                        <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
+                        </a></li>
 
-            <li class="sidebar-item">
-            <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
-            </a></li>
+                        <li class="sidebar-item active">
+                        <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
+                        </a></li>
 
-          
-				
+                        <li class="sidebar-item">
+                            <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                            <div id="myDropdown" class="dropdown-content">
+                              <a href="access-right-genz.html">Access Right</a>
+                              <a href="team-genz.html">Team</a>
+                              <a href="category-genz.html">Category</a>
+                              <a href="jobtype-genz.html">Job Types</a>
+                              <a href="timeslot-genz.html">Time Slot</a>
+                              <a href="bloodgrp-genz.html">Blood Group</a>
+                              <a href="course-genz.html">Courses</a>
+                              <a href="vehicle-genz.html">Vehicle Type</a>
+                              <a href="citystate-genz.html">City Country State</a>
+                            </div>
+                            </div>
+                        </li>
 				</ul>
 
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
@@ -239,7 +370,7 @@
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
 				<!-- <h4><b>Genzest Admin</b></h4>
-				<p>Â© 2021 All Rights Reserved</p> -->
+				<p>© 2021 All Rights Reserved</p> -->
 			</div>
 		</nav>
 
@@ -271,9 +402,9 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-1/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Dashboard</b></h4>
+			   <h4><b>Search Jobs</b></h4>
 
-			   <div class="navbar-collapse collapse">
+			   			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
 							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
@@ -297,7 +428,7 @@
 
 			<main class="content">
                 <div class="container-fluid">
-                     <form:form action="/searchjobs-genz.html" method="post"
+                                         <form:form action="/searchjobs-genz.html" method="post"
 					modelAttribute="searchJob" >
                         <div class="form-row">
                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
@@ -339,30 +470,27 @@
                             </c:forEach>
                             </form:select>
                           </div>
-                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-                             <h4>State</h4>
-                             <form:select  path="state" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Andra Pradesh</form:option>
-                               <form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-                               <form:option value="Assam">Assam</form:option>
-                               <form:option value="Bihar">Bihar</form:option>
-                               <form:option value="Chhattisgarh">Chhattisgarh</form:option>
-                             </form:select>
-                          </div>
-                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-                             <h4>City <span>*</span></h4>
-                              <form:select path="city" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Gurgaon</form:option>
-                               <form:option value="Andra Pradesh">Indore</form:option>
-                               <form:option value="Arunachal Pradesh">Kolkata</form:option>
-                               <form:option value="Assam">Pune</form:option>
-                               <form:option value="Bihar">Mumbai</form:option>
-                               <form:option value="Chhattisgarh">Delhi</form:option>
-                             </form:select>                          </div>
-                        
-                        </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								State <span>*</span>
+							</h4>
+							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
+								<form:option class="first-op" value="">Select</form:option>
+									<c:forEach var="state" items="${states}">
+									<form:option value="${state[1]}"
+										label="${state[1]}" />
+								</c:forEach>
+							</form:select>
+
+						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<h4>
+								City <span>*</span>
+							</h4>
+							<form:select path="city"  id="cityDropDown" class="form-control">
+								<option value="">Select</option>
+							</form:select>
+						</div>
                         
                         
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
@@ -383,72 +511,114 @@
                         </div>
                        
                       </form:form>
-						<c:if test="${jobs.size() > 0 }">   
 
-
- <table class="table">
-                        <thead>
-                        
-                          <tr>
-                            <th scope="col">Job Code</th>
-                            <th scope="col">Employer</th>
-                            <th scope="col">Job Name</th>
-                            <th scope="col">Time</th>
-                            <th scope="col">Job Category</th>
-                            <th scope="col">No of Vacancy</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Date of Job</th>
-                            <th scope="col">View</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="job" items="${jobs}"> 
-                         <tr> 
-                            <th scope="row">${job.jobCode}</th>
-                            <td>${job.employer.employerName}</td>
-                            <td>${job.jobName}</td>
-                            <td>${job.timeSlot.timeSlotName}</td>
-                            <td>${job.category.categoryName}</td>
-                            <td>${job.noOfVacancy}</td>
-                            <td>${job.city}</td>
-                            <td>${job.jobDate}</td>
-                            <td><a
-										href="/showJobProfile?jobId=${job.id}">View</a></td>
-                          </tr>
-                          </c:forEach>
-                        </tbody>
-                      </table>
-                      
-                      <div class="form-row last">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
-                            <button type="submit" onclick="forceStop()">Apply</button>
-                        </div>
-                      </div>
-                      </c:if>
-                </div>
+                     <table id="example" class="display" width="100%"></table>
+                     <!-- <table class="table">
+                       <thead>
+                         <tr>
+                           <th scope="col">Job Code</th>
+                           <th scope="col">Employer</th>
+                           <th scope="col">Job Type</th>
+                           <th scope="col">Time</th>
+                           <th scope="col">Category</th>
+                           <th scope="col">No of Vacancy</th>
+                           <th scope="col">City</th>
+                           <th scope="col">Valid Till</th>
+                           <th scope="col">View</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                         <tr>
+                           <th scope="row">001</th>
+                           <td>Henny</td>
+                           <td>Remote/ Online Job</td>
+                           <td>8am - 5pm</td>
+                           <td>Billing</td>
+                           <td>5</td>
+                           <td>Gurgaon</td>
+                           <td>6/20/2021</td>
+                           <td>----</td>
+                           
+                         </tr>
+                         <tr>
+                           <th scope="row">002</th>
+                           <td>Den</td>
+                           <td>Office Job</td>
+                           <td>9:30am - 6:30pm</td>
+                           <td>Customer Service</td>
+                           <td>3</td>
+                           <td>Gurgaon</td>
+                           <td>6/20/2021</td>
+                           <td>----</td>
+                           
+                         </tr>
+                         <tr style="border-bottom: none;">
+                           <th scope="row">003</th>
+                           <td>Jay</td>
+                           <td>Field Job</td>
+                           <td>12pm - 8pm</td>
+                           <td>Designing</td>
+                           <td>8</td>
+                           <td>Gurgaon</td>
+                           <td>6/20/2021</td>
+                           <td>----</td>
+                          
+                         </tr>
+                       </tbody>
+                     </table> -->
+               </div>
 			</main>
 
 		
 		</div>
 	</div>
-	<script>
-	
-	function forceStop()
-    {
-
-        var checkboxes = document.getElementsByName('applyJob');
-        var selected = new Array();
-        for (var i=0; i<checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                selected.push(checkboxes[i].value);
-            }
-        }
-        
-        alert(JSON.stringify(selected));
-        
-    }
+<script>
+function myFunction() {
+	  var x = document.getElementById("editState").value;
+	  $.ajax({
+			type: 'GET',
+			url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
+			success: function(result) {
+				var s = '';
+				for(var i = 0; i < result.length; i++) {
+					//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+					s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+				}
+				console.log(s);
+				$('#cityDropDown').html(s);
+			}
+		});
+	}
 	</script>
+	
+	
+	
+		<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	$(".success").click(function(){
+		toastr.success('We do have the Kapua suite available.', 'Success Alert', {timeOut: 5000})
+	});
 
+
+	$(".error").click(function(){
+		toastr.error('You Got Error', 'Inconceivable!', {timeOut: 5000})
+	});
+
+
+	$(".info").click(function(){
+		toastr.info('It is for your kind information', 'Information', {timeOut: 5000})
+	});
+
+
+	$(".warning").click(function(){
+		toastr.warning('It is for your kind warning', 'Warning', {timeOut: 5000})
+	});
+</script>
 	<script src="assets-1/js/app.js"></script>
 
 

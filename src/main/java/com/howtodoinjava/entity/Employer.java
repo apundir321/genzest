@@ -1,14 +1,23 @@
 package com.howtodoinjava.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+
+import com.howtodoinjava.model.Location;
 
 @Entity
 public class Employer {
@@ -43,6 +52,12 @@ public class Employer {
 	}
 	private String status;
 	private Date createdDate;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "employer_location", joinColumns = { @JoinColumn(name = "emp_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "location_id") })
+	private Set<Location> locations = new HashSet<>();
+	
 	private String action;
 	public int getId() {
 		return id;
@@ -139,6 +154,12 @@ public class Employer {
 	}
 	public void setAction(String action) {
 		this.action = action;
+	}
+	public Set<Location> getLocations() {
+		return locations;
+	}
+	public void setLocations(Set<Location> locations) {
+		this.locations = locations;
 	}
 	
 	

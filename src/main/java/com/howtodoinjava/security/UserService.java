@@ -105,6 +105,8 @@ public class UserService implements IUserService {
 			profile.setEmail(accountDto.getEmail());
 			profile.setFirstName(accountDto.getFirstName());
 			profile.setLastName(accountDto.getLastName());
+			profile.setMobileNo(accountDto.getPhoneNo());
+			profile.setStatus("IN-ACTIVE");
 			role = roleRepository.findByName("ROLE_EMPLOYEE");
 			if (role == null) {
 				role = new Role();

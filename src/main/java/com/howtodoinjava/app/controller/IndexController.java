@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -213,6 +212,7 @@ public class IndexController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		model.put("states", categoryRepo.getStatesByCountryId("100"));
 		model.put("profile", profile);
 		model.put("courses", courses);
 		model.put("employers", employers);
@@ -241,6 +241,9 @@ public class IndexController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		model.put("profile", profile);
 		model.put("courses", courses);
 		model.put("employers", employers);
@@ -389,6 +392,7 @@ public class IndexController {
 			userProfileRepo.save(userProfile);
 			User user = userRepo.findByEmail(authentication.getName());
 			model.put("user", user);
+			model.put("successMessage", "Profile Updated!");
 			model.put("profile", user.getUserProfile());
 			model.put("dayPreference",new DayPreference());
 			model.put("timeSlots", timeSlotRepo.findAll());
@@ -397,7 +401,7 @@ public class IndexController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/updatePreferences.html")
-	public void searchJobs(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("dayPreference") DayPreference dayPreference) throws Exception {
+	public void searchJobs(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("dayPreference") DayPreference dayPreference,Map<String, Object> model) throws Exception {
 		System.out.println("***********88(((((((((((9");
 		DayPreference preference = null;
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
@@ -422,6 +426,9 @@ public class IndexController {
 			profile.setPreferences(preferences);
 			userProfileRepo.save(profile);
 		}
+		
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		
 		response.sendRedirect("/edit.html");
 	}
@@ -475,10 +482,13 @@ public class IndexController {
 	
 	@RequestMapping("/appliedjobs.html")
 	public String appliedjobs(Map<String, Object> model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		model.put("message", "HowToDoInJava Reader !!");
 		
 		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant(userRepo.findById(2L).get());
 		model.put("applications", applications);
+		User user = userRepo.findByEmail(auth.getName());
+		model.put("user", user);
 		return "appliedjobs";
 	}
 	
@@ -512,6 +522,8 @@ public class IndexController {
 //        }  
 //         return "login1";  
 //     }  
+	
+	
 	
 
 }

@@ -76,10 +76,12 @@
     margin: .4rem;
 }
 .dataTables_wrapper table th{
-    padding: 2rem;
+    padding: 11px;
+    font-size: 12px;
 }
 .dataTables_wrapper table td{
-    padding: 2rem;
+    padding: 11px;
+    font-size: 12px;
 }
 .dataTables_wrapper table thead{
     border-bottom: .5px solid #A4A4A4;

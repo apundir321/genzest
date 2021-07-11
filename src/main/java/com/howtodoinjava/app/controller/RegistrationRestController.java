@@ -1,6 +1,7 @@
 package com.howtodoinjava.app.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,13 +20,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.howtodoinjava.domain.CategoryRepo;
 import com.howtodoinjava.dto.PasswordDto;
 import com.howtodoinjava.dto.UserDto;
 import com.howtodoinjava.error.InvalidOldPasswordException;
@@ -57,6 +61,10 @@ public class RegistrationRestController {
 
     @Autowired
     private Environment env;
+    
+    
+    @Autowired
+    private CategoryRepo categoryRepo;
 
     public RegistrationRestController() {
         super();
@@ -194,5 +202,17 @@ public class RegistrationRestController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+    
+    @RequestMapping("/loadStatesByCountry/{id}")
+	public List<Object[]> loadStatesByCountry(@PathVariable("id") String id) {
+		
+		return categoryRepo.getStatesByCountryId(id);
+	}
+	
+	@RequestMapping("/loadCitiesByState/{id}")
+	public List<Object[]> loadCitiesByState(@PathVariable("id") String id) {
+		
+		return categoryRepo.getCitiesByState(id);
 	}
 }

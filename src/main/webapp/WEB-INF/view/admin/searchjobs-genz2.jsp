@@ -273,7 +273,7 @@
                </a>
 			   <h4><b>Dashboard</b></h4>
 
-			  <div class="navbar-collapse collapse">
+			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
 							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
@@ -296,90 +296,162 @@
 			</nav>
 
 			<main class="content">
-                <div class="container-fluid1">
-                    <div class="row">
-                        <div class="col-lg-4">
-                          <div class="card1">
-                            <div class="card-body">
-                              <i class="fa fa-users align-middle"></i> 
-                              <p class="card-text"><a href="/employer-genz.html">Total Employer</a></p>
-                              <h5>${employersCount}</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-4">
-                          <div class="card1">
-                            <div class="card-body">
-                              <i class="fa fa-smile-o align-middle"></i>
-                              <p class="card-text"><a href="/searchcandi-genz.html">Total Student</a></p>
-                              <h5>${studentCount}</h5>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card1">
-                              <div class="card-body">
-                                <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                                <p class="card-text"><a href="/jobs-genz.html">Active Jobs</a></p>
-                                <h5>${jobsCount}</h5>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card1">
-                              <div class="card-body">
-                                <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                <p class="card-text"><a href="/jobtype-genz.html">Job Type</a></p>
-                                <h5>${jobTypeCount}</h5>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card1">
-                              <div class="card-body">
-                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
-                                <p class="card-text"><a href="/course-genz.html">Courses</a></p>
-                                <h5>${courseCount}</h5>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                </div>
-
-                <div class="container-fluid1">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card flex-fill">
-                                <table class="table" style="width: auto;">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Categories</th>
-                                        <th scope="col">Jobs</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                   <c:forEach var="catCount" items="${categoriesCountJobs}">
-										<tr>
-											<th scope="row" id="th">${catCount.category}</th>
-											<td>${catCount.value}</td>
-											
-										</tr>
+                <div class="container-fluid">
+                     <form:form action="/searchjobs-genz.html" method="post"
+					modelAttribute="searchJob" >
+                        <div class="form-row">
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+                            <h4>Category <span>*</span></h4>
+                            <form:select class="form-control" path="jobCategory">
+										<form:option value="">Select</form:option>
+										<c:forEach var="category" items="${categories}">
+											<form:option value="${category.id}"
+												label="${category.categoryName}" />
 										</c:forEach>
-                                                                        </tbody>
-                                </table>
-                            </div>
+									</form:select>
+                          </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+                            <h4>Job Type <span>*</span></h4>
+                            <form:select class="form-control" path="jobType">
+										<form:option value="">Select</form:option>
+										<c:forEach var="jobType" items="${jobTypes}">
+											<form:option value="${jobType.id}"
+												label="${jobType.jobTypeName}" />
+										</c:forEach>
+									</form:select>
+                          </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+                            <h4>Time-Slot <span>*</span></h4>
+                           <form:select class="form-control" path="timeSlot">
+										<form:option value="">Select</form:option>
+										<c:forEach var="timeSlot" items="${timeSlots}">
+											<form:option value="${timeSlot.id}"
+												label="${timeSlot.timeSlotName}" />
+										</c:forEach>
+									</form:select>
+                          </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+                            <h4>Employer <span>*</span></h4>
+                             <form:select class="form-control" path="employerName">
+                            <form:option value="">Select</form:option>
+                            <c:forEach var="employer" items="${employers}">  
+                            <form:option  value="${employer.id}" label="${employer.employerName}" />
+                            </c:forEach>
+                            </form:select>
+                          </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+                             <h4>State</h4>
+                             <form:select  path="state" class="form-control">
+                               <form:option class="first-op" value="">Select</form:option> 
+                               <form:option value="Andra Pradesh">Andra Pradesh</form:option>
+                               <form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
+                               <form:option value="Assam">Assam</form:option>
+                               <form:option value="Bihar">Bihar</form:option>
+                               <form:option value="Chhattisgarh">Chhattisgarh</form:option>
+                             </form:select>
+                          </div>
+                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+                             <h4>City <span>*</span></h4>
+                              <form:select path="city" class="form-control">
+                               <form:option class="first-op" value="">Select</form:option> 
+                               <form:option value="Andra Pradesh">Gurgaon</form:option>
+                               <form:option value="Andra Pradesh">Indore</form:option>
+                               <form:option value="Arunachal Pradesh">Kolkata</form:option>
+                               <form:option value="Assam">Pune</form:option>
+                               <form:option value="Bihar">Mumbai</form:option>
+                               <form:option value="Chhattisgarh">Delhi</form:option>
+                             </form:select>                          </div>
+                        
                         </div>
-                    </div>
+                        
+                        
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <h4>Date From <span>*</span></h4>
+                            <form:input path="dateFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                         </div>
+
+                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <h4>Date To <span>*</span></h4>
+                            <form:input path="dateTo" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                         </div>
+                        
+                        
+                        <div class="form-row last">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
+                              <button type="submit">Get Data</button>
+                          </div>
+                        </div>
+                       
+                      </form:form>
+						<c:if test="${jobs.size() > 0 }">   
+
+
+ <table class="table">
+                        <thead>
+                        
+                          <tr>
+                            <th scope="col">Job Code</th>
+                            <th scope="col">Employer</th>
+                            <th scope="col">Job Name</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Job Category</th>
+                            <th scope="col">No of Vacancy</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Date of Job</th>
+                            <th scope="col">View</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="job" items="${jobs}"> 
+                         <tr> 
+                            <th scope="row">${job.jobCode}</th>
+                            <td>${job.employer.employerName}</td>
+                            <td>${job.jobName}</td>
+                            <td>${job.timeSlot.timeSlotName}</td>
+                            <td>${job.category.categoryName}</td>
+                            <td>${job.noOfVacancy}</td>
+                            <td>${job.city}</td>
+                            <td>${job.jobDate}</td>
+                            <td><a
+										href="/showJobProfile?jobId=${job.id}">View</a></td>
+                          </tr>
+                          </c:forEach>
+                        </tbody>
+                      </table>
+                      
+<!--                       <div class="form-row last"> -->
+<!--                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol"> -->
+<!--                             <button type="submit" onclick="forceStop()">Apply</button> -->
+<!--                         </div> -->
+<!--                       </div> -->
+                      </c:if>
                 </div>
 			</main>
 
 		
 		</div>
 	</div>
+	<script>
+	
+	function forceStop()
+    {
+
+        var checkboxes = document.getElementsByName('applyJob');
+        var selected = new Array();
+        for (var i=0; i<checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                selected.push(checkboxes[i].value);
+            }
+        }
+        
+        alert(JSON.stringify(selected));
+        
+    }
+	</script>
 
 	<script src="assets-1/js/app.js"></script>
 
 
 </body>
 
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg3plcpnl0184'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>
+</html>

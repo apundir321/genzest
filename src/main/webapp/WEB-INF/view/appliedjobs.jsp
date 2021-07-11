@@ -272,7 +272,7 @@ $(document).ready(function() {
 						<a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
 					</div>
 				</div>   -->
-				<button class="csv"><a href="">Download CSV</a></button>
+<!-- 				<button class="csv"><a href="">Download CSV</a></button> -->
 				<table id="example" class="display" width="100%"></table>
 			</main>
 

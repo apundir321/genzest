@@ -340,7 +340,7 @@
 			 width: 100% !important;
 		 }
 		 .sidebar{
-			 display: none;
+			 display: block;
 		 }
 		 .card {
 			width: 190px;
