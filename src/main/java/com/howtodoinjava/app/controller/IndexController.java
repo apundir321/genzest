@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -31,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
-import com.howtodoinjava.dao.JobApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.UserProfileRepository;
 import com.howtodoinjava.dao.UserRepository;
@@ -55,12 +57,12 @@ import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
-import com.howtodoinjava.model.JobApplication;
 import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 import com.howtodoinjava.security.UserService;
 import com.howtodoinjava.service.AWSS3Service;
+import com.howtodoinjava.service.CSVService;
 import com.howtodoinjava.service.UserProfileService;
 
 @Controller
@@ -112,6 +114,7 @@ public class IndexController {
 	
 	@Autowired
 	AWSS3Service awsService;
+	
 
 	@RequestMapping("/student-d.html")
 	public String home(Map<String, Object> model) {
@@ -200,8 +203,6 @@ public class IndexController {
 		List<Category> categories = null;
 		try {
 			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-			System.out.println(authentication.getName()+"  &&&&&&7");
-			model.put("message", "HowToDoInJava Reader !!");
 			User user = userRepo.findByEmail(authentication.getName());
 			model.put("user", user);
 			profile = user.getUserProfile();
@@ -557,6 +558,8 @@ public class IndexController {
 //        }  
 //         return "login1";  
 //     }  
+	
+	 
 	
 	
 	

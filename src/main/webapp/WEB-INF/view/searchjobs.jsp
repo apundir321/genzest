@@ -18,18 +18,24 @@
 
 	<title>Genzest</title>
 
-	<link href="assets-1/css/app.css" rel="stylesheet">
-    
+	<link href="assets-2/css/app.css" rel="stylesheet">
 
-	<link href="assets-1/css/style.css" rel="stylesheet">
-	<link href="assets-1/css/style2.css" rel="stylesheet">
+	<link href="assets-2/css/style.css" rel="stylesheet">
+	<link href="assets-2/css/style2.css" rel="stylesheet">
+    <link href="assets-2/css/style3.css" rel="stylesheet">
+    <link href="assets-2/css/earning.css" rel="stylesheet">
 
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+<script src="//code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
 
 <style>
 	.sidebar-content .sidebar-nav .fa-user-circle-o{
@@ -84,6 +90,44 @@
    }
   }
 </style>
+
+<script>
+
+
+var dataSet = new Array();
+<c:forEach items="${jobs}" var="job" varStatus="status">
+jobArray = new Array();
+jobArray.push('${job.jobCode}');
+jobArray.push('${job.employer.employerName}');
+jobArray.push('${job.jobName}');
+jobArray.push('<c:forEach var="timeSlot" items="${job.timeSlots}">${timeSlot.timeSlotName}   </c:forEach>');
+jobArray.push('${job.category.categoryName}');
+jobArray.push('${job.noOfVacancy}');
+jobArray.push('${job.city}');
+jobArray.push('${job.jobDate}');
+jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}">')
+dataSet.push(jobArray);
+</c:forEach>
+ 
+$(document).ready(function() {
+    $('#example').DataTable( {
+        data: dataSet,
+        columns: [
+			{ title: "Job code" },
+            { title: "Employer" },
+            { title: "Job Name" },
+            { title: "Time Slot" },
+            { title: "Job Category" },
+            { title: "No of vacancy" },
+            { title: "City" },
+            { title: "Date of Job" },
+            { title: "Apply" }
+        ],
+		
+    } );
+} );
+</script>
+
 </head>
 
 <body>
@@ -261,43 +305,46 @@
                       </form:form>
 						<c:if test="${jobs.size() > 0 }">   
 
-
- <table class="table">
-                        <thead>
+<div style="padding-top: 20%">
+<button class="csv"><a href="/downloadJobs">Download CSV</a></button>
+<table id="example" class="display" width="100%"></table>
+</div>
+<!--  <table class="table"> -->
+<!--                         <thead> -->
                         
-                          <tr>
-                            <th scope="col">Job Code</th>
-                            <th scope="col">Employer</th>
-                            <th scope="col">Job Name</th>
-                            <th scope="col">Time Slot</th>
-                            <th scope="col">Job Category</th>
-                            <th scope="col">No of Vacancy</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Date of Job</th>
-                            <th scope="col">Apply</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="job" items="${jobs}"> 
-                         <tr> 
-                            <th scope="row">${job.jobCode}</th>
-                            <td>${job.employer.employerName}</td>
-                            <td>${job.jobName}</td>
-                            <td><c:forEach var="timeSlot" items="${job.timeSlots}">${timeSlot.timeSlotName}   </c:forEach></td>
-                            <td>${job.category.categoryName}</td>
-                            <td>${job.noOfVacancy}</td>
-                            <td>${job.city}</td>
-                            <td>${job.jobDate}</td>
-                            <td><div class="form-check">
-                              <input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}">
-                              <label class="form-check-label" for="defaultCheck1">
-                               Apply
-                              </label>
-                            </div></td>
-                          </tr>
-                          </c:forEach>
-                        </tbody>
-                      </table>
+<!--                           <tr> -->
+<!--                             <th scope="col">Job Code</th> -->
+<!--                             <th scope="col">Employer</th> -->
+<!--                             <th scope="col">Job Name</th> -->
+<!--                             <th scope="col">Time Slot</th> -->
+<!--                             <th scope="col">Job Category</th> -->
+<!--                             <th scope="col">No of Vacancy</th> -->
+<!--                             <th scope="col">City</th> -->
+<!--                             <th scope="col">Date of Job</th> -->
+<!--                             <th scope="col">Apply</th> -->
+<!--                           </tr> -->
+<!--                         </thead> -->
+<!--                         <tbody> -->
+<%--                         <c:forEach var="job" items="${jobs}">  --%>
+<!--                          <tr>  -->
+<%--                             <th scope="row">${job.jobCode}</th> --%>
+<%--                             <td>${job.employer.employerName}</td> --%>
+<%--                             <td>${job.jobName}</td> --%>
+<%--                             <td><c:forEach var="timeSlot" items="${job.timeSlots}">${timeSlot.timeSlotName}   </c:forEach></td> --%>
+<%--                             <td>${job.category.categoryName}</td> --%>
+<%--                             <td>${job.noOfVacancy}</td> --%>
+<%--                             <td>${job.city}</td> --%>
+<%--                             <td>${job.jobDate}</td> --%>
+<!--                             <td><div class="form-check"> -->
+<%--                               <input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}"> --%>
+<!--                               <label class="form-check-label" for="defaultCheck1"> -->
+<!--                                Apply -->
+<!--                               </label> -->
+<!--                             </div></td> -->
+<!--                           </tr> -->
+<%--                           </c:forEach> --%>
+<!--                         </tbody> -->
+<!--                       </table> -->
                       
                       <div class="form-row last">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
