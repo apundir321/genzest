@@ -302,6 +302,8 @@
                        </div>
                    </div>
                   <form:form action="/timeslot-edit-genz.html" method="post" modelAttribute="timeSlot">
+                    <form:input path="id" placeholder="First Name"
+								class="form-control" type="hidden" />
                     <div class="form-row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
                             <h4>Time-Slot <span>*</span></h4>
@@ -311,6 +313,7 @@
                               <form:option  value="9:30am - 6:30pm"></form:option>
                               <form:option value="12:00pm - 8:00pm"></form:option>
                               <form:option value="1:00pm - 10:00pm"></form:option>
+                              <form:option value="1pm"></form:option>
                             </form:select>
                              <form:errors path="timeSlotName" cssClass="error"></form:errors>
                           </div>
@@ -345,6 +348,13 @@
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>
 	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
 	
 	</script>
 

@@ -541,6 +541,7 @@ table thead {
 							</form:select>
 						</div>
 						<br/>
+						</div>
 						<div class="container-fluid">
 							<div class="row two">
 								<div class="container-fluid">
@@ -609,6 +610,7 @@ table thead {
 								</div>
 
 							</div>
+							</div>
 							
 							<div class="container-fluid">
 				<div class="row two">
@@ -673,9 +675,9 @@ table thead {
 <!--                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
 <!--                             <button type="submit">Save</button> -->
 <!--                         </div>  -->
-						</div>
+						
 				
-			</div>
+			
 
 
 

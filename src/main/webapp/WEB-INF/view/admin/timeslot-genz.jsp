@@ -182,7 +182,7 @@ timeSlot.push('${timeSlot.timeSlotName}');
 timeSlot.push('${timeSlot.timeSlotStatus}');
 timeSlot.push('${timeSlot.createdDate}');
 timeSlot.push('Administrator');
-timeSlot.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-pencil"/></a>');
+timeSlot.push('<a href="timeslot-edit-genz.html?timeSlotId=${timeSlot.id}"><i class="fa fa-pencil"/></a>');
 dataSet.push(timeSlot);
 </c:forEach>
 	var dataSet2 = [

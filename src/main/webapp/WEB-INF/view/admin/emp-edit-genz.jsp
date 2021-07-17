@@ -556,10 +556,9 @@ function myFunction1() {
 		</c:if>
 	});
 	
-	
 	$(document).ready(function(){
-		<c:if test="${not empty warningMessage}">
-		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
 	});
 	

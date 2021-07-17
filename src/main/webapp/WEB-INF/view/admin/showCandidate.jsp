@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,12 +149,13 @@ table thead {
 
 
 
-<ul class="sidebar-nav">
+				<ul class="sidebar-nav">
 					<br>
 
 					<li class="sidebar-item top"><a class="sidebar-link first"
 						href="index.html"><i class="fa fa-user-circle-o align-middle"
-							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i
+								class="fa fa-angle-down" aria-hidden="true"></i></span>
 							<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
 					</a></li>
 
@@ -223,150 +224,146 @@ table thead {
 		</nav>
 
 
-				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-				<div class="container">
-					<div class="centered">
-						<b class="dot">.....</b><br> <a href="#"><b>Download
-								our App</b></a><br> <b class="dot">.....</b> <br> <a
-							class="blurtext"> Become a part of GenZest by Downloading our
-							App </a>
-					</div>
-				</div>
-				<!-- DOWNLOAD APP TRANSPARENT BOX -->
+		<!-- DOWNLOAD APP TRANSPARENT BOX -->
+		<div class="container">
+			<div class="centered">
+				<b class="dot">.....</b><br> <a href="#"><b>Download
+						our App</b></a><br> <b class="dot">.....</b> <br> <a
+					class="blurtext"> Become a part of GenZest by Downloading our
+					App </a>
+			</div>
+		</div>
+		<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
-				<h4>
-					<b>Genzest Admin</b>
-				</h4>
-				<p>© 2021 All Rights Reserved</p>
+		<h4>
+			<b>Genzest Admin</b>
+		</h4>
+		<p>© 2021 All Rights Reserved</p>
+	</div>
+	</nav>
+
+	<div class="main">
+		<!-- ---------------TOP BAR-------------- -->
+		<nav class="navbar navbar-expand">
+			<a class="sidebar-toggle js-sidebar-toggle"> <img
+				src="assets-2/img/icons/Shape@1X (3).png">
+			</a>
+			<h4>
+				<b>My Profile</b>
+			</h4>
+
+			<div class="navbar-collapse collapse">
+				<ul class="navbar-nav navbar-align">
+					<li class="nav-item"><i class="fa fa-sign-out"
+						aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a></li>
+					<li class="nav-item dropdown"></li>
+				</ul>
+			</div>
+			<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#"
+				data-bs-toggle="dropdown"> </a>
+
+			<div class="dropdown-menu dropdown-menu-end">
+				<button class="btn-forth">Genzest Login</button>
+				<button class="btn-fifth">Recruiter Login</button>
+				<button class="btn-sixth">Student Login</button>
 			</div>
 		</nav>
 
-		<div class="main">
-			<!-- ---------------TOP BAR-------------- -->
-			<nav class="navbar navbar-expand">
-				<a class="sidebar-toggle js-sidebar-toggle"> <img
-					src="assets-2/img/icons/Shape@1X (3).png">
-				</a>
-				<h4>
-					<b>My Profile</b>
-				</h4>
+		<main class="content">
 
-				<div class="navbar-collapse collapse">
-					<ul class="navbar-nav navbar-align">
-						<li class="nav-item">
-							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
-						</li>
-						<li class="nav-item dropdown">
-						
-						
-						</li>
-					</ul>
+		<div class="row two">
+			<div class="container-fluid">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div id="profile-container">
+						<image id="profileImage" src="http://lorempixel.com/100/100" />
+					</div>
+					<input id="imageUpload" type="file" name="profile_photo"
+						placeholder="Photo" required="" capture>
 				</div>
-				<a class="nav-link dropdown-toggle d-none d-sm-inline-block"
-					href="#" data-bs-toggle="dropdown"> </a>
-
-				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth">Genzest Login</button>
-					<button class="btn-fifth">Recruiter Login</button>
-					<button class="btn-sixth">Student Login</button>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<h4>General profile (data once entered can not be altered)</h4>
 				</div>
-			</nav>
-
-			<main class="content">
-
-			<div class="row two">
-				<div class="container-fluid">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div id="profile-container">
-							<image id="profileImage" src="http://lorempixel.com/100/100" />
-						</div>
-						<input id="imageUpload" type="file" name="profile_photo"
-							placeholder="Photo" required="" capture>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<h4>General profile (data once entered can not be altered)</h4>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<button class="back" style="float: right; margin: 1rem;">
-							<a href="profile.html">Back <i
-								class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
-						</button>
-					</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<button class="back" style="float: right; margin: 1rem;">
+						<a href="profile.html">Back <i
+							class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
+					</button>
 				</div>
 			</div>
+		</div>
 
-			<div class="container-fluid">
-				<form:form action="/updateProfile.html" method="post"
-					modelAttribute="profile" enctype="multipart/form-data">
-					<div class="form-row">
-					
-					<form:input path="id" placeholder="First Name"
-								class="form-control" type="hidden" />
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								First Name <span>*</span>
-							</h4>
-							<form:input path="firstName" placeholder="First Name"
-								class="form-control" type="text"  disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Last Name <span>*</span>
-							</h4>
-							<form:input path="lastName" placeholder="Last Name"
-								class="form-control" type="text" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Email <span>*</span>
-							</h4>
-							<form:input class="form-control" path="email"
-								placeholder="Drop Your Mail Id" id="example-email-input" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Parent's Name <span>*</span>
-							</h4>
-							<form:input path="parentsName" placeholder="Parents Name"
-								class="form-control" type="text" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Mobile No <span>*</span>
-							</h4>
-							<form:input class="form-control" path="mobileNo"
-								placeholder="Mobile no" id="example-tel-input" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Alternate Mobile No <span>*</span>
-							</h4>
-							<form:input class="form-control" path="alternateMobileNo"
-								placeholder="Mobile no" id="example-tel-input" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Gender <span>*</span>
-							</h4>
-							<form:select path="gender" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Male">Male</form:option>
-								<form:option value="Female">Female</form:option>
-								<form:option value="Other">Other</form:option>
-							</form:select>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Date of Birth <span>*</span>
-							</h4>
-							<form:input class="form-control" path="dob"
-								placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Course <span>*</span>
-							</h4>
-							<!--   <select class="form-control">
+		<div class="container-fluid">
+			<form:form action="/updateProfile.html" method="post"
+				modelAttribute="profile" enctype="multipart/form-data">
+				<div class="form-row">
+
+					<form:input path="id" placeholder="First Name" class="form-control"
+						type="hidden" />
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							First Name <span>*</span>
+						</h4>
+						<form:input path="firstName" placeholder="First Name"
+							class="form-control" type="text" disabled="true" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Last Name <span>*</span>
+						</h4>
+						<form:input path="lastName" placeholder="Last Name"
+							class="form-control" type="text" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Email <span>*</span>
+						</h4>
+						<form:input class="form-control" path="email"
+							placeholder="Drop Your Mail Id" id="example-email-input" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Parent's Name <span>*</span>
+						</h4>
+						<form:input path="parentsName" placeholder="Parents Name"
+							class="form-control" type="text" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Mobile No <span>*</span>
+						</h4>
+						<form:input class="form-control" path="mobileNo"
+							placeholder="Mobile no" id="example-tel-input" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Alternate Mobile No <span>*</span>
+						</h4>
+						<form:input class="form-control" path="alternateMobileNo"
+							placeholder="Mobile no" id="example-tel-input" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Gender <span>*</span>
+						</h4>
+						<form:select path="gender" class="form-control">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Male">Male</form:option>
+							<form:option value="Female">Female</form:option>
+							<form:option value="Other">Other</form:option>
+						</form:select>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Date of Birth <span>*</span>
+						</h4>
+						<form:input class="form-control" path="dob"
+							placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Course <span>*</span>
+						</h4>
+						<!--   <select class="form-control">
                              <option class="first-op">Select</option> 
                              <option>MBA/ M.Tech/ ME</option>
                              <option>Other PG Course</option>
@@ -379,374 +376,376 @@ table thead {
                              <option>Sales & Marketing</option>
                            </select> -->
 
-							<form:select class="form-control" path="course">
-								<form:option value="">Select</form:option>
-								<c:forEach var="course" items="${courses}">
-									<form:option value="${course.id}"
-										label="${course.courseTypeName}" />
-								</c:forEach>
-							</form:select>
+						<form:select class="form-control" path="course">
+							<form:option value="">Select</form:option>
+							<c:forEach var="course" items="${courses}">
+								<form:option value="${course.id}"
+									label="${course.courseTypeName}" />
+							</c:forEach>
+						</form:select>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Vehicle Type <span>*</span>
+						</h4>
+						<form:select class="form-control" path="vehicleType">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Dont Own a Vehicle"></form:option>
+							<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
+							<form:option value="Four Wheeler"></form:option>
+							<form:option value="Two Wheeler">Two Wheeler</form:option>
+							<!-- <option>Freelance</option> -->
+						</form:select>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Blood Group <span>*</span>
+						</h4>
+						<form:select path="bloodGroup" class="form-control">
+							<form:option value="">Don't Know</form:option>
+							<form:option value="AB-"></form:option>
+							<form:option value="O-"></form:option>
+							<form:option value="B-"></form:option>
+							<form:option value="A-"></form:option>
+							<form:option value="O+"></form:option>
+							<form:option value="AB+"></form:option>
+							<form:option value="B+"></form:option>
+							<form:option value="A+"></form:option>
+						</form:select>
+					</div>
+					<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
+					<!--                            <h4>Employer <span>*</span></h4> -->
+					<!--                            <select class="form-control"> -->
+					<!--                              <option class="first-op">Select</option>  -->
+					<!--                              <option>10</option> -->
+					<!--                              <option>20</option> -->
+					<!--                              <option>30</option> -->
+					<!--                              <option>40</option> -->
+					<!--                              <option>50</option> -->
+					<!--                            </select> -->
+					<!--                          </div> -->
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Address Line 1 <span>*</span>
+						</h4>
+						<form:input id="address-line1" path="addressLine1" type="text"
+							placeholder="Address line 1" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Address Line 2 <span>*</span>
+						</h4>
+						<form:input id="address-line2" path="addressLine2" type="text"
+							placeholder="Address line 2" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>Address Line 3</h4>
+						<form:input id="address-line3" path="addressLine3" type="text"
+							placeholder="Address line 3" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>Street No</h4>
+						<form:input id="street-no" path="streetNo" type="text"
+							placeholder="Street No" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Locality <span>*</span>
+						</h4>
+						<input id="locality" path="locality" type="text"
+							placeholder="Locality" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Landmark <span>*</span>
+						</h4>
+						<input id="landmark" path="landmark" type="text"
+							placeholder="Landmark" class="form-control">
+					</div>
+					<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
+					<!--                             <h4> Country <span>*</span></h4> -->
+					<!--                             <input id="country" name="country" type="text" placeholder="country" class="form-control"> -->
+					<!--                          </div> -->
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Postal Code <span>*</span>
+						</h4>
+						<form:input id="postal-code" path="postalCode" type="text"
+							placeholder="zip or postal code" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Collage Name <span>*</span>
+						</h4>
+						<form:input id="collage-name" path="collegeName" type="text"
+							placeholder="Collage-name" class="form-control" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Degree Completion Month <span>*</span>
+						</h4>
+						<form:input class="form-control" type="date"
+							placeholder="MM/DD/YYYY" id="birthday"
+							path="degreeCollegeCompletionDate" />
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							State <span>*</span>
+						</h4>
+						<form:select path="state" class="form-control">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Andra Pradesh">Andra Pradesh</form:option>
+							<form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
+							<form:option value="Assam">Assam</form:option>
+							<form:option value="Bihar">Bihar</form:option>
+							<form:option value="Chhattisgarh">Chhattisgarh</form:option>
+						</form:select>
+
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							City <span>*</span>
+						</h4>
+						<form:select path="city" class="form-control">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Andra Pradesh">Gurgaon</form:option>
+							<form:option value="Andra Pradesh">Indore</form:option>
+							<form:option value="Arunachal Pradesh">Kolkata</form:option>
+							<form:option value="Assam">Pune</form:option>
+							<form:option value="Bihar">Mumbai</form:option>
+							<form:option value="Chhattisgarh">Delhi</form:option>
+						</form:select>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+						<h4>
+							Do You Have Own PC <span>*</span>
+						</h4>
+						<form:select class="form-control" path="havePc">
+							<form:option class="first-op" value="false">Select</form:option>
+							<form:option value="true">Yes</form:option>
+							<form:option value="false">No</form:option>
+						</form:select>
+					</div>
+					</div>
+					<br />
+					<div class="container-fluid">
+						<div class="row two">
+							<div class="container-fluid">
+
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+									<h4>Your Job Preferences (You can change your preferences
+										any time)</h4>
+								</div>
+
+							</div>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Vehicle Type <span>*</span>
-							</h4>
-							<form:select class="form-control" path="vehicleType">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Dont Own a Vehicle"></form:option>
-								<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
-								<form:option value="Four Wheeler"></form:option>
-								<form:option value="Two Wheeler">Two Wheeler</form:option>
-								<!-- <option>Freelance</option> -->
-							</form:select>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Blood Group <span>*</span>
-							</h4>
-							<form:select path="bloodGroup" class="form-control">
-								<form:option value="">Don't Know</form:option>
-								<form:option value="AB-"></form:option>
-								<form:option value="O-"></form:option>
-								<form:option value="B-"></form:option>
-								<form:option value="A-"></form:option>
-								<form:option value="O+"></form:option>
-								<form:option value="AB+"></form:option>
-								<form:option value="B+"></form:option>
-								<form:option value="A+"></form:option>
-							</form:select>
-						</div>
-						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
-						<!--                            <h4>Employer <span>*</span></h4> -->
-						<!--                            <select class="form-control"> -->
-						<!--                              <option class="first-op">Select</option>  -->
-						<!--                              <option>10</option> -->
-						<!--                              <option>20</option> -->
-						<!--                              <option>30</option> -->
-						<!--                              <option>40</option> -->
-						<!--                              <option>50</option> -->
-						<!--                            </select> -->
-						<!--                          </div> -->
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Address Line 1 <span>*</span>
-							</h4>
-							<form:input id="address-line1" path="addressLine1" type="text"
-								placeholder="Address line 1" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Address Line 2 <span>*</span>
-							</h4>
-							<form:input id="address-line2" path="addressLine2" type="text"
-								placeholder="Address line 2" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>Address Line 3</h4>
-							<form:input id="address-line3" path="addressLine3" type="text"
-								placeholder="Address line 3" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>Street No</h4>
-							<form:input id="street-no" path="streetNo" type="text"
-								placeholder="Street No" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Locality <span>*</span>
-							</h4>
-							<input id="locality" path="locality" type="text"
-								placeholder="Locality" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Landmark <span>*</span>
-							</h4>
-							<input id="landmark" path="landmark" type="text"
-								placeholder="Landmark" class="form-control">
-						</div>
-						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
-						<!--                             <h4> Country <span>*</span></h4> -->
-						<!--                             <input id="country" name="country" type="text" placeholder="country" class="form-control"> -->
-						<!--                          </div> -->
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Postal Code <span>*</span>
-							</h4>
-							<form:input id="postal-code" path="postalCode" type="text"
-								placeholder="zip or postal code" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Collage Name <span>*</span>
-							</h4>
-							<form:input id="collage-name" path="collegeName" type="text"
-								placeholder="Collage-name" class="form-control" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Degree Completion Month <span>*</span>
-							</h4>
-							<form:input class="form-control" type="date"
-								placeholder="MM/DD/YYYY" id="birthday"
-								path="degreeCollegeCompletionDate" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								State <span>*</span>
-							</h4>
-							<form:select path="state" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Andra Pradesh</form:option>
-								<form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-								<form:option value="Assam">Assam</form:option>
-								<form:option value="Bihar">Bihar</form:option>
-								<form:option value="Chhattisgarh">Chhattisgarh</form:option>
-							</form:select>
+
+						<div class="form-row">
+
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+								<h4>
+									Job Categories <span>*</span>
+								</h4>
+
+								<form:select class="form-control" path="category">
+									<form:option value="">Select</form:option>
+									<c:forEach var="category" items="${categories}">
+										<form:option value="${category.id}"
+											label="${category.categoryName}" />
+									</c:forEach>
+								</form:select>
+							</div>
+
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+								<h4>
+									Preference <span>*</span>
+								</h4>
+								<form:select path="preference" class="form-control">
+									<form:option class="first-op" value="">Select</form:option>
+									<form:option value="Other Onsite Job (Warehouse/Factory etc)">Other Onsite Job (Warehouse/Factory etc)</form:option>
+									<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
+									<form:option value="Field Job">Field Job</form:option>
+									<form:option value="Office Job">Office Job</form:option>
+								</form:select>
+							</div>
 
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								City <span>*</span>
-							</h4>
-							<form:select path="city" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Gurgaon</form:option>
-								<form:option value="Andra Pradesh">Indore</form:option>
-								<form:option value="Arunachal Pradesh">Kolkata</form:option>
-								<form:option value="Assam">Pune</form:option>
-								<form:option value="Bihar">Mumbai</form:option>
-								<form:option value="Chhattisgarh">Delhi</form:option>
-							</form:select>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Do You Have Own PC <span>*</span>
-							</h4>
-							<form:select class="form-control" path="havePc">
-								<form:option class="first-op" value="false">Select</form:option>
-								<form:option value="true">Yes</form:option>
-								<form:option value="false">No</form:option>
-							</form:select>
-						</div>
-						<br/>
+
 						<div class="container-fluid">
 							<div class="row two">
 								<div class="container-fluid">
 
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<h4>Your Job Preferences (You can change your preferences
-											any time)</h4>
+										<h4>Your Verification Details</h4>
 									</div>
 
 								</div>
 							</div>
-
 							<div class="form-row">
-
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+								<div class="col-lg-4">
+									<div class="input-group">
+										<h4>
+											Aadhar Card <span>*</span>
+										</h4>
+										<div class="custom-file">
+											<input type="file" name="aadhar" class="custom-file-input"
+												id="inputGroupFile01"
+												aria-describedby="inputGroupFileAddon01">
+											<!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="input-group">
+										<h4>
+											Student Id <span>*</span>
+										</h4>
+										<div class="custom-file">
+											<input type="file" name="studentId" class="custom-file-input"
+												id="inputGroupFile01"
+												aria-describedby="inputGroupFileAddon01">
+											<!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 									<h4>
-										Job Categories <span>*</span>
+										Status <span>*</span>
 									</h4>
-
-									<form:select class="form-control" path="category">
-										<form:option value="">Select</form:option>
-										<c:forEach var="category" items="${categories}">
-											<form:option value="${category.id}"
-												label="${category.categoryName}" />
-										</c:forEach>
-									</form:select>
-								</div>
-
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Preference <span>*</span>
-									</h4>
-									<form:select path="preference" class="form-control">
-										<form:option class="first-op" value="">Select</form:option>
-										<form:option value="Other Onsite Job (Warehouse/Factory etc)">Other Onsite Job (Warehouse/Factory etc)</form:option>
-										<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
-										<form:option value="Field Job">Field Job</form:option>
-										<form:option value="Office Job">Office Job</form:option>
-									</form:select>
-								</div>
-
-							</div>
-							
-							<div class="container-fluid">
-				<div class="row two">
-					<div class="container-fluid">
-
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Your Verification Details</h4>
-						</div>
-
-					</div>
-				</div>
-					<div class="form-row">
-						<div class="col-lg-4">
-							<div class="input-group">
-								<h4>
-									Aadhar Card <span>*</span>
-								</h4>
-								<div class="custom-file">
-									<input type="file" name="aadhar" class="custom-file-input"
-										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-									<!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
+									<select class="form-control">
+										<option class="first-op">Select</option>
+										<option>Active</option>
+										<option>In-Active</option>
+									</select>
 								</div>
 							</div>
-						</div>
-						<div class="col-lg-4">
-							<div class="input-group">
-								<h4>
-									Student Id <span>*</span>
-								</h4>
-								<div class="custom-file">
-									<input type="file" name="studentId" class="custom-file-input"
-										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-									<!-- <label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Status <span>*</span>
-							</h4>
-							<select class="form-control">
-								<option class="first-op">Select</option>
-								<option>Active</option>
-								<option>In-Active</option>
-							</select>
-						</div>
-					</div>
-			
-			</div>
-							
-							
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button type="submit">Save</button>
-                        </div> 
-						</div>
-				</form:form>
-			</div>
 
-
-
-
-			
-			<div class="container-fluid">
-				<div class="row two">
-					<div class="container-fluid">
-
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Your Payment Details</h4>
 						</div>
 
-					</div>
-				</div>
-				<form>
-					<div class="form-row">
 
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-							<h4>
-								Payment Method <span>*</span>
-							</h4>
-							<select class="form-control">
-								<option class="first-op">Select</option>
-								<option>Bank Account</option>
-								<option>Wallet</option>
-							</select>
-						</div>
-						<div class="col-lg-6 col-md-6"></div>
-					</div>
-					<div class="form-row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-							<button>Save</button>
+							<button type="submit">Save</button>
 						</div>
 					</div>
-				</form>
+			</form:form>
+		
+
+
+
+
+
+		<div class="container-fluid">
+			<div class="row two">
+				<div class="container-fluid">
+
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h4>Your Payment Details</h4>
+					</div>
+
+				</div>
 			</div>
+			<form>
+				<div class="form-row">
 
-			<div class="container-fluid">
-				<div class="row two">
-					<div class="container-fluid">
-
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Your Availability (You may provide convenient day and
-								timeslots when you are free for doing a job)</h4>
-						</div>
-
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
+						<h4>
+							Payment Method <span>*</span>
+						</h4>
+						<select class="form-control">
+							<option class="first-op">Select</option>
+							<option>Bank Account</option>
+							<option>Wallet</option>
+						</select>
+					</div>
+					<div class="col-lg-6 col-md-6"></div>
+				</div>
+				<div class="form-row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+						<button>Save</button>
 					</div>
 				</div>
-				<form>
-					<div class="form-row">
-						<form>
-							<div class="form-row">
+			</form>
+		</div>
 
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Days <span>*</span>
-									</h4>
+		<div class="container-fluid">
+			<div class="row two">
+				<div class="container-fluid">
 
-									<select class="form-control">
-										<option class="first-op">Select</option>
-										<option>Monday</option>
-										<option>Tuesday</option>
-										<option>Wednesday</option>
-										<option>Thrusday</option>
-										<option>Friday</option>
-										<option>Saturday</option>
-										<option>Sunday</option>
-									</select>
-								</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h4>Your Availability (You may provide convenient day and
+							timeslots when you are free for doing a job)</h4>
+					</div>
 
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Time-Slots <span>*</span>
-									</h4>
-									<select class="form-control">
-										<option class="first-op">Select</option>
-										<option>After 6pm</option>
-										<option>4pm - 6pm</option>
-										<option>12pm - 4pm</option>
-										<option>8am - 12pm</option>
-									</select>
-								</div>
+				</div>
+			</div>
+			<form>
+				<div class="form-row">
+					<form>
+						<div class="form-row">
 
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+								<h4>
+									Days <span>*</span>
+								</h4>
+
+								<select class="form-control">
+									<option class="first-op">Select</option>
+									<option>Monday</option>
+									<option>Tuesday</option>
+									<option>Wednesday</option>
+									<option>Thrusday</option>
+									<option>Friday</option>
+									<option>Saturday</option>
+									<option>Sunday</option>
+								</select>
 							</div>
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button onclick="myCreateFunction()" type="submit">Add</button>
+
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+								<h4>
+									Time-Slots <span>*</span>
+								</h4>
+								<select class="form-control">
+									<option class="first-op">Select</option>
+									<option>After 6pm</option>
+									<option>4pm - 6pm</option>
+									<option>12pm - 4pm</option>
+									<option>8am - 12pm</option>
+								</select>
 							</div>
-						</form>
-						<br />
-						<br />
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
-							<table id="myTable">
-								<thead>
-									<tr>
-										<th scope="col">Days</th>
-										<th scope="col">Time-Slots</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th scope="row">Tuesday</th>
-										<td>After 6pm</td>
-									</tr>
-								</tbody>
-								<!-- <tr>
+
+						</div>
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+							<button onclick="myCreateFunction()" type="submit">Add</button>
+						</div>
+					</form>
+					<br /> <br />
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
+						<table id="myTable">
+							<thead>
+								<tr>
+									<th scope="col">Days</th>
+									<th scope="col">Time-Slots</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">Tuesday</th>
+									<td>After 6pm</td>
+								</tr>
+							</tbody>
+							<!-- <tr>
                                     <td>Row1 cell1</td>
                                     <td>Row1 cell2</td>
                                     </tr> -->
-							</table>
-							<br>
+						</table>
+						<br>
 
-							<!-- <button onclick="myCreateFunction()">Create row</button> -->
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button onclick="myDeleteFunction()">Delete row</button>
-							</div>
+						<!-- <button onclick="myCreateFunction()">Create row</button> -->
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+							<button onclick="myDeleteFunction()">Delete row</button>
+						</div>
 
-							<script>
+						<script>
                                 function myCreateFunction() {
                                     var table = document.getElementById("myTable");
                                     var row = table.insertRow(0);
@@ -761,14 +760,14 @@ table thead {
                                 }
                                 </script>
 
-						</div>
-						<div class="col-lg-6 col-md-6"></div>
 					</div>
-				</form>
-			</div>
-			</main>
-
+					<div class="col-lg-6 col-md-6"></div>
+				</div>
+			</form>
 		</div>
+		</main>
+
+	</div>
 	</div>
 	<script>
 		$(document).ready( function () {

@@ -305,6 +305,8 @@
                    </div>
                    <form:form action="/jobtype-edit-genz.html" method="post" modelAttribute="jobType">
                     <div class="form-row">
+                    <form:input path="id" placeholder="First Name"
+								class="form-control" type="hidden" />
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
                             <h4>Job Type <span>*</span></h4>
 							<form:select  path="jobTypeName" class="form-control">
@@ -346,6 +348,12 @@
 	$(document).ready(function(){
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
 	});
 	

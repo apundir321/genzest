@@ -168,34 +168,42 @@
 }
 </style>
 <script>
+
+
+
 var dataSet = new Array();
-<c:forEach items="${jobTypes}" var="jobType" varStatus="status">
-jobType = new Array();
-jobType.push('${jobType.id}');
-jobType.push('${jobType.jobTypeName}');
-jobType.push('${jobType.jobTypeStatus}');
-jobType.push('${jobType.createdDate}');
-jobType.push('<a href="jobtype-edit-genz.html?jobTypeId=${jobType.id}"><i class="fa fa-pencil"/></a>');
-dataSet.push(jobType);
+<c:forEach items="${profiles}" var="profile" varStatus="status">
+jobArray = new Array();
+jobArray.push('${profile.id}');
+jobArray.push('${profile.firstName}');
+jobArray.push('${profile.dob}');
+jobArray.push('${profile.email}');
+jobArray.push('${profile.mobileNo}');
+jobArray.push('${profile.gender}');
+jobArray.push('${profile.course}');
+jobArray.push('${profile.city}');
+jobArray.push('${profile.havePc}');
+jobArray.push('<a href="edit_stud.html?profileId=${profile.id}">View</a>');
+
+
+dataSet.push(jobArray);
 </c:forEach>
-
-
-	var cate = [
-       [ "2", "Field Job", "Active", "26/05/2021", "Administrator", "----" ],
-	//    [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-    [ "3", "Remote Job", "Active", "26/05/2021", "Administrator", "----" ],
-	//    [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-    // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
+	var dataSet1 = [
+    [ "002", "Den", "Office Job", "8am-5am", "Designing", "4", "Gurgaon", "6/20/2021", "----" ],
+	  //  [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+	  //  [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+    // // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "1", "Office Job", "Active", "26/05/2021", "Administrator", "----" ]
+    [ "001", "Henny", "Remote/Online Job", "8am-5am", "Billing", "5", "Gurgaon", "6/20/2021", "----" ]
     // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
     // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
     // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
@@ -237,21 +245,41 @@ dataSet.push(jobType);
         } );
     } );
  
-$(document).ready(function() {
-    $('#example').DataTable( {
-        data: dataSet,
-        columns: [
-			{ title: "Id" },
-            { title: "Job Type" },
-            { title: "Status" },
-            { title: "Created Date" },
-            {
-               title: 'Edit'
-            }
-        ],
-		
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            data: dataSet,
+            columns: [
+            	{ title: "S No." },
+    			{ title: "Name" },
+                { title: "Dob" },
+                { title: "Email" },
+                { title: "Phone" },
+                { title: "Gender" },
+                { title: "Course" },
+                { title: "City" },
+    			{ title: "Computer" },
+    			{
+    				 title: "view"
+    			}
+    			
+    			
+    			
+//                 {
+//                     data: null,
+//                     className: "dt-center editor-edit",
+//                     defaultContent: '<a href="editjobs-genz.html"><i class="fa fa-pencil"/></a>',
+//                     orderable: false
+//                 },
+//                 {
+//                     data: null,
+//                     className: "dt-center editor-delete",
+//                     defaultContent: '<i class="fa fa-trash"/>',
+//                     orderable: false
+//                 }
+            ],
+    		
+        } );
     } );
-} );
 </script>
 </head>
 
@@ -275,7 +303,7 @@ $(document).ready(function() {
 					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
             		</a></li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item active">
 					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
 					</a></li>
 
@@ -303,7 +331,7 @@ $(document).ready(function() {
                     <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
                     </a></li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <div class="dropdown">
                             <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                             <div id="myDropdown" class="dropdown-content">
@@ -353,9 +381,9 @@ $(document).ready(function() {
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-1/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Job Type</b></h4>
+			   <h4><b>Applied Jobs</b></h4>
 
-			   <div class="navbar-collapse collapse">
+			  <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
 							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
@@ -433,7 +461,6 @@ $(document).ready(function() {
                        <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
                    </div>
                </div>   -->
-               <button class="csv"><a href="jobtype-edit-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
                <table id="example" class="display" width="100%"></table>
            </main>
 
@@ -450,4 +477,4 @@ $(document).ready(function() {
 
 </body>
 
-</html>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg3plcpnl0184'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>

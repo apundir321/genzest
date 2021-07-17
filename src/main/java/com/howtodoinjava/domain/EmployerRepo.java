@@ -10,4 +10,8 @@ import com.howtodoinjava.entity.TimeSlot;
 @Repository
 public interface EmployerRepo extends JpaRepository<Employer, Integer>{
 
+	Employer findByEmployerName(String employerName);
+	
+	Employer findByClientCode(String clientCode);
+
 }

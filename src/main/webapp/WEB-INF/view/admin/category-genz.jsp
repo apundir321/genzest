@@ -177,7 +177,6 @@ category.push('${category.categoryName}');
 category.push('${category.categoryStatus}');
 category.push('${category.createdDate}');
 category.push('Administrator');
-category.push('-----');
 category.push('<a href="editCategory.html?categoryId=${category.id}"><i class="fa fa-pencil"/></a>')
 dataSet.push(category);
 </c:forEach>
@@ -249,7 +248,6 @@ $(document).ready(function() {
             { title: "Status" },
             { title: "Created Date" },
 			{ title: "Created By" },
-			{ title: "Action" },
             {
                 title: 'Edit'
             }

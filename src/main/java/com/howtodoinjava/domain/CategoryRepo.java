@@ -19,5 +19,8 @@ public interface CategoryRepo extends JpaRepository<Category, Integer>{
 	    
 	    @Query(value="SELECT * FROM genzest.cities where city_name= :cityName", nativeQuery=true)
 	    List<Object[]> getCityByCityName(String cityName);
+	    
+	    
+	    Category findByCategoryName(String categoryName);
 
 }

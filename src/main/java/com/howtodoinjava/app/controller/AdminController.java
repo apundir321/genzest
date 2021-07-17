@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.LocationRepository;
 import com.howtodoinjava.dao.UserProfileRepository;
 import com.howtodoinjava.dao.UserRepository;
@@ -46,6 +47,7 @@ import com.howtodoinjava.entity.CourseType;
 import com.howtodoinjava.entity.DayPreference;
 import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
+import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobs;
@@ -84,6 +86,9 @@ public class AdminController {
 
 	@Autowired
 	JobAccountCustomRepo jobAccountCustomRepo;
+	
+	@Autowired
+	JobAccountApplicationRepo jobAccountApplicationRepo;
 
 	@Autowired
 	LocationRepository locationRepo;
@@ -190,17 +195,37 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "admin/category-edit-genz";
 		}
+		
+		
 		if (categoryId != null) {
 			Optional<Category> categoryEntity = categoryRepo.findById(Integer.parseInt(categoryId));
 			if (categoryEntity.isPresent()) {
 				model.put("category", categoryEntity.get());
 			}
 		} else {
-			category.setCreatedDate(new Date());
-			category.setCreatedBy(userRepo.findById(2L).get());
-			categoryRepo.save(category);
-			model.put("category", categoryRepo.save(category));
-			model.put("successMessage", "Category created");
+			if(category.getId()==0)
+			{
+				if(categoryRepo.findByCategoryName(category.getCategoryName())!=null)
+				{
+					model.put("errorMessage", "Category already Exists");
+					model.put("category", category);
+					return "admin/category-edit-genz";
+				}
+				category.setCreatedDate(new Date());
+				category.setCreatedBy(userRepo.findById(2L).get());
+				categoryRepo.save(category);
+				model.put("category", categoryRepo.save(category));
+				model.put("successMessage", "Category created");
+			}
+			else
+			{
+				category.setCreatedDate(new Date());
+				category.setCreatedBy(userRepo.findById(2L).get());
+				categoryRepo.save(category);
+				model.put("category", categoryRepo.save(category));
+				model.put("successMessage", "Category Updated");
+			}
+			
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
@@ -222,8 +247,17 @@ public class AdminController {
 	}
 
 	@RequestMapping("/jobtype-edit-genz.html")
-	public String editJobType(Map<String, Object> model) {
+	public String editJobType(Map<String, Object> model, @RequestParam(required = false) String jobTypeId) {
+		
 		model.put("jobType", new JobType());
+		if(jobTypeId!=null)
+		{
+			Optional<JobType> jobType = jobTypeRepo.findById(Integer.parseInt(jobTypeId));
+			if(jobType.isPresent())
+			{
+				model.put("jobType", jobType.get());
+			}
+		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -243,11 +277,27 @@ public class AdminController {
 				model.put("jobType", jobTypeEntity.get());
 			}
 		} else {
-			jobType.setCreatedDate(new Date());
-			jobType.setCreatedBy(userRepo.findById(2L).get());
-			jobTypeRepo.save(jobType);
-			model.put("jobType", jobTypeRepo.save(jobType));
-			model.put("successMessage", "Job Type created");
+			if(jobType.getId()==0)
+			{
+				if(jobTypeRepo.findByJobTypeName(jobType.getJobTypeName())!=null)
+				{
+					model.put("errorMessage", "JobType already Exists");
+					model.put("jobType", jobType);
+					return "admin/jobtype-edit-genz";
+				}
+				jobType.setCreatedDate(new Date());
+				jobType.setCreatedBy(userRepo.findById(2L).get());
+				jobTypeRepo.save(jobType);
+				model.put("jobType", jobTypeRepo.save(jobType));
+				model.put("successMessage", "Job Type created");
+			}else
+			{
+				jobType.setCreatedDate(new Date());
+				jobType.setCreatedBy(userRepo.findById(2L).get());
+				jobTypeRepo.save(jobType);
+				model.put("jobType", jobTypeRepo.save(jobType));
+				model.put("successMessage", "Job Type Updated");
+			}
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
@@ -298,8 +348,18 @@ public class AdminController {
 	}
 
 	@RequestMapping("/course-edit-genz.html")
-	public String editCourseType(Map<String, Object> model) {
+	public String editCourseType(Map<String, Object> model, @RequestParam(required = false) String courseId) {
+		
 		model.put("courseType", new CourseType());
+		if(courseId!=null)
+		{
+			Optional<CourseType> courseType = courseRepo.findById(Integer.parseInt(courseId));
+			if(courseType.isPresent())
+			{
+				model.put("courseType", courseType.get());
+			}
+		}
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -319,11 +379,28 @@ public class AdminController {
 				model.put("courseType", courseTypeEntity.get());
 			}
 		} else {
-			courseType.setCreatedDate(new Date());
-			courseType.setCreatedBy(userRepo.findById(2L).get());
-			courseRepo.save(courseType);
-			model.put("courseType", courseRepo.save(courseType));
-			model.put("successMessage", "Course created");
+			
+			if(courseType.getId()==0)
+			{
+				if(courseRepo.findByCourseTypeName(courseType.getCourseTypeName())!=null)
+				{
+					model.put("errorMessage", "Course already Exists");
+					model.put("courseType", courseType);
+					return "admin/course-edit-genz";
+				}
+				courseType.setCreatedDate(new Date());
+				courseType.setCreatedBy(userRepo.findById(2L).get());
+				courseRepo.save(courseType);
+				model.put("courseType", courseRepo.save(courseType));
+				model.put("successMessage", "Course created");
+			}else
+			{
+				courseType.setCreatedDate(new Date());
+				courseType.setCreatedBy(userRepo.findById(2L).get());
+				courseRepo.save(courseType);
+				model.put("courseType", courseRepo.save(courseType));
+				model.put("successMessage", "Course Updated");
+			}
 
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -344,10 +421,26 @@ public class AdminController {
 				model.put("timeSlot", timeSLotEntity.get());
 			}
 		} else {
+			
+			if(timeSlot.getId()==0)
+			{
+				if(timeSlotRepo.findByTimeSlotName(timeSlot.getTimeSlotName())!=null)
+				{
+					model.put("errorMessage", "Timeslot already Exists");
+					model.put("timeSlot", timeSlot);
+					return "admin/timeslot-edit-genz";
+				}
+				timeSlot.setCreatedDate(new Date());
+				timeSlot.setCreatedBy(userRepo.findById(2L).get());
+				model.put("timeSlot", timeSlotRepo.save(timeSlot));
+				model.put("successMessage", "Time slot created");
+			}else
+			{
 			timeSlot.setCreatedDate(new Date());
 			timeSlot.setCreatedBy(userRepo.findById(2L).get());
 			model.put("timeSlot", timeSlotRepo.save(timeSlot));
-			model.put("successMessage", "Time slot created");
+			model.put("successMessage", "Time slot Updated");
+			}
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
@@ -405,7 +498,6 @@ public class AdminController {
 	@RequestMapping(method = RequestMethod.POST, value = "/searchjobs-genz.html")
 	public String editJob(@ModelAttribute("searchJob") SearchJobs searchJob, Map<String, Object> model)
 			throws Exception {
-		System.out.println("***********88(((((((((((9");
 		List<CourseType> courses = null;
 		List<Employer> employers = null;
 		List<Category> categories = null;
@@ -441,9 +533,19 @@ public class AdminController {
 	}
 
 	@RequestMapping("/timeslot-edit-genz.html")
-	public String editTimeSlot(Map<String, Object> model) {
-		System.out.println("***********88");
+	public String editTimeSlot(Map<String, Object> model, @RequestParam(required = false) String timeSlotId) {
+		
+		
 		model.put("timeSlot", new TimeSlot());
+		
+		if(timeSlotId!=null)
+		{
+			Optional<TimeSlot> timeSlot = timeSlotRepo.findById(Integer.parseInt(timeSlotId));
+			if(timeSlot.isPresent())
+			{
+				model.put("timeSlot", timeSlot.get());
+			}
+		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -515,16 +617,37 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "admin/emp-edit-genz";
 		}
-		System.out.println("***********88(((((((((((9");
 		if (employerId != null) {
 			Optional<Employer> employerEntity = employerRepo.findById(Integer.parseInt(employerId));
 			if (employerEntity.isPresent()) {
 				model.put("employer", employerEntity.get());
 			}
 		} else {
+			if(employer.getId()==0)
+			{
+				if(employerRepo.findByEmployerName(employer.getEmployerName())!=null)
+				{
+					model.put("errorMessage", "Employer Name already Exists");
+					model.put("employer", employer);
+					return "admin/emp-edit-genz";
+				}
+				
+				if(employerRepo.findByClientCode(employer.getClientCode())!=null)
+				{
+					model.put("errorMessage", "Employer code already exists");
+					model.put("employer", employer);
+					return "admin/emp-edit-genz";
+				}
+				employer.setCreatedDate(new Date());
+				model.put("employer", employerRepo.save(employer));
+				model.put("successMessage", "Employer created!");
+			}else
+			{
+			
 			employer.setCreatedDate(new Date());
 			model.put("employer", employerRepo.save(employer));
 			model.put("successMessage", "Employer created!");
+			}
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
@@ -654,7 +777,6 @@ public class AdminController {
 
 	@RequestMapping("/jobs-genz.html")
 	public String showJobs(Map<String, Object> model) {
-		System.out.println("***********7777");
 		List<JobAccount> jobs = new ArrayList<JobAccount>();
 		jobs = jobAccountRepo.findAll();
 		model.put("jobs", jobs);
@@ -666,7 +788,6 @@ public class AdminController {
 
 	@RequestMapping("/editjobs-genz.html")
 	public String showEditJob(Map<String, Object> model) {
-		System.out.println("***********7777");
 		List<TimeSlot> timeSlots = timeSlotRepo.findAll();
 		List<Category> categories = categoryRepo.findAll();
 		List<Employer> employers = employerRepo.findAll();
@@ -683,7 +804,6 @@ public class AdminController {
 
 	@RequestMapping("/updatejobs-genz.html")
 	public String showUpdateJob(Map<String, Object> model, @RequestParam String jobId) {
-		System.out.println("***********7777");
 		List<TimeSlot> timeSlots = timeSlotRepo.findAll();
 		List<Category> categories = categoryRepo.findAll();
 		List<Employer> employers = employerRepo.findAll();
@@ -709,7 +829,6 @@ public class AdminController {
 	@RequestMapping(method = RequestMethod.POST, value = "/updateJobTimeSlots.html")
 	public void searchJobs(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("jobTimeSlot") JobTimeSlot jobTimeSlot) throws Exception {
-		System.out.println("***********88(((((((((((9");
 		DayPreference preference = null;
 
 		JobAccount account = jobAccountRepo.findById(jobTimeSlot.getJobId()).get();
@@ -720,31 +839,7 @@ public class AdminController {
 			model.put("successMessage", "Time slot added to this Job");
 		} else {
 			model.put("warningMessage", "Time slot is already present to this job");
-		}
-
-//		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-//		UserProfile profile = userRepo.findByEmail(authentication.getName()).getUserProfile();
-//		Set<DayPreference> preferences = profile.getPreferences();
-//		
-//		for(DayPreference pref : preferences)
-//		{
-//			if(pref.getDay().equals(dayPreference.getDay()))
-//			{
-//				preference = pref;
-//				pref.setTimeSlot(dayPreference.getTimeSlot());
-//			}
-//		}
-//		
-//		if(preference==null)
-//		{
-//			profile.getPreferences().add(dayPreference);
-//			userProfileRepo.save(profile);
-//		}else
-//		{
-//			profile.setPreferences(preferences);
-//			userProfileRepo.save(profile);
-//		}
-//		
+		}	
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -757,7 +852,6 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "admin/editjobs";
 		}
-		System.out.println("***********88(((((((((((9");
 		if (jobAccountId != null) {
 			Optional<JobAccount> jobAccountEntity = jobAccountRepo.findById(Integer.parseInt(jobAccountId));
 			if (jobAccountEntity.isPresent()) {
@@ -850,6 +944,36 @@ public class AdminController {
 		to.setVacancyForOther(from.getVacancyForOther());
 		return to;
 
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/appliedJobs.html")
+	public String appliedJobs(Map<String, Object> model, @RequestParam(required = false) String jobId) {
+
+		List<JobAccountApplication> profiles = null;
+		List<UserProfile> userProfiles = new ArrayList<>();
+		if (jobId != null) {
+			
+			try {
+				
+				Optional<JobAccount> job = jobAccountRepo.findById(Integer.parseInt(jobId));
+				profiles = jobAccountApplicationRepo.findByJob(job.get());
+				for(JobAccountApplication accountApplication : profiles)
+				{
+					userProfiles.add(accountApplication.getApplicant().getUserProfile());
+				}
+				model.put("profiles", userProfiles);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		return "admin/applied-jobs";
 	}
 
 }

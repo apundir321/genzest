@@ -28,12 +28,4 @@ public class SpringBootWebApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SpringBootWebApplication.class, args);
 	}  
-	
-	@PostConstruct
-	public void init()
-	{
-		System.out.println(jobCategoryRepo.getStatesByCountryId("100").size());
-		System.out.println(jobCategoryRepo.getCitiesByState("739").size());
-		
-	}
 }

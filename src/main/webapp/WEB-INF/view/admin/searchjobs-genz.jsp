@@ -193,7 +193,7 @@ jobArray.push('${job.status}');
 jobArray.push('${job.createdBy.firstName}');
 jobArray.push('${job.createdDate}');
 
-jobArray.push('<a href="/showJobProfile?jobId=${job.id}">View</a>');
+jobArray.push('<a href="/updatejobs-genz.html?jobId=${job.id}">View</a>');
 
 dataSet.push(jobArray);
 </c:forEach>

@@ -518,6 +518,7 @@ table thead {
 								<form:option value="false">No</form:option>
 							</form:select>
 						</div>
+						</div>
 						<br/>
 						<div class="container-fluid">
 							<div class="row two">
@@ -567,6 +568,8 @@ table thead {
 									</c:if>
 								</div>
 
+							</div>
+							
 							</div>
 							
 							<div class="container-fluid">
@@ -622,9 +625,9 @@ table thead {
 <!--                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
 <!--                             <button type="submit">Save</button> -->
 <!--                         </div>  -->
-						</div>
+						
 				
-			</div>
+			
 
 
 

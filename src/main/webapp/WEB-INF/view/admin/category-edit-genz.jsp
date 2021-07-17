@@ -362,6 +362,12 @@
 		</c:if>
 	});
 	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
 	</script>
 
 	<script src="assets-1/js/app.js"></script>

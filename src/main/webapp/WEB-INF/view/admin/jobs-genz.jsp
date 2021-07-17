@@ -180,8 +180,8 @@ jobArray.push('${job.employer.employerName}');
 jobArray.push('${job.status}');
 jobArray.push('${job.createdBy.firstName}');
 jobArray.push('${job.createdDate}');
-jobArray.push('------');
 jobArray.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-pencil"/></a>');
+jobArray.push('<a href="appliedJobs.html?jobId=${job.id}">Applied</a>');
 
 dataSet.push(jobArray);
 </c:forEach>
@@ -255,9 +255,11 @@ $(document).ready(function() {
             { title: "Status" },
 			{ title: "Created By" },
 			{ title: "Created Date" },
-			{ title: "Action" },
 			{
 				 title: "Edit"
+			},
+			{
+				 title: "Applied Jobs"
 			}
 //             {
 //                 data: null,

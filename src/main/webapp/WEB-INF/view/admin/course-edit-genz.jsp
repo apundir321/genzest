@@ -302,6 +302,8 @@
                        </div>
                    </div>
                    <form:form action="/course-edit-genz.html" method="post" modelAttribute="courseType">
+                   <form:input path="id" placeholder="First Name"
+								class="form-control" type="hidden" />
                     <div class="form-row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
                             <h4>Course</h4>
@@ -363,25 +365,13 @@
 		</c:if>
 	});
 	
-	$(".success").click(function(){
-		toastr.success('We do have the Kapua suite available.', 'Success Alert', {timeOut: 5000})
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
 	});
-
-
-	$(".error").click(function(){
-		toastr.error('You Got Error', 'Inconceivable!', {timeOut: 5000})
-	});
-
-
-	$(".info").click(function(){
-		toastr.info('It is for your kind information', 'Information', {timeOut: 5000})
-	});
-
-
-	$(".warning").click(function(){
-		toastr.warning('It is for your kind warning', 'Warning', {timeOut: 5000})
-	});
-</script>
+	</script>
 
 	<script src="assets-1/js/app.js"></script>
 

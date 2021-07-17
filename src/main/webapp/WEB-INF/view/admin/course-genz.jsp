@@ -180,9 +180,8 @@ courseType = new Array();
 courseType.push('${courseType.id}');
 courseType.push('${courseType.courseTypeName}');
 courseType.push('${courseType.courseTypeStatus}');
-courseType.push('${courseType.createdDate}');
-courseType.push('Administrator');
-courseType.push('${courseType.createdDate}');
+courseType.push('${courseType.createdDate}'); 
+courseType.push('<a href="course-edit-genz.html?courseId=${courseType.id}"><i class="fa fa-pencil"/></a>')
 dataSet.push(courseType);
 </c:forEach>
 	var cate = [
@@ -250,13 +249,9 @@ $(document).ready(function() {
             { title: "Course" },
             { title: "Status" },
             { title: "Created Date" },
-			{ title: "Created By" },
-			{ title: "Action" },
+			
             {
-                data: null,
-                className: "dt-center editor-edit",
-                defaultContent: '<a href="course-edit-genz.html"><i class="fa fa-pencil"/></a>',
-                orderable: false
+               title : 'Edit'
             }
         ],
 		

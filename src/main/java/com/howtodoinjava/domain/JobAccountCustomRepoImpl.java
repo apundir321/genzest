@@ -82,33 +82,36 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchJob.getTimeSlot())).get();
 		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
 		    }
-//		    if(searchCriteria.get("minExperience") != null)
-//		    {
-//		    	predicates.add(cb.greaterThanOrEqualTo(job.get("minExperience"),searchCriteria.get("minExperience")));
-//		    }
-//		    if(searchCriteria.get("maxExperience") != null)
-//		    {
-//		    	predicates.add(cb.lessThanOrEqualTo(job.get("maxExperience"),searchCriteria.get("maxExperience")));
-//		    }
-//		    if(searchCriteria.get("minSalary") != null)
-//		    {
-//		    	predicates.add(cb.greaterThanOrEqualTo(job.get("minSalary"),searchCriteria.get("minSalary")));
-//		    }
-//		    if(searchCriteria.get("maxSalary") != null)
-//		    {
-//		    	predicates.add(cb.lessThanOrEqualTo(job.get("maxSalary"),searchCriteria.get("maxSalary")));
-//		    }
-//		    if(searchCriteria.get("jobPublished") != null)
-//		    {
-//		    	try {
-//					Date jobPublished=new SimpleDateFormat("yyyy-MM-dd").parse(searchCriteria.get("jobPublished"));
-//					predicates.add(cb.greaterThanOrEqualTo(job.get("jobPublished"),jobPublished));
-//		    	} catch (ParseException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//		    	
-//		    }
+		    
+		    if (!StringUtils.isEmpty(searchJob.getState())) {
+		        predicates.add(cb.equal(job.get("state"), searchJob.getState()));
+		    }
+		    if (!StringUtils.isEmpty(searchJob.getCity())) {
+		        predicates.add(cb.equal(job.get("city"), searchJob.getCity()));
+		    }
+		    if(searchJob.getDateFrom() != null)
+		    {
+		    	try {
+					
+					predicates.add(cb.greaterThanOrEqualTo(job.get("jobDate"),searchJob.getDateFrom()));
+		    	} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+		    }
+		    
+		    if(searchJob.getDateTo() != null)
+		    {
+		    	try {
+					
+					predicates.add(cb.lessThanOrEqualTo(job.get("jobDate"),searchJob.getDateFrom()));
+		    	} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	
+		    }
 		    cq.where(predicates.toArray(new Predicate[0]));
 
 		    return em.createQuery(cq).getResultList();
@@ -174,6 +177,15 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 		    if (!StringUtils.isEmpty(searchCandidate.getTimeSlot())) {
 		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchCandidate.getTimeSlot())).get();
 		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
+		    }
+		    if (!StringUtils.isEmpty(searchCandidate.getState())) {
+		        predicates.add(cb.equal(job.get("state"), searchCandidate.getState()));
+		    }
+		    if (!StringUtils.isEmpty(searchCandidate.getCity())) {
+		        predicates.add(cb.equal(job.get("city"), searchCandidate.getCity()));
+		    }
+		    if (!StringUtils.isEmpty(searchCandidate.getGender())) {
+		        predicates.add(cb.equal(job.get("gender"), searchCandidate.getCity()));
 		    }
 		    cq.where(predicates.toArray(new Predicate[0]));
 
