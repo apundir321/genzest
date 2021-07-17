@@ -459,7 +459,9 @@ $(document).ready(function() {
                    </div>
                </div>   -->
                <button class="csv"><a href="editjobs-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
+               <div class="table_genz">
                <table id="example" class="display" width="100%"></table>
+               </div> 
            </main>
 
 		
