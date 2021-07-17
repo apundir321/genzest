@@ -42,6 +42,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script> -->
 
+
+
+<!--     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script> -->
+<!--     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+
+
+
 <style>
 	body{
 		font-family: 'Lato', sans-serif;
@@ -279,6 +289,21 @@ $(document).ready(function() {
 		
 		</div>
 	</div>
+	
+		<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+	});
+	
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+	});
+	</script>
 	<script>
 		$(document).ready( function () {
 			$('#table_id').DataTable();

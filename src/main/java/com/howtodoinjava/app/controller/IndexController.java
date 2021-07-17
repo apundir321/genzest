@@ -505,6 +505,7 @@ public class IndexController {
 			}
 
 		}
+		model.put("successMessage", "Jobs Applied!"); 
 		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant((User)model.get("user"));
 		model.put("applications", applications);
 		return "appliedjobs";
@@ -521,9 +522,10 @@ public class IndexController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		model.put("message", "HowToDoInJava Reader !!");
 		
-		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant(userRepo.findById(2L).get());
-		model.put("applications", applications);
+		
 		User user = userRepo.findByEmail(auth.getName());
+		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant(user);
+		model.put("applications", applications);
 		model.put("user", user);
 		return "appliedjobs";
 	}
