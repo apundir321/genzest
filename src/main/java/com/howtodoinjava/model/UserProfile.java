@@ -15,8 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.DayPreference;
@@ -30,19 +35,53 @@ public class UserProfile {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	@NotNull
+	@NotEmpty(message = "Please enter first name")
 	private String firstName;
+	
+	@NotNull
+	@NotEmpty(message = "Please enter last name")
 	private String lastName;
+	
+	@NotNull
+	@NotEmpty(message = "Please enter email")
+	@Email
 	private String email;
+	
+	@NotNull
+	@NotEmpty(message = "Please Enter Parents Name")
 	private String parentsName;
+	
+	@NotNull
+	@NotEmpty(message = "Mobile no. can't be empty")
 	private String mobileNo;
+	
+	@NotNull
+	@NotEmpty(message = "Please Enter Alternate Mobile No.")
 	private String alternateMobileNo;
+	
+	@NotNull
+	@NotEmpty(message = "Please select Gender")
 	private String gender;
+	
+	@NotNull(message = "Please select DOB")
+	@Past
 	@DateTimeFormat(pattern = "MM/DD/YYYY")
 	public Date dob;
+	
+	@NotNull
+	@NotEmpty(message = "Please Select Course")
 	public String course;
+	
+	@NotNull
+	@NotEmpty(message = "Please Select Vehicle Type")
 	public String vehicleType;
+	@NotNull
+	@NotEmpty(message = "Please Select Blood Group")
 	private String bloodGroup;
+	@NotEmpty(message = "Please Upload Adhar card photo")
 	private String aadharFileName;
+	@NotEmpty(message = "Please Upload Student Id")
 	private String studentIdFileName;
 	private String profilePicFileName;
 	private String status;
@@ -52,26 +91,46 @@ public class UserProfile {
 //	private Organization organization;	
 	
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@NotNull(message = "Please select category")
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
 	
-	
+	@NotNull
+	@NotEmpty(message = "Please Enter Address.")
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
 	private String streetNo;
+	
+	@NotNull
+	@NotEmpty(message = "Please Enter Locality.")
 	private String locality;
 	private String landmark;
 //	private String country;
+	@NotNull
+	@NotEmpty(message = "Please Enter Postal Code")
 	private String postalCode;
+	
+	@NotNull
+	@NotEmpty(message = "Please Enter College Name")
 	private String collegeName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past
+	@NotNull(message = "Please select Date")
 	private Date degreeCollegeCompletionDate;
+	@NotNull
+	@NotEmpty(message = "Please Enter State.")
 	private String state;
+	@NotNull
+	@NotEmpty(message = "Please Enter City.")
 	private String city;
+	
+	@NotNull(message = "Please select value")
 	private boolean havePc;
 	
+	@NotNull
+	@NotEmpty(message = "Please select preference.")
 	private String preference;
 	private String paymentMethod;
 	private String day;

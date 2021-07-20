@@ -101,12 +101,12 @@ public class UserService implements IUserService {
 		user.setEmail(accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
 		if (!isRecuiter) {
-			profile = new UserProfile();
-			profile.setEmail(accountDto.getEmail());
-			profile.setFirstName(accountDto.getFirstName());
-			profile.setLastName(accountDto.getLastName());
-			profile.setMobileNo(accountDto.getPhoneNo());
-			profile.setStatus("IN-ACTIVE");
+//			profile = new UserProfile();
+//			profile.setEmail(accountDto.getEmail());
+//			profile.setFirstName(accountDto.getFirstName());
+//			profile.setLastName(accountDto.getLastName());
+//			profile.setMobileNo(accountDto.getPhoneNo());
+//			profile.setStatus("IN-ACTIVE");
 			role = roleRepository.findByName("ROLE_EMPLOYEE");
 			if (role == null) {
 				role = new Role();
@@ -115,11 +115,11 @@ public class UserService implements IUserService {
 			}
 			roles.add(role);
 		} else {
-			recruiterProfile = new RecruiterProfile();
-			recruiterProfile.setEmail(accountDto.getEmail());
-			recruiterProfile.setFirstName(accountDto.getFirstName());
-			recruiterProfile.setLastName(accountDto.getLastName());
-			role = roleRepository.findByName("ROLE_RECRUITER");
+//			recruiterProfile = new RecruiterProfile();
+//			recruiterProfile.setEmail(accountDto.getEmail());
+//			recruiterProfile.setFirstName(accountDto.getFirstName());
+//			recruiterProfile.setLastName(accountDto.getLastName());
+//			role = roleRepository.findByName("ROLE_RECRUITER");
 			if (role == null) {
 				role = new Role();
 				role.setName("ROLE_RECRUITER");

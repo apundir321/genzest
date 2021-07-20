@@ -124,7 +124,7 @@ public class IndexController {
 		User user = userRepo.findByEmail(authentication.getName());
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(userRepo.findByEmail(authentication.getName()));
 		model.put("appliedJobsCount", appliedJobs.size());
-		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile().getCategory());
+		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile()==null?null:user.getUserProfile().getCategory());
 		model.put("matchingJobsCount", matchingJobs.size());
 		model.put("user", user);
 		return "student-d";
@@ -216,7 +216,7 @@ public class IndexController {
 			e.printStackTrace();
 		}
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
-		model.put("profile", profile);
+		model.put("profile", profile==null?new UserProfile():profile);
 		model.put("courses", courses);
 		model.put("employers", employers);
 		model.put("categories", categories);
@@ -328,7 +328,7 @@ public class IndexController {
 			registered = uService.registerNewUserAccount(userDto,isRecruiter);	
 			model.put("successMessage", "User registered");
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 			model.put("errorMessage", e.getMessage());
 		}
 		return "signup";
@@ -392,21 +392,25 @@ public class IndexController {
 
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateProfile.html")
-	public String searchJobs(@ModelAttribute("seachJob") UserProfile userProfile,
+	public String searchJobs(@Valid @ModelAttribute("profile") UserProfile userProfile, BindingResult result,
 			@RequestParam("aadhar") MultipartFile multipartFile,
 			@RequestParam("studentId") MultipartFile studentIdMultipart,
 			@RequestParam("profilepic") MultipartFile profilePicMultipart,Map<String, Object> model,
 			@RequestParam(required = false) String userProfileId) throws Exception {
-		System.out.println("***********88(((((((((((9");
+		
 		UserProfile profile;
+		model.put("dayPreference", new DayPreference());
 		if (userProfileId != null) {
 			profile = userService.getUserProfile(userProfileId);
 			if (profile != null) {
 				model.put("profile", profile);
 			}
 		} else {
+			
+			if (result.hasErrors()) {
+				return "edit";
+			}
 			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-			model.put("message", "HowToDoInJava Reader !!");
 			
 			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
 				awsService.uploadFile(multipartFile, userProfile);

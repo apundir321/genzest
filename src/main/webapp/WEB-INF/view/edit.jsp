@@ -153,6 +153,14 @@ table thead {
 }
 </style>
 
+   <style>
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+</style>
+
 </head>
 
 <body>
@@ -298,21 +306,24 @@ table thead {
 								First Name <span>*</span>
 							</h4>
 							<form:input path="firstName" placeholder="First Name"
-								class="form-control" type="text" />
+								class="form-control" type="text" value="${user.firstName}"/>
+								<form:errors path="firstName" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Last Name <span>*</span>
 							</h4>
 							<form:input path="lastName" placeholder="Last Name"
-								class="form-control" type="text" />
+								class="form-control" type="text" value="${user.lastName}"/>
+								<form:errors path="lastName" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Email <span>*</span>
 							</h4>
 							<form:input class="form-control" path="email"
-								placeholder="Drop Your Mail Id" id="example-email-input" />
+								placeholder="Drop Your Mail Id" id="example-email-input" value="${user.email}" />
+								<form:errors path="email" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -320,13 +331,16 @@ table thead {
 							</h4>
 							<form:input path="parentsName" placeholder="Parents Name"
 								class="form-control" type="text" />
+								<form:errors path="parentsName" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Mobile No <span>*</span>
 							</h4>
 							<form:input class="form-control" path="mobileNo"
-								placeholder="Mobile no" id="example-tel-input" />
+								placeholder="Mobile no" id="example-tel-input"  value="${user.phoneNo}"/>
+								
+								<form:errors path="mobileNo" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -334,6 +348,7 @@ table thead {
 							</h4>
 							<form:input class="form-control" path="alternateMobileNo"
 								placeholder="Mobile no" id="example-tel-input" />
+								<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -345,13 +360,17 @@ table thead {
 								<form:option value="Female">Female</form:option>
 								<form:option value="Other">Other</form:option>
 							</form:select>
+							<form:errors path="gender" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								Date of Birth <span>*</span>
 							</h4>
-							<form:input class="form-control" path="dob"
+							<form:input class="form-control" path="dob" type="date"
 								placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
+								<form:errors path="dob" cssClass="error"></form:errors>
+								
+
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -377,6 +396,7 @@ table thead {
 										label="${course.courseTypeName}" />
 								</c:forEach>
 							</form:select>
+							<form:errors path="course" cssClass="error"></form:errors>
 							
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
@@ -391,6 +411,7 @@ table thead {
 								<form:option value="Two Wheeler">Two Wheeler</form:option>
 								<!-- <option>Freelance</option> -->
 							</form:select>
+							<form:errors path="vehicleType" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -407,6 +428,7 @@ table thead {
 								<form:option value="B+"></form:option>
 								<form:option value="A+"></form:option>
 							</form:select>
+							<form:errors path="bloodGroup" cssClass="error"></form:errors>
 						</div>
 						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
 						<!--                            <h4>Employer <span>*</span></h4> -->
@@ -425,6 +447,7 @@ table thead {
 							</h4>
 							<form:input id="address-line1" path="addressLine1" type="text"
 								placeholder="Address line 1" class="form-control" />
+								<form:errors path="addressLine1" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -449,6 +472,7 @@ table thead {
 							</h4>
 							<input id="locality" path="locality" type="text"
 								placeholder="Locality" class="form-control" />
+								<form:errors path="locality" cssClass="error"></form:errors>
 						</div>
 						
 						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
@@ -462,6 +486,7 @@ table thead {
 							</h4>
 							<form:input id="collage-name" path="collegeName" type="text"
 								placeholder="Collage-name" class="form-control" />
+								<form:errors path="collegeName" cssClass="error"></form:errors>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -482,6 +507,7 @@ table thead {
 										label="${state[1]}" />
 								</c:forEach>
 							</form:select>
+							<form:errors path="state" cssClass="error"></form:errors>
 
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
@@ -491,6 +517,7 @@ table thead {
 							<form:select path="city"  id="cityDropDown" class="form-control">
 								<option value="">Select</option>
 							</form:select>
+							<form:errors path="city" cssClass="error"></form:errors>
 						</div>
 						
 						
@@ -500,6 +527,8 @@ table thead {
 							</h4>
 							<form:input id="postal-code" path="postalCode" type="text"
 								placeholder="zip or postal code" class="form-control" />
+								<form:errors path="postalCode" cssClass="error"></form:errors>
+								
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
@@ -517,6 +546,7 @@ table thead {
 								<form:option value="true">Yes</form:option>
 								<form:option value="false">No</form:option>
 							</form:select>
+							<form:errors path="havePc" cssClass="error"></form:errors>
 						</div>
 						</div>
 						<br/>
@@ -563,6 +593,7 @@ table thead {
 										<form:option value="Field Job">Field Job</form:option>
 										<form:option value="Office Job">Office Job</form:option>
 									</form:select>
+									<form:errors path="preference" cssClass="error"></form:errors>
 									<c:if test="${not empty profile.preference}">
 									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.preference}</span> </h4>
 									</c:if>
@@ -655,6 +686,9 @@ table thead {
 								<form:option value="Bank Account"></form:option>
 								<form:option value="Wallet"></form:option>
 							</form:select>
+							<form:errors path="paymentMethod" cssClass="error"></form:errors>
+							
+							
 						</div>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
@@ -716,7 +750,7 @@ table thead {
 
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button onclick="myCreateFunction()" type="submit">Add</button>
+								<button  type="submit">Add</button>
 							</div>
 						</form:form>
 						<br />
@@ -746,22 +780,6 @@ table thead {
 
 							<!-- <button onclick="myCreateFunction()">Create row</button> -->
 							
-
-							<script>
-                                function myCreateFunction() {
-                                    var table = document.getElementById("myTable");
-                                    var row = table.insertRow(0);
-                                    var cell1 = row.insertCell(0);
-                                    var cell2 = row.insertCell(1);
-                                    cell1.innerHTML = "Tuesday";
-                                    cell2.innerHTML = "After 6pm";
-                                }
-                                
-                                function myDeleteFunction() {
-                                    document.getElementById("myTable").deleteRow(0);
-                                }
-                                </script>
-
 						</div>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
