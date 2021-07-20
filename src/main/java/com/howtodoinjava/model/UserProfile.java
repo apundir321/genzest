@@ -2,6 +2,7 @@ package com.howtodoinjava.model;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -79,9 +81,9 @@ public class UserProfile {
 	@NotNull
 	@NotEmpty(message = "Please Select Blood Group")
 	private String bloodGroup;
-	@NotEmpty(message = "Please Upload Adhar card photo")
+//	@NotEmpty(message = "Please Upload Adhar card photo")
 	private String aadharFileName;
-	@NotEmpty(message = "Please Upload Student Id")
+//	@NotEmpty(message = "Please Upload Student Id")
 	private String studentIdFileName;
 	private String profilePicFileName;
 	private String status;
@@ -90,10 +92,12 @@ public class UserProfile {
 //	@JoinColumn(name = "organization_id")
 //	private Organization organization;	
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@NotNull(message = "Please select category")
-	@JoinColumn(name = "category_id")
-	private Category category;
+	
+//	@Transient
+//	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+////	@NotNull(message = "Please select category")
+//	@JoinColumn(name = "category_id")
+//	private Category category;
 	
 	
 	@NotNull
@@ -136,6 +140,11 @@ public class UserProfile {
 	private String day;
 	private String timeSlot;
 	private Date lastUpdated;
+//	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "category_id") })
+	public List<Category> jobCategories; 
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "profile_preference", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
@@ -328,13 +337,13 @@ public class UserProfile {
 		this.timeSlot = timeSlot;
 	}
 
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+//	public Category getCategory() {
+//		return category;
+//	}
+//
+//	public void setCategory(Category category) {
+//		this.category = category;
+//	}
 
 	public Date getLastUpdated() {
 		return lastUpdated;
@@ -383,6 +392,15 @@ public class UserProfile {
 	public void setProfilePicFileName(String profilePicFileName) {
 		this.profilePicFileName = profilePicFileName;
 	}
+//
+	public List<Category> getJobCategories() {
+		return jobCategories;
+	}
+
+	public void setJobCategories(List<Category> categories) {
+		this.jobCategories = categories;
+	}
+
 	
 
 	

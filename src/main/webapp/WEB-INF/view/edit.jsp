@@ -366,7 +366,7 @@ table thead {
 							<h4>
 								Date of Birth <span>*</span>
 							</h4>
-							<form:input class="form-control" path="dob" type="date"
+							<form:input class="form-control" path="dob" 
 								placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
 								<form:errors path="dob" cssClass="error"></form:errors>
 								
@@ -470,7 +470,7 @@ table thead {
 							<h4>
 								Locality <span>*</span>
 							</h4>
-							<input id="locality" path="locality" type="text"
+							<form:input id="locality" path="locality" type="text"
 								placeholder="Locality" class="form-control" />
 								<form:errors path="locality" cssClass="error"></form:errors>
 						</div>
@@ -507,6 +507,9 @@ table thead {
 										label="${state[1]}" />
 								</c:forEach>
 							</form:select>
+							<c:if test="${not empty profile.state}">
+									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.state}</span> </h4>
+									</c:if>
 							<form:errors path="state" cssClass="error"></form:errors>
 
 						</div>
@@ -518,6 +521,9 @@ table thead {
 								<option value="">Select</option>
 							</form:select>
 							<form:errors path="city" cssClass="error"></form:errors>
+							<c:if test="${not empty profile.city}">
+									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.city}</span> </h4>
+									</c:if>
 						</div>
 						
 						
@@ -569,16 +575,15 @@ table thead {
 										Job Categories <span>*</span>
 									</h4>
 
-									<form:select class="form-control" path="category">
+									<form:select class="form-control" path="jobCategories" multiple="true">
 										<form:option value="">Select</form:option>
 										<c:forEach var="category" items="${categories}">
 											<form:option value="${category.id}"
 												label="${category.categoryName}" />
 										</c:forEach>
 									</form:select>
-<!-- 									<h4 style="color: #f15336">Selected: </h4><h4>${profile.category.categoryName}</h4> -->
-									<c:if test="${not empty profile.category.categoryName}">
-									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.category.categoryName}</span> </h4>
+									<c:if test="${not empty profile.jobCategories}">
+									<h4 style="color: #f15336">Selected:  <span style="color: #A4A4A4;"><c:forEach var="category" items="${profile.jobCategories}"><span>${category.categoryName}</span>&nbsp;&nbsp;</c:forEach></span> </h4>
 									</c:if>
 								</div>
 

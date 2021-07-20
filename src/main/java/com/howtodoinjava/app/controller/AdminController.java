@@ -196,7 +196,9 @@ public class AdminController {
 			return "admin/category-edit-genz";
 		}
 		
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		if (categoryId != null) {
 			Optional<Category> categoryEntity = categoryRepo.findById(Integer.parseInt(categoryId));
 			if (categoryEntity.isPresent()) {
@@ -212,7 +214,7 @@ public class AdminController {
 					return "admin/category-edit-genz";
 				}
 				category.setCreatedDate(new Date());
-				category.setCreatedBy(userRepo.findById(2L).get());
+				category.setCreatedBy(user);
 				categoryRepo.save(category);
 				model.put("category", categoryRepo.save(category));
 				model.put("successMessage", "Category created");
@@ -220,16 +222,14 @@ public class AdminController {
 			else
 			{
 				category.setCreatedDate(new Date());
-				category.setCreatedBy(userRepo.findById(2L).get());
+				category.setCreatedBy(user);
 				categoryRepo.save(category);
 				model.put("category", categoryRepo.save(category));
 				model.put("successMessage", "Category Updated");
 			}
 			
 		}
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
-		model.put("user", user);
+		
 		return "admin/category-edit-genz";
 	}
 
@@ -370,6 +370,8 @@ public class AdminController {
 	@RequestMapping(method = RequestMethod.POST, value = "/course-edit-genz.html")
 	public String editCourseType(@Valid @ModelAttribute("courseType") CourseType courseType, BindingResult result,
 			Map<String, Object> model, @RequestParam(required = false) String courseTypeId) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
 		if (result.hasErrors()) {
 			return "admin/course-edit-genz";
 		}
@@ -389,22 +391,21 @@ public class AdminController {
 					return "admin/course-edit-genz";
 				}
 				courseType.setCreatedDate(new Date());
-				courseType.setCreatedBy(userRepo.findById(2L).get());
+				courseType.setCreatedBy(user);
 				courseRepo.save(courseType);
 				model.put("courseType", courseRepo.save(courseType));
 				model.put("successMessage", "Course created");
 			}else
 			{
 				courseType.setCreatedDate(new Date());
-				courseType.setCreatedBy(userRepo.findById(2L).get());
+				courseType.setCreatedBy(user);
 				courseRepo.save(courseType);
 				model.put("courseType", courseRepo.save(courseType));
 				model.put("successMessage", "Course Updated");
 			}
 
 		}
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
+		
 		model.put("user", user);
 		return "admin/course-edit-genz";
 	}

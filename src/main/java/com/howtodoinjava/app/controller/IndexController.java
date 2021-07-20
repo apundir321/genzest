@@ -124,7 +124,7 @@ public class IndexController {
 		User user = userRepo.findByEmail(authentication.getName());
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(userRepo.findByEmail(authentication.getName()));
 		model.put("appliedJobsCount", appliedJobs.size());
-		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile()==null?null:user.getUserProfile().getCategory());
+		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(null);
 		model.put("matchingJobsCount", matchingJobs.size());
 		model.put("user", user);
 		return "student-d";
@@ -276,7 +276,7 @@ public class IndexController {
 			categories = categoryRepo.findAll();
 			jobTypes = jobTypeRepo.findAll();
 			timeSlots = timeSlotRepo.findAll();
-			List<JobAccount>  jobsAccount = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile().getCategory());
+			List<JobAccount>  jobsAccount = jobAccountCustomRepo.findJobsByCategory(null);
 			
 			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
 			for(JobAccountApplication accountApplication : jobApplications)
@@ -401,6 +401,10 @@ public class IndexController {
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
+		model.put("categories", categoryRepo.findAll());
+		model.put("dayPreference",new DayPreference());
+		model.put("timeSlots", timeSlotRepo.findAll());
+		model.put("courses", courseRepo.findAll());
 		if (userProfileId != null) {
 			profile = userService.getUserProfile(userProfileId);
 			if (profile != null) {
@@ -411,6 +415,7 @@ public class IndexController {
 			if (result.hasErrors()) {
 				return "edit";
 			}
+		
 			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 			
 			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
@@ -429,14 +434,15 @@ public class IndexController {
 				awsService.uploadFile(profilePicMultipart, userProfile);
 				userProfile.setProfilePicFileName(profilePicMultipart.getOriginalFilename());
 			}
-			userProfile.setLastUpdated(new Date());
-			userProfileRepo.save(userProfile);
+			
+			
 			User user = userRepo.findByEmail(authentication.getName());
 			model.put("user", user);
+			userProfile.setLastUpdated(new Date());
+			user.setUserProfile(userProfile);
+			userRepo.save(user);
 			model.put("successMessage", "Profile Updated!");
-			model.put("profile", user.getUserProfile());
-			model.put("dayPreference",new DayPreference());
-			model.put("timeSlots", timeSlotRepo.findAll());
+			model.put("profile", userProfile);
 		}
 		return "edit";
 	}
