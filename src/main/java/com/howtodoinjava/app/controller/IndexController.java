@@ -400,6 +400,7 @@ public class IndexController {
 		
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
+		model.put("states", categoryRepo.getStatesByCountryId("100"));
 		if (userProfileId != null) {
 			profile = userService.getUserProfile(userProfileId);
 			if (profile != null) {

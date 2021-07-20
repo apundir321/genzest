@@ -723,7 +723,7 @@ table thead {
 										Days <span>*</span>
 									</h4>
 
-									<form:select class="form-control" path="day">
+									<form:select id="timeslotDay" class="form-control" path="day">
 										<form:option class="first-op" value="">Select</form:option>
 										<form:option value="Monday"></form:option>
 										<form:option value="Tuesday"></form:option>
@@ -733,24 +733,27 @@ table thead {
 										<form:option value="Saturday"></form:option>
 										<form:option value="Sunday"></form:option>
 									</form:select>
+									<div id="confirmMessageDay" class="error"></div>
 								</div>
 
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
 									<h4>
 										Time-Slots <span>*</span>
 									</h4>
-									<form:select class="form-control" path="timeSlot">
+									<form:select id="timeSlot" class="form-control" path="timeSlot">
 										<form:option value="">Select</form:option>
 										<c:forEach var="timeSlot" items="${timeSlots}">
 											<form:option value="${timeSlot.id}"
 												label="${timeSlot.timeSlotName}" />
 										</c:forEach>
+										
 									</form:select>
+									<div id="confirmMessage" class="error"></div>
 								</div>
 
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-								<button  type="submit">Add</button>
+								<button  type="submit" onclick="return validate()">Add</button>
 							</div>
 						</form:form>
 						<br />
@@ -828,6 +831,23 @@ function myFunction() {
 		}
 	});
 }
+</script>
+
+<script type="text/javascript">
+    function validate() {
+        var timeSlot = document.getElementById("timeSlot").value;
+        var timeslotDay = document.getElementById("timeslotDay").value;
+        if(!timeslotDay){
+        	document.getElementById("confirmMessageDay").innerHTML = "Day Not Selected";
+        	return false;
+        }
+        
+        if(!timeSlot){
+        	document.getElementById("confirmMessage").innerHTML = "TimeSlot Not Selected";
+        	return false;
+        }
+        return true;
+    }
 </script>
 
 <script type="text/javascript">
