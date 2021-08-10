@@ -180,6 +180,14 @@
         .colbox h4{
             color: #bebbbb;
         }
+        
+        .form-group label{
+            color: #bebbbb;
+        }
+        
+        .form-group{
+        margin-top:15px;
+        }
         .log{
             background-color: #212130;
             border-radius: 10px;
@@ -218,48 +226,46 @@
                 </div>
 				
                 <div class="container log shadow">
-                    <form:form action="/signup.html" modelAttribute="userDto">
+<form:form action="/signup.html" modelAttribute="userDto" id="signupForm">
                     <div class="form-row" style="text-align: center">
                     <h4 style="font-size: 22px;color: #F15336;">Create Genzest Account</h4>
                     </div>
-                       <div class="form-row" style="padding-top: 10px">
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-                            <h4>First Name <span>*</span></h4>
+  <div class="form-group col-md-6">
+    <label for="firstName">First Name <span>*</span></label>
                             <form:input type="text" placeholder="First Name" class="form-control" path="firstName"/>
                             <form:errors path="firstName" cssClass="error"></form:errors>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-                            <h4>Last Name <span>*</span></h4>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="lastName">Last Name <span>*</span></label>
                             <form:input type="text" placeholder="Last Name" class="form-control" path="lastName"/>
                             <form:errors path="lastName" cssClass="error"></form:errors>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-                           <h4>Email <span>*</span></h4>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="email">Email <span>*</span></label>
                            <form:input type="email" placeholder="email" class="form-control" path="email"/>
                            <form:errors path="email" cssClass="error"></form:errors>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-                           <h4>Mobile No <span>*</span></h4>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="phoneNo">Mobile No <span>*</span></label>
                            <form:input class="form-control" type="tel" placeholder="Mobile No" id="example-tel-input" path="phoneNo" />
                            <form:errors path="phoneNo" cssClass="error"></form:errors>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-                            <h4>Password <span>*</span></h4>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="password">Password <span>*</span></label>
                             <form:input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" path="password"/>
                             <form:errors path="password" cssClass="error"></form:errors>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-                            <h4>Confirm Password <span>*</span></h4>
+  </div>
+  <div class="form-group col-md-6">
+    <label for="matchingPassword">Confirm Password <span>*</span></label>
                             <form:input type="password" class="form-control" path="matchingPassword" id="exampleInputPassword2" placeholder="Confirm Password"/>
                             <form:errors path="matchingPassword" cssClass="error"></form:errors>
                             <div id="confirmMessage" class="error"></div>
-                        </div>                    
-                       </div>
-
+  </div>
                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
                             <button type="submit" onclick="return Validate()">Sign Up</button>
                          </div>
-                     </form:form>
+</form:form>
+
                </div>
 			</main>
 
@@ -298,6 +304,9 @@
 
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
+        <script src="assets/js/jquery-1.11.1.js"></script>
+        <script src="assets/js/jquery.validate.js"></script>
+        <script src="assets/validatejs/signup.js"></script>
 
 
 </body>

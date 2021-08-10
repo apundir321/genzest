@@ -63,6 +63,7 @@ main .colboxb button{
 }
 main .colboxb{
     text-align: center;
+    margin-top: 25px;
 }
 main .form-row input[type="file"]{
     background-color: white;

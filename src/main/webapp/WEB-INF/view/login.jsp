@@ -1,25 +1,3 @@
-<!-- <html> -->
-<!-- <head></head> -->
-<!-- <body> -->
-<!--    <h1>Login</h1> -->
-<!--    <form name='f' action="login" method='POST'> -->
-<!--       <table> -->
-<!--          <tr> -->
-<!--             <td>User:</td> -->
-<!--             <td><input type='text' name='username' value=''></td> -->
-<!--          </tr> -->
-<!--          <tr> -->
-<!--             <td>Password:</td> -->
-<!--             <td><input type='password' name='password' /></td> -->
-<!--          </tr> -->
-<!--          <tr> -->
-<!--             <td><input name="submit" type="submit" value="submit" /></td> -->
-<!--          </tr> -->
-<!--       </table> -->
-<!--   </form> -->
-<!-- </body> -->
-<!-- </html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +7,8 @@
     <title>Document</title>
     <link href="assets/login.css" rel="stylesheet">
     <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
     <style>
         h2{
             font-size: 1.5rem;
@@ -58,12 +37,23 @@
           <h2 class="inactive underlineHover">Sign In </h2>
     
           <!-- Login Form -->
-          <form name='f' action="login" method='POST'>
-            <input type="text" id="login" class="fadeIn second shadow" name="username" placeholder="Username">
-            <input type="password" id="password" class="fadeIn third shadow" name="password" placeholder="password">
-            <!-- <a href="index.html"><input type="submit" value="Log In"></a> -->
-            <button type="submit" class="btn btn-dark">Login</button>
-          </form>
+          <form name='f' action="login" method='POST' id="loginForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="username">Username</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="username" name="username" placeholder="Username" />
+								</div>
+							</div>
+            
+							<div class="form-group">
+								<label class="col-sm-3 control-label  mt10" for="firstname1">Password</label>
+								<div class="col-sm-9  mt10">
+									<input type="password" class="form-control" id="password" name="password" placeholder="password" />
+								</div>
+							</div>
+              <button type="submit" class="btn btn-dark">Login</button>
+            </form>
+            
       
           <!-- Remind Passowrd -->
           <div id="formFooter">
@@ -73,6 +63,59 @@
       
         </div>
       </div>
+        <script src="assets/js/jquery-1.11.1.js"></script>
+        <script src="assets/js/jquery.validate.js"></script>
+    <script>
+        $(document).ready( function () {
+			$( "#loginForm" ).validate( {
+				rules: {
+					username: "required",
+					password: "required",
+					username: {
+						required: true,
+						minlength: 2
+					},
+					password: {
+						required: true,
+						minlength: 5
+					},
+					
+				},
+				messages: {
+					username: "Please enter your firstname",
+					password: "Please enter your password",
+					username: {
+						required: "Please enter a username",
+						minlength: "Your username must consist of at least 2 characters"
+					},
+					password: {
+						required: "Please provide a password",
+						minlength: "Your password must be at least 5 characters long"
+					},
+					
+				},
+				errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".col-sm-9" ).addClass( "has-error" ).removeClass( "has-success" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).parents( ".col-sm-9" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+			} );
+            
+        });
+            </script>
+
 </body>
 </html>
 
