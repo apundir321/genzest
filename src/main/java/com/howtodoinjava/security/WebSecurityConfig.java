@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -34,6 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().formLogin()
         .loginPage("/login.html").loginProcessingUrl("/login").permitAll().successHandler(authenticationSuccessHandler).and().csrf().disable() // disable csrf for our requests.
         .authorizeRequests()
+        .antMatchers("/genzest-d.html").hasAuthority("ROLE_ADMIN")
+        .antMatchers("/recruiter-d.html").hasAuthority("ROLE_RECRUITER")
         .antMatchers("/").permitAll()
         .antMatchers(HttpMethod.POST,"/user/registration").permitAll()
         .antMatchers(HttpMethod.POST,"/user/admin/registration").permitAll()
@@ -44,11 +48,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET,"/getLocations").permitAll()
         .antMatchers(HttpMethod.POST,"/getFilterJobs").permitAll()
         .antMatchers(HttpMethod.GET,"/getAllJobs").permitAll()
-        .antMatchers("/registrationAccountConfirm").permitAll()
+        .antMatchers(HttpMethod.POST,"/user/savePassword").permitAll()
+        .antMatchers("/registrationConfirm.html").permitAll()
         .antMatchers("/loadStatesByCountry/**").permitAll()
         .antMatchers("/loadCitiesByState/**").permitAll()
         .antMatchers("/signup.html").permitAll()
+        .antMatchers("/user/resetPassword").permitAll()
         .antMatchers("/badUser").permitAll()
+        .antMatchers("/forgotpassword").permitAll()
         .antMatchers("/edit.html").permitAll()
         .antMatchers("/assets-2/**").permitAll()
         .antMatchers("/assets-1/**").permitAll()
@@ -56,45 +63,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/assets/**").permitAll()
         .antMatchers("/index.html").permitAll()
         .antMatchers("/editCategory.html").permitAll()
-//        .antMatchers("/profile.html").permitAll()
-//        .antMatchers("/earning.html").permitAll()
-//        .antMatchers("/edit.html").permitAll()
-//        .antMatchers("/searchjobs.html").permitAll()
-//        .antMatchers("/appliedjobs.html").permitAll()
-//        .antMatchers("/category-genz.html").permitAll()
-//        .antMatchers("/category-edit-genz.html").permitAll()
-//        .antMatchers("/jobtype-genz.html").permitAll()
-//        .antMatchers("/jobtype-edit-genz.html").permitAll()
-//        .antMatchers("/course-genz.html").permitAll()
-//        .antMatchers("/course-edit-genz.html").permitAll()
-//        .antMatchers("/timeslot-genz.html").permitAll()
-//        .antMatchers("/timeslot-edit-genz.html").permitAll()
-//        .antMatchers("/emp-edit-genz.html").permitAll()
-//        .antMatchers("/employer-genz.html").permitAll()
-//        .antMatchers("/editjobs-genz.html").permitAll()
-//        .antMatchers("/updateProfile.html").permitAll()
-//        .antMatchers("/searchJobs.html").permitAll()
-//        .antMatchers("/jobs-genz.html").permitAll()
-//        .antMatchers("/updatejobs-genz.html").permitAll()
-//        .antMatchers("/searchCandidates.html").permitAll()
-//        .antMatchers("/searchcandi-genz.html").permitAll()
-//        .antMatchers("/genzest-d.html").permitAll()
-//        .antMatchers("/showCandidateProfile").permitAll()
-//        .antMatchers("/searchjobs-genz.html").permitAll()
-//        .antMatchers("/recruiter-d.html").permitAll()
-//        .antMatchers("/jobs.html").permitAll()
-//        .antMatchers("/editjobs-recruiter.html").permitAll()
-//        .antMatchers("/updatejobs-recruiter.html").permitAll()
-//        .antMatchers("/emloyer.html").permitAll()
-//        .antMatchers("/updatejobs-recruiter.html").permitAll()
-//        .antMatchers("/applyJob").permitAll()
-//        .antMatchers("/updatePreferences.html").permitAll()
+        .antMatchers("/user/changePassword").permitAll()
         
         
         
         
-        
-        .anyRequest().authenticated();
+        .anyRequest().authenticated().and()
+        .exceptionHandling().accessDeniedPage("/accessdenied");
 //        .and().
 //        exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 //		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

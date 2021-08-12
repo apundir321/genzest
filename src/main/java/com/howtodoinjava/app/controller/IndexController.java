@@ -2,37 +2,49 @@ package com.howtodoinjava.app.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.howtodoinjava.OnRegistrationCompleteEvent;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.UserProfileRepository;
@@ -45,6 +57,8 @@ import com.howtodoinjava.domain.JobAccountCustomRepo;
 import com.howtodoinjava.domain.JobAccountRepo;
 import com.howtodoinjava.domain.JobTypeRepo;
 import com.howtodoinjava.domain.TimeSlotRepo;
+import com.howtodoinjava.dto.ForgotPasswordDto;
+import com.howtodoinjava.dto.PasswordDto;
 import com.howtodoinjava.dto.UserDto;
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.CategoryCount;
@@ -60,10 +74,13 @@ import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
+import com.howtodoinjava.security.ISecurityUserService;
+import com.howtodoinjava.security.IUserService;
 import com.howtodoinjava.security.UserService;
 import com.howtodoinjava.service.AWSS3Service;
 import com.howtodoinjava.service.CSVService;
 import com.howtodoinjava.service.UserProfileService;
+import com.howtodoinjava.util.GenericResponse;
 
 @Controller
 public class IndexController {
@@ -92,6 +109,9 @@ public class IndexController {
 	@Autowired
 	UserProfileService userService;
 	
+	@Autowired
+	IUserService iUserService;
+	
 	
 	@Autowired
 	JobEarningRepo jobEarningRepo;
@@ -114,6 +134,20 @@ public class IndexController {
 	
 	@Autowired
 	AWSS3Service awsService;
+	
+
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
+    
+    
+    @Autowired
+    private JavaMailSender mailSender;
+    
+    @Autowired
+    private Environment env;
+    
+    @Autowired
+    private ISecurityUserService securityService;
 	
 
 	@RequestMapping("/student-d.html")
@@ -315,23 +349,26 @@ public class IndexController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/signup.html")
-	public String submit(HttpServletRequest request,HttpServletResponse response,@Valid @ModelAttribute("userDto") UserDto userDto,BindingResult result, Map<String, Object> model)
+	public String submit(HttpServletRequest request,HttpServletResponse response,@Valid @ModelAttribute("userDto") UserDto userDto,BindingResult result, Map<String, Object> model,HttpSession session)
 			throws Exception {
 		User registered = null;
 		if(result.hasErrors())	
 		{
 			return "signup";
 		}
+
 		
 		boolean isRecruiter = request.getParameter("recruiter")==null?false:true;
+
 		try {
 			registered = uService.registerNewUserAccount(userDto,isRecruiter);	
+			eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
 			model.put("successMessage", "User registered");
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.put("errorMessage", e.getMessage());
 		}
-		return "signup";
+		return "login";
 	}
 
 
@@ -563,6 +600,25 @@ public class IndexController {
 	}
 	
 	
+	 private String getAppUrl(HttpServletRequest request) {
+	        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+	    }
+	
+	 
+	    @GetMapping("/registrationConfirm.html")
+	    public String confirmRegistration(final HttpServletRequest request, final ModelMap model, @RequestParam("token") final String token) throws UnsupportedEncodingException {
+	        Locale locale = request.getLocale();
+	        model.addAttribute("lang", locale.getLanguage());
+	        final String result = iUserService.validateVerificationToken(token);
+	        if (result.equals("valid")) {
+	            final User user = iUserService.getUser(token);
+	            model.addAttribute("successMessage", "Account has been verified please log in now!");
+	            return "login";
+	        }
+	        model.addAttribute("errorMessage", "Token is Expired!");
+	        return "login";
+	    }
+	
 //	@RequestMapping(value="/logout", method=RequestMethod.GET)  
 //    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {  
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
@@ -571,6 +627,102 @@ public class IndexController {
 //        }  
 //         return "login1";  
 //     }  
+	    
+	    
+	    @RequestMapping("/forgotpassword")
+		public String forgotpassword() throws IOException {
+			
+			return "forgotpassword";
+		}
+	    
+	    
+	    @RequestMapping("/user/resetPassword")
+	    public String resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail,final ModelMap model) {
+	        final User user = iUserService.findUserByEmail(userEmail);
+	        try {
+	        	
+	       
+	        if (user != null) {
+	            final String token = UUID.randomUUID().toString();
+	            iUserService.createPasswordResetTokenForUser(user, token);
+	            mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
+	            model.addAttribute("successMessage", "Forgot password link has been sent to your email id");
+	        }
+	        else
+	        {
+	        	model.addAttribute("errorMessage", "No username has been found by this id");
+	        }
+	        }catch (Exception e) {
+				// TODO: handle exception
+	        	model.addAttribute("errorMessage", "Exception occured with message="+e.getMessage());
+			}
+	        return "forgotpassword";
+	    }
+	    
+	    private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale, final String token, final User user) {
+	        final String url = contextPath + "/user/changePassword?token=" + token;
+	        final String message = "Reset Password";
+	        return constructEmail("Reset Password", message + " \r\n" + url, user);
+	    }
+	    
+	    private SimpleMailMessage constructEmail(String subject, String body, User user) {
+	        final SimpleMailMessage email = new SimpleMailMessage();
+	        email.setSubject(subject);
+	        email.setText(body);
+	        email.setTo(user.getEmail());
+	        email.setFrom(env.getProperty("support.email"));
+	        return email;
+	    }
+	    
+	    
+	    @GetMapping("/user/changePassword")
+	    public String showChangePasswordPage(final ModelMap model, @RequestParam("token") final String token) {
+	        final String result = securityService.validatePasswordResetToken(token);
+	        if(result != null) {	          
+	            model.addAttribute("errorMessage", "Invalid password token!");
+	            return "login";
+	        } else {
+	            model.addAttribute("token", token);
+	            ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto();
+	            forgotPasswordDto.setToken(token);
+	            model.addAttribute("forgotPasswordDto",forgotPasswordDto );
+	            return "updateForgotpassword";
+	        }
+	    }
+	    
+	@RequestMapping(method = RequestMethod.POST, value = "/user/savePassword")
+	public void savePassword(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("forgotPasswordDto") ForgotPasswordDto forgotPasswordDto, ModelMap model,HttpSession session) throws IOException {
+
+		final String result = securityService.validatePasswordResetToken(forgotPasswordDto.getToken());
+
+		if (result != null) {
+			session.setAttribute("errorMessage", "Invalid Token Please verify your email again!");
+			response.sendRedirect("/login.html");
+		}
+
+		Optional<User> user = iUserService.getUserByPasswordResetToken(forgotPasswordDto.getToken());
+		if (user.isPresent()) {
+			iUserService.changeUserPassword(user.get(), forgotPasswordDto.getNewPassword());
+			session.setAttribute("successMessage",
+					"Password has been updated please try login in with your updated password.");
+
+		} else {
+			session.setAttribute("errorMessage", "User is not present for this token!");
+
+		}
+
+		response.sendRedirect("/login.html");
+
+	}
+	
+	  @RequestMapping("/accessdenied")
+			public String accessdenied() throws IOException {
+				
+				return "accessdenied";
+			}
+		    
+
 	
 	 
 	

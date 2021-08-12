@@ -15,12 +15,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.joda.time.Days;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -317,12 +319,14 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/course-genz";
 	}
-
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/genzest-d.html")
 	public String showAdminPage(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
+		System.out.println(user.getRoles());
 		model.put("courseCount", courseRepo.count());
 		model.put("employersCount", employerRepo.count());
 		model.put("categoriesCount", categoryRepo.count());

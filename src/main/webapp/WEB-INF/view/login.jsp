@@ -1,3 +1,9 @@
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +13,10 @@
     <title>Document</title>
     <link href="assets/login.css" rel="stylesheet">
     <!-- CSS only -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <style>
         h2{
             font-size: 1.5rem;
@@ -59,6 +67,8 @@
           <div id="formFooter">
 <!--             <a class="underlineHover" href="signup.html">Forgot Password?</a>&nbsp;&nbsp;&nbsp; -->
             <a class="underlineHover" href="/signup.html">SignUp</a>
+            
+            <a class="underlineHover" href="/forgotpassword">Forgot Password</a>
           </div>
       
         </div>
@@ -115,6 +125,24 @@
             
         });
             </script>
+            
+            
+            		<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+	});
+	
+	</script>
 
 </body>
 </html>
