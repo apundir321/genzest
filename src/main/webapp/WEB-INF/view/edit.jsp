@@ -260,8 +260,140 @@ table thead {
 			</nav>
 
 			<main class="content">
+			
+			
+			
 	<form:form action="/updateProfile.html" method="post"
-					modelAttribute="profile" enctype="multipart/form-data">
+					modelAttribute="profile" enctype="multipart/form-data" id="studentprofileform">
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">First Name <span>*</span></label>
+    							<form:input path="firstName" placeholder="First Name"
+								class="form-control" type="text" value="${user.firstName}"/>
+								<form:errors path="firstName" cssClass="error"></form:errors>
+
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Last Name <span>*</span></label>
+							<form:input path="lastName" placeholder="Last Name"
+								class="form-control" type="text" value="${user.lastName}"/>
+								<form:errors path="lastName" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Email <span>*</span></label>
+							<form:input class="form-control" path="email"
+								placeholder="Drop Your Mail Id" id="example-email-input" value="${user.email}" />
+								<form:errors path="email" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Parent's Name <span>*</span></label>
+							<form:input path="parentsName" placeholder="Parents Name"
+								class="form-control" type="text" />
+								<form:errors path="parentsName" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Mobile No <span>*</span></label>
+							<form:input class="form-control" path="mobileNo"
+								placeholder="Mobile no" id="example-tel-input"  value="${user.phoneNo}"/>
+								
+								<form:errors path="mobileNo" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Alternate Mobile No <span>*</span></label>
+							<form:input class="form-control" path="alternateMobileNo"
+								placeholder="Mobile no" id="example-tel-input" />
+								<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Gender <span>*</span></label>
+							<form:select path="gender" class="form-control">
+								<form:option class="first-op" value="">Select</form:option>
+								<form:option value="Male">Male</form:option>
+								<form:option value="Female">Female</form:option>
+							</form:select>
+							<form:errors path="gender" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Date of Birth <span>*</span></label>
+							<form:input type="date" class="form-control" path="dob" 
+								placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
+								<form:errors path="dob" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Course <span>*</span></label>
+							<form:select class="form-control" path="course">
+								<form:option value="">Select</form:option>
+								<c:forEach var="course" items="${courses}">
+									<form:option value="${course.id}"
+										label="${course.courseTypeName}" />
+								</c:forEach>
+							</form:select>
+							<form:errors path="course" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Vehicle Type <span>*</span></label>
+							<form:select class="form-control" path="vehicleType">
+								<form:option class="first-op" value="">Select</form:option>
+								<form:option value="Dont Own a Vehicle"></form:option>
+								<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
+								<form:option value="Four Wheeler"></form:option>
+								<form:option value="Two Wheeler">Two Wheeler</form:option>
+								<!-- <option>Freelance</option> -->
+							</form:select>
+							<form:errors path="vehicleType" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Blood Group <span>*</span></label>
+							<form:select path="bloodGroup" class="form-control">
+								<form:option value="">Don't Know</form:option>
+								<form:option value="AB-"></form:option>
+								<form:option value="O-"></form:option>
+								<form:option value="B-"></form:option>
+								<form:option value="A-"></form:option>
+								<form:option value="O+"></form:option>
+								<form:option value="AB+"></form:option>
+								<form:option value="B+"></form:option>
+								<form:option value="A+"></form:option>
+							</form:select>
+							<form:errors path="bloodGroup" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Address Line 1 <span>*</span></label>
+							<form:input id="address-line1" path="addressLine1" type="text"
+								placeholder="Address line 1" class="form-control" />
+								<form:errors path="addressLine1" cssClass="error"></form:errors>
+  </div>
+
+ 
+   <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+
+					<div class="form-row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+							<button type="submit">Save</button>
+						</div>
+					</div>
+
+</form:form>
+			
+			
+			
+			
+			
+	<form:form action="/updateProfile.html" method="post"
+					modelAttribute="profile" enctype="multipart/form-data" id="">
 					<div class="form-row">
 			<div class="row two">
 				<div class="container-fluid">
@@ -285,7 +417,8 @@ table thead {
 			</div>
 
 			<div class="container-fluid">
-			
+
+
 					
 					<form:input path="id" placeholder="First Name"
 								class="form-control" type="hidden" />
@@ -879,6 +1012,9 @@ function myFunction() {
 
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
+        <script src="assets/js/jquery-1.11.1.js"></script>
+        <script src="assets/js/jquery.validate.js"></script>
+        <script src="assets/validatejs/editstudentprofile.js"></script>
 
 
 </body>
