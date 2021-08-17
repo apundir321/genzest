@@ -32,6 +32,17 @@
 					course: "required",
 					vehicleType: "required",
 					bloodGroup: "required",
+					address: "required",
+					country: "required",
+					state: "required",
+					city: "required",
+					locality: "required",
+					postalCode: "required",
+					collegeName: "required",
+					degreeCollegeCompletionDate: "required",
+					havePc: "required",
+					jobCategories: "required",
+					preference: "required",
 					firstName: {
 						required: true,
 						minlength: 2,
@@ -49,7 +60,7 @@
 					},
 					parentsName: {
 						required: true,
-						minlength: 10,
+						minlength: 2,
 						aphadot: true,
 						maxlength: 64
 					},
@@ -72,7 +83,6 @@
 					},
 					dob: {
 						required: true,
-						dateITA: true,
 					},
 				},
 				errorElement: "em",
@@ -93,23 +103,5 @@
 					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
 				}
 			} );
-            
         });
 
-        
-        
-        	$(function(){
-    var dtToday = new Date();
-    
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if(month < 10)
-        month = '0' + month.toString();
-    if(day < 10)
-        day = '0' + day.toString();
-    
-    var maxDate = year + '-' + month + '-' + day;
-    alert(maxDate);
-    $('#dob').attr('max', maxDate);
-});
