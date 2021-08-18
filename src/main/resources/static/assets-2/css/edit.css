@@ -8,7 +8,7 @@
     font-size: 1.8rem;
 }
 form .colbox{
-    margin-bottom: 4rem;
+    
 }
 body{
     font-family: 'Lato', sans-serif;
@@ -46,8 +46,7 @@ body{
 }
 main .colbox label{
     color: white;
-    margin: .5rem;
-    padding: .5rem;
+    margin-top:15px;
     font-size: 1.5rem;
 }
 main .colboxb button{
