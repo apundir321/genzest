@@ -129,9 +129,10 @@ $(document).ready(function() {
             { title: "Job Name" },
             { title: "Category" },
             { title: "Time Slot" },
-            { title: "city" },
+            { title: "City" },
             { title: "Job Date" },
-			{ title: "Employer" }
+			{ title: "Employer" },
+			{ title: "Action" }
         ],
 		
     } );

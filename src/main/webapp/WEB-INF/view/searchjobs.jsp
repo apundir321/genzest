@@ -89,6 +89,13 @@
      display: block;
    }
   }
+  
+.content .container-fluid h4 {
+	color:white;
+}
+.content .container-fluid h4 span{
+	color:red;
+}
 </style>
 
 <script>
@@ -150,9 +157,6 @@ $(document).ready(function() {
 					<a class="sidebar-link" href="student-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
             		</a></li>
 
-					<li class="sidebar-item">
-					<a class="sidebar-link" href="earning.html"><i class="fa fa-money align-middle" style="font-size:19px"></i> <span class="align-middle"><b>My Earnings</b></span>
-					</a></li>
 
 					<li class="sidebar-item">
 					<a class="sidebar-link" href="profile.html"><i class="fa fa-user-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>My Profile</b></span>
@@ -161,6 +165,11 @@ $(document).ready(function() {
 					<li class="sidebar-item active">
 					<a class="sidebar-link" href="searchjobs.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Jobs</b></span>
 					</a></li>
+					
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="earning.html"><i class="fa fa-money align-middle" style="font-size:19px"></i> <span class="align-middle"><b>My Earnings</b></span>
+					</a></li>
+					
 
 					<li class="sidebar-item">
 					<a class="sidebar-link" href="appliedjobs.html"><i class='fa fa-check-square-o align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Applied Jobs</b></span>
@@ -223,7 +232,7 @@ $(document).ready(function() {
 					modelAttribute="searchJob" >
                         <div class="form-row">
                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-                            <h4>Category <span>*</span></h4>
+                            <h4>Job Category <span>*</span></h4>
                             <form:select class="form-control" path="jobCategory">
 										<form:option value="">Select</form:option>
 										<c:forEach var="category" items="${categories}">
@@ -261,28 +270,19 @@ $(document).ready(function() {
                             </c:forEach>
                             </form:select>
                           </div>
-                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-                             <h4>State</h4>
-                             <form:select  path="state" class="form-control">
-                               <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Andra Pradesh</form:option>
-                               <form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-                               <form:option value="Assam">Assam</form:option>
-                               <form:option value="Bihar">Bihar</form:option>
-                               <form:option value="Chhattisgarh">Chhattisgarh</form:option>
-                             </form:select>
-                          </div>
+                          
                           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
                              <h4>City <span>*</span></h4>
                               <form:select path="city" class="form-control">
                                <form:option class="first-op" value="">Select</form:option> 
-                               <form:option value="Andra Pradesh">Gurgaon</form:option>
-                               <form:option value="Andra Pradesh">Indore</form:option>
-                               <form:option value="Arunachal Pradesh">Kolkata</form:option>
-                               <form:option value="Assam">Pune</form:option>
-                               <form:option value="Bihar">Mumbai</form:option>
-                               <form:option value="Chhattisgarh">Delhi</form:option>
-                             </form:select>                          </div>
+                               <form:option value="Gurgaon">Gurgaon</form:option>
+                               <form:option value="Indore">Indore</form:option>
+                               <form:option value="Kolkata">Kolkata</form:option>
+                               <form:option value="Pune">Pune</form:option>
+                               <form:option value="Mumbai">Mumbai</form:option>
+                               <form:option value="Delhi">Delhi</form:option>
+                             </form:select>    
+                           </div>
                         
                         </div>
                         

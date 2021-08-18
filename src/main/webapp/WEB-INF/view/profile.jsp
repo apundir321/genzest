@@ -152,9 +152,7 @@ $(document).ready(function() {
                         <a class="sidebar-link" href="student-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
                         </a></li>
     
-                        <li class="sidebar-item">
-                        <a class="sidebar-link" href="earning.html"><i class="fa fa-money align-middle" style="font-size:19px"></i> <span class="align-middle"><b>My Earnings</b></span>
-                        </a></li>
+                  
     
                         <li class="sidebar-item active">
                         <a class="sidebar-link" href="profile.html"><i class="fa fa-user-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>My Profile</b></span>
@@ -162,6 +160,10 @@ $(document).ready(function() {
     
                         <li class="sidebar-item">
                         <a class="sidebar-link" href="searchjobs.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Jobs</b></span>
+                        </a></li>
+                        
+                              <li class="sidebar-item">
+                        <a class="sidebar-link" href="earning.html"><i class="fa fa-money align-middle" style="font-size:19px"></i> <span class="align-middle"><b>My Earnings</b></span>
                         </a></li>
     
                         <li class="sidebar-item">

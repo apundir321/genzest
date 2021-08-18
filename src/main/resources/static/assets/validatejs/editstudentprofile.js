@@ -42,7 +42,12 @@
 					degreeCollegeCompletionDate: "required",
 					havePc: "required",
 					jobCategories: "required",
+					UPI: "required",
 					preference: "required",
+					paymentMethod: "required",
+					aadhar: "required",
+					studentId: "required",
+					inputother: "required",
 					firstName: {
 						required: true,
 						minlength: 2,
@@ -84,6 +89,12 @@
 					dob: {
 						required: true,
 					},
+					postalCode: {
+						required: true,
+						minlength: 6,
+						maxlength: 6,
+						digits: true,
+					}
 				},
 				errorElement: "em",
 				errorPlacement: function ( error, element ) {

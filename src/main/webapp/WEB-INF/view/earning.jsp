@@ -70,6 +70,14 @@
 	form .searchjobs{
 		margin-bottom: 2rem;
 	}
+	
+	.content .container-fluid h4 {
+		color:white;
+	}
+	
+.content .container-fluid h4 span{
+	color:red;
+}
 </style>
 
 <script>

@@ -70,7 +70,7 @@
 
 <style>
 .main {
-	height: 2200px;
+	height: 2500px;
 }
 /* xs */
 @media ( max-width : 767px) {
@@ -155,10 +155,104 @@ table thead {
 </style>
 
    <style>
+   
+   .avatar-upload {
+	 position: relative;
+	 max-width: 140px;
+	 margin: 20px auto;
+	 margin-left:2px;
+}
+ .avatar-upload .avatar-edit {
+	 position: absolute;
+	 right: 12px;
+	 z-index: 1;
+	 top: 10px;
+}
+ .avatar-upload .avatar-edit input {
+	 display: none;
+}
+ .avatar-upload .avatar-edit input + label {
+	 display: inline-block;
+	 width: 30px;
+	 height: 30px;
+	 margin-bottom: 0;
+	 border-radius: 100%;
+	 background: #FFFFFF;
+	 border: 1px solid transparent;
+	 box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12);
+	 cursor: pointer;
+	 font-weight: normal;
+	 transition: all .2s ease-in-out;
+}
+ .avatar-upload .avatar-edit input + label:hover {
+	 background: #f1f1f1;
+	 border-color: #d6d6d6;
+}
+ .avatar-upload .avatar-edit input + label:after {
+	 content: "\f040";
+	 font-family: 'FontAwesome';
+	 color: #757575;
+	 position: absolute;
+	 top: 5px;
+	 left: 0;
+	 right: 0;
+	 text-align: center;
+	 margin: auto;
+}
+ .avatar-upload .avatar-preview {
+	 width: 134px;
+	 height: 134px;
+	 position: relative;
+	 border-radius: 100%;
+	 border: 6px solid #F8F8F8;
+	 box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
+}
+ .avatar-upload .avatar-preview > div {
+	 width: 100%;
+	 height: 100%;
+	 border-radius: 100%;
+	 background-size: cover;
+	 background-repeat: no-repeat;
+	 background-position: center;
+}
+ 
+   
 .error {
 	color: #ff0000;
 	font-style: italic;
 	font-weight: bold;
+}
+
+.colbox span{
+	color: red;
+	font-size:17px;
+}
+input[type=file] {
+    color: white;
+}
+
+.ba-class{
+	margin-top:18px;
+}
+.ba-class-1{
+	margin-top:-18px;
+}
+.ba-class label{
+	color:white;
+}
+.ba-class-1 label{
+	color:white;
+}
+.ba-class label span{
+	color:red;
+	font-size:17px;
+}
+.ba-class-1 label span{
+	color:red;
+	font-size:17px;
+}
+.upload-img{
+	margin-top:-12px;
 }
 </style>
 
@@ -189,10 +283,7 @@ table thead {
 							data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
 					</a></li>
 
-					<li class="sidebar-item"><a class="sidebar-link"
-						href="earning.html"><i class="fa fa-money align-middle"
-							style="font-size: 19px"></i> <span class="align-middle"><b>My
-									Earnings</b></span> </a></li>
+					
 
 					<li class="sidebar-item active"><a class="sidebar-link"
 						href="profile.html"><i class="fa fa-user-o align-middle"
@@ -203,6 +294,11 @@ table thead {
 						href="searchjobs.html"><i class="fa fa-search align-middle"
 							style="font-size: 19px"></i> <span class="align-middle"><b>Search
 									Jobs</b></span> </a></li>
+									
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="earning.html"><i class="fa fa-money align-middle"
+							style="font-size: 19px"></i> <span class="align-middle"><b>My
+									Earnings</b></span> </a></li>
 
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="appliedjobs.html"><i
@@ -269,23 +365,37 @@ table thead {
 
 
 				<div class="container-fluid">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div id="profile-container">
-							<image id="profileImage" src="/getProfilePic/${profile.profilePicFileName}" />
-						</div>
-						<input id="imageUpload" type="file" name="profilepic"
-							placeholder="Photo" capture>
+				
+					<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center">
+						<h4>General Details (data once entered can not be altered)</h4>
 					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<h4>General profile (data once entered can not be altered)</h4>
-					</div>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 						<button class="back" style="float: right; margin: 1rem;">
 							<a href="profile.html">Back <i
 								class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
 						</button>
 					</div>
 				</div>
+				
+				<div class="container">
+				<div class="row">
+					<div class="col-lg-12 text-left upload-img">
+						    <div class="avatar-upload">
+				        <div class="avatar-edit">
+				            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+				            <label for="imageUpload"></label>
+				        </div>
+				        <div class="avatar-preview">
+				            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+				            </div>
+				        </div>
+				    </div>
+					</div>
+				</div>
+				
+				</div>
+				
+				
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="firstName">First Name <span>*</span></label>
     							<form:input path="firstName" placeholder="First Name"
@@ -342,22 +452,15 @@ table thead {
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="dob">Date of Birth <span>*</span></label>
-							<form:input type="text" class="form-control" path="dob" 
-								placeholder="MM/DD/YYYY" id="birthday" name="birthday" />
+							<form:input type="date" class="form-control" path="dob" onchange="ageCalculation()"
+								placeholder="DD/MM/YYYY" name="birthday" />
 								<form:errors path="dob" cssClass="error"></form:errors>
+								
   </div>
+  
 
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="course">Course <span>*</span></label>
-							<form:select class="form-control" path="course">
-								<form:option value="">Select</form:option>
-								<c:forEach var="course" items="${courses}">
-									<form:option value="${course.id}"
-										label="${course.courseTypeName}" />
-								</c:forEach>
-							</form:select>
-							<form:errors path="course" cssClass="error"></form:errors>
-  </div>
+
+
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="vehicleType">Vehicle Type <span>*</span></label>
@@ -375,7 +478,7 @@ table thead {
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="bloodGroup">Blood Group <span>*</span></label>
 							<form:select path="bloodGroup" class="form-control">
-								<form:option value="">Don't Know</form:option>
+								<form:option value="">Please Select</form:option>
 								<form:option value="AB-"></form:option>
 								<form:option value="O-"></form:option>
 								<form:option value="B-"></form:option>
@@ -384,12 +487,61 @@ table thead {
 								<form:option value="AB+"></form:option>
 								<form:option value="B+"></form:option>
 								<form:option value="A+"></form:option>
+								<form:option value="DK">Don't Know</form:option>
+								
 							</form:select>
 							<form:errors path="bloodGroup" cssClass="error"></form:errors>
   </div>
+  
+  					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
+						<h4>Education Details</h4>
+					</div>
+					
+					  <div class="form-group col-sm-6 col-xs-12 colbox">
+					    <label for="course">Course <span>*</span></label>
+												<form:select class="form-control" path="course">
+													<form:option value="">Select</form:option>
+													<c:forEach var="course" items="${courses}">
+														<form:option value="${course.id}"
+															label="${course.courseTypeName}" />
+													</c:forEach>
+												</form:select>
+												<form:errors path="course" cssClass="error"></form:errors>
+					  </div>
+					  
+					  
+					    <div class="form-group col-sm-6 col-xs-12 colbox">
+					    <label for="collegeName">College Name <span>*</span></label>
+												<form:input id="collage-name" path="collegeName" type="text" 
+													placeholder="Collage-name" class="form-control" />
+													<form:errors path="collegeName" cssClass="error"></form:errors>
+					  </div>
+					
+					
+					  <div class="form-group col-sm-6 col-xs-12 colbox">
+					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
+												<form:input class="form-control" type="date" onchange="ageCalculationtwo()"
+													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
+													path="degreeCollegeCompletionDate" />
+					  </div>
+					
+					  <div class="form-group col-sm-6 col-xs-12 colbox">
+					    <label for="havePc">Do You Have Own PC <span>*</span></label>
+												<form:select class="form-control" path="havePc">
+													<form:option class="first-op" value="false">Select</form:option>
+													<form:option value="true">Yes</form:option>
+													<form:option value="false">No</form:option>
+												</form:select>
+												<form:errors path="havePc" cssClass="error"></form:errors>
+					  </div>
+  
+  
+  					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
+						<h4>Communication Details</h4>
+					</div>
  
    <div class="form-group col-xs-12 colbox">
-    <label for="address">Address</label>
+    <label for="address">Address <span>*</span></label>
     <textarea class="form-control" id="address" name="address" rows="3"></textarea>
   </div>
 
@@ -451,36 +603,20 @@ table thead {
 								<form:errors path="postalCode" cssClass="error"></form:errors>
   </div>
 
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="collegeName">College Name <span>*</span></label>
-							<form:input id="collage-name" path="collegeName" type="text"
-								placeholder="Collage-name" class="form-control" />
-								<form:errors path="collegeName" cssClass="error"></form:errors>
-  </div>
 
-
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
-							<form:input class="form-control" type="date"
-								placeholder="MM/DD/YYYY" id="birthday"
-								path="degreeCollegeCompletionDate" />
-  </div>
-
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="havePc">Do You Have Own PC <span>*</span></label>
-							<form:select class="form-control" path="havePc">
-								<form:option class="first-op" value="false">Select</form:option>
-								<form:option value="true">Yes</form:option>
-								<form:option value="false">No</form:option>
-							</form:select>
-							<form:errors path="havePc" cssClass="error"></form:errors>
-  </div>
 
   
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="jobCategories">Job Categories <span>*</span></label>
-									<form:select class="form-control" path="jobCategories" multiple="true">
+    <label for="jobCategories">Job Categories (Select Upto 5)<span>*</span></label>
+									<form:select class="form-control" path="jobCategories" multiple="true" maxlength="5" minlength="1">
 										<form:option value="">Select</form:option>
+										<form:option value="">1</form:option>
+										<form:option value="">2</form:option>
+										<form:option value="">3</form:option>
+										<form:option value="">4</form:option>
+										<form:option value="">5</form:option>
+										<form:option value="">6</form:option>
+										<form:option value="">7</form:option>
 										<c:forEach var="category" items="${categories}">
 											<form:option value="${category.id}"
 												label="${category.categoryName}" />
@@ -506,6 +642,10 @@ table thead {
 									<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.preference}</span> </h4>
 									</c:if>
   </div>
+  
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
+						<h4>Upload Documents</h4>
+					</div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="aadhar">Aadhar Card <span>*</span></label>
@@ -522,32 +662,43 @@ table thead {
 								</div>
 	  </div>
 
-  <div class="form-group col-sm-6 col-xs-12 colbox">
+  <div class="form-group col-sm-3 col-xs-12 colbox">
     <label for="paymentMethod">Payment Method <span>*</span></label>
-							<form:select class="form-control" path="paymentMethod">
+							<form:select onchange='checkItem(this.value)' class="form-control" path="paymentMethod">
 								<form:option class="first-op" value="">Select</form:option>
 								<form:option value="Bank Account"></form:option>
 								<form:option value="Wallet"></form:option>
 							</form:select>
 							<form:errors path="paymentMethod" cssClass="error"></form:errors>
 	  </div>
-
+	  	  
+	  <div class="form-group col-md-3 ba-class">
+          <label for="inputother" style="display: none;" id="BA">Bank Name <span>*</span></label>
+          <input type="text" class="form-control" id="text" name="text" style="display: none;" placeholder="Bank Name">
+      </div>
+      <div class="form-group col-md-3 ba-class">
+          <label for="inputother" style="display: none;" id="AC">Account Number <span>*</span></label>
+          <input type="text" class="form-control" id="text-1" name="text" style="display: none;" placeholder="Account Number">
+      </div>
+      <div class="form-group col-md-3 ba-class">
+          <label for="inputother" style="display: none;" id="IC">IFSC Code <span>*</span></label>
+          <input type="text" class="form-control" id="text-3" name="text" style="display: none;" placeholder="IFSC Code">
+      </div>
+      	
+	    <div class="form-group col-md-3 ba-class-1">
+	         <label for="inputother" style="display: none;" id="UPI">UPI <span>*</span></label>
+	         <input type="text" class="form-control" id="text-4" name="text" style="display: none;" placeholder="UPI">
+	       </div>	
+	
   
-
-
-					<div class="form-row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-							<button type="submit">Save</button>
-						</div>
-					</div>
+			<div class="form-row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+					<button type="submit">Save</button>
+				</div>
+			</div>
 
 </form:form>
 			
-			
-			
-			
-			
-
 			<div class="container-fluid">
 				<div class="row two">
 					<div class="container-fluid">
@@ -738,6 +889,103 @@ $(function() {
 });
 </script>
 
+  <script>
+  function ageCalculation(){
+
+	  var currentDate = new Date();
+	  var val = document.getElementById("dob").value;
+	  var birthDate = new Date(val);
+	  var difference = currentDate - birthDate;
+	  
+	  var differenceInYears = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
+	  if(birthDate > currentDate) {
+	    window.alert("Please Select Valid Date of Birth ");
+	    document.getElementById('dob').value = "";
+	  } else if( differenceInYears>8) {
+	    window.alert("Age should be less than 8 years");
+	    document.getElementById('dob').value = "";
+	  } else {
+	    document.getElementById("age").value = differenceInYears ;
+	  }
+	}
+  </script>
+
+ <script>
+  function ageCalculationtwo(){
+
+	  var currentDate = new Date();
+	  var val = document.getElementById("degreeCollegeCompletionDate").value;
+	  var birthDate = new Date(val);
+	  var difference = currentDate - birthDate;
+	  
+	  var differenceInYears = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
+	  if(birthDate > currentDate) {
+	    window.alert("You cannot be complete your degree in the future");
+	    document.getElementById('degreeCollegeCompletionDate').value = "";
+	  } else if( differenceInYears>8) {
+	    window.alert("Age should be less than 8 years");
+	    document.getElementById('degreeCollegeCompletionDate').value = "";
+	  } else {
+	    document.getElementById("age").value = differenceInYears ;
+	  }
+	}
+  </script>
+  
+  <script>
+  
+  function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+	            $('#imagePreview').hide();
+	            $('#imagePreview').fadeIn(650);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$("#imageUpload").change(function() {
+	    readURL(this);
+	});
+  
+  </script>
+  
+  <script>
+  var itm = document.getElementById('paymentMethod');
+  function checkItem(val)
+  {
+      if(val === "Bank Account"){
+        document.getElementById('BA').style.display='block';
+        document.getElementById('text').style.display='block';
+        
+        document.getElementById('AC').style.display='block';
+        document.getElementById('text-1').style.display='block';
+        
+        document.getElementById('IC').style.display='block';
+        document.getElementById('text-3').style.display='block';
+      }
+      else{
+        document.getElementById('text').value=""; 
+        document.getElementById('BA').style.display='none';
+        document.getElementById('text').style.display='none';
+        
+        document.getElementById('AC').style.display='none';
+        document.getElementById('text-1').style.display='none';
+        
+        document.getElementById('IC').style.display='none';
+        document.getElementById('text-3').style.display='none';
+      }
+      
+      if(val === "Wallet"){
+    	  document.getElementById('UPI').style.display='block';
+          document.getElementById('text-4').style.display='block';
+      }
+      else{
+          document.getElementById('UPI').style.display='none';
+          document.getElementById('text-4').style.display='none';
+      }
+  }
+  </script>
 
 
 </body>

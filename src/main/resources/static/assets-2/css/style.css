@@ -187,9 +187,10 @@
 			margin-left: 1.5rem;
 		}
 		.content .container-fluid h4{
-			color: #A4A4A4; 
-			font-size: 1.8rem;
+			color: #F15336; 
+			font-size: 1.7rem;
 			margin-left: .5rem;
+			font-weight:bold;
 		}
 		.content .container-fluid h4 b{
 			color: #A4A4A4; 
