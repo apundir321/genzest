@@ -6,7 +6,9 @@ import java.util.Map;
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.SearchCandidate;
+import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
+import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.UserProfile;
 
 public interface JobAccountCustomRepo {
@@ -19,5 +21,6 @@ public interface JobAccountCustomRepo {
 	public   List<Object[]> findJobAcountByCateory();
 	
 	public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate);
-
+	
+	public List<JobEarning> findJobEarningByProfileCriteria(SearchJobEarning searchJobEarning);
 }

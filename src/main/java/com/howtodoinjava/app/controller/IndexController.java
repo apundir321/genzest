@@ -199,29 +199,11 @@ public class IndexController {
 		return "index";
 	}
 	
-	@RequestMapping("/earning.html")
-	public String earning(Map<String, Object> model) {
-		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getName()+"  &&&&&&7");
-		model.put("message", "HowToDoInJava Reader !!");
-		User user = userRepo.findByEmail(authentication.getName());
-		model.put("user", user);
-		List<JobEarning> earnings = jobEarningRepo.findByApplicantUser(user);
-		model.put("earnings", earnings);
-		model.put("employers",employerRepo.findAll());
-		model.put("jobEarning", new SearchJobEarning());
-//		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(userRepo.findByEmail(authentication.getName()));
-//		model.put("appliedJobsCount", appliedJobs.size());
-//		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(user.getUserProfile().getCategory());
-//		model.put("matchingJobsCount", matchingJobs.size());
-		return "earning";
-	}
+
 
 	@RequestMapping("/profile.html")
 	public String profile(Map<String, Object> model) {
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getName()+"  &&&&&&7");
-		model.put("message", "HowToDoInJava Reader !!");
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		model.put("profile", user.getUserProfile());

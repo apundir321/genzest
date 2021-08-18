@@ -26,8 +26,10 @@ import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.SearchCandidate;
+import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.UserProfile;
 
 
@@ -105,7 +107,7 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 		    {
 		    	try {
 					
-					predicates.add(cb.lessThanOrEqualTo(job.get("jobDate"),searchJob.getDateFrom()));
+					predicates.add(cb.lessThanOrEqualTo(job.get("jobDate"),searchJob.getDateTo()));
 		    	} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -191,6 +193,56 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 
 		    return em.createQuery(cq).getResultList();
 
+	}
+
+	@Override
+	public List<JobEarning> findJobEarningByProfileCriteria(SearchJobEarning searchJobEarning) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				 CriteriaBuilder cb = em.getCriteriaBuilder();
+				    CriteriaQuery<JobEarning> cq = cb.createQuery(JobEarning.class);
+				    
+				    Root<JobEarning> jobEarning = cq.from(JobEarning.class);
+				    List<Predicate> predicates = new ArrayList<>();
+				    
+				    if (!StringUtils.isEmpty(searchJobEarning.getJobId())) {
+				    	JobAccount jobAccount = JobAccountRepo.findById(Integer.parseInt(searchJobEarning.getJobId())).get();
+				        predicates.add(cb.equal(jobEarning.get("jobAccount"), jobAccount));
+				    }
+				    
+				    if (!StringUtils.isEmpty(searchJobEarning.getEmployerName())) {
+				    	Optional<Employer> employer = employerRepo.findById(Integer.parseInt(searchJobEarning.getEmployerName()));
+				        predicates.add(cb.equal(jobEarning.get("jobAccount").get("employer"), employer.get()));
+				    }
+				    
+				    if(searchJobEarning.getDateFrom() != null)
+				    {
+				    	try {
+							
+							predicates.add(cb.greaterThanOrEqualTo(jobEarning.get("presentDate"),searchJobEarning.getDateFrom()));
+				    	} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				    	
+				    }
+				    
+				    if(searchJobEarning.getDateTo() != null)
+				    {
+				    	try {
+							
+							predicates.add(cb.lessThanOrEqualTo(jobEarning.get("presentDate"),searchJobEarning.getDateTo()));
+				    	} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				    	
+				    }
+
+				    
+				    cq.where(predicates.toArray(new Predicate[0]));
+
+				    return em.createQuery(cq).getResultList();
 	}
 
 

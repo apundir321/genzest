@@ -150,10 +150,10 @@ public class UserService implements IUserService {
 		user.setEmail(accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
 
-		profile = new UserProfile();
-		profile.setEmail(accountDto.getEmail());
-		profile.setFirstName(accountDto.getFirstName());
-		profile.setLastName(accountDto.getLastName());
+//		profile = new UserProfile();
+//		profile.setEmail(accountDto.getEmail());
+//		profile.setFirstName(accountDto.getFirstName());
+//		profile.setLastName(accountDto.getLastName());
 		role = roleRepository.findByName("ROLE_ADMIN");
 		if (role == null) {
 			role = new Role();
