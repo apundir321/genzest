@@ -1,4 +1,3 @@
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -19,269 +18,263 @@
 
 	<title>Genzest</title>
 
-	<link href="assets-2/css/app.css" rel="stylesheet">
+	<link href="assets/css/app.css" rel="stylesheet">
 
-	<link href="assets-2/css/style.css" rel="stylesheet">
-	<link href="assets-2/css/style2.css" rel="stylesheet">
-    <link href="assets-2/css/style3.css" rel="stylesheet">
-    <link href="assets-2/css/edit.css" rel="stylesheet">
+	<link href="assets/css/style.css" rel="stylesheet">
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-
-<script src="//code.jquery.com/jquery-3.5.1.js"></script>
-<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 <style>
-    .main{
-        height: 1000px;
-    }
-       /* xs */
-        @media (max-width: 767px) {
-            .main{
-                height: 5200px;
-            }
-        }
-        /* sm */
-        @media (min-width: 768px) and (max-width: 991px) {
-            .main{
-                height: 3200px;
-            }
-        }
-        /* md */
-        @media (min-width: 992px) and (max-width: 1199px) {
-            .main{
-                height: 2500px;
-            }
-        }
-    .content .back{
-		background-color: #F15336;
-		padding: 1rem;
-		float: right; 
-		margin: 1rem;
-		width: 8rem;
-		border: none;
-		border-radius: .5rem;
+
+	#formContent{
+		    padding: 20px;
+    text-align: center;
 	}
-	.content .back a{
-		color: white;
-		font-weight: bold;
-		text-decoration: none;
+	.wrapper{
+		border-radius:12px;
 	}
-    form #category{
-        width: 100%;
-    }
-    table, td {
-        /* border: 1px solid black; */
-        width: 100%;
-        padding: 1.5rem;
-        margin: .5rem;
-    }
-    table th{
-        padding: 1.5rem;
-        width: 50%;
-        
-    }
-   table thead{
-       border-bottom: 1px solid white;
-   }
-    .colboxtable{
-        margin-top: 1rem;
-    }
-    /* sm */
-    @media (min-width: 768px) and (max-width: 991px) {
-        table thead{
-            border-bottom: 1px solid white;
-            width: 50%;
-        }
-        table th{
-            /* padding: 1.5rem; */
-            width: auto !important;
-        }
-    } 
-
-    /* xs */
-    @media (max-width: 767px) {
-        form .colboxtable{
-            width: 100%;
-        }
-        table th{
-            /* padding: 1.5rem; */
-            width: auto !important;
-        }
-        .log{
-            background-color: #212130;
-            border-radius: 10px;
-            padding: 0px;
-            width: 100%;
-        }
-        .main{
-            height: 1100px;
-        }
-    }
-
-    .dropbtn {
-        background-color: #212130;
-        color: rgba(233, 236, 239, 0.5);
-        font-weight: 600;
-        padding: 16px;
-        font-size: 14px;
-        border: none;
-        text-align: center;
-        cursor: pointer;
-        }
-
-        .dropbtn:hover, .dropbtn:focus {
-        background-color: #212130;
-        }
-
-        .dropdown {
-        position: relative;
-        display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #212130;
-            min-width: 260px;
-            overflow: auto;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: rgba(233, 236, 239, 0.5);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .dropdown a:hover {
-            background-color: black;
-            font-weight: bold;
-        }
-
-        .show {display: block;}
-
-        .colbox h4{
-            color: #bebbbb;
-        }
-        
-        .form-group label{
-            color: #bebbbb;
-        }
-        
-        .form-group{
-        margin-top:15px;
-        }
-        .log{
-            background-color: #212130;
-            border-radius: 10px;
-            padding: 45px;
-            width: 70%;
-        }
-</style>
-
-
-   <style>
-.error {
-	color: #ff0000;
-	font-style: italic;
-	font-weight: bold;
-}
+	.wrapper #formContent{
+		width:50%;
+		background: #17171e;
+		border-radius:12px;
+		text-align:center;
+		align-items:center;
+		margin: 30px auto;
+	}
+	.control-label{
+		margin-top:25px;
+		color:#fff;
+		margin-right:-25px;
+		margin-left: -17px;
+	}
+	.form-control {
+		margin-top:20px;
+	}
+	.btn-dark{
+		margin-top:15px;
+		margin-bottom:15px;
+	}
+	.inactive{
+		color:#F15336;
+		font-weight:bold;
+		font-size:25px;
+	}
+	.underlineHover{
+		color:#F15336;
+		margin-left:15px;
+	}
+	.underlineHover:hover{
+		color:#F15336;
+	}
+	.wrapper{
+		background:none;
+	}
+	.navbar .btn-three {
+	    margin: .9rem;
+	    border: 1px solid #4A39FB;
+	    border-radius: .4rem;
+	    padding: .6rem;
+	    background-color: #212130;
+	    color: #4A39FB;
+	    width: 90px;
+	}
+	#username-error{
+		text-align:left;
+	}
+	#password-error{
+		text-align:left;
+	}
 </style>
 
 </head>
 
 <body>
 	<div class="wrapper">
-      
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a href="index.html"><img src="assets/img/icons/Genzest Logo.png" alt="" class="img-responsive logo"></a></a>
+
+
+				<ul class="sidebar-nav">
+				<br>
+					<li class="sidebar-item active">
+					<a class="sidebar-link" href="index.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
+            		</a></li>
+
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="https://www.flybunch.com/GenZest-2/Work/about-us.html"><i class="fa fa-rocket align-middle" style="font-size:21px"></i> <span class="align-middle"><b>About Us</b></span>
+                    </a></li>
+
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="https://www.flybunch.com/GenZest-2/Work/business.html"><i class='fa fa-archive align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Business</b></span>
+                    </a></li>
+
+					<li class="sidebar-item">
+					<a class="sidebar-link" href="https://www.flybunch.com/GenZest-2/Work/contact.html"><i class='fa fa-envelope-o align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Contact Us</b></span>
+                    </a></li>
+				
+				</ul>
+
+				<!-- DOWNLOAD APP TRANSPARENT BOX -->
+				<div class="container">
+					<div class="centered">
+						<b class="dot">.....</b><br>
+						<a href="#"><b>Download our App</b></a><br>
+						<b class="dot" >.....</b>
+						<br>
+						<a class="blurtext">
+							Become a part of GenZest by Downloading our App
+						</a>
+					</div>
+				  </div>
+				<!-- DOWNLOAD APP TRANSPARENT BOX -->
+
+				<h4><b>Genzest Admin</b></h4>
+				<p>© 2021 All Rights Reserved</p>
+			</div>
+		</nav>
 
 		<div class="main">
 			<!-- ---------------TOP BAR-------------- -->
-			
+			<nav class="navbar navbar-expand">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<img src="assets/img/icons/Shape@1X (3).png">
+               </a>
+			   <h4><b>Forget Password</b></h4>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item">
+							<a href="login.html"><button class="btn-three">Back</button></a>
+						</li>
+						<li class="nav-item dropdown">
+						
+						
+						</li>
+					</ul>
+				</div>
+				<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+				</a>
+				
+				<div class="dropdown-menu dropdown-menu-end">
+					<button class="btn-forth"><a href="genzest-d.html">Genzest Login</a></button>
+					<button class="btn-fifth"><a href="recruiter-d.html">Recruiter Login</a></button>
+					<button class="btn-sixth"><a href="student-d.html">Student Login</a></button>
+					<!-- <a class="dropdown-item" href="#">Log out</a> -->
+				</div> 
+			</nav>
 
 			<main class="content">
-			
-                <div class="row two">
-                    <div class="container-fluid">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="back" style="float: right; margin: 1rem;"><a href="/login.html">Login  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
-                        </div>
-                    </div>
-                </div>
-				
-                <div class="container log shadow">
-<form:form action="/user/resetPassword" id="signupForm">
-                    <div class="form-row" style="text-align: center">
-                    <h4 style="font-size: 22px;color: #F15336;">Forgot Password</h4>
-                    </div>
-  <div class="form-group col-md-6">
-    <label for="firstName">Email Id <span>*</span></label>
-                            <input type="text" placeholder="First Name" class="form-control" name="email"/>
-  </div>
-                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button type="submit" onclick="return Validate()">Submit</button>
-                         </div>
-</form:form>
-
-               </div>
+		    <div class="wrapper fadeInDown">
+		   				
+                 <div id="formContent">
+          <!-- Tabs Titles -->
+          <!-- <h2 class="active"> Sign In </h2> -->
+          <h2 class="inactive underlineHover">Forget Password </h2>
+    
+          <!-- Login Form -->
+          <form name='f' action="login" method='POST' id="loginForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="username">Username</label>
+								<div class="col-sm-9">
+									<input type="email" class="form-control" id="username" name="username" placeholder="Enter Username" />
+								</div>
+							</div>
+            
+              <button type="submit" class="btn btn-dark">Submit</button>
+            </form>
+                  
+        </div>
+		    </div>
 			</main>
 
+		
 		</div>
 	</div>
+
 	
+
+	<script src="assets/js/jquery.validate.js"></script>
+	<script src="assets/js/app.js"></script>
 	
-	<script type="text/javascript">
-    function Validate() {
-        var password = document.getElementById("exampleInputPassword1").value;
-        var confirmPassword = document.getElementById("exampleInputPassword2").value;
-        if(password && confirmPassword){
-        if (password != confirmPassword) {
-        	document.getElementById("confirmMessage").innerHTML = "Password not matched"; 
-            return false;
-        }
-        }
-        return true;
-    }
-</script>
-	
-		<script type="text/javascript">
+	 <script>
+        $(document).ready( function () {
+			$( "#loginForm" ).validate( {
+				rules: {
+					username: "required",
+					password: "required",
+					username: {
+						required: true,
+					},
+					password: {
+						required: true,
+						
+					},
+					
+				},
+				messages: {
+					username: "Please enter username",
+					password: "Please enter password",
+					username: {
+						required: "Please enter username",
+						
+					},
+					password: {
+						required: "Please provide a password",
+						
+					},
+					
+				},
+				errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".col-sm-9" ).addClass( "has-error" ).removeClass( "has-success" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).parents( ".col-sm-9" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+			} );
+            
+        });
+            </script>
+            
+            
+            		<script type="text/javascript">
 	$(document).ready(function(){
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="successMessage" scope="session"/>
 	});
 	
 	$(document).ready(function(){
 		<c:if test="${not empty errorMessage}">
 		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="successMessage" scope="session"/>
 	});
 	
 	</script>
 
-	<script src="assets-2/js/app.js"></script>
-	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
-        <script src="assets/js/jquery-1.11.1.js"></script>
-        <script src="assets/js/jquery.validate.js"></script>
-        <script src="assets/validatejs/signup.js"></script>
-
+	
+	
 
 </body>
 
-</html>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'}),_trfd.push({'ap':'cpsh'},{'server':'sg3plcpnl0184'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/tcc/tcc_l.combined.1.0.6.min.js'></script></html>

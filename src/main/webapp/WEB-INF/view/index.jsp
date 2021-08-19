@@ -88,13 +88,13 @@
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
 						<li class="nav-item">
-							<button class="btn-first"><a href="genzest-d.html">Genzest Login</a></button>
+							<a href="genzest-d.html"><button class="btn-first">Genzest Login</button></a>
 						</li>
 						<li class="nav-item">
-							<button class="btn-second"><a href="recruiter-d.html">Recruiters Login</a></button>
+							<a href="recruiter-d.html"><button class="btn-second">Recruiters Login</button></a>
 						</li>
 						<li class="nav-item">
-							<button class="btn-three"><a href="student-d.html">Student Login</a></button>
+							<a href="student-d.html"><button class="btn-three">Student Login</button></a>
 						</li>
 						<li class="nav-item dropdown">
 						

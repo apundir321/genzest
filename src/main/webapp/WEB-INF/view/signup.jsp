@@ -32,7 +32,7 @@
 
 <style>
 .log{
-	    background: #212130;
+	    background: #17171e;
 	    width: 100%;
 	    border-radius: 12px;
 	    padding:26px;
@@ -53,6 +53,9 @@
 	#signupForm h4{
 		margin-bottom:30px;
 		font-weight:bold;
+	}
+	.navbar .btn-three {
+		width:105px;
 	}
 </style>
 </head>
@@ -117,7 +120,7 @@
 					<ul class="navbar-nav navbar-align">
 						
 						<li class="nav-item">
-							<button class="btn-three"><a href="/login.html">Login <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
+							<a href="/login.html"><button class="btn-three">Login <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button></a>
 						</li>
 						<li class="nav-item dropdown">
 						
@@ -155,6 +158,9 @@
                             <form:input type="text" placeholder="Last Name" class="form-control" path="lastName"/>
                             <form:errors path="lastName" cssClass="error"></form:errors>
   </div>
+  
+  <div class="clear clearfix"></div>
+  
   <div class="form-group col-md-6">
     <label for="email">Email <span>*</span></label>
                            <form:input type="email" placeholder="email" class="form-control" path="email"/>
@@ -165,6 +171,9 @@
                            <form:input class="form-control" type="tel" placeholder="Mobile No" id="example-tel-input" path="phoneNo" />
                            <form:errors path="phoneNo" cssClass="error"></form:errors>
   </div>
+  
+  <div class="clear clearfix"></div>
+  
   <div class="form-group col-md-6">
     <label for="password">Password <span>*</span></label>
                             <form:input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" path="password"/>

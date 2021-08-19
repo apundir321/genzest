@@ -41,10 +41,11 @@
 	}
 	.wrapper #formContent{
 		width:50%;
-		background: #222e3c;
+		background: #17171e;
 		border-radius:12px;
 		text-align:center;
 		align-items:center;
+		margin: 30px auto;
 	}
 	.control-label{
 		margin-top:22px;
@@ -64,7 +65,7 @@
 	}
 	.underlineHover{
 		color:#F15336;
-		margin-left:10px;
+		margin-left:15px;
 	}
 	.underlineHover:hover{
 		color:#F15336;
@@ -149,7 +150,7 @@
 					<ul class="navbar-nav navbar-align">
 					
 						<li class="nav-item">
-							<button class="btn-three"><a href="index.html">Back</a></button>
+							<a href="index.html"><button class="btn-three">Back</button></a>
 						</li>
 						<li class="nav-item dropdown">
 						
@@ -200,7 +201,7 @@
           
           <div id="formFooter">
             <!-- <a class="underlineHover" href="signup.html">Forgot Password?</a>&nbsp;&nbsp;&nbsp; -->
-            <a class="underlineHover" href="/signup.html">SignUp</a>
+            <a class="underlineHover" href="/signup.html">Sign up</a>
             <a class="underlineHover" href="/forgotpassword">Forgot Password</a>
           </div>
       

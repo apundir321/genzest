@@ -69,9 +69,7 @@
 </style>
 
 <style>
-.main {
-	height: 2500px;
-}
+
 /* xs */
 @media ( max-width : 767px) {
 	.main {
@@ -232,10 +230,10 @@ input[type=file] {
 }
 
 .ba-class{
-	margin-top:18px;
+	margin-top:16px;
 }
 .ba-class-1{
-	margin-top:-18px;
+	margin-top:-16px;
 }
 .ba-class label{
 	color:white;
@@ -370,10 +368,9 @@ input[type=file] {
 						<h4>General Details (data once entered can not be altered)</h4>
 					</div>
 					<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-						<button class="back" style="float: right; margin: 1rem;">
-							<a href="profile.html">Back <i
-								class="fa fa-chevron-circle-left" aria-hidden="true"></i></a>
-						</button>
+						<a href="profile.html"><button class="back" style="float: right; margin: 1rem; color:white;">
+							Back <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+						</button></a>
 					</div>
 				</div>
 				
@@ -386,7 +383,7 @@ input[type=file] {
 				            <label for="imageUpload"></label>
 				        </div>
 				        <div class="avatar-preview">
-				            <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+				            <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);">
 				            </div>
 				        </div>
 				    </div>
@@ -410,6 +407,8 @@ input[type=file] {
 								class="form-control" type="text" value="${user.lastName}"/>
 								<form:errors path="lastName" cssClass="error"></form:errors>
   </div>
+  
+  <div class="clear clearfix"></div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="email">Email <span>*</span></label>
@@ -424,6 +423,8 @@ input[type=file] {
 								class="form-control" type="text" />
 								<form:errors path="parentsName" cssClass="error"></form:errors>
   </div>
+
+<div class="clear clearfix"></div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="mobileNo">Mobile No <span>*</span></label>
@@ -440,6 +441,8 @@ input[type=file] {
 								<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
   </div>
 
+<div class="clear clearfix"></div>
+
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="gender">Gender <span>*</span></label>
 							<form:select path="gender" class="form-control">
@@ -452,13 +455,13 @@ input[type=file] {
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="dob">Date of Birth <span>*</span></label>
-							<form:input type="date" class="form-control" path="dob" onchange="ageCalculation()"
+							<form:input type="date" class="form-control" path="dob" onfocusout="ageCalculation()"
 								placeholder="DD/MM/YYYY" name="birthday" />
 								<form:errors path="dob" cssClass="error"></form:errors>
 								
   </div>
   
-
+<div class="clear clearfix"></div>
 
 
 
@@ -493,6 +496,8 @@ input[type=file] {
 							<form:errors path="bloodGroup" cssClass="error"></form:errors>
   </div>
   
+  <div class="clear clearfix"></div>
+  
   					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
 						<h4>Education Details</h4>
 					</div>
@@ -501,6 +506,7 @@ input[type=file] {
 					    <label for="course">Course <span>*</span></label>
 												<form:select class="form-control" path="course">
 													<form:option value="">Select</form:option>
+													<form:option value="B.tech">B.tech</form:option>
 													<c:forEach var="course" items="${courses}">
 														<form:option value="${course.id}"
 															label="${course.courseTypeName}" />
@@ -517,10 +523,11 @@ input[type=file] {
 													<form:errors path="collegeName" cssClass="error"></form:errors>
 					  </div>
 					
+					<div class="clear clearfix"></div>
 					
 					  <div class="form-group col-sm-6 col-xs-12 colbox">
 					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
-												<form:input class="form-control" type="date" onchange="ageCalculationtwo()"
+												<form:input class="form-control" type="date" 
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
 													path="degreeCollegeCompletionDate" />
 					  </div>
@@ -534,7 +541,7 @@ input[type=file] {
 												</form:select>
 												<form:errors path="havePc" cssClass="error"></form:errors>
 					  </div>
-  
+  <div class="clear clearfix"></div>
   
   					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
 						<h4>Communication Details</h4>
@@ -570,6 +577,8 @@ input[type=file] {
 							<form:errors path="state" cssClass="error"></form:errors>
   </div>
 
+<div class="clear clearfix"></div>
+
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="city">City <span>*</span></label>
 							<form:select path="city"  id="cityDropDown" class="form-control">
@@ -588,6 +597,8 @@ input[type=file] {
 								<option value="sec49">Sec 49</option>
 							</select>
   </div>
+  
+  <div class="clear clearfix"></div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="landmark">Landmark </label>
@@ -603,7 +614,7 @@ input[type=file] {
 								<form:errors path="postalCode" cssClass="error"></form:errors>
   </div>
 
-
+<div class="clear clearfix"></div>
 
   
   <div class="form-group col-sm-6 col-xs-12 colbox">
@@ -643,6 +654,8 @@ input[type=file] {
 									</c:if>
   </div>
   
+  <div class="clear clearfix"></div>
+  
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
 						<h4>Upload Documents</h4>
 					</div>
@@ -661,6 +674,8 @@ input[type=file] {
 										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
 								</div>
 	  </div>
+
+<div class="clear clearfix"></div>
 
   <div class="form-group col-sm-3 col-xs-12 colbox">
     <label for="paymentMethod">Payment Method <span>*</span></label>
@@ -693,7 +708,7 @@ input[type=file] {
   
 			<div class="form-row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-					<button type="submit">Save</button>
+					<button onClick="bankandwallet()" type="submit">Save</button>
 				</div>
 			</div>
 
@@ -871,23 +886,23 @@ function myFunction() {
 	</script>
 
 
-<script>
-$(function() {
-    $("#birthday").datepicker({
-       //showOn: both - datepicker will appear clicking the input box as well as the calendar icon
-       //showOn: button - datepicker will appear only on clicking the calendar icon
-       showOn: 'both',
-       //you can use your local path also eg. buttonImage: 'images/x_office_calendar.png'
-       buttonImage: 'https://theonlytutorials.com/demo/x_office_calendar.png',
-       buttonImageOnly: true,
-       changeMonth: true,
-       changeYear: true,
-       showAnim: 'slideDown',
-       duration: 'fast',
-       dateFormat: 'dd-mm-yy'
-    });
-});
-</script>
+	<script>
+	$(function() {
+	    $("#birthday").datepicker({
+	       //showOn: both - datepicker will appear clicking the input box as well as the calendar icon
+	       //showOn: button - datepicker will appear only on clicking the calendar icon
+	       showOn: 'both',
+	       //you can use your local path also eg. buttonImage: 'images/x_office_calendar.png'
+	       buttonImage: 'https://theonlytutorials.com/demo/x_office_calendar.png',
+	       buttonImageOnly: true,
+	       changeMonth: true,
+	       changeYear: true,
+	       showAnim: 'slideDown',
+	       duration: 'fast',
+	       dateFormat: 'dd-mm-yy'
+	    });
+	});
+	</script>
 
   <script>
   function ageCalculation(){
@@ -901,11 +916,8 @@ $(function() {
 	  if(birthDate > currentDate) {
 	    window.alert("Please Select Valid Date of Birth ");
 	    document.getElementById('dob').value = "";
-	  } else if( differenceInYears>8) {
-	    window.alert("Age should be less than 8 years");
-	    document.getElementById('dob').value = "";
 	  } else {
-	    document.getElementById("age").value = differenceInYears ;
+		  return true;
 	  }
 	}
   </script>
@@ -922,11 +934,8 @@ $(function() {
 	  if(birthDate > currentDate) {
 	    window.alert("You cannot be complete your degree in the future");
 	    document.getElementById('degreeCollegeCompletionDate').value = "";
-	  } else if( differenceInYears>8) {
-	    window.alert("Age should be less than 8 years");
-	    document.getElementById('degreeCollegeCompletionDate').value = "";
 	  } else {
-	    document.getElementById("age").value = differenceInYears ;
+		  return true;
 	  }
 	}
   </script>
@@ -986,7 +995,47 @@ $(function() {
       }
   }
   </script>
-
+  
+  <script>
+  	function bankandwallet(){
+  	  var value = document.getElementById('paymentMethod').value;
+  		var BA = document.getElementById("text").value;
+  		var AC = document.getElementById("text-1").value;
+  		var IFSC = document.getElementById("text-3").value;
+  		var UPI = document.getElementById("text-4").value;
+  		 if(value === "Bank Account"){
+  			 console.log("in bank acc.");
+  			 if(BA === ""){
+  				 console.log("in bank name.");
+  				 window.alert("Please Fill Bank Name");
+  				 return false;
+  			 }else{
+  				 return true;
+  			 }
+  			 if(AC === ""){
+  				 window.alert("Please Fill Account Number");
+  				return false;
+  			 }else {
+  				 return true;
+  			 }
+  			 if(IFSC === ""){
+  				 window.alert("Please Fill IFSC Code");
+  				return false;
+  			 }else{
+  				 return true;
+  			 }
+  		 }else if(value === "Wallet"){
+  			 
+  			 if(UPI === ""){
+  				 window.alert("Please Fill UPI");
+  				 return false;
+  			 }else{
+  				 return true;
+  			 }
+  		 }
+  	}
+  </script>
+  
 
 </body>
 

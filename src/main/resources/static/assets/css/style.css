@@ -67,6 +67,7 @@
 		}
 		.navbar .btn-first a{
 			color: #F15336;
+			text-decoration:none;
 		}
 		.navbar .btn-forth{
 			margin: .9rem;
@@ -92,6 +93,7 @@
 		}
 		.navbar .btn-second a{
 			color: #F6AD2E;
+			text-decoration:none;
 		}
 		.navbar .btn-fifth{
 			margin: .9rem;
@@ -117,6 +119,7 @@
 		}
 		.navbar .btn-three a{
 			color: #4A39FB;
+			text-decoration:none;
 		}
 		.navbar .btn-sixth{
 			margin: .9rem;
@@ -299,9 +302,6 @@
 
 
 	
-		.main{
-			height: 1250px;
-		}
 		.navbar-nav{
 			float: right !important;
 		}

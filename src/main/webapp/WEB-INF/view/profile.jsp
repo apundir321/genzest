@@ -279,7 +279,7 @@ $(document).ready(function() {
 				</div>   -->
 				<button class="csv"><a href="/downloadProfileData">Download CSV</a></button>
 				<table id="example" class="display" width="100%"></table>
-				<button class="edit"><a href="edit.html">Edit  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></button>
+				<a href="edit.html"><button class="edit" style="color:white;">Edit  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
 			</main>
 
 		
