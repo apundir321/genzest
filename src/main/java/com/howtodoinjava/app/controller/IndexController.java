@@ -20,29 +20,27 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.howtodoinjava.OnRegistrationCompleteEvent;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
@@ -58,7 +56,6 @@ import com.howtodoinjava.domain.JobAccountRepo;
 import com.howtodoinjava.domain.JobTypeRepo;
 import com.howtodoinjava.domain.TimeSlotRepo;
 import com.howtodoinjava.dto.ForgotPasswordDto;
-import com.howtodoinjava.dto.PasswordDto;
 import com.howtodoinjava.dto.UserDto;
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.CategoryCount;
@@ -68,19 +65,15 @@ import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
-import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
-import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 import com.howtodoinjava.security.ISecurityUserService;
 import com.howtodoinjava.security.IUserService;
 import com.howtodoinjava.security.UserService;
 import com.howtodoinjava.service.AWSS3Service;
-import com.howtodoinjava.service.CSVService;
 import com.howtodoinjava.service.UserProfileService;
-import com.howtodoinjava.util.GenericResponse;
 
 @Controller
 public class IndexController {
@@ -619,7 +612,7 @@ public class IndexController {
 	    
 	    
 	    @RequestMapping("/user/resetPassword")
-	    public String resetPassword(final HttpServletRequest request, @RequestParam("email") final String userEmail,final ModelMap model) {
+	    public void resetPassword(final HttpServletRequest request,HttpServletResponse response, @RequestParam("email") final String userEmail,final ModelMap model,HttpSession session) throws IOException {
 	        final User user = iUserService.findUserByEmail(userEmail);
 	        try {
 	        	
@@ -628,17 +621,17 @@ public class IndexController {
 	            final String token = UUID.randomUUID().toString();
 	            iUserService.createPasswordResetTokenForUser(user, token);
 	            mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
-	            model.addAttribute("successMessage", "Forgot password link has been sent to your email id");
+	            session.setAttribute("successMessage", "Forgot password link has been sent to your email id");
 	        }
 	        else
 	        {
-	        	model.addAttribute("errorMessage", "No username has been found by this id");
+	        	 session.setAttribute("errorMessage", "No username has been found by this id");
 	        }
 	        }catch (Exception e) {
 				// TODO: handle exception
-	        	model.addAttribute("errorMessage", "Exception occured with message="+e.getMessage());
+	        	 session.setAttribute("errorMessage", "Exception occured with message="+e.getMessage());
 			}
-	        return "forgotpassword";
+	        response.sendRedirect("/login.html");
 	    }
 	    
 	    private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale, final String token, final User user) {
@@ -703,6 +696,21 @@ public class IndexController {
 				
 				return "accessdenied";
 			}
+	  
+	  @GetMapping("/login-error")
+	    public String login(HttpServletRequest request, Model model) {
+	        HttpSession session = request.getSession(false);
+	        String errorMessage = null;
+	        if (session != null) {
+	            AuthenticationException ex = (AuthenticationException) session
+	                    .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+	            if (ex != null) {
+	                errorMessage = ex.getMessage();
+	            }
+	        }
+	        model.addAttribute("errorMessage", errorMessage);
+	        return "login";
+	    }
 		    
 
 	

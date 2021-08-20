@@ -177,19 +177,19 @@
                  <div id="formContent">
           <!-- Tabs Titles -->
           <!-- <h2 class="active"> Sign In </h2> -->
-          <h2 class="inactive underlineHover">Forget Password </h2>
+          <h2 class="inactive underlineHover">Forgot Password </h2>
     
           <!-- Login Form -->
-          <form name='f' action="login" method='POST' id="loginForm">
+         <form:form action="/user/resetPassword"  method='POST' id="loginForm">
 							<div class="form-group">
 								<label class="col-sm-3 control-label" for="username">Username</label>
 								<div class="col-sm-9">
-									<input type="email" class="form-control" id="username" name="username" placeholder="Enter Username" />
+									<input type="email" class="form-control" id="username" name="email" placeholder="Enter Username" />
 								</div>
 							</div>
             
               <button type="submit" class="btn btn-dark">Submit</button>
-            </form>
+            </form:form>
                   
         </div>
 		    </div>

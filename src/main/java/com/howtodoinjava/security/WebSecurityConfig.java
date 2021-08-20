@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().cacheControl();
 
         http.cors().and().formLogin()
-        .loginPage("/login.html").loginProcessingUrl("/login").permitAll().successHandler(authenticationSuccessHandler).and().csrf().disable() // disable csrf for our requests.
+        .loginPage("/login.html").loginProcessingUrl("/login").permitAll().failureUrl("/login-error").successHandler(authenticationSuccessHandler).and().csrf().disable() // disable csrf for our requests.
         .authorizeRequests()
         .antMatchers("/genzest-d.html").hasAuthority("ROLE_ADMIN")
         .antMatchers("/recruiter-d.html").hasAuthority("ROLE_RECRUITER")

@@ -29,7 +29,8 @@
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 <style>
 
 	#formContent{
@@ -276,13 +277,15 @@
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>
 		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
 	});
 	
 	$(document).ready(function(){
 		<c:if test="${not empty errorMessage}">
 		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
-		<c:remove var="successMessage" scope="session"/>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
 	});
 	
 	</script>
