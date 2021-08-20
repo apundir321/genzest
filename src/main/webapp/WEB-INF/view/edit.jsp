@@ -399,8 +399,16 @@ input[type=file] {
 				        <div class="avatar-preview">
 <!-- 				            <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);"> -->
 <!-- 				            </div> -->
-
- 				             <div id="imagePreview" style="background-image: url(/getProfilePic/${profile.profilePicFileName});">
+<c:if test="${not empty profile.profilePicFileName}">
+									  <div id="imagePreview" style="background-image: url(/getProfilePic/${profile.profilePicFileName});">
+									  </div>
+									</c:if>
+									
+									<c:if test="${empty profile.profilePicFileName}">
+									    <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);"> -->
+ 				            </div>
+									</c:if>
+ 				           
  				            </div> 
  				            
  				           
@@ -890,6 +898,8 @@ function myFunction() {
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
 	});
 	
 	
@@ -897,12 +907,16 @@ function myFunction() {
 		<c:if test="${not empty warningMessage}">
 		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="warningMessage" scope="session"/>
+			<c:remove var="warningMessage" scope="request"/>
 	});
 	
 	$(document).ready(function(){
 		<c:if test="${not empty errorMessage}">
 		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
 	});
 	
 	</script>

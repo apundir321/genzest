@@ -91,7 +91,7 @@ courseType.push('${earning.jobAccount.rate}');
 courseType.push('${earning.totalHours} Hours');
 courseType.push('${earning.totalEarning}');
 courseType.push('${earning.totalPaid}');
-courseType.push('<a style='color:white'; href=''>Raise a query</a>');
+courseType.push('<a data-toggle="modal" data-target="#exampleModal">Raise a query</a>');
 
 dataSet.push(courseType);
 </c:forEach>
@@ -362,10 +362,7 @@ $(document).ready(function() {
 		
 		</div>
 	</div>
-	
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
+
 
 	<script>
 		$(document).ready( function () {
@@ -376,6 +373,7 @@ $(document).ready(function() {
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -404,6 +402,7 @@ $(document).ready(function() {
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Raise</button>
+        
       </div>
       </form:form>
     </div>
