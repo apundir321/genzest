@@ -363,6 +363,20 @@ input[type=file] {
 
 
 				<div class="container-fluid">
+				<form:input path="id" placeholder="First Name"
+								class="form-control" type="hidden" />
+								
+								
+								<form:input path="profilePicFileName" placeholder="First Name"
+								class="form-control" type="hidden" />
+								
+								
+								<form:input path="studentIdFileName" placeholder="First Name"
+								class="form-control" type="hidden" />
+								
+								
+								<form:input path="aadharFileName" placeholder="First Name"
+								class="form-control" type="hidden" />
 				
 					<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center">
 						<h4>General Details (data once entered can not be altered)</h4>
@@ -379,13 +393,17 @@ input[type=file] {
 					<div class="col-lg-12 text-left upload-img">
 						    <div class="avatar-upload">
 				        <div class="avatar-edit">
-				            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+				            <input type='file' name="profilepic" id="imageUpload" accept=".png, .jpg, .jpeg" />
 				            <label for="imageUpload"></label>
 				        </div>
 				        <div class="avatar-preview">
-				            <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);">
-				            </div>
-				        </div>
+<!-- 				            <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);"> -->
+<!-- 				            </div> -->
+
+ 				             <div id="imagePreview" style="background-image: url(/getProfilePic/${profile.profilePicFileName});">
+ 				            </div> 
+ 				            
+ 				           
 				    </div>
 					</div>
 				</div>
@@ -549,16 +567,16 @@ input[type=file] {
  
    <div class="form-group col-xs-12 colbox">
     <label for="address">Address <span>*</span></label>
-    <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+    <form:textarea class="form-control" id="address" name="address" path="addressLine1" rows="3"/>
   </div>
 
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="country">Country <span>*</span></label>
-							<select name="country" class="form-control">
-								<option value="">Please select</option>
-								<option value="India">India</option>
-							</select>
+							<form:select name="country" class="form-control" path="country">
+								<form:option value="">Please select</form:option>
+								<form:option value="India">India</form:option>
+							</form:select>
   </div>
 
 
@@ -592,18 +610,22 @@ input[type=file] {
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="locality">Locality <span>*</span></label>
-							<select name="locality" class="form-control">
-								<option value="">Please select</option>
-								<option value="sec49">Sec 49</option>
-							</select>
+							<%-- <form:select name="locality" class="form-control">
+								<form:option value="">Please select</form:option>
+								<form:option value="sec49">Sec 49</form:option>
+							</form:select> --%>
+							
+							<form:input class="form-control" type="text" 
+													placeholder="Locality" id="locality"
+													path="locality" />
   </div>
   
   <div class="clear clearfix"></div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="landmark">Landmark </label>
-							<input id="landmark" path="landmark" type="text"
-								placeholder="Landmark" class="form-control">
+							<form:input id="landmark" path="landmark" type="text"
+								placeholder="Landmark" class="form-control"/>
   </div>
 
 

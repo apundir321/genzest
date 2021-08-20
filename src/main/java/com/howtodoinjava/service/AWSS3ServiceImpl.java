@@ -112,7 +112,6 @@ public class AWSS3ServiceImpl implements AWSS3Service {
             while ((len = is.read(buffer, 0, buffer.length)) != -1) {
                 baos.write(buffer, 0, len);
             }
-            
             return baos;
 		} catch (IOException ioe) {
 			System.out.println("IOException: " + ioe.getMessage());

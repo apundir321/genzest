@@ -67,8 +67,7 @@ public class UserProfile {
 	private String gender;
 	
 	@NotNull(message = "Please select DOB")
-	@Past
-	@DateTimeFormat(pattern = "MM/DD/YYYY")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date dob;
 	
 	@NotNull
@@ -100,8 +99,6 @@ public class UserProfile {
 //	private Category category;
 	
 	
-	@NotNull
-	@NotEmpty(message = "Please Enter Address.")
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
@@ -111,7 +108,7 @@ public class UserProfile {
 	@NotEmpty(message = "Please Enter Locality.")
 	private String locality;
 	private String landmark;
-//	private String country;
+	private String country;
 	@NotNull
 	@NotEmpty(message = "Please Enter Postal Code")
 	private String postalCode;
@@ -120,7 +117,6 @@ public class UserProfile {
 	@NotEmpty(message = "Please Enter College Name")
 	private String collegeName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Past
 	@NotNull(message = "Please select Date")
 	private Date degreeCollegeCompletionDate;
 	@NotNull
@@ -270,12 +266,12 @@ public class UserProfile {
 	public void setLandmark(String landmark) {
 		this.landmark = landmark;
 	}
-//	public String getCountry() {
-//		return country;
-//	}
-//	public void setCountry(String country) {
-//		this.country = country;
-//	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	public String getPostalCode() {
 		return postalCode;
 	}
