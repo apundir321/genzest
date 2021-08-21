@@ -199,7 +199,11 @@
 	
 
 
-	<script src="assets/js/app.js"></script>
+	<script src="assets-2/js/app.js"></script>
+	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
+        <script src="assets/js/jquery-1.11.1.js"></script>
+        <script src="assets/js/jquery.validate.js"></script>
+        <script src="assets/validatejs/signup.js"></script>
 
 	
 	
