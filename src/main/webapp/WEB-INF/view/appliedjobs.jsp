@@ -70,6 +70,7 @@ courseType.push('<c:forEach var="timeSlot" items="${application.job.timeSlots}">
 courseType.push('${application.job.city}');
 courseType.push('${application.job.jobDate}');
 courseType.push('${application.job.employer.employerName}');
+courseType.push('<a href="withdraw/appliedJob?jobId=${application.id}">Withdraw</a>');
 dataSet.push(courseType);
 </c:forEach>
 	var dataSet12 = [

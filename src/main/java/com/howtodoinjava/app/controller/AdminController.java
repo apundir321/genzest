@@ -320,7 +320,7 @@ public class AdminController {
 		return "admin/course-genz";
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/genzest-d.html")
 	public String showAdminPage(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

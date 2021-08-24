@@ -80,6 +80,9 @@ public class IndexController {
 
 	@Autowired
 	CategoryRepo categoryRepo;
+	
+	@Autowired
+	HttpSession session;
 
 	@Autowired
 	JobTypeRepo jobTypeRepo;
@@ -146,14 +149,11 @@ public class IndexController {
 	@RequestMapping("/student-d.html")
 	public String home(Map<String, Object> model) {
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getName()+"  &&&&&&7");
-		model.put("message", "HowToDoInJava Reader !!");
-		User user = userRepo.findByEmail(authentication.getName());
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(userRepo.findByEmail(authentication.getName()));
 		model.put("appliedJobsCount", appliedJobs.size());
 		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(null);
 		model.put("matchingJobsCount", matchingJobs.size());
-		model.put("user", user);
+		model.put("user", session.getAttribute("user"));
 		return "student-d";
 	}
 	
@@ -197,7 +197,7 @@ public class IndexController {
 	@RequestMapping("/profile.html")
 	public String profile(Map<String, Object> model) {
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
+		User user = (User) session.getAttribute("user");
 		model.put("user", user);
 		model.put("profile", user.getUserProfile());
 		return "profile";
@@ -212,7 +212,7 @@ public class IndexController {
 		List<Category> categories = null;
 		try {
 			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-			User user = userRepo.findByEmail(authentication.getName());
+			User user = (User) session.getAttribute("user");
 			model.put("user", user);
 			profile = user.getUserProfile();
 			courses = courseRepo.findAll();
@@ -254,7 +254,7 @@ public class IndexController {
 			e.printStackTrace();
 		}
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
+		User user = (User) session.getAttribute("user");
 		model.put("user", user);
 		model.put("profile", profile);
 		model.put("courses", courses);
@@ -274,9 +274,7 @@ public class IndexController {
 		List<TimeSlot> timeSlots = null;
 		List<JobAccount> jobs = new ArrayList<JobAccount>();
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(authentication.getName()+"  &&&&&&7");
-		model.put("message", "HowToDoInJava Reader !!");
-		User user = userRepo.findByEmail(authentication.getName());
+		User user = (User) session.getAttribute("user");
 		model.put("user", user);
 		List<Integer> appliedJobIds = new ArrayList<>();
 		try {
@@ -359,7 +357,7 @@ public class IndexController {
 		List<JobAccount> jobs = new ArrayList<>();
 		List<Integer> appliedJobIds = new ArrayList<>();
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
+		User user = (User) session.getAttribute("user");
 		model.put("user", user);
 		try {
 			courses = courseRepo.findAll();
@@ -448,7 +446,7 @@ public class IndexController {
 			}
 			
 			
-			User user = userRepo.findByEmail(authentication.getName());
+			User user = (User) session.getAttribute("user");
 			model.put("user", user);
 			userProfile.setLastUpdated(new Date());
 			user.setUserProfile(userProfile);
@@ -521,7 +519,7 @@ public class IndexController {
 				JobAccountApplication jobAccountApplication = new JobAccountApplication();
 				jobAccountApplication.setJob(jobAccount.get());
 				jobAccountApplication.setApplicationDate(new Date());
-				User user = userRepo.findByEmail(auth.getName());
+				User user = (User) session.getAttribute("user");
 				model.put("user", user);
 				jobAccountApplication.setApplicant(user);
 				jobAccountApplicationRepo.save(jobAccountApplication);
@@ -546,10 +544,10 @@ public class IndexController {
 		model.put("message", "HowToDoInJava Reader !!");
 		
 		
-		User user = userRepo.findByEmail(auth.getName());
+		User user = (User) session.getAttribute("user");
+		model.put("user", user);
 		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant(user);
 		model.put("applications", applications);
-		model.put("user", user);
 		return "appliedjobs";
 	}
 	
@@ -566,7 +564,7 @@ public class IndexController {
 	public ResponseEntity<byte[]> downloadFile(@PathVariable String name) {
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName()+"  &&&&&&7");
-		User user = userRepo.findByEmail(authentication.getName());
+		User user = (User) session.getAttribute("user");
 		ByteArrayOutputStream downloadInputStream = awsService.downloadFile(name,user.getUserProfile());
 	
 		return ResponseEntity.ok()
@@ -711,6 +709,17 @@ public class IndexController {
 	        model.addAttribute("errorMessage", errorMessage);
 	        return "login";
 	    }
+	  
+	  @GetMapping("/withdraw/appliedJob")
+	  public void withdrawAppliedJob(HttpServletRequest request,HttpServletResponse res, ModelMap model,@RequestParam String jobId) throws IOException {
+			try {
+			jobAccountApplicationRepo.deleteById(Long.parseLong(jobId));
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+			res.sendRedirect("/appliedjobs.html");
+	    }
+	  
 		    
 
 	
