@@ -142,7 +142,7 @@ $(document).ready(function() {
                     <br>
     
                         <li class="sidebar-item top">
-                        <a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                        <a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
                             <p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p>
                         </a>
                     </li>
@@ -276,7 +276,7 @@ $(document).ready(function() {
 						<a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
 					</div>
 				</div>   -->
-				<button class="csv"><a href="/downloadProfileData">Download CSV</a></button>
+			
 				<table id="example" class="display" width="100%"></table>
 				<a href="edit.html"><button class="edit" style="color:white;">Edit  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
 			</main>

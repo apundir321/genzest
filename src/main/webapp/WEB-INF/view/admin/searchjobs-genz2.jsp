@@ -164,7 +164,7 @@
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="index.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+					<a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
             		</a>
 				</li>

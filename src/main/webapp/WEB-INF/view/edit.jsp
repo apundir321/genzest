@@ -361,7 +361,6 @@ input[type=file] {
 	<form:form action="/updateProfile.html" method="post"
 					modelAttribute="profile" enctype="multipart/form-data" id="studentprofileform">
 
-
 				<div class="container-fluid">
 				<form:input path="id" placeholder="First Name"
 								class="form-control" type="hidden" />
@@ -452,22 +451,6 @@ input[type=file] {
 
 <div class="clear clearfix"></div>
 
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="mobileNo">Mobile No <span>*</span></label>
-							<form:input class="form-control" path="mobileNo"
-								placeholder="Mobile no" id="example-tel-input"  value="${user.phoneNo}"/>
-								
-								<form:errors path="mobileNo" cssClass="error"></form:errors>
-  </div>
-
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="alternateMobileNo">Alternate Mobile No <span>*</span></label>
-							<form:input class="form-control" path="alternateMobileNo"
-								placeholder="Mobile no" id="example-tel-input" />
-								<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
-  </div>
-
-<div class="clear clearfix"></div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="gender">Gender <span>*</span></label>
@@ -492,19 +475,6 @@ input[type=file] {
 
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="vehicleType">Vehicle Type <span>*</span></label>
-							<form:select class="form-control" path="vehicleType">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Dont Own a Vehicle"></form:option>
-								<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
-								<form:option value="Four Wheeler"></form:option>
-								<form:option value="Two Wheeler">Two Wheeler</form:option>
-								<!-- <option>Freelance</option> -->
-							</form:select>
-							<form:errors path="vehicleType" cssClass="error"></form:errors>
-  </div>
-
-  <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="bloodGroup">Blood Group <span>*</span></label>
 							<form:select path="bloodGroup" class="form-control">
 								<form:option value="">Please Select</form:option>
@@ -523,11 +493,33 @@ input[type=file] {
   </div>
   
   <div class="clear clearfix"></div>
+  			<div class="form-row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+					<button type="submit">Save</button>
+				</div>
+			</div>
+  
   
   					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
-						<h4>Education Details</h4>
+						<h4>Other Details</h4>
 					</div>
 					
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="mobileNo">Mobile No <span>*</span></label>
+							<form:input class="form-control" path="mobileNo"
+								placeholder="Mobile no" id="example-tel-input"  value="${user.phoneNo}"/>
+								
+								<form:errors path="mobileNo" cssClass="error"></form:errors>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="alternateMobileNo">Alternate Mobile No <span>*</span></label>
+							<form:input class="form-control" path="alternateMobileNo"
+								placeholder="Mobile no" id="example-tel-input" />
+								<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
+  </div>
+
+<div class="clear clearfix"></div>
 					  <div class="form-group col-sm-6 col-xs-12 colbox">
 					    <label for="course">Course <span>*</span></label>
 												<form:select class="form-control" path="course">
@@ -568,11 +560,21 @@ input[type=file] {
 												<form:errors path="havePc" cssClass="error"></form:errors>
 					  </div>
   <div class="clear clearfix"></div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="vehicleType">Vehicle Type <span>*</span></label>
+							<form:select class="form-control" path="vehicleType">
+								<form:option class="first-op" value="">Select</form:option>
+								<form:option value="Dont Own a Vehicle"></form:option>
+								<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
+								<form:option value="Four Wheeler"></form:option>
+								<form:option value="Two Wheeler">Two Wheeler</form:option>
+								<!-- <option>Freelance</option> -->
+							</form:select>
+							<form:errors path="vehicleType" cssClass="error"></form:errors>
+  </div>
+  <div class="clear clearfix"></div>
+
   
-  					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
-						<h4>Communication Details</h4>
-					</div>
- 
    <div class="form-group col-xs-12 colbox">
     <label for="address">Address <span>*</span></label>
     <form:textarea class="form-control" id="address" name="address" path="addressLine1" rows="3"/>
@@ -685,6 +687,11 @@ input[type=file] {
   </div>
   
   <div class="clear clearfix"></div>
+    			<div class="form-row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+					<button type="submit">Save</button>
+				</div>
+			</div>
   
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
 						<h4>Upload Documents</h4>
