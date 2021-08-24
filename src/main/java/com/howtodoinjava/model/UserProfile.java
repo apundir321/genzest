@@ -37,48 +37,48 @@ public class UserProfile {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@NotNull
+//	@NotNull
 	@NotEmpty(message = "Please enter first name")
 	private String firstName;
 	
-	@NotNull
+//	@NotNull
 	@NotEmpty(message = "Please enter last name")
 	private String lastName;
 	
-	@NotNull
+//	@NotNull
 	@NotEmpty(message = "Please enter email")
 	@Email
 	private String email;
 	
-	@NotNull
-	@NotEmpty(message = "Please Enter Parents Name")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter Parents Name")
 	private String parentsName;
 	
-	@NotNull
-	@NotEmpty(message = "Mobile no. can't be empty")
+//	@NotNull
+//	@NotEmpty(message = "Mobile no. can't be empty")
 	private String mobileNo;
 	
-	@NotNull
-	@NotEmpty(message = "Please Enter Alternate Mobile No.")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter Alternate Mobile No.")
 	private String alternateMobileNo;
 	
-	@NotNull
-	@NotEmpty(message = "Please select Gender")
+//	@NotNull
+//	@NotEmpty(message = "Please select Gender")
 	private String gender;
 	
-	@NotNull(message = "Please select DOB")
+//	@NotNull(message = "Please select DOB")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	public Date dob;
 	
-	@NotNull
-	@NotEmpty(message = "Please Select Course")
+//	@NotNull
+//	@NotEmpty(message = "Please Select Course")
 	public String course;
 	
-	@NotNull
-	@NotEmpty(message = "Please Select Vehicle Type")
+//	@NotNull
+//	@NotEmpty(message = "Please Select Vehicle Type")
 	public String vehicleType;
-	@NotNull
-	@NotEmpty(message = "Please Select Blood Group")
+//	@NotNull
+//	@NotEmpty(message = "Please Select Blood Group")
 	private String bloodGroup;
 //	@NotEmpty(message = "Please Upload Adhar card photo")
 	private String aadharFileName;
@@ -104,33 +104,33 @@ public class UserProfile {
 	private String addressLine3;
 	private String streetNo;
 	
-	@NotNull
-	@NotEmpty(message = "Please Enter Locality.")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter Locality.")
 	private String locality;
 	private String landmark;
 	private String country;
-	@NotNull
-	@NotEmpty(message = "Please Enter Postal Code")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter Postal Code")
 	private String postalCode;
 	
-	@NotNull
-	@NotEmpty(message = "Please Enter College Name")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter College Name")
 	private String collegeName;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull(message = "Please select Date")
+//	@NotNull(message = "Please select Date")
 	private Date degreeCollegeCompletionDate;
-	@NotNull
-	@NotEmpty(message = "Please Enter State.")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter State.")
 	private String state;
-	@NotNull
-	@NotEmpty(message = "Please Enter City.")
+//	@NotNull
+//	@NotEmpty(message = "Please Enter City.")
 	private String city;
 	
-	@NotNull(message = "Please select value")
+//	@NotNull(message = "Please select value")
 	private boolean havePc;
 	
-	@NotNull
-	@NotEmpty(message = "Please select preference.")
+//	@NotNull
+//	@NotEmpty(message = "Please select preference.")
 	private String preference;
 	private String paymentMethod;
 	private String day;

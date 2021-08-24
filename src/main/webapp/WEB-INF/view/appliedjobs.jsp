@@ -70,7 +70,7 @@ courseType.push('<c:forEach var="timeSlot" items="${application.job.timeSlots}">
 courseType.push('${application.job.city}');
 courseType.push('${application.job.jobDate}');
 courseType.push('${application.job.employer.employerName}');
-courseType.push('<a href="withdraw/appliedJob?jobId=${application.id}">Withdraw</a>');
+courseType.push('<a href="withdraw/appliedJob?jobId=${application.job.id}">Withdraw</a>');
 dataSet.push(courseType);
 </c:forEach>
 	var dataSet12 = [
@@ -297,6 +297,8 @@ $(document).ready(function() {
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
 	});
 	
 	
@@ -304,6 +306,8 @@ $(document).ready(function() {
 		<c:if test="${not empty errorMessage}">
 		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
 		</c:if>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
 	});
 	</script>
 	<script>

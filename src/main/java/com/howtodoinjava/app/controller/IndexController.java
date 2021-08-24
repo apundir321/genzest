@@ -212,7 +212,7 @@ public class IndexController {
 		List<Category> categories = null;
 		try {
 			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-			User user = (User) session.getAttribute("user");
+			User user = (User) userRepo.findByEmail(authentication.getName());
 			model.put("user", user);
 			profile = user.getUserProfile();
 			courses = courseRepo.findAll();
@@ -446,7 +446,7 @@ public class IndexController {
 			}
 			
 			
-			User user = (User) session.getAttribute("user");
+			User user = userRepo.findByEmail(authentication.getName());
 			model.put("user", user);
 			userProfile.setLastUpdated(new Date());
 			user.setUserProfile(userProfile);
@@ -713,10 +713,16 @@ public class IndexController {
 	  @GetMapping("/withdraw/appliedJob")
 	  public void withdrawAppliedJob(HttpServletRequest request,HttpServletResponse res, ModelMap model,@RequestParam String jobId) throws IOException {
 			try {
-			jobAccountApplicationRepo.deleteById(Long.parseLong(jobId));
+			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+			User user = (User) userRepo.findByEmail(authentication.getName());
+			Optional<JobAccount> jobAccount = jobAccountRepo.findById(Integer.parseInt(jobId));
+//			model.put("user", user);
+			jobAccountApplicationRepo.deleteAppliedJob(user, jobAccount.get());
 			}catch (Exception e) {
-				// TODO: handle exception
+				session.setAttribute("errorMessage", "Exception in withdrawing appliedjobs with error message="+e.getMessage());
+				res.sendRedirect("/appliedjobs.html");
 			}
+			session.setAttribute("successMessage", "Successfully Withdrawed");
 			res.sendRedirect("/appliedjobs.html");
 	    }
 	  

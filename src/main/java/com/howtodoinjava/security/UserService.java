@@ -101,12 +101,13 @@ public class UserService implements IUserService {
 		user.setEmail(accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
 		if (!isRecuiter) {
-//			profile = new UserProfile();
-//			profile.setEmail(accountDto.getEmail());
-//			profile.setFirstName(accountDto.getFirstName());
-//			profile.setLastName(accountDto.getLastName());
-//			profile.setMobileNo(accountDto.getPhoneNo());
-//			profile.setStatus("IN-ACTIVE");
+			profile = new UserProfile();
+			profile.setEmail(accountDto.getEmail());
+			profile.setFirstName(accountDto.getFirstName());
+			profile.setLastName(accountDto.getLastName());
+			profile.setMobileNo(accountDto.getPhoneNo());
+			profile.setAlternateMobileNo(accountDto.getPhoneNo());
+			profile.setStatus("IN-ACTIVE");
 			role = roleRepository.findByName("ROLE_EMPLOYEE");
 			if (role == null) {
 				role = new Role();
