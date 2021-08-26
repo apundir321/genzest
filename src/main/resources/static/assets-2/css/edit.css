@@ -69,12 +69,6 @@ main .form-row input[type="file"]{
     padding: .5rem;
     border-radius: .3rem;
 }
-form #category{
-    padding: 1rem;
-}
-form #category option{
-    padding: .5rem;
-}
 .address h4{
 	color: #F15336;
     font-size: 1.9rem;

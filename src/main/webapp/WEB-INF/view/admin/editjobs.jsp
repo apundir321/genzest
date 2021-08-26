@@ -348,9 +348,9 @@
 				
                 <div class="container-fluid">
                     <form:form action="/editjobs-genz.html" method="post" modelAttribute="jobAccount">
-                       <div class="form-row">
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Employer <span>*</span></h4>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Employer <span>*</span></label>
                             <form:select class="form-control" path="employer">
                             <form:option value="">Select</form:option>
                             <c:forEach var="employer" items="${employers}">  
@@ -358,15 +358,15 @@
                             </c:forEach>
                             </form:select>
                             <form:errors path="employer" cssClass="error"></form:errors>
-                          </div>
-                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Job Name <span>*</span></h4>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Job Title <span>*</span></label>
                             <form:input id="jobName" name="jobName" path="jobName" placeholder="Job Name" class="form-control"/>
                             <form:errors path="jobName" cssClass="error"></form:errors>
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4>Job Categories <span>*</span></h4>
-                    
+  </div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Job Categories <span>*</span></label>
                             <form:select class="form-control" path="category">
                             <form:option value="">Select</form:option>
                             <c:forEach var="category" items="${categories}">  
@@ -374,25 +374,15 @@
                             </c:forEach>
                             </form:select>
                             <form:errors path="category" cssClass="error"></form:errors>
-                        </div>
-                   
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>No of Vacancy <span>*</span></h4>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                                         <span class="glyphicon glyphicon-minus"></span>
-                                    </button>
-                                </span>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">No of Vacancy <span>*</span></label>
                                 <form:input type="text" path="noOfVacancy" id="quantity" name="quantity" class="form-control input-number" min="1" max="100"/>
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                            </div>
                             <form:errors path="noOfVacancy" cssClass="error"></form:errors>
-                        </div>
+  </div>
+
+
 
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
                             <h4>Vacancy for Male <span>*</span></h4>

@@ -44,6 +44,7 @@
 
 
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
@@ -56,9 +57,6 @@
 }
 </style>
 <style>
-    .main{
-        height: 2200px;
-    }
        /* xs */
         @media (max-width: 767px) {
             .main{
@@ -348,77 +346,79 @@
                 </div>
 				
                 <div class="container-fluid">
-                   <form:form action="/emp-edit-genz.html" method="post" modelAttribute="employer">
-                       <div class="form-row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4>Employer Name <span>*</span></h4>
+                   <form:form action="/emp-edit-genz.html" method="post" modelAttribute="employer" id="employereditform">
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Employer Name <span>*</span></label>
                             <form:input type="text" path="employerName" placeholder="Employer Name" class="form-control" />
                             <form:errors path="employerName" cssClass="error"></form:errors>
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4>Contact Person <span>*</span></h4>
+
+  </div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Contact Person <span>*</span></label>
                             <form:input type="text" path="contactPerson" placeholder="Contact Person" class="form-control"/>
                             <form:errors path="contactPerson" cssClass="error"></form:errors>
-                          </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4>Email <span>*</span></h4>
-                            <form:input class="form-control" path="email"  placeholder="Enter Email" id="example-email-input"/>
+
+  </div>
+
+  <div class="clear clearfix"></div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Email <span>*</span></label>
+                            <form:input class="form-control" path="email"  placeholder="Enter Email" type="email"/>
                             <form:errors path="email" cssClass="error"></form:errors>
-                         </div>
-                         <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Parent's Name <span>*</span></h4>
-                            <input name="firstname" placeholder="First Name" class="form-control" type="text">
-                          </div> -->
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Mobile No <span>*</span></h4>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Mobile No <span>*</span></label>
                             <form:input class="form-control" path="mobile"  placeholder="Mobile No" id="example-tel-input"/>
-                         </div>
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>GSTN No <span>*</span></h4>
+  </div>
+  <div class="clear clearfix"></div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">GSTN No <span>*</span></label>
                             <form:input class="form-control" path="gstNo" placeholder="GSTN No" id="example-tel-input"/>
-                         </div>
-                   
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4> Nature Of Business <span>*</span></h4>
-                            <form:input id="business" name="business" type="text" path="natureOfbuisness" placeholder="Nature Of Business" class="form-control"/>
-                         </div>
-                        
- 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								State <span>*</span>
-							</h4>
-							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Nature Of Business <span>*</span></label>
+                            <form:input id="business" type="text" path="natureOfbuisness" placeholder="Nature Of Business" class="form-control"/>
+  </div>
+  <div class="clear clearfix"></div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">State <span>*</span></label>
+							<form:select path="state" class="form-control" onchange="myFunction()">
 								<form:option class="first-op" value="">Select</form:option>
 									<c:forEach var="state" items="${states}">
 									<form:option value="${state[1]}"
 										label="${state[1]}" />
 								</c:forEach>
 							</form:select>
+  </div>
 
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								City <span>*</span>
-							</h4>
-							<form:select path="city"  id="cityDropDown" class="form-control">
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">City <span>*</span></label>
+							<form:select path="city" class="form-control">
 								<option value="">Select</option>
 							</form:select>
-						</div>
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4> Postal Code <span>*</span></h4>
+  </div>
+  <div class="clear clearfix"></div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Postal Code <span>*</span></label>
                              <form:input id="postal-code" name="postal-code" path="postalCode" placeholder="zip or postal code" class="form-control"/>
-                         </div>
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4> Client Code <span>*</span></h4>
+  </div>
+
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Client Code <span>*</span></label>
                             <form:input id="clientcode" name="clientcode" type="text" path="clientCode" placeholder="Client Code" class="form-control"/>
                             <form:errors path="clientCode" cssClass="error"></form:errors>
-                         </div>
-                          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4>Company Address <span>*</span></h4>
+  </div>
+  <div class="clear clearfix"></div>
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="firstName">Company Address <span>*</span></label>
                            <form:textarea class="form-control" width="100%" path="companyAddress" style="padding: 1rem; width: 100%;" placeholder="Company Address"/>
                          	 <form:errors path="companyAddress" cssClass="error"></form:errors>
-                         </div>
-                       
+  </div>
+  <div class="clear clearfix"></div>
+                   
+                        
                         
                        
 
@@ -512,6 +512,10 @@
 		</div>
 	</div>
 	
+        <script src="assets/js/jquery-1.11.1.js"></script>
+        <script src="assets/js/jquery-ui.min.js"></script>
+        <script src="assets/js/jquery.validate.js"></script>
+        <script src="assets-2/Validate_Admin/add_employer.js"></script>
 		       <script>
 function myFunction() {
   var x = document.getElementById("editState").value;
