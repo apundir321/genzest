@@ -350,7 +350,7 @@
                     <form:form action="/editjobs-genz.html" method="post" modelAttribute="jobAccount">
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="firstName">Employer <span>*</span></label>
+    <label for="employer">Employer <span>*</span></label>
                             <form:select class="form-control" path="employer">
                             <form:option value="">Select</form:option>
                             <c:forEach var="employer" items="${employers}">  
@@ -361,12 +361,13 @@
   </div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="firstName">Job Title <span>*</span></label>
+    <label for="jobName">Job Title <span>*</span></label>
                             <form:input id="jobName" name="jobName" path="jobName" placeholder="Job Name" class="form-control"/>
                             <form:errors path="jobName" cssClass="error"></form:errors>
   </div>
+    <div class="clear clearfix"></div>
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="firstName">Job Categories <span>*</span></label>
+    <label for="category">Job Categories <span>*</span></label>
                             <form:select class="form-control" path="category">
                             <form:option value="">Select</form:option>
                             <c:forEach var="category" items="${categories}">  
@@ -375,89 +376,68 @@
                             </form:select>
                             <form:errors path="category" cssClass="error"></form:errors>
   </div>
-
+  
+  
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="firstName">No of Vacancy <span>*</span></label>
+    <label for="quantity">No of Vacancy <span>*</span></label>
                                 <form:input type="text" path="noOfVacancy" id="quantity" name="quantity" class="form-control input-number" min="1" max="100"/>
                             <form:errors path="noOfVacancy" cssClass="error"></form:errors>
   </div>
+  
+    <div class="clear clearfix"></div>
+  
+    <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="preference">Gender Preference <span>*</span></label>
+                            <select onchange='checkItem(this.value)' class="form-control" name="preference" id="preference">
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                            </select>
+                            <form:errors path="employer" cssClass="error"></form:errors>
+  </div>
+  
+  
+  
+   <div class="form-group col-md-6 col-xs-12 colbox" style="display:none;" id="male-label">
+          <label for="malevac" style="color: white; margin-top: 15px; font-size: 1.5rem;" >Vacancy For Male <span>*</span></label>
+          <input type="text" class="form-control" id="male" name="malevac" style="display: none;" placeholder="Vacancy For Male">
+      </div>
+      <div class="form-group col-md-6 col-xs-12 colbox" style="display:none;" id="female-label">
+          <label for="femalevac" style="color: white; margin-top: 15px; font-size: 1.5rem;">Vacancy For Female <span>*</span></label>
+          <input type="text" class="form-control" id="female" name="femalevac" style="display: none;" placeholder="Vacancy For Female">
+      </div>
+      
+      
 
 
 
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Vacancy for Male <span>*</span></h4>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus-male btn btn-danger btn-number"  data-type="minus" data-field="">
-                                        <span class="glyphicon glyphicon-minus"></span>
-                                    </button>
-                                </span>
-                                <form:input type="text" path="vacancyForMale" id="quantity_male" name="quantity" class="form-control input-number" min="1" max="100"/>
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus-male btn btn-success btn-number" data-type="plus" data-field="">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
+       
 
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Vacancy for Female <span>*</span></h4>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus-female btn btn-danger btn-number"  data-type="minus" data-field="">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                    </button>
-                                </span>
-                                <form:input type="text" path="vacancyForFemale" id="quantity_female" name="quantity" class="form-control input-number" min="1" max="100"/>
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus-female btn btn-success btn-number" data-type="plus" data-field="">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
+  <div class="clear clearfix"></div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Vacancy for Any Other <span>*</span></h4>
-                            <div class="input-group">
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-left-minus-other btn btn-danger btn-number"  data-type="minus" data-field="">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                    </button>
-                                </span>
-                                <form:input type="text" path="vacancyForOther" id="quantity_other" name="quantity" class="form-control input-number" min="1" max="100"/>
-                                <span class="input-group-btn">
-                                    <button type="button" class="quantity-right-plus-other btn btn-success btn-number" data-type="plus" data-field="">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Effective From <span>*</span></h4>
+                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <label for="Effectivefrom">Effective From <span>*</span></label>
                             <form:input path="effectiveFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
                          <form:errors path="effectiveFrom" cssClass="error"></form:errors>
                          </div>
 
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Effective Till <span>*</span></h4>
-                            <form:input path="effectiveTill" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
-                         <form:errors path="effectiveTill" cssClass="error"></form:errors>
+                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <label for="Effectivefrom">Effective Till <span>*</span></label>
+                            <form:input path="effectiveFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                         <form:errors path="effectiveFrom" cssClass="error"></form:errors>
                          </div>
 
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4>Rate (per hr) <span>*</span></h4>
+                         <div class=" form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <label for="rate">Rate (per hr) <span>*</span></label>
                             <form:input class="form-control" type="rate" placeholder="Rate" id="rate" name="rate" path="rate"/>
                             <form:errors path="rate" cssClass="error"></form:errors>
                          </div>
 
                      
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
+                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+							<label>
 								State <span>*</span>
-							</h4>
+							</label>
 							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
 								<form:option class="first-op" value="">Select</form:option>
 									<c:forEach var="state" items="${states}">
@@ -467,28 +447,33 @@
 							</form:select>
 
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
+						
+						  <div class="clear clearfix"></div>
+						
+						<div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+							<label>
 								City <span>*</span>
-							</h4>
+							</label>
 							<form:select path="city"  id="cityDropDown" class="form-control">
 								<option value="">Select</option>
 							</form:select>
 						</div>
                          
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4> Locality <span>*</span></h4>
+                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <label for="locality"> Locality <span>*</span></label>
                             <form:input id="locality" name="locality" type="text" placeholder="Locality" class="form-control" path="locality"/>
                          </div>
                          
-                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4> Postal Code <span>*</span></h4>
-                             <form:input id="postal-code" name="postal-code" path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
+                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                            <label for="postal-code"> Postal Code <span>*</span></label>
+                             <form:input id="postal-code" name="postalcode" path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
                          </div>
+                         
+                           <div class="clear clearfix"></div>
                       
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <h4> Description <span>*</span></h4>
-                           <form:textarea width="100%" type="textarea" style="padding: 1rem; width: 100%;" placeholder="Description" path="description" />
+                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+                            <label> Description <span>*</span></label>
+                           <form:textarea width="100%" name="Description" type="textarea" style="padding: 1rem; width: 100%;" placeholder="Description" path="description" />
                          </div>
 
 <!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
@@ -497,8 +482,8 @@
 <!--                          </div> -->
                        </div>
 
-                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button type="submit">Save</button>
+                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+                            <button onClick="malefemalevalid()" type="submit">Save</button>
                          </div>
                      </form:form>
                </div>
@@ -712,6 +697,62 @@ function myFunction() {
 
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
+	
+ <script>
+  var itm = document.getElementById('preference');
+  function checkItem(val)
+  {
+      if(val === "yes"){
+        document.getElementById('male').style.display='block';
+        document.getElementById('female').style.display='block';
+        
+        document.getElementById('male-label').style.display='block';
+        document.getElementById('female-label').style.display='block';
+        
+      }
+      else{
+        document.getElementById('female').value=""; 
+        document.getElementById('male').style.display='none';
+        document.getElementById('female').style.display='none';
+        
+        document.getElementById('male-label').style.display='none';
+        document.getElementById('female-label').style.display='none';
+      }
+      
+      if(val === "no"){
+    	  document.getElementById('male').style.display='none';
+          document.getElementById('female').style.display='none';
+          
+          document.getElementById('male-label').style.display='none';
+          document.getElementById('female-label').style.display='none';
+      }
+     
+  }
+  </script>
+  
+  
+  <script>
+  	function malefemalevalid(){
+  	    var value = document.getElementById('preference').value;
+  		var ml = document.getElementById("male").value;
+  		var fml = document.getElementById("female").value;
+  		 if(value === "yes"){
+  			 if(ml === ""){
+  				 window.alert("Please Fill Vacancies for Male");
+  				 return false;
+  			 }else{
+  				 return true;
+  			 }
+  			 if(fml === ""){
+  				 window.alert("Please Fill Vacancies for Female");
+  				return false;
+  			 }else {
+  				 return true;
+  			 }
+  			
+  		 }
+  	}
+  </script>
 
 
 </body>

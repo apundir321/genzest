@@ -45,11 +45,19 @@
 					mobile: "required",
 					gstNo: "required",
 					natureOfbuisness: "required",
+					Effectivefrom: "required",
 					state: "required",
 					city: "required",
 					postalCode: "required",
 					clientCode: "required",
+					employer: "required",
 					companyAddress: "required",
+					malevac: "required",
+					femalevac: "required",
+					state: "required",
+					locality: "required",
+					postalcode: "required",
+					Description: "required",
 					employerName: {
 						required: true,
 						minlength: 2,
@@ -70,6 +78,16 @@
 						maxlength: 10,
 						digits: true,
 						firstzero: true
+					},
+					malevac: {
+						required: true,
+						digits: true,
+						alphabets: false
+					},
+					femalevac: {
+						required: true,
+						digits: true,
+						alphabets: false
 					},
 					gstNo: {
 						required: true,
@@ -93,6 +111,9 @@
 						alphabet: true
 					},
 					companyAddress: {
+						required: true
+					},
+					Effectivefrom: {
 						required: true
 					}
 				},
