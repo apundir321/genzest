@@ -309,11 +309,11 @@ $(document).ready(function() {
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="#"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
+					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="#"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
+					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
                     </a></li>
 
                     <li class="sidebar-item">
@@ -458,7 +458,7 @@ $(document).ready(function() {
                        <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
                    </div>
                </div>   -->
-               <button class="csv"><a href="editjobs-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
+              <a style="color:#fff; " href="editjobs-genz.html"> <button class="csv">Add  <i class="fa fa-plus" aria-hidden="true"></i></button></a>
                <div class="table_genz">
                <table id="example" class="display" width="100%"></table>
                </div> 

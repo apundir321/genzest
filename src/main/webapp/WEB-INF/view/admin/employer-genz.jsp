@@ -168,7 +168,7 @@
   }
     .dataTables_wrapper table td {
     padding: 2rem;
-    text-align: center;
+    text-align: left;
 }
     main .row1, .row2{
         text-align: center;
@@ -201,25 +201,20 @@ employer.push('<a href="editEmployer.html?employerId=${employer.id}"><i class="f
 dataSet1.push(employer);
 </c:forEach>
 	var cate = [
-    [ "2", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "12", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "10", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "8", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "6", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "4", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "3", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "5", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "7", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "9", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-	[ "11", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-    // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
-    // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
-    // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "1", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified", "26/05/1998", "----" ],
-    // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
-    // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
-    // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
-    // [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
+    [ "2", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "12", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "10", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "8", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "6", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "4", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "3", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "5", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "7", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "9", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+	[ "11", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+   
+    [ "1", "Dk", "Henny", "Den", "abc@gmail.com", "9098765432", "Gurgaon", "Verified",  "----" ],
+   
 ];
 
 
@@ -252,14 +247,13 @@ $(document).ready(function() {
     $('#example1').DataTable( {
         data: dataSet1,
         columns: [
-            { title: "Code" },
+            { title: "Client Code" },
             { title: "Company Name" },
             { title: "Contact Person" },
             { title: "Email" },
             { title: "Phone" },
             { title: "City" },
 			
-            { title: "Created Date" },
             { title: "Edit" }
             // {
             //     data: null,

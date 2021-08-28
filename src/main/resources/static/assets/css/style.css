@@ -30,7 +30,7 @@
 			font-weight: 600;
 			font-family: 'Lato', sans-serif;
 			color: #F15336;
-			font-size: 3rem;
+			font-size: 2.6rem;
 		}
 		.card-body img{
 			background-color: #2769EE;
@@ -67,7 +67,6 @@
 		}
 		.navbar .btn-first a{
 			color: #F15336;
-			text-decoration:none;
 		}
 		.navbar .btn-forth{
 			margin: .9rem;
@@ -435,9 +434,9 @@
 				display: none !important;
 			 }	
 			.card {
-				width: 179px;
-				height: 192px;
-				margin: 15px auto;
+				width: 172px;
+				height: 186px;
+				margin: 14px auto;
 				/* margin-bottom: 28px; */
 			}
 			

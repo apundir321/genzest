@@ -9,7 +9,6 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Genzest">
 	<meta name="author" content="Genzest">
 	
 
@@ -185,6 +184,12 @@
         .sidebar .sidebar-nav .sidebar-item a {
     height: 55px;
 }
+
+table, td {
+    border: 1px solid black;
+    width: 30%;
+    padding:1.1rem;
+}
 </style>
 
 </head>
@@ -321,9 +326,7 @@
 				</a>
 				
 				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth">Genzest Login</button>
-					<button class="btn-fifth">Recruiter Login</button>
-					<button class="btn-sixth">Student Login</button>
+					<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
 				</div> 
 			</nav>
 
@@ -341,13 +344,13 @@
                             <h4>General profile (data once entered can not be altered)</h4>
                         </div> -->
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="back" style="float: right; margin: 1rem;"><a href="jobs-genz.html">Back  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
+                        <a style="color:#fff;" href="jobs-genz.html"> <button class="back" style="float: right; margin: 1rem;">Back  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button></a>
                         </div>
                     </div>
                 </div>
 				
                 <div class="container-fluid">
-                    <form:form action="/editjobs-genz.html" method="post" modelAttribute="jobAccount">
+                    <form:form action="/editjobs-genz.html" method="post" modelAttribute="jobAccount" id="employereditform">
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="employer">Employer <span>*</span></label>
@@ -362,10 +365,12 @@
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="jobName">Job Title <span>*</span></label>
-                            <form:input id="jobName" name="jobName" path="jobName" placeholder="Job Name" class="form-control"/>
+                            <form:input id="jobName" path="jobName" placeholder="Job Title" class="form-control"/>
                             <form:errors path="jobName" cssClass="error"></form:errors>
   </div>
+  
     <div class="clear clearfix"></div>
+    
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="category">Job Categories <span>*</span></label>
                             <form:select class="form-control" path="category">
@@ -378,13 +383,22 @@
   </div>
   
   
-  <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="quantity">No of Vacancy <span>*</span></label>
-                                <form:input type="text" path="noOfVacancy" id="quantity" name="quantity" class="form-control input-number" min="1" max="100"/>
-                            <form:errors path="noOfVacancy" cssClass="error"></form:errors>
+   <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="jobType">Job Type <span>*</span></label>
+                               <form:select class="form-control" path="jobName">
+                                 <form:option value="">Select</form:option>
+                               </form:select>
+                            <form:errors path="jobName" cssClass="error"></form:errors>
   </div>
   
     <div class="clear clearfix"></div>
+  
+  <div class="form-group col-sm-6 col-xs-12 colbox">
+    <label for="noOfVacancy">No of Vacancy <span>*</span></label>
+                                <form:input type="text" path="noOfVacancy" class="form-control input-number" min="1" max="100"/>
+                            <form:errors path="noOfVacancy" cssClass="error"></form:errors>
+  </div>
+  
   
     <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="preference">Gender Preference <span>*</span></label>
@@ -396,7 +410,7 @@
                             <form:errors path="employer" cssClass="error"></form:errors>
   </div>
   
-  
+    <div class="clear clearfix"></div>
   
    <div class="form-group col-md-6 col-xs-12 colbox" style="display:none;" id="male-label">
           <label for="malevac" style="color: white; margin-top: 15px; font-size: 1.5rem;" >Vacancy For Male <span>*</span></label>
@@ -408,44 +422,81 @@
       </div>
       
       
-
-
-
        
 
   <div class="clear clearfix"></div>
 
-                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="Effectivefrom">Effective From <span>*</span></label>
-                            <form:input path="effectiveFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                            <form:input path="effectiveFrom" class="form-control disablePastdate" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" />
                          <form:errors path="effectiveFrom" cssClass="error"></form:errors>
                          </div>
-
-                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                     
+                                        
+                     
+                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="Effectivefrom">Effective Till <span>*</span></label>
-                            <form:input path="effectiveFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                            <form:input path="effectiveFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivetill"/>
                          <form:errors path="effectiveFrom" cssClass="error"></form:errors>
                          </div>
+                         
+                      <script>
+                     $(function(){
+                    	    var dtToday = new Date();
+                    	    
+                    	    var month = dtToday.getMonth() + 1;
+                    	    var day = dtToday.getDate();
+                    	    var year = dtToday.getFullYear();
+                    	    if(month < 10)
+                    	        month = '0' + month.toString();
+                    	    if(day < 10)
+                    	        day = '0' + day.toString();
+                    	    
+                    	    var minDate= year + '-' + month + '-' + day;
+                    	    
+                    	    $('#Effectivefrom').attr('min', minDate);
+                    	});
+					</script>
+					
+					  <script>
+                     $(function(){
+                    	    var dtToday = new Date();
+                    	    
+                    	    var month = dtToday.getMonth() + 1;
+                    	    var day = dtToday.getDate();
+                    	    var year = dtToday.getFullYear();
+                    	    if(month < 10)
+                    	        month = '0' + month.toString();
+                    	    if(day < 10)
+                    	        day = '0' + day.toString();
+                    	    
+                    	    var minDate= year + '-' + month + '-' + day;
+                    	    
+                    	    $('#Effectivetill').attr('min', minDate);
+                    	});
+					</script>
 
-                         <div class=" form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+
+  <div class="clear clearfix"></div>
+
+                         <div class=" form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="rate">Rate (per hr) <span>*</span></label>
-                            <form:input class="form-control" type="rate" placeholder="Rate" id="rate" name="rate" path="rate"/>
+                            <form:input class="form-control" placeholder="Rate"  path="rate"/>
                             <form:errors path="rate" cssClass="error"></form:errors>
                          </div>
 
                      
-                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
 							<label>
 								State <span>*</span>
 							</label>
-							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
+							<form:select path="state" class="form-control" onchange="myFunction()">
 								<form:option class="first-op" value="">Select</form:option>
 									<c:forEach var="state" items="${states}">
 									<form:option value="${state[1]}"
 										label="${state[1]}" />
 								</c:forEach>
 							</form:select>
-
 						</div>
 						
 						  <div class="clear clearfix"></div>
@@ -454,36 +505,39 @@
 							<label>
 								City <span>*</span>
 							</label>
-							<form:select path="city"  id="cityDropDown" class="form-control">
+							<form:select path="city" class="form-control">
 								<option value="">Select</option>
 							</form:select>
 						</div>
                          
-                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="locality"> Locality <span>*</span></label>
-                            <form:input id="locality" name="locality" type="text" placeholder="Locality" class="form-control" path="locality"/>
-                         </div>
-                         
-                         <div class="form-group col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <label for="postal-code"> Postal Code <span>*</span></label>
-                             <form:input id="postal-code" name="postalcode" path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
+                            <form:input  type="text" placeholder="Locality" class="form-control" path="locality"/>
                          </div>
                          
                            <div class="clear clearfix"></div>
-                      
+                         
                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <label> Description <span>*</span></label>
-                           <form:textarea width="100%" name="Description" type="textarea" style="padding: 1rem; width: 100%;" placeholder="Description" path="description" />
+                            <label for="postal-code"> Postal Code <span>*</span></label>
+                             <form:input  path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
                          </div>
+                   
+ 
+ 
+						 <div class="form-group col-sm-6 col-xs-12 colbox">
+						    <label for="jobName">Description <span>*</span></label>
+						          <form:textarea class="form-control" placeholder="Description" path="description" />
+						  </div>
+  
+                     
 
 <!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
 <!--                             <h4> Job Code </h4> -->
 <%--                            <form:input path="jobCode" width="100%" type="text" style="padding: 1rem; width: 100%;"/> --%>
 <!--                          </div> -->
-                       </div>
 
                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button onClick="malefemalevalid()" type="submit">Save</button>
+                            <button onClick="malefemalevalid(); checkequality();" type="submit">Save</button>
                          </div>
                      </form:form>
                </div>
@@ -495,177 +549,15 @@
 
 		</div>
 	</div>
-
-    <script>
-        $(document).ready(function(){
-
-        var quantitiy=0;
-        $('.quantity-right-plus').click(function(e){
-                
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity').val());
-                
-                // If is not undefined
-                    
-                    $('#quantity').val(quantity + 1);
-
-                
-                    // Increment
-                
-            });
-
-            $('.quantity-left-minus').click(function(e){
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity').val());
-                
-                // If is not undefined
-            
-                    // Increment
-                    if(quantity>0){
-                    $('#quantity').val(quantity - 1);
-                    }
-            });
-            
-        });
-    </script>
-    
-    
-      <script>
-        $(document).ready(function(){
-
-        var quantitiy=0;
-        $('.quantity-right-plus-female').click(function(e){
-                
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity_female').val());
-                
-                // If is not undefined
-                    
-                    $('#quantity_female').val(quantity + 1);
-
-                
-                    // Increment
-                
-            });
-
-            $('.quantity-left-minus-female').click(function(e){
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity_female').val());
-                
-                // If is not undefined
-            
-                    // Increment
-                    if(quantity>0){
-                    $('#quantity_female').val(quantity - 1);
-                    }
-            });
-            
-        });
-    </script>
-    
-    
-      <script>
-        $(document).ready(function(){
-
-        var quantitiy=0;
-        $('.quantity-right-plus-male').click(function(e){
-                
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity_male').val());
-                
-                // If is not undefined
-                    
-                    $('#quantity_male').val(quantity + 1);
-
-                
-                    // Increment
-                
-            });
-
-            $('.quantity-left-minus-male').click(function(e){
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity_male').val());
-                
-                // If is not undefined
-            
-                    // Increment
-                    if(quantity>0){
-                    $('#quantity_male').val(quantity - 1);
-                    }
-            });
-            
-        });
-    </script>
-    
-      <script>
-        $(document).ready(function(){
-
-        var quantitiy=0;
-        $('.quantity-right-plus-other').click(function(e){
-                
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity_other').val());
-                
-                // If is not undefined
-                    
-                    $('#quantity_other').val(quantity + 1);
-
-                
-                    // Increment
-                
-            });
-
-            $('.quantity-left-minus-other').click(function(e){
-                // Stop acting like a button
-                e.preventDefault();
-                // Get the field name
-                var quantity = parseInt($('#quantity_other').val());
-                
-                // If is not undefined
-            
-                    // Increment
-                    if(quantity>0){
-                    $('#quantity_other').val(quantity - 1);
-                    }
-            });
-            
-        });
-    </script>
-	<script>
-		$(document).ready( function () {
-			$('#table_id').DataTable();
-		} );
-	</script>
-    <script>
-        $("#profileImage").click(function(e) {
-        $("#imageUpload").click();
-    });
-    
-    function fasterPreview( uploader ) {
-        if ( uploader.files && uploader.files[0] ){
-              $('#profileImage').attr('src', 
-                 window.URL.createObjectURL(uploader.files[0]) );
-        }
-    }
-    
-    $("#imageUpload").change(function(){
-        fasterPreview( this );
-    });
-    </script>
+	
+	    <script src="assets/js/jquery-1.11.1.js"></script>
+        <script src="assets/js/jquery-ui.min.js"></script>
+        <script src="assets/js/jquery.validate.js"></script>
+        <script src="assets-2/Validate_Admin/add_employer.js"></script>
+        <script src="assets-2/Validate_Admin/edit_jobs.js"></script>
+										
+			
+  
     
     <script type="text/javascript">
 	$(document).ready(function(){
@@ -676,24 +568,24 @@
 	
 	</script>
 	
-	       <script>
-function myFunction() {
-  var x = document.getElementById("editState").value;
-  $.ajax({
-		type: 'GET',
-		url: '${pageContext.request.contextPath }/loadCitiesByState/' + x,
-		success: function(result) {
-			var s = '';
-			for(var i = 0; i < result.length; i++) {
-				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
-				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
-			}
-			console.log(s);
-			$('#cityDropDown').html(s);
+       <script>
+		function myFunction() {
+		  var x = document.getElementById("editState").value;
+		  $.ajax({
+				type: 'GET',
+				url: '${pageContext.request.contextPath }/loadCitiesByState/' + x,
+				success: function(result) {
+					var s = '';
+					for(var i = 0; i < result.length; i++) {
+						//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+						s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+					}
+					console.log(s);
+					$('#cityDropDown').html(s);
+				}
+			});
 		}
-	});
-}
-</script>
+		</script>
 
 	<script src="assets-2/js/app.js"></script>
 	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
@@ -753,6 +645,28 @@ function myFunction() {
   		 }
   	}
   </script>
+
+	<script>
+		
+		function checkequality(){
+			var val = document.getElementById("preference").value;
+			var nov = document.getElementById("noOfVacancy").value;
+			var ml = parseInt(document.getElementById("male").value);
+			var fml = parseInt(document.getElementById("female").value);
+			var result;
+			if(val === "yes" && ml != ""){
+				result = ml + fml;
+				if(result == nov){
+					return true;
+				}else{
+					alert("Total vacancy should be equal to both male and female vacancy.");
+				}
+			}else{
+				return true;
+			}
+		}
+	
+	</script>
 
 
 </body>

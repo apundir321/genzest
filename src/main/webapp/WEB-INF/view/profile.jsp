@@ -267,7 +267,7 @@ $(document).ready(function() {
 							</tr>
 						</tbody>
 					</table>
-					<div class="dataTables_info" id="example_info" role="status" aria-live="polite">Showing 1 to 1 of 1 entries</div>
+					
 					<div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
 						<a class="paginate_button previous disabled" aria-controls="example" data-dt-idx="0" tabindex="-1" id="example_previous">Previous</a>
 						<span>
@@ -276,7 +276,9 @@ $(document).ready(function() {
 						<a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
 					</div>
 				</div>   -->
-			
+
+			<!-- 	<button class="csv"><a href="/downloadProfileData">Download CSV</a></button> -->
+
 				<table id="example" class="display" width="100%"></table>
 				<a href="edit.html"><button class="edit" style="color:white;">Edit  <i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
 			</main>

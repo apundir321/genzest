@@ -58,6 +58,8 @@
 					locality: "required",
 					postalcode: "required",
 					Description: "required",
+					jobName: "required",
+					jobType: "required",
 					employerName: {
 						required: true,
 						minlength: 2,

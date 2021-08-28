@@ -182,9 +182,9 @@
           <!-- Login Form -->
          <form:form action="/user/resetPassword"  method='POST' id="loginForm">
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="username">Username</label>
+								<label class="col-sm-3 control-label" for="username">E-mail Id</label>
 								<div class="col-sm-9">
-									<input type="email" class="form-control" id="username" name="email" placeholder="Enter Username" />
+									<input type="email" class="form-control" id="username" name="email" placeholder="E mail Id" />
 								</div>
 							</div>
             

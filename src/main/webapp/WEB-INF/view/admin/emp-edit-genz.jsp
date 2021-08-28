@@ -347,12 +347,14 @@
 				
                 <div class="container-fluid">
                    <form:form action="/emp-edit-genz.html" method="post" modelAttribute="employer" id="employereditform">
+                   
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="firstName">Employer Name <span>*</span></label>
                             <form:input type="text" path="employerName" placeholder="Employer Name" class="form-control" />
                             <form:errors path="employerName" cssClass="error"></form:errors>
 
   </div>
+  
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="firstName">Contact Person <span>*</span></label>
                             <form:input type="text" path="contactPerson" placeholder="Contact Person" class="form-control"/>

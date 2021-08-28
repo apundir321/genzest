@@ -175,22 +175,7 @@
 					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
             		</a></li>
 
-                <li class="sidebar-item">
-                  <div class="dropdown">
-                    <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                    <div id="myDropdown" class="dropdown-content">
-                      <a href="access-right-genz.html">Access Right</a>
-                              <a href="team-genz.html">Team</a>
-                              <a href="category-genz.html">Category</a>
-                              <a href="jobtype-genz.html">Job Types</a>
-                              <a href="timeslot-genz.html">Time Slot</a>
-                              <a href="bloodgrp-genz.html">Blood Group</a>
-                              <a href="course-genz.html">Courses</a>
-                              <a href="vehicle-genz.html">Vehicle Type</a>
-                              <a href="citystate-genz.html">City Country State</a>
-                    </div>
-                  </div>
-              </li>
+              
 
 					<li class="sidebar-item">
 					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
@@ -219,6 +204,24 @@
             <li class="sidebar-item">
             <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
             </a></li>
+            
+            
+              <li class="sidebar-item">
+                  <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="access-right-genz.html">Access Right</a>
+                              <a href="team-genz.html">Team</a>
+                              <a href="category-genz.html">Category</a>
+                              <a href="jobtype-genz.html">Job Types</a>
+                              <a href="timeslot-genz.html">Time Slot</a>
+                              <a href="bloodgrp-genz.html">Blood Group</a>
+                              <a href="course-genz.html">Courses</a>
+                              <a href="vehicle-genz.html">Vehicle Type</a>
+                              <a href="citystate-genz.html">City Country State</a>
+                    </div>
+                  </div>
+              </li>
 
           
 				

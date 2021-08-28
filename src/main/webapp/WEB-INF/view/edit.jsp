@@ -252,6 +252,7 @@ input[type=file] {
 .upload-img{
 	margin-top:-12px;
 }
+
 </style>
 
 </head>
@@ -348,9 +349,7 @@ input[type=file] {
 					href="#" data-bs-toggle="dropdown"> </a>
 
 				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth">Genzest Login</button>
-					<button class="btn-fifth">Recruiter Login</button>
-					<button class="btn-sixth">Student Login</button>
+					<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
 				</div>
 			</nav>
 
@@ -387,7 +386,7 @@ input[type=file] {
 					</div>
 				</div>
 				
-				<div class="container">
+				<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12 text-left upload-img">
 						    <div class="avatar-upload">
@@ -397,7 +396,7 @@ input[type=file] {
 				        </div>
 				        <div class="avatar-preview">
 <!-- 				            <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);"> -->
-<!-- 				            </div> -->
+
 <c:if test="${not empty profile.profilePicFileName}">
 									  <div id="imagePreview" style="background-image: url(/getProfilePic/${profile.profilePicFileName});">
 									  </div>
@@ -408,8 +407,8 @@ input[type=file] {
  				            </div>
 									</c:if>
  				           
+
  				            </div> 
- 				            
  				           
 				    </div>
 					</div>
@@ -438,7 +437,7 @@ input[type=file] {
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="email">Email <span>*</span></label>
 							<form:input class="form-control" path="email"
-								placeholder="Drop Your Mail Id" id="example-email-input" value="${user.email}" />
+								placeholder="Drop Your Mail Id" id="example-email-input" type="email" value="${user.email}" />
 								<form:errors path="email" cssClass="error"></form:errors>
   </div>
 
@@ -549,6 +548,24 @@ input[type=file] {
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
 													path="degreeCollegeCompletionDate" />
 					  </div>
+					  
+					  	  <script>
+                     $(function(){
+                    	    var dtToday = new Date();
+                    	    
+                    	    var month = dtToday.getMonth() + 1;
+                    	    var day = dtToday.getDate();
+                    	    var year = dtToday.getFullYear();
+                    	    if(month < 10)
+                    	        month = '0' + month.toString();
+                    	    if(day < 10)
+                    	        day = '0' + day.toString();
+                    	    
+                    	    var minDate= year + '-' + month + '-' + day;
+                    	    
+                    	    $('#degreeCollegeCompletionDate').attr('min', minDate);
+                    	});
+					</script>
 					
 					  <div class="form-group col-sm-6 col-xs-12 colbox">
 					    <label for="havePc">Do You Have Own PC <span>*</span></label>
@@ -757,7 +774,7 @@ input[type=file] {
 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<h4>Your Availability (You may provide convenient day and
-								timeslots when you are free for doing a job)</h4>
+								timeslots when you are free for doing a job)<br>(Student can change it anytime)</h4>
 						</div>
 
 					</div>
@@ -813,6 +830,7 @@ input[type=file] {
 									<tr>
 										<th scope="col">Days</th>
 										<th scope="col">Time-Slots</th>
+										<th scope="col">Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -820,7 +838,9 @@ input[type=file] {
 									<tr>
 										<th scope="row">${dayPreference.day}</th>
 										<td>${dayPreference.timeSlot.timeSlotName}</td>
+										<td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
 									</tr>
+								
 									</c:forEach>
 								</tbody>
 								<!-- <tr>
