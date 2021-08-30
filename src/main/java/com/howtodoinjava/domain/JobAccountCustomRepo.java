@@ -9,6 +9,7 @@ import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.model.JobEarning;
+import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.UserProfile;
 
 public interface JobAccountCustomRepo {
@@ -23,4 +24,6 @@ public interface JobAccountCustomRepo {
 	public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate);
 	
 	public List<JobEarning> findJobEarningByProfileCriteria(SearchJobEarning searchJobEarning);
+	
+	public List<OtherUserDetails> findProfileBySearchJob(SearchCandidate searchCandidate);
 }

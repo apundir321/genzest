@@ -7,5 +7,7 @@ import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.JobAccount;
 @Repository
 public interface JobAccountRepo extends JpaRepository<JobAccount, Integer>{
-
+	
+	public JobAccount findByJobCode(String jobCode);
+	
 }

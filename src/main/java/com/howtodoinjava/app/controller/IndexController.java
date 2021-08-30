@@ -54,6 +54,7 @@ import com.howtodoinjava.domain.EmployerRepo;
 import com.howtodoinjava.domain.JobAccountCustomRepo;
 import com.howtodoinjava.domain.JobAccountRepo;
 import com.howtodoinjava.domain.JobTypeRepo;
+import com.howtodoinjava.domain.OtherDetailsRepo;
 import com.howtodoinjava.domain.TimeSlotRepo;
 import com.howtodoinjava.dto.ForgotPasswordDto;
 import com.howtodoinjava.dto.UserDto;
@@ -67,6 +68,8 @@ import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.OtherUserDetails;
+import com.howtodoinjava.model.StudentDocuments;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 import com.howtodoinjava.security.ISecurityUserService;
@@ -130,6 +133,9 @@ public class IndexController {
 	
 	@Autowired
 	AWSS3Service awsService;
+	
+	@Autowired
+	OtherDetailsRepo otherUserDetailsRepo;
 	
 
     @Autowired
@@ -197,9 +203,17 @@ public class IndexController {
 	@RequestMapping("/profile.html")
 	public String profile(Map<String, Object> model) {
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) session.getAttribute("user");
+		User user = (User) userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		model.put("profile", user.getUserProfile());
+		OtherUserDetails userDetails = user.getUserProfile().getOtherDetails();
+		if(userDetails==null)
+		{
+			model.put("otherDetails",new OtherUserDetails());
+		}else
+		{
+			model.put("otherDetails", userDetails);
+		}
 		return "profile";
 	}
 
@@ -231,6 +245,23 @@ public class IndexController {
 		model.put("categories", categories);
 		model.put("dayPreference",new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findAll());
+		OtherUserDetails userDetails = profile.getOtherDetails();
+		if(userDetails==null)
+		{
+			model.put("otherDetails",new OtherUserDetails());
+		}else
+		{
+			model.put("otherDetails", userDetails);
+		}
+		if(profile.getParentsName()==null)
+		{
+			model.put("editable", true);
+		}else
+		{
+			model.put("editable", false);
+		}
+		StudentDocuments studentDocuments = profile.getStudentDocuments()==null?new StudentDocuments():profile.getStudentDocuments();
+		model.put("studentDocs", studentDocuments);
 		return "edit";
 	}
 	
@@ -402,9 +433,8 @@ public class IndexController {
 
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateProfile.html")
-	public String searchJobs(@Valid @ModelAttribute("profile") UserProfile userProfile, BindingResult result,
-			@RequestParam("aadhar") MultipartFile multipartFile,
-			@RequestParam("studentId") MultipartFile studentIdMultipart,
+	public String updateProfile(@Valid @ModelAttribute("profile") UserProfile userProfile, BindingResult result,
+			
 			@RequestParam("profilepic") MultipartFile profilePicMultipart,Map<String, Object> model,
 			@RequestParam(required = false) String userProfileId) throws Exception {
 		
@@ -427,35 +457,113 @@ public class IndexController {
 			}
 		
 			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+			User user = userRepo.findByEmail(authentication.getName());
+			UserProfile profileData =user.getUserProfile();
 			
-			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
-				awsService.uploadFile(multipartFile, userProfile);
-				userProfile.setAadharFileName(multipartFile.getOriginalFilename());
+			profileData.setFirstName(userProfile.getFirstName());
+			profileData.setLastName(userProfile.getLastName());
+			profileData.setEmail(userProfile.getEmail());
+			profileData.setParentsName(userProfile.getParentsName());
+			profileData.setGender(userProfile.getGender());
+			profileData.setDob(userProfile.getDob());
+			profileData.setBloodGroup(userProfile.getBloodGroup());
+			if(profileData.getParentsName()==null)
+			{
+				model.put("editable", true);
+			}else
+			{
+				model.put("editable", false);
 			}
-			
-			
-
-			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
-				awsService.uploadFile(studentIdMultipart, userProfile);
-				userProfile.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
-			}
-			
 			if (!StringUtils.isEmpty(profilePicMultipart.getOriginalFilename())) {
-				awsService.uploadFile(profilePicMultipart, userProfile);
+				awsService.uploadFile(profilePicMultipart, user.getUserProfile());
 				userProfile.setProfilePicFileName(profilePicMultipart.getOriginalFilename());
 			}
 			
-			
-			User user = userRepo.findByEmail(authentication.getName());
-			model.put("user", user);
-			userProfile.setLastUpdated(new Date());
-			user.setUserProfile(userProfile);
+			model.put("user", user);;
+			user.setUserProfile(profileData);
 			userRepo.save(user);
 			model.put("successMessage", "Profile Updated!");
 			model.put("profile", userProfile);
+			model.put("otherDetails", user.getUserProfile().getOtherDetails()==null?new OtherUserDetails():user.getUserProfile().getOtherDetails());
+			model.put("studentDocs", user.getUserProfile().getStudentDocuments()==null?new StudentDocuments():user.getUserProfile().getStudentDocuments());
 		}
 		return "edit";
 	}
+	
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/updateOtherDetails.html")
+	public String updateOtherDetails(@Valid @ModelAttribute("otherDetails") OtherUserDetails otherDetails, BindingResult result,
+			Map<String, Object> model) throws Exception {
+		
+		UserProfile profile;
+		model.put("dayPreference", new DayPreference());
+		model.put("states", categoryRepo.getStatesByCountryId("100"));
+		model.put("categories", categoryRepo.findAll());
+		model.put("dayPreference",new DayPreference());
+		model.put("timeSlots", timeSlotRepo.findAll());
+		model.put("courses", courseRepo.findAll());			
+			if (result.hasErrors()) {
+				return "edit";
+			}
+			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+			User user = userRepo.findByEmail(authentication.getName());
+			model.put("user", user);
+			otherDetails.setUserProfile(user.getUserProfile());
+//			userProfile.setLastUpdated(new Date());
+//			
+			
+//			otherUserDetailsRepo.save(otherDetails);
+			user.getUserProfile().setOtherDetails(otherDetails);
+			userRepo.save(user);
+			model.put("successMessage", "Profile Updated!");
+			model.put("profile", user.getUserProfile());
+			model.put("otherDetails", otherDetails);
+			model.put("studentDocs", user.getUserProfile().getStudentDocuments()==null?new StudentDocuments():user.getUserProfile().getStudentDocuments());
+		return "edit";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/updatedocs.html")
+	public String updateDocs(@Valid @ModelAttribute("studentDocs") StudentDocuments studentDocuments,
+			@RequestParam("aadhar") MultipartFile multipartFile,
+			@RequestParam("studentId") MultipartFile studentIdMultipart,BindingResult result,
+			Map<String, Object> model) throws Exception {
+		
+		UserProfile profile;
+		model.put("dayPreference", new DayPreference());
+		model.put("states", categoryRepo.getStatesByCountryId("100"));
+		model.put("categories", categoryRepo.findAll());
+		model.put("dayPreference",new DayPreference());
+		model.put("timeSlots", timeSlotRepo.findAll());
+		model.put("courses", courseRepo.findAll());			
+			if (result.hasErrors()) {
+				return "edit";
+			}
+		
+			Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+			User user = userRepo.findByEmail(authentication.getName());
+			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
+				awsService.uploadFile(multipartFile, user.getUserProfile());
+				studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
+			}
+			
+			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
+				awsService.uploadFile(studentIdMultipart, user.getUserProfile());
+				studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
+			}
+			
+			model.put("user", user);
+//			userProfile.setLastUpdated(new Date());
+			user.getUserProfile().setStudentDocuments(studentDocuments);
+			userRepo.save(user);
+			model.put("successMessage", "Profile Updated!");
+			model.put("profile", user.getUserProfile());
+			model.put("otherDetails", user.getUserProfile().getOtherDetails());
+			model.put("studentDocs", user.getUserProfile().getStudentDocuments());
+		return "edit";
+	}
+	
+	
+	
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/updatePreferences.html")
 	public void searchJobs(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("dayPreference") DayPreference dayPreference,Map<String, Object> model) throws Exception {
@@ -463,7 +571,7 @@ public class IndexController {
 		DayPreference preference = null;
 		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 		UserProfile profile = userRepo.findByEmail(authentication.getName()).getUserProfile();
-		Set<DayPreference> preferences = profile.getPreferences();
+		Set<DayPreference> preferences = profile.getOtherDetails().getPreferences();
 		
 		for(DayPreference pref : preferences)
 		{
@@ -476,11 +584,11 @@ public class IndexController {
 		
 		if(preference==null)
 		{
-			profile.getPreferences().add(dayPreference);
+			profile.getOtherDetails().getPreferences().add(dayPreference);
 			userProfileRepo.save(profile);
 		}else
 		{
-			profile.setPreferences(preferences);
+			profile.getOtherDetails().setPreferences(preferences);
 			userProfileRepo.save(profile);
 		}
 		
@@ -725,13 +833,5 @@ public class IndexController {
 			session.setAttribute("successMessage", "Successfully Withdrawed");
 			res.sendRedirect("/appliedjobs.html");
 	    }
-	  
-		    
-
-	
-	 
-	
-	
-	
 
 }

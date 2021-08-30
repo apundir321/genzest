@@ -386,7 +386,7 @@
   <div class="clear clearfix"></div>
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="firstName">State <span>*</span></label>
-							<form:select path="state" class="form-control" onchange="myFunction()">
+							<form:select id="editState" path="state" class="form-control" onchange="myFunction()">
 								<form:option class="first-op" value="">Select</form:option>
 									<c:forEach var="state" items="${states}">
 									<form:option value="${state[1]}"
@@ -397,7 +397,7 @@
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="firstName">City <span>*</span></label>
-							<form:select path="city" class="form-control">
+							<form:select name="cityLoc" id="cityLoc" path="city" class="form-control">
 								<option value="">Select</option>
 							</form:select>
   </div>
@@ -423,12 +423,6 @@
                         
                         
                        
-
-                         <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-                            <h4> Job Code </h4>
-                           <input class="form-control" width="100%" type="text" style="padding: .5rem; width: 100%;">
-                         </div> -->
-                       </div>
 
                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
                             <button type="submit">Save</button>
@@ -531,7 +525,7 @@ function myFunction() {
 				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
 			}
 			console.log(s);
-			$('#cityDropDown').html(s);
+			$('#cityLoc').html(s);
 		}
 	});
 }

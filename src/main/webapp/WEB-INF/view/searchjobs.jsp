@@ -115,7 +115,7 @@ jobArray.push('${job.jobDate}');
 jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}">')
 dataSet.push(jobArray);
 </c:forEach>
- 
+
 $(document).ready(function() {
     $('#example').DataTable( {
         data: dataSet,

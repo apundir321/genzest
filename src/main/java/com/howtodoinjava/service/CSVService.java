@@ -153,12 +153,12 @@ public class CSVService {
 	    			 String.valueOf(userProfile.getId()),
 	    			 userProfile.getFirstName(),
 	    			 userProfile.getEmail(),
-	    			 userProfile.getMobileNo(),
+	    			 userProfile.getOtherDetails().getMobileNo(),
 	    			 dateFormat.format(userProfile.getDob()),
-	    			 userProfile.getCourse(),
-	    			 userProfile.getCity(),
-	    			 userProfile.getState(),
-	    			 userProfile.getStatus()
+	    			 userProfile.getOtherDetails().getCourse(),
+	    			 userProfile.getOtherDetails().getCity(),
+	    			 userProfile.getOtherDetails().getState(),
+	    			 userProfile.getOtherDetails().getStatus()
 	    			 );
 	    	
 	    

@@ -47,7 +47,17 @@ public class JobAccount {
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "jobtype_id")
+	private JobType jobType;
 	
+	
+	public JobType getJobType() {
+		return jobType;
+	}
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
+	}
 	@Min(value=1, message="must be atleaset one vacancy")  
 	private int noOfVacancy;
 	
@@ -232,15 +242,17 @@ public class JobAccount {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String toString() {
 		return "JobAccount [id=" + id + ", employer=" + employer + ", jobName=" + jobName + ", category=" + category
-				+ ", noOfVacancy=" + noOfVacancy + ", vacancyForFemale=" + vacancyForFemale + ", vacancyForMale="
-				+ vacancyForMale + ", vacancyForOther=" + vacancyForOther + ", effectiveFrom=" + effectiveFrom
-				+ ", effectiveTill=" + effectiveTill + ", rate=" + rate + ", locality=" + locality + ", description="
-				+ description + ", jobCode=" + jobCode + ", state=" + state + ", city=" + city + ", postalCode="
-				+ postalCode + ", status=" + status + ", createdDate=" + createdDate + ", createdBy=" + createdBy
-				+ ", action=" + action + "]";
+				+ ", jobType=" + jobType + ", noOfVacancy=" + noOfVacancy + ", vacancyForFemale=" + vacancyForFemale
+				+ ", vacancyForMale=" + vacancyForMale + ", vacancyForOther=" + vacancyForOther + ", effectiveFrom="
+				+ effectiveFrom + ", effectiveTill=" + effectiveTill + ", jobDate=" + jobDate + ", rate=" + rate
+				+ ", locality=" + locality + ", description=" + description + ", jobCode=" + jobCode + ", state="
+				+ state + ", city=" + city + ", postalCode=" + postalCode + ", day=" + day + ", timeSlot=" + timeSlot
+				+ ", status=" + status + ", createdDate=" + createdDate + ", createdBy=" + createdBy + ", timeSlots="
+				+ timeSlots + ", action=" + action + "]";
 	}
 	public String getDay() {
 		return day;

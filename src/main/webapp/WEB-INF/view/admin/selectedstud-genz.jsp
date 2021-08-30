@@ -1,4 +1,7 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -180,8 +183,23 @@
 }
 </style>
 <script>
-	var dataSet = [
-    //    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
+
+var dataSet = new Array();
+<c:forEach items="${applications}" var="application" varStatus="status">
+jobArray = new Array();
+jobArray.push('${application.userProfile.id}');
+jobArray.push('${application.userProfile.firstName}');
+jobArray.push('${application.userProfile.dob}');
+jobArray.push('${application.userProfile.email}');
+jobArray.push('${application.userProfile.otherDetails.mobileNo}');
+jobArray.push('${application.userProfile.gender}');
+jobArray.push('${application.userProfile.otherDetails.city}');
+jobArray.push('${application.userProfile.otherDetails.havePc}');
+jobArray.push('<a href="edit_stud.html?profileId=${application.userProfile.id}">View</a>');
+dataSet.push(jobArray);
+</c:forEach>
+	var dataSet2 = [
+       [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
 	//    [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
 	//    [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
 	//    [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
@@ -241,18 +259,17 @@ $(document).ready(function() {
     $('#example').DataTable( {
         data: dataSet,
         columns: [
-			{ title: "Id" },
-            { title: "Job Code" },
-            { title: "Employer" },
-            { title: "Category" },
-            { title: "Job Name" },
-            { title: "Rate" },
-            { title: "Required Slot" },
-			{ title: "Candidate" },
-			{ title: "Email" },
-			{ title: "Phone" },
-            { title: "DOB" },
-            { title: "Action" }
+        	{ title: "S No." },
+			{ title: "Name" },
+            { title: "Dob" },
+            { title: "Email" },
+            { title: "Phone" },
+            { title: "Gender" },
+            { title: "City" },
+			{ title: "Computer" },
+			{
+				 title: "view"
+			}
    
         ],
 		
@@ -276,7 +293,7 @@ $(document).ready(function() {
     // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "1", "30SMKL12221", "Henny", "HR", "Job2", "180.00", "4pm - 6pm", "A B", "abc@gmail.com", "9098765432", "26/05/1998", "----" ]
+	// [ "1", "30SMKL12221", "Henny", "HR", "Job2", "180.00", "4pm - 6pm", "A B", "abc@gmail.com", "9098765432", "26/05/1998", "----" ]
     // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
     // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
     // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],

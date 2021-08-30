@@ -1,9 +1,6 @@
 package com.howtodoinjava.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +8,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Root;import javax.persistence.criteria.Selection;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -30,6 +31,7 @@ import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobEarning;
+import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.UserProfile;
 
 
@@ -154,46 +156,122 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 	  }
 	
 	
-//	@Override
-	public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate) {
-		// TODO Auto-generated method stub
-		 CriteriaBuilder cb = em.getCriteriaBuilder();
-		    CriteriaQuery<UserProfile> cq = cb.createQuery(UserProfile.class);
-		    
-		    Root<UserProfile> job = cq.from(UserProfile.class);
-		    List<Predicate> predicates = new ArrayList<>();
-		    
-		    if (!StringUtils.isEmpty(searchCandidate.getJobCategory())) {
-		    	Category category = categoryRepo.findById(Integer.parseInt(searchCandidate.getJobCategory())).get();
-		        predicates.add(cb.equal(job.get("category"), category));
-		    }
-		    
-		    if (!StringUtils.isEmpty(searchCandidate.getEmployerName())) {
-		    	Optional<Employer> employer = employerRepo.findById(Integer.parseInt(searchCandidate.getEmployerName()));
-		        predicates.add(cb.equal(job.get("employer"), employer.get()));
-		    }
-		    if (!StringUtils.isEmpty(searchCandidate.getJobType())) {
-		    	JobType jobType = jobTypeRepo.findById(Integer.parseInt(searchCandidate.getJobType())).get();
-		        predicates.add(cb.equal(job.get("jobType"), jobType));
-		    }
-		    if (!StringUtils.isEmpty(searchCandidate.getTimeSlot())) {
-		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchCandidate.getTimeSlot())).get();
-		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
-		    }
-		    if (!StringUtils.isEmpty(searchCandidate.getState())) {
-		        predicates.add(cb.equal(job.get("state"), searchCandidate.getState()));
-		    }
-		    if (!StringUtils.isEmpty(searchCandidate.getCity())) {
-		        predicates.add(cb.equal(job.get("city"), searchCandidate.getCity()));
-		    }
-		    if (!StringUtils.isEmpty(searchCandidate.getGender())) {
-		        predicates.add(cb.equal(job.get("gender"), searchCandidate.getCity()));
-		    }
-		    cq.where(predicates.toArray(new Predicate[0]));
+////	@Override
+//	public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate) {
+//		// TODO Auto-generated method stub
+//		 CriteriaBuilder cb = em.getCriteriaBuilder();
+//		    CriteriaQuery<UserProfile> cq = cb.createQuery(UserProfile.class);
+//		    
+//		    Root<UserProfile> job = cq.from(UserProfile.class);
+//		    Root<OtherUserDetails> otherDetailsRoot = cq.from(OtherUserDetails.class);
+//		    
+//		    In<String> inClause = cb.in(otherDetailsRoot.get("jobCategories"));
+//		    List<Predicate> predicates = new ArrayList<>();
+//		   
+//		    
+//		    if (!StringUtils.isEmpty(searchCandidate.getJobCategory())) {
+//		    	Join<UserProfile, OtherUserDetails> otherDetailGroupJoin = job.join("otherDetails");
+//		    	Join<OtherUserDetails, Category> assetCategoryJoin = otherDetailGroupJoin.join("jobCategories");
+//		    	Category category = categoryRepo.findById(Integer.parseInt(searchCandidate.getJobCategory())).get();
+//		    	predicates.add(cb.in(assetCategoryJoin.get("id").in(Integer.parseInt(searchCandidate.getJobCategory()))));
+//		    }
+//		    
+//		    if (!StringUtils.isEmpty(searchCandidate.getEmployerName())) {
+//		    	Optional<Employer> employer = employerRepo.findById(Integer.parseInt(searchCandidate.getEmployerName()));
+//		        predicates.add(cb.equal(job.get("employer"), employer.get()));
+//		    }
+//		    if (!StringUtils.isEmpty(searchCandidate.getJobType())) {
+//		    	JobType jobType = jobTypeRepo.findById(Integer.parseInt(searchCandidate.getJobType())).get();
+//		        predicates.add(cb.equal(job.get("jobType"), jobType));
+//		    }
+//		    if (!StringUtils.isEmpty(searchCandidate.getTimeSlot())) {
+//		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchCandidate.getTimeSlot())).get();
+//		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
+//		    }
+//		    if (!StringUtils.isEmpty(searchCandidate.getState())) {
+//		        predicates.add(cb.equal(job.get("state"), searchCandidate.getState()));
+//		    }
+//		    if (!StringUtils.isEmpty(searchCandidate.getCity())) {
+//		        predicates.add(cb.equal(job.get("city"), searchCandidate.getCity()));
+//		    }
+//		    if (!StringUtils.isEmpty(searchCandidate.getGender())) {
+//		        predicates.add(cb.equal(job.get("gender"), searchCandidate.getCity()));
+//		    }
+//		    cq.multiselect(predicates.toArray(new Predicate[0]));
+//		   
+//		    return em.createQuery(cq).getResultList();
+//
+//	}
+	
+	
+//@Override
+public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate) {
+	// TODO Auto-generated method stub
+	 CriteriaBuilder cb = em.getCriteriaBuilder();
+	    CriteriaQuery<UserProfile> cq = cb.createQuery(UserProfile.class);
+	    
+	    Root<UserProfile> job = cq.from(UserProfile.class);
+	    Root<OtherUserDetails> otherDetailsRoot = cq.from(OtherUserDetails.class);
+	    
+	    In<String> inClause = cb.in(otherDetailsRoot.get("jobCategories"));
+	    List<Predicate> predicates = new ArrayList<>();
+	   
+	    
+//	    if (!StringUtils.isEmpty(searchCandidate.getJobCategory())) {
+	    	Join<UserProfile, OtherUserDetails> otherDetailGroupJoin = job.join("otherDetails");
+	    	Join<OtherUserDetails, Category> assetCategoryJoin = otherDetailGroupJoin.join("jobCategories");
+	    	Category category = categoryRepo.findById(Integer.parseInt(searchCandidate.getJobCategory())).get();
+//	    	predicates.add(cb.equal(assetCategoryJoin.get("id"),(Integer.parseInt(searchCandidate.getJobCategory()))));
+	    	assetCategoryJoin.on(cb.equal(assetCategoryJoin.get("id"),Integer.parseInt(searchCandidate.getJobCategory())));
+	         cq.multiselect(assetCategoryJoin);
+//	    }
+//	    
+//	    if (!StringUtils.isEmpty(searchCandidate.getEmployerName())) {
+//	    	Optional<Employer> employer = employerRepo.findById(Integer.parseInt(searchCandidate.getEmployerName()));
+//	        predicates.add(cb.equal(job.get("employer"), employer.get()));
+//	    }
+//	    if (!StringUtils.isEmpty(searchCandidate.getJobType())) {
+//	    	JobType jobType = jobTypeRepo.findById(Integer.parseInt(searchCandidate.getJobType())).get();
+//	        predicates.add(cb.equal(job.get("jobType"), jobType));
+//	    }
+//	    if (!StringUtils.isEmpty(searchCandidate.getTimeSlot())) {
+//	    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchCandidate.getTimeSlot())).get();
+//	        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
+//	    }
+//	    if (!StringUtils.isEmpty(searchCandidate.getState())) {
+//	        predicates.add(cb.equal(job.get("state"), searchCandidate.getState()));
+//	    }
+//	    if (!StringUtils.isEmpty(searchCandidate.getCity())) {
+//	        predicates.add(cb.equal(job.get("city"), searchCandidate.getCity()));
+//	    }
+//	    if (!StringUtils.isEmpty(searchCandidate.getGender())) {
+//	        predicates.add(cb.equal(job.get("gender"), searchCandidate.getCity()));
+//	    }
+	    cq.where(predicates.toArray(new Predicate[0]));
+//	   
+	    return em.createQuery(cq).getResultList();
 
-		    return em.createQuery(cq).getResultList();
+}
 
-	}
+
+@Override
+public List<OtherUserDetails> findProfileBySearchJob(SearchCandidate searchCandidate) {
+	// TODO Auto-generated method stub
+	 CriteriaBuilder cb = em.getCriteriaBuilder();
+	    CriteriaQuery<OtherUserDetails> cq = cb.createQuery(OtherUserDetails.class);
+	    
+	    Root<OtherUserDetails> job = cq.from(OtherUserDetails.class);	
+	    
+	    ListJoin<OtherUserDetails,Category> categories = job.joinList("jobCategories",JoinType.LEFT);
+//	    	Join<OtherUserDetails, Category> assetCategoryJoin = job.join("jobCategories");
+	    	
+	    Predicate idPredicate = cb.equal(categories.get("id"),Integer.parseInt(searchCandidate.getJobCategory()));
+	    
+	    cq.where(idPredicate).distinct(true);
+  
+	    return em.createQuery(cq).getResultList();
+}
+
 
 	@Override
 	public List<JobEarning> findJobEarningByProfileCriteria(SearchJobEarning searchJobEarning) {

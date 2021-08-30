@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.LocationRepository;
+import com.howtodoinjava.dao.SelectedProfilesRepo;
 import com.howtodoinjava.dao.UserProfileRepository;
 import com.howtodoinjava.dao.UserRepository;
 import com.howtodoinjava.domain.CategoryRepo;
@@ -53,9 +54,11 @@ import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobs;
+import com.howtodoinjava.entity.SelectedProfile;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobTimeSlot;
 import com.howtodoinjava.model.Location;
+import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 
@@ -94,6 +97,9 @@ public class AdminController {
 
 	@Autowired
 	LocationRepository locationRepo;
+	
+	@Autowired
+	SelectedProfilesRepo selectedProfileRepo;
 
 	@RequestMapping("/category-genz.html")
 	public String category(Map<String, Object> model) {
@@ -110,6 +116,8 @@ public class AdminController {
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		model.put("category", new Category());
+		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
+		model.put("applications", applications);
 		return "admin/selectedstud-genz";
 	}
 
@@ -741,6 +749,97 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/search-candidate";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/searchJobInfo.html")
+	public String showCandidateInfo(HttpServletRequest request,HttpServletResponse response,
+			Map<String, Object> model) throws Exception {
+		System.out.println("***********88(((((((((((9");
+		List<UserProfile> profiles = new ArrayList<>();
+		String jobId = request.getParameter("jobId");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		List<Integer> selectedProfilesIds = new ArrayList<>();
+		JobAccount job = jobAccountRepo.findByJobCode(jobId);
+		
+		if(job!=null)
+		{
+			JobAccount jobAccount = job;
+			SearchCandidate candidate = new SearchCandidate();
+			candidate.setJobCategory(String.valueOf(jobAccount.getCategory().getId()));
+//			candidate.setTimeSlot(jobAccount.getTimeSlot().getTimeSlotName());
+//			candidate.setCity(jobAccount.getCity());
+//			candidate.setEmployerName(String.valueOf(jobAccount.getEmployer().getId()));
+//			candidate.setJobType(String.valueOf(jobAccount.getJobType().getId()));
+//			candidate.setState(jobAccount.getState());
+//			candidate.setCity(jobAccount.getCity());
+		
+			
+			List<OtherUserDetails> userDetails = (List<OtherUserDetails>) jobAccountCustomRepo.findProfileBySearchJob(candidate);
+			
+			List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
+			for(SelectedProfile selectedProfile : applications)
+			{
+				selectedProfilesIds.add(selectedProfile.getUserProfile().getId());
+			}
+			
+			for(OtherUserDetails profile : userDetails)
+			{
+				
+				if(!selectedProfilesIds.contains(profile.getUserProfile().getId()))
+				{
+				profiles.add(profile.getUserProfile());
+				}
+			}
+			
+			SearchCandidate searchCandidate = new SearchCandidate();
+			searchCandidate.setJobCategory(jobAccount.getCategory().getCategoryName());
+			searchCandidate.setEmployerName(jobAccount.getEmployer().getEmployerName());
+			searchCandidate.setJobType(jobAccount.getJobType().getJobTypeName());
+			searchCandidate.setState(jobAccount.getState());
+			searchCandidate.setCity(jobAccount.getCity());
+			model.put("searchCandidate", searchCandidate);
+		}
+		else
+		{
+			model.put("errorMessage", "Not able to find job by this Job Id");
+			model.put("searchCandidate", new SearchCandidate());
+		}
+		
+//		List<CourseType> courses = null;
+//		List<Employer> employers = null;
+//		List<Category> categories = null;
+//		List<JobType> jobTypes = null;
+//		List<TimeSlot> timeSlots = null;
+//		List<UserProfile> profiles = null;
+//		try {
+//			courses = courseRepo.findAll();
+//			employers = employerRepo.findAll();
+//			categories = categoryRepo.findAll();
+//			jobTypes = jobTypeRepo.findAll();
+//			timeSlots = timeSlotRepo.findAll();
+//			profiles = (List<UserProfile>) jobAccountCustomRepo.findProfileByProfileCriterias(searchCandidate);
+//
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		model.put("courses", courses);
+//		model.put("employers", employers);
+//		model.put("categories", categories);
+//		model.put("jobTypes", jobTypes);
+//		model.put("timeSlots", timeSlots);
+//		model.put("profiles", profiles);
+//		model.put("searchJob", new SearchJobs());
+//		model.put("states", categoryRepo.getStatesByCountryId("100"));
+//		model.put("successMessage", "Refined Results has been posted!");
+		model.put("profiles", profiles);
+		
+		return "admin/search-candidate";
+	}
+
+
 
 	@RequestMapping(method = RequestMethod.POST, value = "/searchCandidates.html")
 	public String searchCandidate(@ModelAttribute("searchCandidate") SearchCandidate searchCandidate,
@@ -767,7 +866,6 @@ public class AdminController {
 
 		model.put("courses", courses);
 		model.put("employers", employers);
-		model.put("categories", categories);
 		model.put("jobTypes", jobTypes);
 		model.put("timeSlots", timeSlots);
 		model.put("profiles", profiles);
@@ -780,6 +878,46 @@ public class AdminController {
 		return "admin/search-candidate";
 	}
 
+	@RequestMapping("/selectProfiles")
+	public String applyJob(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
+			@RequestParam String profilesId) throws IOException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (profilesId.contains(",")) {
+			String[] profilesIds = profilesId.split(",");
+			if (profilesIds.length > 0) {
+				for (String profile : profilesIds) {
+					Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profile));
+					if (userProfileOptional.isPresent()) {
+						SelectedProfile selectedProfile = new SelectedProfile();
+						selectedProfile.setUserProfile(userProfileOptional.get());
+						selectedProfile.setSelectedDate(new Date());
+						User user = userRepo.findByEmail(auth.getName());
+						model.put("user", user);
+						selectedProfile.setSelectedBy(user);
+						selectedProfileRepo.save(selectedProfile);
+					}
+				}
+			}
+		} else {
+			Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profilesId));
+			if (userProfileOptional.isPresent()) {
+				SelectedProfile selectedProfile = new SelectedProfile();
+				selectedProfile.setUserProfile(userProfileOptional.get());
+				selectedProfile.setSelectedDate(new Date());
+				User user = userRepo.findByEmail(auth.getName());
+				model.put("user", user);
+				selectedProfile.setSelectedBy(user);
+				selectedProfileRepo.save(selectedProfile);
+			}
+
+		}
+		model.put("successMessage", "Profiles Selected"); 
+		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
+		model.put("applications", applications);
+		return "admin/selectedstud-genz";
+	}
+
+	
 	@RequestMapping("/jobs-genz.html")
 	public String showJobs(Map<String, Object> model) {
 		List<JobAccount> jobs = new ArrayList<JobAccount>();
@@ -796,10 +934,12 @@ public class AdminController {
 		List<TimeSlot> timeSlots = timeSlotRepo.findAll();
 		List<Category> categories = categoryRepo.findAll();
 		List<Employer> employers = employerRepo.findAll();
+		List<JobType> jobTypes = jobTypeRepo.findAll();
 		model.put("jobAccount", new JobAccount());
 		model.put("timeSlots", timeSlots);
 		model.put("categories", categories);
 		model.put("employers", employers);
+		model.put("jobTypes", jobTypes);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -830,6 +970,8 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/updatejobs";
 	}
+	
+	
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateJobTimeSlots.html")
 	public void searchJobs(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response,
@@ -947,6 +1089,7 @@ public class AdminController {
 		to.setVacancyForFemale(from.getVacancyForFemale());
 		to.setVacancyForMale(from.getVacancyForMale());
 		to.setVacancyForOther(from.getVacancyForOther());
+		to.setJobType(from.getJobType());
 		return to;
 
 	}

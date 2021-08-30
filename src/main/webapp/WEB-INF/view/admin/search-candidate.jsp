@@ -184,12 +184,13 @@ jobArray.push('${profile.id}');
 jobArray.push('${profile.firstName}');
 jobArray.push('${profile.dob}');
 jobArray.push('${profile.email}');
-jobArray.push('${profile.mobileNo}');
+jobArray.push('${profile.otherDetails.mobileNo}');
 jobArray.push('${profile.gender}');
-jobArray.push('${profile.course}');
-jobArray.push('${profile.city}');
-jobArray.push('${profile.havePc}');
+jobArray.push('${profile.otherDetails.course}');
+jobArray.push('${profile.otherDetails.city}');
+jobArray.push('${profile.otherDetails.havePc}');
 jobArray.push('<a href="edit_stud.html?profileId=${profile.id}">View</a>');
+jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${profile.id}" id="defaultCheck1_${profile.id}">')
 
 
 dataSet.push(jobArray);
@@ -266,7 +267,10 @@ dataSet.push(jobArray);
     			{ title: "Computer" },
     			{
     				 title: "view"
-    			}
+    			},
+    			{
+   				 title: "Select"
+   				}
     			
     			
     			
@@ -432,6 +436,30 @@ dataSet.push(jobArray);
 						<h4>Minimum One Value Required To Fetch The Data</h4>
 					</div>
 				</div>
+				<form:form action="/searchJobInfo.html" method="get">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+							<h4>
+								JobId <span>*</span>
+							</h4>
+<%-- 							<form:select class="form-control" path="jobCategory"> --%>
+<%-- 								<form:option value="">Select</form:option> --%>
+<%-- 								<c:forEach var="category" items="${categories}"> --%>
+<%-- 									<form:option value="${category.id}" --%>
+<%-- 										label="${category.categoryName}" /> --%>
+<%-- 								</c:forEach> --%>
+<%-- 							</form:select> --%>
+
+<input  placeholder="First Name"
+							class="form-control" type="text" name="jobId" />
+						</div>
+						
+						<div class="form-row last">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
+							<button type="submit">Get Data</button>
+						</div>
+					</div>
+				</form:form>
+				
 				<form:form action="/searchCandidates.html" method="post"
 					modelAttribute="searchCandidate">
 					<div class="form-row">
@@ -439,89 +467,70 @@ dataSet.push(jobArray);
 							<h4>
 								Category <span>*</span>
 							</h4>
-							<form:select class="form-control" path="jobCategory">
-								<form:option value="">Select</form:option>
-								<c:forEach var="category" items="${categories}">
-									<form:option value="${category.id}"
-										label="${category.categoryName}" />
-								</c:forEach>
-							</form:select>
+<%-- 							<form:select class="form-control" path="jobCategory"> --%>
+<%-- 								<form:option value="">Select</form:option> --%>
+<%-- 								<c:forEach var="category" items="${categories}"> --%>
+<%-- 									<form:option value="${category.id}" --%>
+<%-- 										label="${category.categoryName}" /> --%>
+<%-- 								</c:forEach> --%>
+<%-- 							</form:select> --%>
+							
+							<form:input path="jobCategory" placeholder="Job Category"
+							class="form-control" type="text" />
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
 							<h4>
 								Job Type <span>*</span>
 							</h4>
-							<form:select class="form-control" path="jobType">
-								<form:option value="">Select</form:option>
-								<c:forEach var="jobType" items="${jobTypes}">
-									<form:option value="${jobType.id}"
-										label="${jobType.jobTypeName}" />
-								</c:forEach>
-							</form:select>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-							<h4>
-								Time-Slot <span>*</span>
-							</h4>
-							<form:select class="form-control" path="timeSlot">
-								<form:option value="">Select</form:option>
-								<c:forEach var="timeSlot" items="${timeSlots}">
-									<form:option value="${timeSlot.id}"
-										label="${timeSlot.timeSlotName}" />
-								</c:forEach>
-							</form:select>
+<%-- 							<form:select class="form-control" path="jobType"> --%>
+<%-- 								<form:option value="">Select</form:option> --%>
+<%-- 								<c:forEach var="jobType" items="${jobTypes}"> --%>
+<%-- 									<form:option value="${jobType.id}" --%>
+<%-- 										label="${jobType.jobTypeName}" /> --%>
+<%-- 								</c:forEach> --%>
+<%-- 							</form:select> --%>
+
+<form:input path="jobType" placeholder="Job Type"
+							class="form-control" type="text" />
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
 							<h4>
 								Employer <span>*</span>
 							</h4>
-							<form:select class="form-control" path="employerName">
-								<form:option value="">Select</form:option>
-								<c:forEach var="employer" items="${employers}">
-									<form:option value="${employer.id}"
-										label="${employer.employerName}" />
-								</c:forEach>
-							</form:select>
+<%-- 							<form:select class="form-control" path="employerName"> --%>
+<%-- 								<form:option value="">Select</form:option> --%>
+<%-- 								<c:forEach var="employer" items="${employers}"> --%>
+<%-- 									<form:option value="${employer.id}" --%>
+<%-- 										label="${employer.employerName}" /> --%>
+<%-- 								</c:forEach> --%>
+<%-- 							</form:select> --%>
+
+<form:input path="employerName" placeholder="Employer"
+							class="form-control" type="text" />
 						</div>
 
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-							<h4>
-								Gender <span>*</span>
-							</h4>
-							<form:select class="form-control" path="gender">
-								<form:option class="first-op" value="">Select</form:option>
-									<form:option value="Male"></form:option>
-									<form:option value="Female"></form:option>
-									<form:option value="Others"></form:option>
-									</form:select>
-						</div>
+						
 						 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								State <span>*</span>
 							</h4>
-							<form:select path="state" id="editState" class="form-control" onchange="myFunction()">
-								<form:option class="first-op" value="">Select</form:option>
-									<c:forEach var="state" items="${states}">
-									<form:option value="${state[1]}"
-										label="${state[1]}" />
-								</c:forEach>
-							</form:select>
+							<form:input path="state" placeholder="State"
+							class="form-control" type="text" />
 
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
 							<h4>
 								City <span>*</span>
 							</h4>
-							<form:select path="city"  id="cityDropDown" class="form-control">
-								<option value="">Select</option>
-							</form:select>
+							<form:input path="city" placeholder="City"
+							class="form-control" type="text" />
 						</div>
 					</div>
-					<div class="form-row last">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
-							<button type="submit">Get Data</button>
-						</div>
-					</div>
+<!-- 					<div class="form-row last"> -->
+<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol"> -->
+<!-- 							<button type="submit">Get Data</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</form:form>
 
 <%-- 				<c:if test="${profiles.size() > 0 }"> --%>
@@ -564,9 +573,15 @@ dataSet.push(jobArray);
 <%-- 							</c:forEach> --%>
 <!-- 						</tbody> -->
 <!-- 					</table> -->
-<div style="margin-top: 35%">
+<div style="margin-top: 40%">
  <table id="example" class="display" width="100%"></table>
  </div>
+ 
+ <div class="form-row last">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
+                            <button type="submit" onclick="selectProfiles()">Select Profiles</button>
+                        </div>
+                      </div>
 <%-- 				</c:if> --%>
 
 			</div>
@@ -576,6 +591,22 @@ dataSet.push(jobArray);
 
 		</div>
 	</div>
+<script>
+	
+	function selectProfiles()
+    {
+        var checkboxes = document.getElementsByName('applyJob');
+        var selected = new Array();
+        var ids = "";
+        for (var i=0; i<checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                selected.push(checkboxes[i].value);
+                ids += checkboxes[i].value + ",";
+            }
+        }
+        location.href = "/selectProfiles?profilesId="+ids;
+    }
+	</script>
 
 <script>
 function myFunction() {

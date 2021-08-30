@@ -77,7 +77,7 @@
     // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "${profile.id}", "${profile.firstName}", "${profile.email}", "${profile.mobileNo}", "${profile.dob}", "${profile.gender}", "${profile.course}", "${profile.city}" ]
+    [ "${profile.id}", "${profile.firstName}", "${profile.email}", "${otherDetails.mobileNo}", "${profile.dob}", "${profile.gender}", "${otherDetails.course}", "${otherDetails.city}" ]
     // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
     // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
     // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
