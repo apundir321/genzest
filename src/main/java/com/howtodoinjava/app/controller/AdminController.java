@@ -799,6 +799,7 @@ public class AdminController {
 			searchCandidate.setState(jobAccount.getState());
 			searchCandidate.setCity(jobAccount.getCity());
 			model.put("searchCandidate", searchCandidate);
+			model.put("successMessage", "Refined results has been posted!");
 		}
 		else
 		{

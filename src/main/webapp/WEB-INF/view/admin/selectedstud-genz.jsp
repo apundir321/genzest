@@ -34,6 +34,12 @@
 <script src="//code.jquery.com/jquery-3.5.1.js"></script>
 <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+	rel="stylesheet">
+
 <style>
 	.sidebar-content .sidebar-nav .fa-user-circle-o{
 		font-size: 4rem;
@@ -630,6 +636,34 @@ $(document).ready(function() {
 		$(document).ready( function () {
 			$('#table_id').DataTable();
 		} );
+	</script>
+	
+		<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
+	});
+		
+	
+	$(document).ready(function(){
+		<c:if test="${not empty warningMessage}">
+		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="warningMessage" scope="session"/>
+			<c:remove var="warningMessage" scope="request"/>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
+	});
+	
 	</script>
 	<script src="assets-1/js/app.js"></script>
 

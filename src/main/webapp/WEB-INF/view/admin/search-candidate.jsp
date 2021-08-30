@@ -634,6 +634,9 @@ function myFunction() {
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
 	});
 	
 	$(".success").click(function(){
