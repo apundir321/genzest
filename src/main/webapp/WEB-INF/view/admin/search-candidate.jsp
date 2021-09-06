@@ -630,14 +630,33 @@ function myFunction() {
 	
 	
 			<script type="text/javascript">
-	$(document).ready(function(){
-		<c:if test="${not empty successMessage}">
-		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
-		</c:if>
-		<c:if test="${not empty errorMessage}">
-		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
-		</c:if>
-	});
+
+			
+			$(document).ready(function(){
+				<c:if test="${not empty successMessage}">
+				toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+				</c:if>
+				<c:remove var="successMessage" scope="session"/>
+					<c:remove var="successMessage" scope="request"/>
+			});
+			
+			
+			$(document).ready(function(){
+				<c:if test="${not empty warningMessage}">
+				toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
+				</c:if>
+				<c:remove var="warningMessage" scope="session"/>
+					<c:remove var="warningMessage" scope="request"/>
+			});
+			
+			$(document).ready(function(){
+				<c:if test="${not empty errorMessage}">
+				toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+				</c:if>
+				<c:remove var="errorMessage" scope="session"/>
+					<c:remove var="errorMessage" scope="request"/>
+			});
+			
 	
 	$(".success").click(function(){
 		toastr.success('We do have the Kapua suite available.', 'Success Alert', {timeOut: 5000})

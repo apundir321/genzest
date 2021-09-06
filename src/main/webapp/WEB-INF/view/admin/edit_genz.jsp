@@ -222,524 +222,501 @@ table thead {
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						<li class="nav-item">
-							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
-						</li>
-						<li class="nav-item dropdown">
-						
-						
-						</li>
+						<li class="nav-item"><i class="fa fa-sign-out"
+							aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a></li>
+						<li class="nav-item dropdown"></li>
 					</ul>
 				</div>
 				<a class="nav-link dropdown-toggle d-none d-sm-inline-block"
 					href="#" data-bs-toggle="dropdown"> </a>
 
 				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth">Genzest Login</button>
-					<button class="btn-fifth">Recruiter Login</button>
-					<button class="btn-sixth">Student Login</button>
+					<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
 				</div>
 			</nav>
 
 			<main class="content">
-	<form:form action="/updateProfile.html" method="post"
-					modelAttribute="profile" enctype="multipart/form-data">
-					<div class="form-row">
-			<div class="row two">
-				<div class="container-fluid">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<div id="profile-container">
-							<image id="profileImage" src="/getProfilePic/${profile.profilePicFileName}" />
+
+
+
+				<form:form action="/updateProfile.html" method="post"
+					modelAttribute="profile" enctype="multipart/form-data"
+					id="studentprofileform">
+
+					<div class="container-fluid">
+						<form:input path="id" placeholder="First Name"
+							class="form-control" type="hidden" />
+
+
+						<form:input path="profilePicFileName" placeholder="First Name"
+ 							class="form-control" type="hidden" /> 
+
+
+<%-- 						<form:input path="studentIdFileName" placeholder="First Name" --%>
+<%-- 							class="form-control" type="hidden" /> --%>
+
+
+<%-- 						<form:input path="aadharFileName" placeholder="First Name" --%>
+<%-- 							class="form-control" type="hidden" /> --%>
+
+						<div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 text-center">
+							<h4>General Details (data once entered can not be altered)</h4>
 						</div>
-<!-- 						<input id="imageUpload" type="file" name="profilepic" -->
-<!-- 							placeholder="Photo" capture> -->
+						<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+							<a href="profile.html"><button class="back"
+									style="float: right; margin: 1rem; color: white;">
+									Back <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+								</button></a>
+						</div>
 					</div>
-<!-- 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> -->
-<!-- 						<h4>General profile (data once entered can not be altered)</h4> -->
-<!-- 					</div> -->
-<!-- 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> -->
-<!-- 						<button class="back" style="float: right; margin: 1rem;"> -->
-<!-- 							<a href="profile.html">Back <i -->
-<!-- 								class="fa fa-chevron-circle-left" aria-hidden="true"></i></a> -->
-<!-- 						</button> -->
-<!-- 					</div> -->
-				</div>
-			</div>
 
-			<div class="container-fluid">
-			
-					
-					<form:input path="id" placeholder="First Name"
-								class="form-control" type="hidden" disabled="true" />
-								
-								
-								<form:input path="profilePicFileName" placeholder="First Name"
-								class="form-control" type="hidden" disabled="true"/>
-								
-								
-								<form:input path="studentIdFileName" placeholder="First Name"
-								class="form-control" type="hidden" disabled="true" />
-								
-								
-								<form:input path="aadharFileName" placeholder="First Name"
-								class="form-control" type="hidden" disabled="true"/>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								First Name <span>*</span>
-							</h4>
-							<form:input path="firstName" placeholder="First Name"
-								class="form-control" type="text" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Last Name <span>*</span>
-							</h4>
-							<form:input path="lastName" placeholder="Last Name"
-								class="form-control" type="text" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Email <span>*</span>
-							</h4>
-							<form:input class="form-control" path="email"
-								placeholder="Drop Your Mail Id" id="example-email-input" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Parent's Name <span>*</span>
-							</h4>
-							<form:input path="parentsName" placeholder="Parents Name"
-								class="form-control" type="text" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Mobile No <span>*</span>
-							</h4>
-							<form:input class="form-control" path="mobileNo"
-								placeholder="Mobile no" id="example-tel-input" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Alternate Mobile No <span>*</span>
-							</h4>
-							<form:input class="form-control" path="alternateMobileNo"
-								placeholder="Mobile no" id="example-tel-input" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Gender <span>*</span>
-							</h4>
-<%-- 							<form:select path="gender" class="form-control" > --%>
-<%-- 								<form:option class="first-op" value="">Select</form:option> --%>
-<%-- 								<form:option value="Male">Male</form:option> --%>
-<%-- 								<form:option value="Female">Female</form:option> --%>
-<%-- 								<form:option value="Other">Other</form:option> --%>
-<%-- 							</form:select> --%>
-							
-							<form:input class="form-control" path="gender"
-								placeholder="gender" id="example-tel-input" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Date of Birth <span>*</span>
-							</h4>
-							<form:input class="form-control" path="dob"
-								placeholder="MM/DD/YYYY" id="birthday" name="birthday" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Course <span>*</span>
-							</h4>
-							<!--   <select class="form-control">
-                             <option class="first-op">Select</option> 
-                             <option>MBA/ M.Tech/ ME</option>
-                             <option>Other PG Course</option>
-                             <option>CA/ CS</option>
-                             <option>LLB/ LLM</option>
-                             <option>MBBS/ BDS/ BAMS/ BHMS</option>
-                             <option>BBA/ M.sc</option>
-                             <option>BE/ B.Tech</option>
-                             <option>BA/ B.Com/ Other Courses</option>
-                             <option>Sales & Marketing</option>
-                           </select> -->
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12 text-left upload-img">
+								<div class="avatar-upload">
+									<div class="avatar-edit">
+										<input type='file' name="profilepic" id="imageUpload"
+											accept=".png, .jpg, .jpeg" /> <label for="imageUpload"></label>
+									</div>
+									<div class="avatar-preview">
+										<!-- 				            <div id="imagePreview" style="background-image: url(assets-2/img/icons/avatar-gz.png);"> -->
+										<!-- 				            </div> -->
+										<c:if test="${not empty profile.profilePicFileName}">
+											<div id="imagePreview"
+												style="background-image: url(/getProfilePic/${profile.profilePicFileName});">
+											</div>
+										</c:if>
 
-<%-- 							<form:select class="form-control" path="course"> --%>
-<%-- 								<form:option value="">Select</form:option> --%>
-<%-- 								<c:forEach var="course" items="${courses}"> --%>
-<%-- 									<form:option value="${course.id}" --%>
-<%-- 										label="${course.courseTypeName}" /> --%>
-<%-- 								</c:forEach> --%>
-<%-- 							</form:select> --%>
+										<c:if test="${empty profile.profilePicFileName}">
+											<div id="imagePreview"
+												style="background-image: url(assets-2/img/icons/avatar-gz.png);">
+												</div>
+										</c:if>
 
-							<form:input class="form-control" path="course"
-								placeholder="course" id="birthday" name="birthday" disabled="true"/>
-							
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Vehicle Type <span>*</span>
-							</h4>
-							<form:select class="form-control" path="vehicleType">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Dont Own a Vehicle"></form:option>
-								<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
-								<form:option value="Four Wheeler"></form:option>
-								<form:option value="Two Wheeler">Two Wheeler</form:option>
-								<!-- <option>Freelance</option> -->
-							</form:select>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Blood Group <span>*</span>
-							</h4>
-							<form:select path="bloodGroup" class="form-control">
-								<form:option value="">Don't Know</form:option>
-								<form:option value="AB-"></form:option>
-								<form:option value="O-"></form:option>
-								<form:option value="B-"></form:option>
-								<form:option value="A-"></form:option>
-								<form:option value="O+"></form:option>
-								<form:option value="AB+"></form:option>
-								<form:option value="B+"></form:option>
-								<form:option value="A+"></form:option>
-							</form:select>
-						</div>
-						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
-						<!--                            <h4>Employer <span>*</span></h4> -->
-						<!--                            <select class="form-control"> -->
-						<!--                              <option class="first-op">Select</option>  -->
-						<!--                              <option>10</option> -->
-						<!--                              <option>20</option> -->
-						<!--                              <option>30</option> -->
-						<!--                              <option>40</option> -->
-						<!--                              <option>50</option> -->
-						<!--                            </select> -->
-						<!--                          </div> -->
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Address Line 1 <span>*</span>
-							</h4>
-							<form:input id="address-line1" path="addressLine1" type="text"
-								placeholder="Address line 1" class="form-control" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Address Line 2 <span>*</span>
-							</h4>
-							<form:input id="address-line2" path="addressLine2" type="text"
-								placeholder="Address line 2" class="form-control" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>Address Line 3</h4>
-							<form:input id="address-line3" path="addressLine3" type="text"
-								placeholder="Address line 3" class="form-control"  disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>Street No</h4>
-							<form:input id="street-no" path="streetNo" type="text"
-								placeholder="Street No" class="form-control" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Locality <span>*</span>
-							</h4>
-							<form:input id="locality" path="locality" type="text"
-								placeholder="Locality" class="form-control" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Landmark <span>*</span>
-							</h4>
-							<form:input id="landmark" path="landmark" type="text"
-								placeholder="Landmark" class="form-control" disabled="true"/>
-						</div>
-						<!--                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
-						<!--                             <h4> Country <span>*</span></h4> -->
-						<!--                             <input id="country" name="country" type="text" placeholder="country" class="form-control"> -->
-						<!--                          </div> -->
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Postal Code <span>*</span>
-							</h4>
-							<form:input id="postal-code" path="postalCode" type="text"
-								placeholder="zip or postal code" class="form-control" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Collage Name <span>*</span>
-							</h4>
-							<form:input id="collage-name" path="collegeName" type="text"
-								placeholder="Collage-name" class="form-control" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Degree Completion Month <span>*</span>
-							</h4>
-							<form:input class="form-control" type="date"
-								placeholder="MM/DD/YYYY" id="birthday"
-								path="degreeCollegeCompletionDate" disabled="true"/>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								State <span>*</span>
-							</h4>
-							<form:select path="state" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Andra Pradesh</form:option>
-								<form:option value="Arunachal Pradesh">Arunachal Pradesh</form:option>
-								<form:option value="Assam">Assam</form:option>
-								<form:option value="Bihar">Bihar</form:option>
-								<form:option value="Chhattisgarh">Chhattisgarh</form:option>
-							</form:select>
-							<c:choose>
-										<c:when test="${not empty profile.state}">
-    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.state}</span> </h4>
-  										</c:when>
-										
-										<c:otherwise>
-   											<h4 style="color: #f15336">
-											Selected: <span style="color: #A4A4A4;">Not Selected</span>
-										</h4>
-  										</c:otherwise>
-									</c:choose>
-
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								City <span>*</span>
-							</h4>
-							<form:select path="city" class="form-control">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Andra Pradesh">Gurgaon</form:option>
-								<form:option value="Andra Pradesh">Indore</form:option>
-								<form:option value="Arunachal Pradesh">Kolkata</form:option>
-								<form:option value="Assam">Pune</form:option>
-								<form:option value="Bihar">Mumbai</form:option>
-								<form:option value="Chhattisgarh">Delhi</form:option>
-							</form:select>
-							
-							<c:choose>
-										<c:when test="${not empty profile.city}">
-    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.city}</span> </h4>
-  										</c:when>
-										
-										<c:otherwise>
-   											<h4 style="color: #f15336">
-											Selected: <span style="color: #A4A4A4;">Not Selected</span>
-										</h4>
-  										</c:otherwise>
-									</c:choose>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								Do You Have Own PC <span>*</span>
-							</h4>
-							<form:select class="form-control" path="havePc">
-								<form:option class="first-op" value="false">Select</form:option>
-								<form:option value="true">Yes</form:option>
-								<form:option value="false">No</form:option>
-							</form:select>
-						</div>
-						<br/>
-						</div>
-						<div class="container-fluid">
-							<div class="row two">
-								<div class="container-fluid">
-
-									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<h4>Your Job Preferences (You can change your preferences
-											any time)</h4>
 									</div>
 
+
 								</div>
 							</div>
-
-							<div class="form-row">
-
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Job Categories <span>*</span>
-									</h4>
-
-									<form:select class="form-control" path="category">
-										<form:option value="">Select</form:option>
-										<c:forEach var="category" items="${categories}">
-											<form:option value="${category.id}"
-												label="${category.categoryName}" />
-										</c:forEach>
-									</form:select>
-<!-- 									<h4 style="color: #f15336">Selected: </h4><h4>${profile.category.categoryName}</h4> -->
-									
-									<c:choose>
-										<c:when test="${not empty profile.category.categoryName}">
-    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.category.categoryName}</span> </h4>
-  										</c:when>
-										
-										<c:otherwise>
-   											<h4 style="color: #f15336">
-											Selected: <span style="color: #A4A4A4;">Not Selected</span>
-										</h4>
-  										</c:otherwise>
-									</c:choose>
-								</div>
-
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-									<h4>
-										Preference <span>*</span>
-									</h4>
-									<form:select path="preference" class="form-control">
-										<form:option class="first-op" value="">Select</form:option>
-										<form:option value="Other Onsite Job (Warehouse/Factory etc)">Other Onsite Job (Warehouse/Factory etc)</form:option>
-										<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
-										<form:option value="Field Job">Field Job</form:option>
-										<form:option value="Office Job">Office Job</form:option>
-									</form:select>
-									<c:choose>
-										<c:when test="${not empty profile.preference}">
-    										<h4 style="color: #f15336">
-											Selected: <span style="color: #A4A4A4;">${profile.preference}</span>
-										</h4>
-  										</c:when>
-										
-										<c:otherwise>
-   											<h4 style="color: #f15336">
-											Selected: <span style="color: #A4A4A4;">Not Selected</span>
-										</h4>
-  										</c:otherwise>
-									</c:choose>
-								</div>
-
-							</div>
-							</div>
-							
-							<div class="container-fluid">
-				<div class="row two">
-					<div class="container-fluid">
-
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Verification Details</h4>
 						</div>
 
 					</div>
-				</div>
-					<div class="form-row">
-					<c:if test="${not empty profile.aadharFileName}">
-						<div class="col-lg-4">
-							<div class="input-group">
-								<h4>
-									Aadhar Card <span>*</span>
-								</h4>
-<!-- 								<div class="custom-file"> -->
-<!-- 									<input type="file" name="aadhar" class="custom-file-input" -->
-<!-- 										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> -->
-<!-- 									<label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-<!-- 								</div> -->
-						<div id="profile-container">
-							<image id="profileImage" src="/getProfilePic/${profile.aadharFileName}" />
-						</div>
-							</div>
-						</div>
-						</c:if>
-						<c:if test="${not empty profile.studentIdFileName}">
-						<div class="col-lg-4">
-							<div class="input-group">
-								<h4>
-									Student Id <span>*</span>
-								</h4>
-<!-- 								<div class="custom-file"> -->
-<!-- 									<input type="file" name="studentId" class="custom-file-input" -->
-<!-- 										id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> -->
-<!-- 									<label class="custom-file-label" for="inputGroupFile01">Choose file</label> -->
-<!-- 								</div> -->
-						<div id="profile-container">
-							<image id="profileImage" src="/getProfilePic/${profile.studentIdFileName}" />
-						</div>
-							</div>
-						</div>
-						</c:if>
-<!-- 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"> -->
-<!-- 							<h4> -->
-<!-- 								Status <span>*</span> -->
-<!-- 							</h4> -->
-<!-- 							<select class="form-control"> -->
-<!-- 								<option class="first-op">Select</option> -->
-<!-- 								<option>Active</option> -->
-<!-- 								<option>In-Active</option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-					</div>
-			
-			</div>
-							
-							
-<!--                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!--                             <button type="submit">Save</button> -->
-<!--                         </div>  -->
-						
-				
-			
 
 
-
-
-			
-			<div class="container-fluid">
-				<div class="row two">
-					<div class="container-fluid">
-
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h4>Payment Details</h4>
-						</div>
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="firstName">First Name <span>*</span></label>
+						<form:input path="firstName" placeholder="First Name"
+							class="form-control" type="text" value="${user.firstName}" readonly="${!editable}" />
+						<form:errors path="firstName" cssClass="error"></form:errors>
 
 					</div>
-				</div>
-				
-					<div class="form-row">
 
-						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 colbox">
-							<h4>
-								Payment Method <span>*</span>
-							</h4>
-							<form:select class="form-control" path="paymentMethod">
-								<form:option class="first-op" value="">Select</form:option>
-								<form:option value="Bank Account"></form:option>
-								<form:option value="Wallet"></form:option>
-							</form:select>
-							<c:choose>
-										<c:when test="${not empty profile.paymentMethod}">
-    										<h4 style="color: #f15336">Selected: <span style="color: #A4A4A4;">${profile.paymentMethod}</span> </h4>
-  										</c:when>
-										
-										<c:otherwise>
-   											<h4 style="color: #f15336">
-											Selected: <span style="color: #A4A4A4;">Not Selected</span>
-										</h4>
-  										</c:otherwise>
-									</c:choose>
-						</div>
-						<div class="col-lg-6 col-md-6"></div>
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="lastName">Last Name <span>*</span></label>
+						<form:input path="lastName" placeholder="Last Name"
+							class="form-control" type="text" value="${user.lastName}" readonly="${!editable}" />
+						<form:errors path="lastName" cssClass="error"></form:errors>
 					</div>
+
+					<div class="clear clearfix"></div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="email">Email <span>*</span></label>
+						<form:input class="form-control" path="email"
+							placeholder="Drop Your Mail Id" id="example-email-input"
+							value="${user.email}" />
+						<form:errors path="email" cssClass="error"></form:errors>
+					</div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="parentsName">Parent's Name <span>*</span></label>
+						<form:input path="parentsName" placeholder="Parents Name"
+							class="form-control" type="text" />
+						<form:errors path="parentsName" cssClass="error"></form:errors>
+					</div>
+
+					<div class="clear clearfix"></div>
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="gender">Gender <span>*</span></label>
+						<form:select path="gender" class="form-control">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Male">Male</form:option>
+							<form:option value="Female">Female</form:option>
+						</form:select>
+						<form:errors path="gender" cssClass="error"></form:errors>
+					</div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="dob">Date of Birth <span>*</span></label>
+						<form:input type="date" class="form-control" path="dob"
+							onfocusout="ageCalculation()" placeholder="DD/MM/YYYY"
+							name="birthday" />
+						<form:errors path="dob" cssClass="error"></form:errors>
+
+					</div>
+
+					<div class="clear clearfix"></div>
+
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="bloodGroup">Blood Group <span>*</span></label>
+						<form:select path="bloodGroup" class="form-control">
+							<form:option value="">Please Select</form:option>
+							<form:option value="AB-"></form:option>
+							<form:option value="O-"></form:option>
+							<form:option value="B-"></form:option>
+							<form:option value="A-"></form:option>
+							<form:option value="O+"></form:option>
+							<form:option value="AB+"></form:option>
+							<form:option value="B+"></form:option>
+							<form:option value="A+"></form:option>
+							<form:option value="DK">Don't Know</form:option>
+
+						</form:select>
+						<form:errors path="bloodGroup" cssClass="error"></form:errors>
+					</div>
+
+					<div class="clear clearfix"></div>
 <!-- 					<div class="form-row"> -->
 <!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
 <!-- 							<button type="submit">Save</button> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-				
-			</div>
-			
-			</form:form>
 
-			<div class="container-fluid">
-				<div class="row two">
-					<div class="container-fluid">
+				</form:form>
 
-					
-
-					</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">
+					<h4>Other Details</h4>
 				</div>
+
+				<form:form action="/updateOtherDetails.html" method="post"
+					modelAttribute="otherDetails" enctype="multipart/form-data"
+					id="studentprofileform">
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="mobileNo">Mobile No <span>*</span></label>
+						<form:input class="form-control" path="mobileNo"
+							placeholder="Mobile no" id="example-tel-input"
+							value="${user.phoneNo}" />
+
+						<form:errors path="mobileNo" cssClass="error"></form:errors>
+					</div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="alternateMobileNo">Alternate Mobile No <span>*</span></label>
+						<form:input class="form-control" path="alternateMobileNo"
+							placeholder="Mobile no" id="example-tel-input" />
+						<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
+					</div>
+
+					<div class="clear clearfix"></div>
+					
+					  <div class="form-group col-sm-6 col-xs-12 colbox">
+					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
+												<form:input class="form-control" type="date" 
+													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
+													path="degreeCollegeCompletionDate" />
+					  </div>
+					  
+					  	  <script>
+                     $(function(){
+                    	    var dtToday = new Date();
+                    	    
+                    	    var month = dtToday.getMonth() + 1;
+                    	    var day = dtToday.getDate();
+                    	    var year = dtToday.getFullYear();
+                    	    if(month < 10)
+                    	        month = '0' + month.toString();
+                    	    if(day < 10)
+                    	        day = '0' + day.toString();
+                    	    
+                    	    var minDate= year + '-' + month + '-' + day;
+                    	    
+                    	    $('#degreeCollegeCompletionDate').attr('min', minDate);
+                    	});
+					</script>
+					
+<!-- 					  <div class="form-group col-sm-6 col-xs-12 colbox"> -->
+<!-- 					    <label for="havePc">Do You Have Own PC <span>*</span></label> -->
+<%-- 												<form:select class="form-control" path="havePc"> --%>
+<%-- 													<form:option class="first-op" value="false">Select</form:option> --%>
+<%-- 													<form:option value="true">Yes</form:option> --%>
+<%-- 													<form:option value="false">No</form:option> --%>
+<%-- 												</form:select> --%>
+<%-- 												<form:errors path="havePc" cssClass="error"></form:errors> --%>
+<!-- 					  </div> -->
+<!--   <div class="clear clearfix"></div> -->
+<!--   <div class="form-group col-sm-6 col-xs-12 colbox"> -->
+<!--     <label for="vehicleType">Vehicle Type <span>*</span></label> -->
+<%-- 							<form:select class="form-control" path="vehicleType"> --%>
+<%-- 								<form:option class="first-op" value="">Select</form:option> --%>
+<%-- 								<form:option value="Dont Own a Vehicle"></form:option> --%>
+<%-- 								<form:option value="Others(Like- 3-Wheeler, etc)"></form:option> --%>
+<%-- 								<form:option value="Four Wheeler"></form:option> --%>
+<%-- 								<form:option value="Two Wheeler">Two Wheeler</form:option> --%>
+<!-- 								<option>Freelance</option> -->
+<%-- 							</form:select> --%>
+<%-- 							<form:errors path="vehicleType" cssClass="error"></form:errors> --%>
+<!--   </div> -->
+  <div class="clear clearfix"></div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="course">Course <span>*</span></label>
+						<form:select class="form-control" path="course">
+							<form:option value="">Select</form:option>
+							<form:option value="B.tech">B.tech</form:option>
+							<c:forEach var="course" items="${courses}">
+								<form:option value="${course.id}"
+									label="${course.courseTypeName}" />
+							</c:forEach>
+						</form:select>
+						<form:errors path="course" cssClass="error"></form:errors>
+					</div>
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="collegeName">College Name <span>*</span></label>
+						<form:input id="collage-name" path="collegeName" type="text"
+							placeholder="Collage-name" class="form-control" />
+						<form:errors path="collegeName" cssClass="error"></form:errors>
+					</div>
+
+					<div class="clear clearfix"></div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="havePc">Do You Have Own PC <span>*</span></label>
+						<form:select class="form-control" path="havePc">
+							<form:option class="first-op" value="false">Select</form:option>
+							<form:option value="true">Yes</form:option>
+							<form:option value="false">No</form:option>
+						</form:select>
+						<form:errors path="havePc" cssClass="error"></form:errors>
+					</div>
+					<div class="clear clearfix"></div>
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="vehicleType">Vehicle Type <span>*</span></label>
+						<form:select class="form-control" path="vehicleType">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Dont Own a Vehicle"></form:option>
+							<form:option value="Others(Like- 3-Wheeler, etc)"></form:option>
+							<form:option value="Four Wheeler"></form:option>
+							<form:option value="Two Wheeler">Two Wheeler</form:option>
+							<!-- <option>Freelance</option> -->
+						</form:select>
+						<form:errors path="vehicleType" cssClass="error"></form:errors>
+					</div>
+					<div class="clear clearfix"></div>
+
+					<div class="form-group col-xs-12 colbox">
+						<label for="address">Address <span>*</span></label>
+						<form:textarea class="form-control" id="address" name="address"
+							path="addressLine1" rows="3" />
+					</div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="country">Country <span>*</span></label>
+						<form:select name="country" class="form-control" path="country">
+							<form:option value="">Please select</form:option>
+							<form:option value="India">India</form:option>
+						</form:select>
+					</div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="state">State <span>*</span></label>
+						<form:select path="state" id="editState" class="form-control"
+							onchange="myFunction()">
+							<form:option class="first-op" value="">Select</form:option>
+							<c:forEach var="state" items="${states}">
+								<form:option value="${state[1]}" label="${state[1]}" />
+							</c:forEach>
+						</form:select>
+						<c:if test="${not empty otherDetails.state}">
+							<h4 style="color: #f15336">
+								Selected: <span style="color: #A4A4A4;">${otherDetails.state}</span>
+							</h4>
+						</c:if>
+						<form:errors path="state" cssClass="error"></form:errors>
+					</div>
+
+					<div class="clear clearfix"></div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="city">City <span>*</span></label>
+						<form:select path="city" id="cityDropDown" class="form-control">
+							<option value="">Select</option>
+							<c:forEach var="state" items="${states}">
+								<form:option value="${state[1]}" label="${state[1]}" />
+							</c:forEach>
+						</form:select>
+						<form:errors path="city" cssClass="error"></form:errors>
+						<c:if test="${not empty otherDetails.city}">
+							<h4 style="color: #f15336">
+								Selected: <span style="color: #A4A4A4;">${otherDetails.city}</span>
+							</h4>
+						</c:if>
+					</div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="locality">Locality <span>*</span></label>
+						<%-- <form:select name="locality" class="form-control">
+								<form:option value="">Please select</form:option>
+								<form:option value="sec49">Sec 49</form:option>
+							</form:select> --%>
+
+						<form:input class="form-control" type="text"
+							placeholder="Locality" id="locality" path="locality" />
+					</div>
+
+					<div class="clear clearfix"></div>
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="landmark">Landmark </label>
+						<form:input id="landmark" path="landmark" type="text"
+							placeholder="Landmark" class="form-control" />
+					</div>
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="postalCode">Postal Code <span>*</span></label>
+						<form:input id="postal-code" path="postalCode" type="text"
+							placeholder="zip or postal code" class="form-control" />
+						<form:errors path="postalCode" cssClass="error"></form:errors>
+					</div>
+
+					<div class="clear clearfix"></div>
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="jobCategories">Job Categories (Select Upto 5)<span>*</span></label>
+						<form:select class="form-control" path="jobCategories"
+							multiple="true" maxlength="5" minlength="1">
+							<form:option value="">Select</form:option>
+					
+							<c:forEach var="category" items="${categories}">
+								<form:option value="${category.id}"
+									label="${category.categoryName}" />
+							</c:forEach>
+						</form:select>
+						<c:if test="${not empty otherDetails.jobCategories}">
+							<h4 style="color: #f15336">
+								Selected: <span style="color: #A4A4A4;"><c:forEach
+										var="category" items="${otherDetails.jobCategories}">
+										<span>${category.categoryName}</span>&nbsp;&nbsp;</c:forEach></span>
+							</h4>
+						</c:if>
+					</div>
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="preference">Preference <span>*</span></label>
+						<form:select path="preference" class="form-control">
+							<form:option class="first-op" value="">Select</form:option>
+							<form:option value="Other Onsite Job (Warehouse/Factory etc)">Other Onsite Job (Warehouse/Factory etc)</form:option>
+							<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
+							<form:option value="Field Job">Field Job</form:option>
+							<form:option value="Office Job">Office Job</form:option>
+						</form:select>
+						<form:errors path="preference" cssClass="error"></form:errors>
+						<c:if test="${not empty otherDetails.preference}">
+							<h4 style="color: #f15336">
+								Selected: <span style="color: #A4A4A4;">${otherDetails.preference}</span>
+							</h4>
+						</c:if>
+					</div>
+
+					<div class="clear clearfix"></div>
+<!-- 					<div class="form-row"> -->
+<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!-- 							<button type="submit">Save</button> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+
+				</form:form>
+				
+<%-- 				<form:form action="/updatedocs.html" method="post" modelAttribute="studentDocs" enctype="multipart/form-data"> --%>
+
+<!-- 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">  -->
+<!--  					<h4>Upload Documents</h4>  -->
+<!--  				</div>  -->
+
+<!--  				<div class="form-group col-sm-6 col-xs-12 colbox">  -->
+<!--  					<label for="aadhar">Aadhar Card <span>*</span></label> <input  -->
+<!--  						type="file" name="aadhar" class="custom-file-input"  -->
+<!--  						id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">  -->
+
+<!--  				</div>  -->
+
+<!--  				<div class="form-group col-sm-6 col-xs-12 colbox">  -->
+<!--  					<label for="studentId">Student Id <span>*</span></label>  -->
+<!--  					<div class="custom-file">  -->
+<!--  						<input type="file" name="studentId" class="custom-file-input"  -->
+<!--  							id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> -->
+<!--  					</div>  -->
+<!--  				</div>  -->
+
+<!-- 				<div class="clear clearfix"></div>  -->
+
+<!--  				<div class="form-group col-sm-3 col-xs-12 colbox">  -->
+<!--  					<label for="paymentMethod">Payment Method <span>*</span></label>  -->
+<%-- 					<form:select onchange='checkItem(this.value)' class="form-control"  --%>
+<%-- 						path="paymentMethod"> --%>
+<%-- 						<form:option class="first-op" value="">Select</form:option> --%>
+<%-- 						<form:option value="Bank Account"></form:option> --%>
+<%-- 						<form:option value="Wallet"></form:option> --%>
+<%-- 					</form:select> --%>
+<%-- 					<form:errors path="paymentMethod" cssClass="error"></form:errors> --%>
+<!-- 				</div> -->
+
+<!-- 				<div class="form-group col-md-3 ba-class"> -->
+<!-- 					<label for="inputother" style="display: none;" id="BA">Bank -->
+<!-- 						Name <span>*</span> -->
+<!-- 					</label> <input type="text" class="form-control" id="text" name="text" -->
+<!-- 						style="display: none;" placeholder="Bank Name"> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group col-md-3 ba-class"> -->
+<!-- 					<label for="inputother" style="display: none;" id="AC">Account -->
+<!-- 						Number <span>*</span> -->
+<!-- 					</label> <input type="text" class="form-control" id="text-1" name="text" -->
+<!-- 						style="display: none;" placeholder="Account Number"> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group col-md-3 ba-class"> -->
+<!-- 					<label for="inputother" style="display: none;" id="IC">IFSC -->
+<!-- 						Code <span>*</span> -->
+<!-- 					</label> <input type="text" class="form-control" id="text-3" name="text" -->
+<!-- 						style="display: none;" placeholder="IFSC Code"> -->
+<!-- 				</div> -->
+
+<!-- 				<div class="form-group col-md-3 ba-class-1"> -->
+<!-- 					<label for="inputother" style="display: none;" id="UPI">UPI -->
+<!-- 						<span>*</span> -->
+<!-- 					</label> <input type="text" class="form-control" id="text-4" name="text" -->
+<!-- 						style="display: none;" placeholder="UPI"> -->
+<!-- 				</div> -->
+						
+
+<!-- 				<div class="form-row"> -->
+<!-- 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!-- 						<button onClick="bankandwallet()" type="submit">Save</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+
+<%-- 				</form:form> --%>
+
+				<div class="container-fluid">
+					<div class="row two">
+						<div class="container-fluid">
+
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<h4>Time slots choosen by Student</h4>
+							</div>
+
+						</div>
+					</div>
 					<div class="form-row">
 <%-- 						<form:form action="/updatePreferences.html" method="post" --%>
-<%-- 					modelAttribute="dayPreference"> --%>
+<%-- 							modelAttribute="dayPreference"> --%>
 <!-- 							<div class="form-row"> -->
 
 <!-- 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
@@ -747,7 +724,7 @@ table thead {
 <!-- 										Days <span>*</span> -->
 <!-- 									</h4> -->
 
-<%-- 									<form:select class="form-control" path="day"> --%>
+<%-- 									<form:select id="timeslotDay" class="form-control" path="day"> --%>
 <%-- 										<form:option class="first-op" value="">Select</form:option> --%>
 <%-- 										<form:option value="Monday"></form:option> --%>
 <%-- 										<form:option value="Tuesday"></form:option> --%>
@@ -757,43 +734,45 @@ table thead {
 <%-- 										<form:option value="Saturday"></form:option> --%>
 <%-- 										<form:option value="Sunday"></form:option> --%>
 <%-- 									</form:select> --%>
+<!-- 									<div id="confirmMessageDay" class="error"></div> -->
 <!-- 								</div> -->
 
 <!-- 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
 <!-- 									<h4> -->
 <!-- 										Time-Slots <span>*</span> -->
 <!-- 									</h4> -->
-<%-- 									<form:select class="form-control" path="timeSlot"> --%>
+<%-- 									<form:select id="timeSlot" class="form-control" path="timeSlot"> --%>
 <%-- 										<form:option value="">Select</form:option> --%>
 <%-- 										<c:forEach var="timeSlot" items="${timeSlots}"> --%>
 <%-- 											<form:option value="${timeSlot.id}" --%>
 <%-- 												label="${timeSlot.timeSlotName}" /> --%>
 <%-- 										</c:forEach> --%>
+
 <%-- 									</form:select> --%>
+<!-- 									<div id="confirmMessage" class="error"></div> -->
 <!-- 								</div> -->
 
 <!-- 							</div> -->
 <!-- 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!-- 								<button onclick="myCreateFunction()" type="submit">Add</button> -->
+<!-- 								<button type="submit" onclick="return validate()">Add</button> -->
 <!-- 							</div> -->
 <%-- 						</form:form> --%>
-						<br />
-						<br />
-						<c:if test="${profile.preferences.size() > 0 }"> 
+						<br /> <br />
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
 							<table id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Days</th>
 										<th scope="col">Time-Slots</th>
+<!-- 										<th scope="col">Action</th> -->
 									</tr>
 								</thead>
 								<tbody>
-								<c:forEach var="dayPreference" items="${profile.preferences}">
-									<tr>
-										<th scope="row">${dayPreference.day}</th>
-										<td>${dayPreference.timeSlot.timeSlotName}</td>
-									</tr>
+									<c:forEach var="dayPreference" items="${otherDetails.preferences}">
+										<tr>	
+											<th scope="row">${dayPreference.day}</th>
+											<td>${dayPreference.timeSlot.timeSlotName}</td>
+										</tr>
 									</c:forEach>
 								</tbody>
 								<!-- <tr>
@@ -804,33 +783,14 @@ table thead {
 							<br>
 
 							<!-- <button onclick="myCreateFunction()">Create row</button> -->
-<!-- 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!-- 								<button onclick="myDeleteFunction()">Delete row</button> -->
-<!-- 							</div> -->
-
-							<script>
-                                function myCreateFunction() {
-                                    var table = document.getElementById("myTable");
-                                    var row = table.insertRow(0);
-                                    var cell1 = row.insertCell(0);
-                                    var cell2 = row.insertCell(1);
-                                    cell1.innerHTML = "Tuesday";
-                                    cell2.innerHTML = "After 6pm";
-                                }
-                                
-                                function myDeleteFunction() {
-                                    document.getElementById("myTable").deleteRow(0);
-                                }
-                                </script>
 
 						</div>
-						</c:if>
 						<div class="col-lg-6 col-md-6"></div>
 					</div>
-				
-			</div>
-			</main>
 
+				</div>
+			</main>
+		
 		</div>
 	</div>
 	<script>

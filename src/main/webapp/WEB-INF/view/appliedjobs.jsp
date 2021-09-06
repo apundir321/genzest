@@ -70,7 +70,9 @@ courseType.push('<c:forEach var="timeSlot" items="${application.job.timeSlots}">
 courseType.push('${application.job.city}');
 courseType.push('${application.job.jobDate}');
 courseType.push('${application.job.employer.employerName}');
+courseType.push('${application.status}');
 courseType.push('<a href="withdraw/appliedJob?jobId=${application.job.id}">Withdraw</a>');
+courseType.push('<c:if test="${application.status eq 'SELECTED'}"><a href="markAttendence.html?applicationId=${application.id}">Mark Attendence</a></c:if> <c:if test="${application.status eq 'OPEN'}">Not Selected</c:if>  <c:if test="${application.status eq 'MARKED'}">MARKED</c:if>');
 dataSet.push(courseType);
 </c:forEach>
 	var dataSet12 = [
@@ -133,7 +135,9 @@ $(document).ready(function() {
             { title: "City" },
             { title: "Job Date" },
 			{ title: "Employer" },
-			{ title: "Action" }
+			{ title: "Status"},
+			{ title: "Action" },
+			{ title: "Mark Attendence"}
         ],
 		
     } );

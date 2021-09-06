@@ -174,17 +174,17 @@
 var dataSet = new Array();
 <c:forEach items="${profiles}" var="profile" varStatus="status">
 jobArray = new Array();
-jobArray.push('${profile.id}');
-jobArray.push('${profile.firstName}');
-jobArray.push('${profile.dob}');
-jobArray.push('${profile.email}');
-jobArray.push('${profile.mobileNo}');
-jobArray.push('${profile.gender}');
-jobArray.push('${profile.course}');
-jobArray.push('${profile.city}');
-jobArray.push('${profile.havePc}');
-jobArray.push('<a href="edit_stud.html?profileId=${profile.id}">View</a>');
-
+jobArray.push('${profile.applicant.userProfile.id}');
+jobArray.push('${profile.applicant.userProfile.firstName}');
+jobArray.push('${profile.applicant.userProfile.dob}');
+jobArray.push('${profile.applicant.userProfile.email}');
+jobArray.push('${profile.applicant.userProfile.otherDetails.mobileNo}');
+jobArray.push('${profile.applicant.userProfile.gender}');
+jobArray.push('${profile.applicant.userProfile.otherDetails.course}');
+jobArray.push('${profile.applicant.userProfile.otherDetails.city}');
+jobArray.push('${profile.applicant.userProfile.otherDetails.havePc}');
+jobArray.push('<a href="edit_stud.html?profileId=${profile.applicant.userProfile.id}">View</a>');
+jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${profile.id}" id="defaultCheck1_${profile.id}">')
 
 dataSet.push(jobArray);
 </c:forEach>
@@ -260,7 +260,10 @@ dataSet.push(jobArray);
     			{ title: "Computer" },
     			{
     				 title: "view"
-    			}
+    			},
+    			{
+   				 title: "select"
+   			}
     			
     			
     			
@@ -462,6 +465,12 @@ dataSet.push(jobArray);
                    </div>
                </div>   -->
                <table id="example" class="display" width="100%"></table>
+               
+                <div class="form-row last">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
+                            <button type="submit" onclick="selectProfiles()">Select Profile</button>
+                        </div>
+                      </div>
            </main>
 
 		
@@ -471,6 +480,23 @@ dataSet.push(jobArray);
 		$(document).ready( function () {
 			$('#table_id').DataTable();
 		} );
+	</script>
+	
+	<script>
+	
+	function selectProfiles()
+    {
+        var checkboxes = document.getElementsByName('applyJob');
+        var selected = new Array();
+        var ids = "";
+        for (var i=0; i<checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                selected.push(checkboxes[i].value);
+                ids += checkboxes[i].value + ",";
+            }
+        }
+        location.href = "/selectProfiles?profilesId="+ids;
+    }
 	</script>
 	<script src="assets-1/js/app.js"></script>
 

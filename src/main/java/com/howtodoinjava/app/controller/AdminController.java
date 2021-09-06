@@ -18,6 +18,7 @@ import java.util.stream.Stream;
 import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.joda.time.Days;
@@ -59,6 +60,7 @@ import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobTimeSlot;
 import com.howtodoinjava.model.Location;
 import com.howtodoinjava.model.OtherUserDetails;
+import com.howtodoinjava.model.StudentDocuments;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 
@@ -116,8 +118,11 @@ public class AdminController {
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		model.put("category", new Category());
-		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
+		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicantAndStatus((User)model.get("user"),"SELECTED");
+		List<JobAccountApplication> presentApplications = jobAccountApplicationRepo.findAllByApplicantAndStatus((User)model.get("user"),"MARKED");
+		
 		model.put("applications", applications);
+		model.put("presentApplications", presentApplications);
 		return "admin/selectedstud-genz";
 	}
 
@@ -142,15 +147,30 @@ public class AdminController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepo.findByEmail(authentication.getName());
-		model.put("user", user);
 		model.put("profile", profile);
 		model.put("courses", courses);
 		model.put("employers", employers);
 		model.put("categories", categories);
 		model.put("dayPreference", new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findAll());
+		OtherUserDetails userDetails = profile.getOtherDetails();
+		if(userDetails==null)
+		{
+			model.put("otherDetails",new OtherUserDetails());
+		}else
+		{
+			model.put("otherDetails", userDetails);
+		}
+		if(profile.getParentsName()==null)
+		{
+			model.put("editable", true);
+		}else
+		{
+			model.put("editable", false);
+		}
+		StudentDocuments studentDocuments = profile.getStudentDocuments()==null?new StudentDocuments():profile.getStudentDocuments();
+		model.put("studentDocs", studentDocuments);
+
 		return "admin/edit_genz";
 	}
 
@@ -769,7 +789,6 @@ public class AdminController {
 			candidate.setJobCategory(String.valueOf(jobAccount.getCategory().getId()));
 //			candidate.setTimeSlot(jobAccount.getTimeSlot().getTimeSlotName());
 //			candidate.setCity(jobAccount.getCity());
-//			candidate.setEmployerName(String.valueOf(jobAccount.getEmployer().getId()));
 //			candidate.setJobType(String.valueOf(jobAccount.getJobType().getId()));
 //			candidate.setState(jobAccount.getState());
 //			candidate.setCity(jobAccount.getCity());
@@ -880,42 +899,57 @@ public class AdminController {
 	}
 
 	@RequestMapping("/selectProfiles")
-	public String applyJob(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
-			@RequestParam String profilesId) throws IOException {
+	public void applyJob(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
+			@RequestParam String profilesId,HttpSession session) throws IOException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (profilesId.contains(",")) {
 			String[] profilesIds = profilesId.split(",");
 			if (profilesIds.length > 0) {
 				for (String profile : profilesIds) {
-					Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profile));
-					if (userProfileOptional.isPresent()) {
-						SelectedProfile selectedProfile = new SelectedProfile();
-						selectedProfile.setUserProfile(userProfileOptional.get());
-						selectedProfile.setSelectedDate(new Date());
-						User user = userRepo.findByEmail(auth.getName());
-						model.put("user", user);
-						selectedProfile.setSelectedBy(user);
-						selectedProfileRepo.save(selectedProfile);
+//					Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profile));
+//					if (userProfileOptional.isPresent()) {
+//						SelectedProfile selectedProfile = new SelectedProfile();
+//						selectedProfile.setUserProfile(userProfileOptional.get());
+//						selectedProfile.setSelectedDate(new Date());
+//						User user = userRepo.findByEmail(auth.getName());
+//						model.put("user", user);
+//						selectedProfile.setSelectedBy(user);
+//						selectedProfileRepo.save(selectedProfile);
+//					}
+					
+					Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo.findById(Long.parseLong(profile));
+					if (jobApplication.isPresent()) {
+						JobAccountApplication application = jobApplication.get();
+						application.setStatus("SELECTED");
+						jobAccountApplicationRepo.save(application);
 					}
 				}
 			}
 		} else {
-			Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profilesId));
-			if (userProfileOptional.isPresent()) {
-				SelectedProfile selectedProfile = new SelectedProfile();
-				selectedProfile.setUserProfile(userProfileOptional.get());
-				selectedProfile.setSelectedDate(new Date());
-				User user = userRepo.findByEmail(auth.getName());
-				model.put("user", user);
-				selectedProfile.setSelectedBy(user);
-				selectedProfileRepo.save(selectedProfile);
+//			Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profilesId));
+//			if (userProfileOptional.isPresent()) {
+//				SelectedProfile selectedProfile = new SelectedProfile();
+//				selectedProfile.setUserProfile(userProfileOptional.get());
+//				selectedProfile.setSelectedDate(new Date());
+//				User user = userRepo.findByEmail(auth.getName());
+//				model.put("user", user);
+//				selectedProfile.setSelectedBy(user);
+//				selectedProfileRepo.save(selectedProfile);
+//			}
+			
+			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo.findById(Long.parseLong(profilesId));
+			if (jobApplication.isPresent()) {
+				JobAccountApplication application = jobApplication.get();
+				application.setStatus("SELECTED");
+				jobAccountApplicationRepo.save(application);
 			}
 
 		}
-		model.put("successMessage", "Profiles Selected"); 
-		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
-		model.put("applications", applications);
-		return "admin/selectedstud-genz";
+		session.setAttribute("successMessage", "Profiles Selected"); 
+//		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
+//		model.put("applications", applications);
+		response.sendRedirect("/selectedstud-genz.html");
+		
 	}
 
 	
@@ -1107,11 +1141,11 @@ public class AdminController {
 				
 				Optional<JobAccount> job = jobAccountRepo.findById(Integer.parseInt(jobId));
 				profiles = jobAccountApplicationRepo.findByJob(job.get());
-				for(JobAccountApplication accountApplication : profiles)
-				{
-					userProfiles.add(accountApplication.getApplicant().getUserProfile());
-				}
-				model.put("profiles", userProfiles);
+//				for(JobAccountApplication accountApplication : profiles)
+//				{
+//					userProfiles.add(accountApplication.getApplicant().getUserProfile());
+//				}
+				model.put("profiles", profiles);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

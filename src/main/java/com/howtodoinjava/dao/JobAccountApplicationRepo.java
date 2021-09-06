@@ -24,5 +24,7 @@ public interface JobAccountApplicationRepo extends JpaRepository<JobAccountAppli
 	@Modifying
     @Query("delete from JobAccountApplication e where applicant = ?1 and job = ?2")
 	public void deleteAppliedJob(User applicant,JobAccount job);
+	
+	public List<JobAccountApplication> findAllByApplicantAndStatus(User applicant, String status);
 
 }

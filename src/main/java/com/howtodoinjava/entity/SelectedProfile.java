@@ -35,6 +35,11 @@ public class SelectedProfile {
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name = "job_id")
+	private JobAccount account;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "applicant_id")
 	private User selectedBy;
 	
@@ -61,6 +66,12 @@ public class SelectedProfile {
 	}
 	public void setSelectedBy(User selectedBy) {
 		this.selectedBy = selectedBy;
+	}
+	public JobAccount getAccount() {
+		return account;
+	}
+	public void setAccount(JobAccount account) {
+		this.account = account;
 	}
 	
 	

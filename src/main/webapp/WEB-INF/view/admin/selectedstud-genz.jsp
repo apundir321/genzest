@@ -193,15 +193,15 @@
 var dataSet = new Array();
 <c:forEach items="${applications}" var="application" varStatus="status">
 jobArray = new Array();
-jobArray.push('${application.userProfile.id}');
-jobArray.push('${application.userProfile.firstName}');
-jobArray.push('${application.userProfile.dob}');
-jobArray.push('${application.userProfile.email}');
-jobArray.push('${application.userProfile.otherDetails.mobileNo}');
-jobArray.push('${application.userProfile.gender}');
-jobArray.push('${application.userProfile.otherDetails.city}');
-jobArray.push('${application.userProfile.otherDetails.havePc}');
-jobArray.push('<a href="edit_stud.html?profileId=${application.userProfile.id}">View</a>');
+jobArray.push('${application.applicant.firstName}');
+jobArray.push('${application.job.employer.employerName}');
+jobArray.push('${application.job.category.categoryName}');
+jobArray.push('${application.job.jobName}');
+jobArray.push('${application.job.rate}');
+jobArray.push('${application.applicant.email}');
+jobArray.push('${application.applicant.userProfile.otherDetails.mobileNo}');
+jobArray.push('${application.applicant.userProfile.otherDetails.city}');
+jobArray.push('<a href="edit_stud.html?profileId=${application.applicant.id}">View</a>');
 dataSet.push(jobArray);
 </c:forEach>
 	var dataSet2 = [
@@ -265,17 +265,15 @@ $(document).ready(function() {
     $('#example').DataTable( {
         data: dataSet,
         columns: [
-        	{ title: "S No." },
-			{ title: "Name" },
-            { title: "Dob" },
-            { title: "Email" },
-            { title: "Phone" },
-            { title: "Gender" },
-            { title: "City" },
-			{ title: "Computer" },
-			{
-				 title: "view"
-			}
+        	{ title: "Candidate" },
+            { title: "Employer" },
+            { title: "Category" },
+            { title: "Job Name" },
+            { title: "Rate" },
+			{ title: "Email" },
+			{ title: "Phone" },
+			{ title: "City" },
+            { title: "view profile" },
    
         ],
 		
@@ -284,28 +282,20 @@ $(document).ready(function() {
 </script>
 
 <script>
-	var dataSet1 = [
-    //    [ "2", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "12", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "10", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "8", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "6", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "4", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "3", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "5", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "7", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "9", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-	//    [ "11", "Designer", "D2241", "Computer S", "20", "Techworld", "Open", "Techworld", "26/05/2021", "----" ],
-    // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
-    // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
-    // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-	// [ "1", "30SMKL12221", "Henny", "HR", "Job2", "180.00", "4pm - 6pm", "A B", "abc@gmail.com", "9098765432", "26/05/1998", "----" ]
-    // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
-    // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
-    // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
-    // [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
-];
-
+var dataSet1 = new Array();
+<c:forEach items="${presentApplications}" var="application" varStatus="status">
+jobArray = new Array();
+jobArray.push('${application.applicant.firstName}');
+jobArray.push('${application.job.employer.employerName}');
+jobArray.push('${application.job.category.categoryName}');
+jobArray.push('${application.job.jobName}');
+jobArray.push('${application.job.rate}');
+jobArray.push('${application.applicant.email}');
+jobArray.push('${application.applicant.userProfile.otherDetails.mobileNo}');
+jobArray.push('${application.applicant.userProfile.otherDetails.city}');
+jobArray.push('<a href="edit_stud.html?profileId=${application.applicant.id}">View</a>');
+dataSet1.push(jobArray);
+</c:forEach>
 
 
     
@@ -335,31 +325,44 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#example1').DataTable( {
         data: dataSet1,
+//         columns: [
+// 			{ title: "Id" },
+//             { title: "Job Code" },
+//             { title: "Employer" },
+//             { title: "Category" },
+//             { title: "Job Name" },
+//             { title: "Rate" },
+//             { title: "Required Slot" },
+// 			{ title: "Candidate" },
+// 			{ title: "Email" },
+// 			{ title: "Phone" },
+//             { title: "DOB" },
+//             { title: "Action" },
+//             {
+//                 data: null,
+//                 className: "dt-center editor-edit",
+//                 defaultContent: '<a href="wallet-genz.html"><i style="margin:-1rem;" class="fa fa-pencil"/></a>',
+//                 orderable: false
+//             },
+//             {
+//                 data: null,
+//                 className: "dt-center editor-delete",
+//                 defaultContent: '<i class="fa fa-trash"/>',
+//                 orderable: false
+//             }
+//         ],
+
         columns: [
-			{ title: "Id" },
-            { title: "Job Code" },
+        	{ title: "Candidate" },
             { title: "Employer" },
             { title: "Category" },
             { title: "Job Name" },
             { title: "Rate" },
-            { title: "Required Slot" },
-			{ title: "Candidate" },
 			{ title: "Email" },
 			{ title: "Phone" },
-            { title: "DOB" },
-            { title: "Action" },
-            {
-                data: null,
-                className: "dt-center editor-edit",
-                defaultContent: '<a href="wallet-genz.html"><i style="margin:-1rem;" class="fa fa-pencil"/></a>',
-                orderable: false
-            },
-            {
-                data: null,
-                className: "dt-center editor-delete",
-                defaultContent: '<i class="fa fa-trash"/>',
-                orderable: false
-            }
+			{ title: "City" },
+            { title: "view profile" },
+   
         ],
 		
     } );

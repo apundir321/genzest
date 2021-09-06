@@ -30,6 +30,14 @@ public class JobAccountApplication {
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "applicant_id")
 	private User applicant;
+	
+	private String checkinTime;
+	
+	
+	private String checkoutTime;
+	
+	private String status;
+	
 	public long getId() {
 		return id;
 	}
@@ -53,6 +61,24 @@ public class JobAccountApplication {
 	}
 	public void setApplicant(User applicant) {
 		this.applicant = applicant;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getCheckinTime() {
+		return checkinTime;
+	}
+	public void setCheckinTime(String checkinTime) {
+		this.checkinTime = checkinTime;
+	}
+	public String getCheckoutTime() {
+		return checkoutTime;
+	}
+	public void setCheckoutTime(String checkoutTime) {
+		this.checkoutTime = checkoutTime;
 	}
 	
 	
