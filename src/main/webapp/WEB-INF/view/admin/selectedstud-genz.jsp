@@ -202,6 +202,8 @@ jobArray.push('${application.applicant.email}');
 jobArray.push('${application.applicant.userProfile.otherDetails.mobileNo}');
 jobArray.push('${application.applicant.userProfile.otherDetails.city}');
 jobArray.push('<a href="edit_stud.html?profileId=${application.applicant.id}">View</a>');
+
+
 dataSet.push(jobArray);
 </c:forEach>
 	var dataSet2 = [
@@ -273,7 +275,7 @@ $(document).ready(function() {
 			{ title: "Email" },
 			{ title: "Phone" },
 			{ title: "City" },
-            { title: "view profile" },
+            { title: "view profile" }
    
         ],
 		
@@ -287,13 +289,14 @@ var dataSet1 = new Array();
 jobArray = new Array();
 jobArray.push('${application.applicant.firstName}');
 jobArray.push('${application.job.employer.employerName}');
-jobArray.push('${application.job.category.categoryName}');
 jobArray.push('${application.job.jobName}');
 jobArray.push('${application.job.rate}');
 jobArray.push('${application.applicant.email}');
 jobArray.push('${application.applicant.userProfile.otherDetails.mobileNo}');
-jobArray.push('${application.applicant.userProfile.otherDetails.city}');
+jobArray.push('${application.checkinTime}');
+jobArray.push('${application.checkoutTime}');
 jobArray.push('<a href="edit_stud.html?profileId=${application.applicant.id}">View</a>');
+jobArray.push('<a href="/editAttendence.html?applicationId=${application.id}"><i  class="fa fa-pencil"></i></a><a href="/approveStud.html?applicationId=${application.id}"><i class="fa fa-check"></i></a><a href="/rejectStud.html?applicationId=${application.id}"><i class="fa fa-close" ></i></a>')
 dataSet1.push(jobArray);
 </c:forEach>
 
@@ -355,13 +358,14 @@ $(document).ready(function() {
         columns: [
         	{ title: "Candidate" },
             { title: "Employer" },
-            { title: "Category" },
             { title: "Job Name" },
             { title: "Rate" },
 			{ title: "Email" },
 			{ title: "Phone" },
-			{ title: "City" },
+			{ title: "Checkin Time" },
+			{ title: "Checkout Time"},
             { title: "view profile" },
+            { title: "Action"}
    
         ],
 		
@@ -635,6 +639,7 @@ $(document).ready(function() {
 		
 		</div>
 	</div>
+	
     <script>
 		$(document).ready( function () {
 			$('#table_id').DataTable();

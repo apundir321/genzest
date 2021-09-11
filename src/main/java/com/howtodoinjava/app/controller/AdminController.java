@@ -27,6 +27,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
+import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.LocationRepository;
 import com.howtodoinjava.dao.SelectedProfilesRepo;
 import com.howtodoinjava.dao.UserProfileRepository;
@@ -53,10 +55,12 @@ import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
+import com.howtodoinjava.entity.MarkAttendence;
 import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.SelectedProfile;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.JobTimeSlot;
 import com.howtodoinjava.model.Location;
 import com.howtodoinjava.model.OtherUserDetails;
@@ -102,6 +106,13 @@ public class AdminController {
 	
 	@Autowired
 	SelectedProfilesRepo selectedProfileRepo;
+	
+	@Autowired
+	JobEarningRepo jobEarningRepo;
+	
+	
+	@Autowired
+	HttpSession session;
 
 	@RequestMapping("/category-genz.html")
 	public String category(Map<String, Object> model) {
@@ -276,6 +287,64 @@ public class AdminController {
 		return "admin/jobtype-genz";
 	}
 
+	
+	@RequestMapping("/approveStud.html")
+	public void approveStud(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		String applicationId = request.getParameter("applicationId");
+		
+		if (!StringUtils.isEmpty(applicationId)) {
+			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
+					.findById(Long.parseLong(applicationId));
+			JobAccountApplication application = jobApplication.get();
+			application.setStatus("APPROVED");
+			jobAccountApplicationRepo.save(application);
+			
+			JobEarning earning = new JobEarning();
+			earning.setApplicantUser(user);
+			earning.setJobAccount(application.getJob());
+			earning.setPresentDate(new Date());
+			earning.setStatus("CREATED");
+			earning.setTotalEarning(500);
+			earning.setTotalHours(8);
+			jobEarningRepo.save(earning);
+			session.setAttribute("successMessage", "Student Application Approved!!");
+			response.sendRedirect("/selectedstud-genz.html");
+		}else
+		{
+		session.setAttribute("errorMessage", "Didn't find any application with this id, please choose another one.");
+		response.sendRedirect("/selectedstud-genz.html");
+		}
+	}
+	
+	
+	
+	@RequestMapping("/rejectStud.html")
+	public void rejectStud(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		String applicationId = request.getParameter("applicationId");
+		
+		if (!StringUtils.isEmpty(applicationId)) {
+			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
+					.findById(Long.parseLong(applicationId));
+			JobAccountApplication application = jobApplication.get();
+			application.setStatus("REJECTED");
+			jobAccountApplicationRepo.save(application);
+			
+			
+			session.setAttribute("successMessage", "Student Application Rejected!!");
+			response.sendRedirect("/selectedstud-genz.html");
+		}else
+		{
+		session.setAttribute("errorMessage", "Didn't find any application with this id, please choose another one.");
+		response.sendRedirect("/selectedstud-genz.html");
+		}
+	}
+	
 	@RequestMapping("/jobtype-edit-genz.html")
 	public String editJobType(Map<String, Object> model, @RequestParam(required = false) String jobTypeId) {
 		
@@ -951,6 +1020,52 @@ public class AdminController {
 		response.sendRedirect("/selectedstud-genz.html");
 		
 	}
+	
+	@RequestMapping(value = "/editAttendence.html", method = RequestMethod.GET)
+	public String markAttendence(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
+			@RequestParam String applicationId) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(auth.getName());
+		model.put("user", user);
+		model.put("applicationId", applicationId);
+		Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
+				.findById(Long.parseLong(applicationId));
+		JobAccountApplication application = jobApplication.get();
+		
+		MarkAttendence markAttendence = new MarkAttendence();
+		markAttendence.setCheckinTime(application.getCheckinTime());
+		markAttendence.setCheckoutTime(application.getCheckoutTime());
+		model.put("markAttendence", markAttendence);
+		return "admin/editattendence";
+	}
+	
+	
+	@RequestMapping(value = "/editAttendencePost.html", method = RequestMethod.POST)
+	public String markAttendence(@ModelAttribute("markAttendence") MarkAttendence markAttendence, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+//		String checkInTime = request.getParameter("checkinTime");
+//		String checkoutTime = request.getParameter("checkoutTime");
+		
+		String checkInTime = markAttendence.getCheckinTime();
+		String checkoutTime = markAttendence.getCheckoutTime();
+		String applicationId = request.getParameter("applicationId");
+		System.out.println(checkInTime);
+		if (!StringUtils.isEmpty(checkInTime) && !StringUtils.isEmpty(checkoutTime)) {
+			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
+					.findById(Long.parseLong(applicationId));
+			JobAccountApplication application = jobApplication.get();
+			application.setCheckinTime(checkInTime);
+			application.setCheckoutTime(checkoutTime);
+			application.setStatus("MARKED");
+			jobAccountApplicationRepo.save(application);
+			session.setAttribute("successMessage", "Attendence Edited!");
+			response.sendRedirect("/selectedstud-genz.html");
+		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) session.getAttribute("user");
+		model.put("user", user);
+		model.put("errorMessage", "Input details invalid");
+		return "admin/editattendence";
+	}
 
 	
 	@RequestMapping("/jobs-genz.html")
@@ -1064,10 +1179,11 @@ public class AdminController {
 //				account.getTimeSlots().add(slot1.get());
 //				
 				List<Object[]> cityObj = categoryRepo.getCityByCityName(account.getCity());
-				int serialNumber = (int) ((Math.random() * (100 - 1)) + 1);
-				String jobCode = account.getEmployer().getClientCode() + "_" + cityObj.get(0)[0] + "_"
-						+ account.getCategory().getCategoryCode() + "_" + account.getCreatedDate().getMonth()
-						+ account.getCreatedDate().getDate() + account.getCreatedDate().getYear() + "_" + serialNumber;
+				String cityName = (String) cityObj.get(0)[1];
+				int serialNumber = (int) ((Math.random() * (1000 - 1)) + 1);
+				String jobCode = account.getEmployer().getClientCode() + "_" + cityName.substring(0,3).toUpperCase() + "_"
+						+ account.getCategory().getCategoryCode() + "_" + account.getJobDate().getMonth()
+						+ account.getJobDate().getDate() + account.getJobDate().getYear() + "_" + serialNumber;
 
 				account.setJobCode(jobCode);
 				System.out.println(account);

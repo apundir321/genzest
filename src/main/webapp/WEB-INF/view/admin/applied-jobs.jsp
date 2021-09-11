@@ -476,6 +476,9 @@ dataSet.push(jobArray);
 		
 		</div>
 	</div>
+	
+	
+	
     <script>
 		$(document).ready( function () {
 			$('#table_id').DataTable();

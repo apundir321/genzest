@@ -167,7 +167,7 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Mark Attendence</b></h4>
+			   <h4><b>Edit Attendence</b></h4>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -198,10 +198,10 @@
                  <div id="formContent">
           <!-- Tabs Titles -->
           <!-- <h2 class="active"> Sign In </h2> -->
-          <h2 class="inactive underlineHover">Mark Attendence </h2>
+          <h2 class="inactive underlineHover">Edit Attendence </h2>
     
           <!-- Login Form -->
-         <form:form action="/markAttendencePost.html" modelAttribute="markAttendence"  method='POST' id="loginForm">
+         <form:form action="/editAttendencePost.html" modelAttribute="markAttendence"  method='POST' id="loginForm">
          					<input type="hidden" class="form-control" value="${applicationId}" id="applicationId" name="applicationId" />
          
 							<div class="form-group">

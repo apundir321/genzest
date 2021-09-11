@@ -67,6 +67,7 @@ import com.howtodoinjava.entity.Employer;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobAccountApplication;
 import com.howtodoinjava.entity.JobType;
+import com.howtodoinjava.entity.MarkAttendence;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobApplication;
@@ -569,7 +570,7 @@ public class IndexController {
 	}
 
 	@RequestMapping("/applyJob")
-	public String applyJob(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
+	public void applyJob(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
 			@RequestParam String jobId) throws IOException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (jobId.contains(",")) {
@@ -603,11 +604,11 @@ public class IndexController {
 			}
 
 		}
-		model.put("successMessage", "Jobs Applied!");
+		session.setAttribute("successMessage", "Jobs Applied!");
 		List<JobAccountApplication> applications = jobAccountApplicationRepo
 				.findAllByApplicant((User) model.get("user"));
 		model.put("applications", applications);
-		return "appliedjobs";
+		response.sendRedirect("/appliedjobs.html");
 	}
 
 	@RequestMapping("/login.html")
@@ -620,9 +621,9 @@ public class IndexController {
 	public String appliedjobs(Map<String, Object> model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		model.put("message", "HowToDoInJava Reader !!");
-
-		User user = (User) session.getAttribute("user");
+		User user = userRepo.findByEmail(auth.getName());
 		model.put("user", user);
+		
 		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant(user);
 		model.put("applications", applications);
 		return "appliedjobs";
@@ -644,13 +645,17 @@ public class IndexController {
 		User user = (User) session.getAttribute("user");
 		model.put("user", user);
 		model.put("applicationId", applicationId);
+		model.put("markAttendence", new MarkAttendence());
 		return "markattendence";
 	}
 
 	@RequestMapping(value = "/markAttendencePost.html", method = RequestMethod.POST)
-	public String markAttendence(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
-		String checkInTime = request.getParameter("checkinTime");
-		String checkoutTime = request.getParameter("checkoutTime");
+	public void markAttendence(@ModelAttribute("markAttendence") MarkAttendence markAttendence, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+//		String checkInTime = request.getParameter("checkinTime");
+//		String checkoutTime = request.getParameter("checkoutTime");
+		
+		String checkInTime = markAttendence.getCheckinTime();
+		String checkoutTime = markAttendence.getCheckoutTime();
 		String applicationId = request.getParameter("applicationId");
 		System.out.println(checkInTime);
 		if (!StringUtils.isEmpty(checkInTime) && !StringUtils.isEmpty(checkoutTime)) {
@@ -663,12 +668,10 @@ public class IndexController {
 			jobAccountApplicationRepo.save(application);
 			session.setAttribute("successMessage", "Attendence Marked");
 			response.sendRedirect("/appliedjobs.html");
+		}else {
+		session.setAttribute("errorMessage", "Input details invalid");
+		response.sendRedirect("/markAttendence.html");
 		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) session.getAttribute("user");
-		model.put("user", user);
-		model.put("errorMessage", "Input details invalid");
-		return "markattendence";
 	}
 
 	@GetMapping("/getProfilePic/{name}")
@@ -832,6 +835,12 @@ public class IndexController {
 		}
 		session.setAttribute("successMessage", "Successfully Withdrawed");
 		res.sendRedirect("/appliedjobs.html");
+	}
+	
+	@RequestMapping("/error.html")
+	public String error() throws IOException {
+
+		return "error";
 	}
 
 }
