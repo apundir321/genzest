@@ -301,14 +301,30 @@ public class AdminController {
 			JobAccountApplication application = jobApplication.get();
 			application.setStatus("APPROVED");
 			jobAccountApplicationRepo.save(application);
+			Date checkinDate = new Date();
+			checkinDate.setHours( Integer.valueOf(   application.getCheckinTime().split(":")[0]));
+			checkinDate.setMinutes(Integer.valueOf( application.getCheckinTime().split(":")[1]));
 			
+			
+			Date checkoutDate = new Date();
+			
+			checkoutDate.setHours( Integer.valueOf(   application.getCheckoutTime().split(":")[0]));
+			checkoutDate.setMinutes(Integer.valueOf( application.getCheckoutTime().split(":")[1]));
+			 long difference_In_Time
+             = checkoutDate.getTime() - checkinDate.getTime();
+			 long difference_In_Hours
+             = (difference_In_Time
+                / (1000 * 60 * 60))
+               % 24;
+			 
+			 int totalAmount = (int)difference_In_Hours*application.getJob().getRate();
 			JobEarning earning = new JobEarning();
 			earning.setApplicantUser(user);
 			earning.setJobAccount(application.getJob());
 			earning.setPresentDate(new Date());
 			earning.setStatus("CREATED");
-			earning.setTotalEarning(500);
-			earning.setTotalHours(8);
+			earning.setTotalEarning(totalAmount);
+			earning.setTotalHours((int)difference_In_Hours);
 			jobEarningRepo.save(earning);
 			session.setAttribute("successMessage", "Student Application Approved!!");
 			response.sendRedirect("/selectedstud-genz.html");

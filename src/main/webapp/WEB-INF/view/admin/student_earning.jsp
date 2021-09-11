@@ -193,14 +193,14 @@ jobArray = new Array();
 jobArray.push('${earning.id}');
 jobArray.push('${earning.jobAccount.jobCode}');
 jobArray.push('${earning.applicantUser.firstName}');
-jobArray.push('${earning.applicantUser.course}');
+jobArray.push('${earning.applicantUser.userProfile.otherDetails.course}');
 jobArray.push('${earning.jobAccount.jobName}');
 jobArray.push('${earning.jobAccount.rate}');
 jobArray.push('${earning.totalEarning}');
 jobArray.push('${earning.totalPaid}');
-jobArray.push('${earning.applicatnUser.email}');
+jobArray.push('${earning.applicantUser.email}');
 
-jobArray.push('<a href="/showJobProfile?jobId=${job.id}">View</a>');
+jobArray.push('<a href="/showJobProfile?jobId=${earning.jobAccount.id}">View</a>');
 
 dataSet1.push(jobArray);
 </c:forEach>
