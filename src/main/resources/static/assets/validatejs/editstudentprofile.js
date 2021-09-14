@@ -114,5 +114,98 @@
 					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
 				}
 			} );
+			
+			
+			
+			
+				$( "#otherdetailsform" ).validate( {
+				rules: {
+					mobileNo: "required",
+					alternateMobileNo: "required",
+					course: "required",
+					vehicleType: "required",
+					address: "required",
+					country: "required",
+					state: "required",
+					city: "required",
+					locality: "required",
+					postalCode: "required",
+					collegeName: "required",
+					degreeCollegeCompletionDate: "required",
+					havePc: "required",
+					jobCategories: "required",
+					preference: "required",
+					mobileNo: {
+						required: true,
+						minlength: 10,
+						maxlength: 10,
+						digits: true,
+						firstzero: true,
+					},
+					alternateMobileNo: {
+						required: true,
+						minlength: 10,
+						maxlength: 10,
+						digits: true,
+						firstzero: true,
+					},
+					postalCode: {
+						required: true,
+						minlength: 6,
+						maxlength: 6,
+						digits: true,
+					}
+				},
+				errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+			} );
+			
+			
+			
+			
+				$( "#uploaddocumentform" ).validate( {
+				rules: {
+					UPI: "required",
+					paymentMethod: "required",
+					aadhar: "required",
+					studentId: "required",
+					inputother: "required",
+				},
+				errorElement: "em",
+				errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+
+					if ( element.prop( "type" ) === "checkbox" ) {
+						error.insertAfter( element.parent( "label" ) );
+					} else {
+						error.insertAfter( element );
+					}
+				},
+				highlight: function ( element, errorClass, validClass ) {
+					$( element ).parents( ".form-group" ).addClass( "has-error" ).removeClass( "has-success" );
+				},
+				unhighlight: function (element, errorClass, validClass) {
+					$( element ).parents( ".form-group" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+			} ); 
+			
+			
+			
         });
 

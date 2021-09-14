@@ -453,14 +453,14 @@ input[type=file] {
 						<label for="email">Email <span>*</span></label>
 						<form:input class="form-control" path="email"
 							placeholder="Drop Your Mail Id" id="example-email-input"
-							value="${user.email}" />
+							value="${user.email}"  readonly="${!editable}"/>
 						<form:errors path="email" cssClass="error"></form:errors>
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="parentsName">Parent's Name <span>*</span></label>
 						<form:input path="parentsName" placeholder="Parents Name"
-							class="form-control" type="text" />
+							class="form-control" type="text"  readonly="${!editable}"/>
 						<form:errors path="parentsName" cssClass="error"></form:errors>
 					</div>
 
@@ -469,7 +469,7 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="gender">Gender <span>*</span></label>
-						<form:select path="gender" class="form-control">
+						<form:select path="gender" class="form-control"  readonly="${!editable}">
 							<form:option class="first-op" value="">Select</form:option>
 							<form:option value="Male">Male</form:option>
 							<form:option value="Female">Female</form:option>
@@ -481,7 +481,7 @@ input[type=file] {
 						<label for="dob">Date of Birth <span>*</span></label>
 						<form:input type="date" class="form-control" path="dob"
 							onfocusout="ageCalculation()" placeholder="DD/MM/YYYY"
-							name="birthday" />
+							name="birthday"  readonly="${!editable}"/>
 						<form:errors path="dob" cssClass="error"></form:errors>
 
 					</div>
@@ -492,7 +492,7 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="bloodGroup">Blood Group <span>*</span></label>
-						<form:select path="bloodGroup" class="form-control">
+						<form:select path="bloodGroup" class="form-control"  readonly="${!editable}">
 							<form:option value="">Please Select</form:option>
 							<form:option value="AB-"></form:option>
 							<form:option value="O-"></form:option>
@@ -523,7 +523,7 @@ input[type=file] {
 
 				<form:form action="/updateOtherDetails.html" method="post"
 					modelAttribute="otherDetails" enctype="multipart/form-data"
-					id="studentprofileform">
+					id="otherdetailsform">
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="mobileNo">Mobile No <span>*</span></label>
 						<form:input class="form-control" path="mobileNo"
@@ -546,7 +546,7 @@ input[type=file] {
 					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
 												<form:input class="form-control" type="date" 
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
-													path="degreeCollegeCompletionDate" />
+													path="degreeCollegeCompletionDate"  readonly="${!editable}"/>
 					  </div>
 					  
 					  	  <script>
@@ -593,7 +593,7 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="course">Course <span>*</span></label>
-						<form:select class="form-control" path="course">
+						<form:select class="form-control" path="course"  readonly="${!editable}" >
 							<form:option value="">Select</form:option>
 							<form:option value="B.tech">B.tech</form:option>
 							<c:forEach var="course" items="${courses}">
@@ -608,7 +608,7 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="collegeName">College Name <span>*</span></label>
 						<form:input id="collage-name" path="collegeName" type="text"
-							placeholder="Collage-name" class="form-control" />
+							placeholder="Collage-name" class="form-control"  readonly="${!editable}"/>
 						<form:errors path="collegeName" cssClass="error"></form:errors>
 					</div>
 
@@ -764,7 +764,8 @@ input[type=file] {
 
 				</form:form>
 				
-				<form:form action="/updatedocs.html" method="post" modelAttribute="studentDocs" enctype="multipart/form-data">
+				<form:form action="/updatedocs.html" method="post" modelAttribute="studentDocs" enctype="multipart/form-data"
+				id="uploaddocumentform">
 
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address"> 
  					<h4>Upload Documents</h4> 
