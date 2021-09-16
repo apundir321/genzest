@@ -288,7 +288,7 @@ input[type=file] {
 					<li class="sidebar-item top"><a class="sidebar-link first"
 						href="index.html"><i class="fa fa-user-circle-o align-middle"
 							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}
-							</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+							</b></span>
 							<p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p> </a>
 					</li>
 
@@ -366,7 +366,10 @@ input[type=file] {
 
 			<main class="content">
 
-
+				<a href="profile.html"><button class="back"
+									style="float: right; margin: 1rem; color: white;">
+									Back <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+								</button></a>
 
 				<form:form action="/updateProfile.html" method="post"
 					modelAttribute="profile" enctype="multipart/form-data"
@@ -392,10 +395,7 @@ input[type=file] {
 							<h4>General Details (data once entered can not be altered)</h4>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-							<a href="profile.html"><button class="back"
-									style="float: right; margin: 1rem; color: white;">
-									Back <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-								</button></a>
+							
 						</div>
 					</div>
 
@@ -546,7 +546,7 @@ input[type=file] {
 					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
 												<form:input class="form-control" type="date" 
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
-													path="degreeCollegeCompletionDate"  readonly="${!editable}"/>
+													path="degreeCollegeCompletionDate"/>
 					  </div>
 					  
 					  	  <script>
@@ -608,7 +608,7 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="collegeName">College Name <span>*</span></label>
 						<form:input id="collage-name" path="collegeName" type="text"
-							placeholder="Collage-name" class="form-control"  readonly="${!editable}"/>
+							placeholder="Collage-name" class="form-control" />
 						<form:errors path="collegeName" cssClass="error"></form:errors>
 					</div>
 

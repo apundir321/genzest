@@ -97,7 +97,7 @@
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+					<a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p>
             		</a>
 				</li>
@@ -125,17 +125,7 @@
 				</ul>
 
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-				<div class="container">
-					<div class="centered">
-						<b class="dot">.....</b><br>
-						<a href="#"><b>Download our App</b></a><br>
-						<b class="dot" >.....</b>
-						<br>
-						<a class="blurtext">
-							Become a part of GenZest by Downloading our App
-						</a>
-					</div>
-				  </div>
+			
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
 				<h4><b>Genzest Admin</b></h4>

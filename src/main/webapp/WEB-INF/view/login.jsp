@@ -121,17 +121,7 @@
 				</ul>
 
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-				<div class="container">
-					<div class="centered">
-						<b class="dot">.....</b><br>
-						<a href="#"><b>Download our App</b></a><br>
-						<b class="dot" >.....</b>
-						<br>
-						<a class="blurtext">
-							Become a part of GenZest by Downloading our App
-						</a>
-					</div>
-				  </div>
+				
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
 				<h4><b>Genzest Admin</b></h4>
