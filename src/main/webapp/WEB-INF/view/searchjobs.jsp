@@ -141,7 +141,7 @@ $(document).ready(function() {
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a href="index.html"><img src="assets-1/img/icons/Genzest Logo.png" alt="" class="img-responsive logo"></a></a>
+				<a href="student-d.html"><img src="assets-1/img/icons/Genzest Logo.png" alt="" class="img-responsive logo"></a></a>
 
 
 				<ul class="sidebar-nav">
@@ -209,9 +209,8 @@ $(document).ready(function() {
 				</a>
 				
 				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth">Genzest Login</button>
-					<button class="btn-fifth">Recruiter Login</button>
-					<button class="btn-sixth">Student Login</button>
+					<button class="btn-forth"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a></button>
+					
 					<!-- <a class="dropdown-item" href="#">Log out</a> -->
 				</div> 
 			</nav>

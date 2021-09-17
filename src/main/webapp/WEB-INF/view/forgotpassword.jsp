@@ -154,9 +154,8 @@
 				</a>
 				
 				<div class="dropdown-menu dropdown-menu-end">
-					<button class="btn-forth"><a href="genzest-d.html">Genzest Login</a></button>
-					<button class="btn-fifth"><a href="recruiter-d.html">Recruiter Login</a></button>
-					<button class="btn-sixth"><a href="student-d.html">Student Login</a></button>
+					<button class="btn-forth"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a></button>
+					
 					<!-- <a class="dropdown-item" href="#">Log out</a> -->
 				</div> 
 			</nav>
