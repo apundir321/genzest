@@ -680,8 +680,8 @@ input[type=file] {
 						<label for="city">City <span>*</span></label>
 						<form:select path="city" id="cityDropDown" class="form-control">
 							<option value="">Select</option>
-							<c:forEach var="state" items="${states}">
-								<form:option value="${state[1]}" label="${state[1]}" />
+							<c:forEach var="city" items="${cities}">
+								<form:option value="${city[1]}" label="${city[1]}" />
 							</c:forEach>
 						</form:select>
 						<form:errors path="city" cssClass="error"></form:errors>
@@ -1008,22 +1008,22 @@ function myFunction() {
 			<c:remove var="successMessage" scope="request"/>
 	});
 	
-	$(document).ready(function(){
-		var x = document.getElementById("editState").value;
-		  $.ajax({
-				type: 'GET',
-				url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
-				success: function(result) {
-					var s = '';
-					for(var i = 0; i < result.length; i++) {
-						//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
-						s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
-					}
-					console.log(s);
-					$('#cityDropDown').html(s);
-				}
-			});
-	});
+// 	$(document).ready(function(){
+// 		var x = document.getElementById("editState").value;
+// 		  $.ajax({
+// 				type: 'GET',
+// 				url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
+// 				success: function(result) {
+// 					var s = '';
+// 					for(var i = 0; i < result.length; i++) {
+// 						//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+// 						s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+// 					}
+// 					console.log(s);
+// 					$('#cityDropDown').html(s);
+// 				}
+// 			});
+// 	});
 	
 	
 	$(document).ready(function(){

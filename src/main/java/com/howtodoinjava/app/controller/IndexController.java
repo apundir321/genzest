@@ -222,6 +222,7 @@ public class IndexController {
 		List<CourseType> courses = null;
 		List<Employer> employers = null;
 		List<Category> categories = null;
+		OtherUserDetails userDetails = null;
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			User user = (User) userRepo.findByEmail(authentication.getName());
@@ -230,6 +231,7 @@ public class IndexController {
 			courses = courseRepo.findAll();
 			employers = employerRepo.findAll();
 			categories = categoryRepo.findAll();
+			userDetails = profile.getOtherDetails();
 			System.out.println(profile + "  *****");
 
 		} catch (Exception e) {
@@ -237,13 +239,16 @@ public class IndexController {
 			e.printStackTrace();
 		}
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
+		if(userDetails!=null)
+		{
+			model.put("cities", categoryRepo.getCitiesByState(profile.getOtherDetails().getState()));
+		}
 		model.put("profile", profile == null ? new UserProfile() : profile);
 		model.put("courses", courses);
 		model.put("employers", employers);
 		model.put("categories", categories);
 		model.put("dayPreference", new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findAll());
-		OtherUserDetails userDetails = profile.getOtherDetails();
 		if (userDetails == null) {
 			model.put("otherDetails", new OtherUserDetails());
 		} else {
