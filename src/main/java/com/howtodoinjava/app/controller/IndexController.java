@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -42,6 +43,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.auth.profile.internal.Profile;
 import com.amazonaws.services.appstream.model.Session;
 import com.howtodoinjava.OnRegistrationCompleteEvent;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
@@ -550,7 +552,17 @@ public class IndexController {
 		DayPreference preference = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserProfile profile = userRepo.findByEmail(authentication.getName()).getUserProfile();
-		Set<DayPreference> preferences = profile.getOtherDetails().getPreferences();
+		Set<DayPreference> preferences = null;
+		OtherUserDetails otherUserDetails = profile.getOtherDetails();
+		if(otherUserDetails!=null)
+		{
+			preferences = profile.getOtherDetails().getPreferences();
+		}
+		else
+		{	
+			otherUserDetails = new OtherUserDetails();
+			preferences = new HashSet<>();
+		}
 
 		for (DayPreference pref : preferences) {
 			if (pref.getDay().equals(dayPreference.getDay())) {
@@ -560,10 +572,12 @@ public class IndexController {
 		}
 
 		if (preference == null) {
-			profile.getOtherDetails().getPreferences().add(dayPreference);
+			otherUserDetails.getPreferences().add(dayPreference);
+			profile.setOtherDetails(otherUserDetails);
 			userProfileRepo.save(profile);
 		} else {
-			profile.getOtherDetails().setPreferences(preferences);
+			otherUserDetails.setPreferences(preferences);
+			profile.setOtherDetails(otherUserDetails);
 			userProfileRepo.save(profile);
 		}
 
