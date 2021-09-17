@@ -17,7 +17,6 @@ public class UserDto {
     @Size(min = 1, message = "Please enter last name")
     private String lastName;
 
-    @ValidPassword
     private String password;
 
     @NotNull

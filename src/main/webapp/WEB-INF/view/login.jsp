@@ -135,7 +135,7 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Student Login</b></h4>
+			   <h4><b>Login</b></h4>
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">

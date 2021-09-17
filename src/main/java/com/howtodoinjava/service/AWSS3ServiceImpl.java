@@ -101,7 +101,7 @@ public class AWSS3ServiceImpl implements AWSS3Service {
 	}
 	
 	@Override
-	public ByteArrayOutputStream downloadFile(String keyName,UserProfile profile) {
+	public ByteArrayOutputStream downloadFile(String keyName,UserProfile profile) throws Exception {
 		try {
             S3Object s3object = amazonS3.getObject(new GetObjectRequest(bucketName,profile.getId()+"/"+profile.getId()+"_"+ keyName));
             

@@ -12,7 +12,7 @@ public interface AWSS3Service {
 	
 	void uploadGenericFile(MultipartFile multipartFile)  throws Exception;
 	
-	public ByteArrayOutputStream downloadFile(String keyName,UserProfile profile);
+	public ByteArrayOutputStream downloadFile(String keyName,UserProfile profile) throws Exception;
 	
 	
 }

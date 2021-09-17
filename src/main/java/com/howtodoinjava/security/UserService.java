@@ -100,12 +100,12 @@ public class UserService implements IUserService {
 		user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
 		user.setEmail(accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
+		user.setPhoneNo(accountDto.getPhoneNo());
 		if (!isRecuiter) {
 			profile = new UserProfile();
 			profile.setEmail(accountDto.getEmail());
 			profile.setFirstName(accountDto.getFirstName());
 			profile.setLastName(accountDto.getLastName());
-			
 			role = roleRepository.findByName("ROLE_EMPLOYEE");
 			if (role == null) {
 				role = new Role();

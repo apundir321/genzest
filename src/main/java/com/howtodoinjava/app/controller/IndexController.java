@@ -153,9 +153,12 @@ public class IndexController {
 	@RequestMapping("/student-d.html")
 	public String home(Map<String, Object> model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = (User) userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo
-				.findAllByApplicant(userRepo.findByEmail(authentication.getName()));
+				.findAllByApplicant(user);
 		model.put("appliedJobsCount", appliedJobs.size());
+		
 		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(null);
 		model.put("matchingJobsCount", matchingJobs.size());
 		model.put("user", session.getAttribute("user"));
@@ -450,7 +453,7 @@ public class IndexController {
 			}
 			if (!StringUtils.isEmpty(profilePicMultipart.getOriginalFilename())) {
 				awsService.uploadFile(profilePicMultipart, user.getUserProfile());
-				userProfile.setProfilePicFileName(profilePicMultipart.getOriginalFilename());
+				profileData.setProfilePicFileName(profilePicMultipart.getOriginalFilename());
 			}
 
 			model.put("user", user);
@@ -458,7 +461,7 @@ public class IndexController {
 			user.setUserProfile(profileData);
 			userRepo.save(user);
 			model.put("successMessage", "Profile Updated!");
-			model.put("profile", userProfile);
+			model.put("profile", profileData);
 			model.put("otherDetails", user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
 					: user.getUserProfile().getOtherDetails());
 			model.put("studentDocs", user.getUserProfile().getStudentDocuments() == null ? new StudentDocuments()
@@ -679,7 +682,13 @@ public class IndexController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName() + "  &&&&&&7");
 		User user = (User) session.getAttribute("user");
-		ByteArrayOutputStream downloadInputStream = awsService.downloadFile(name, user.getUserProfile());
+		ByteArrayOutputStream downloadInputStream = null;;
+		try {
+			downloadInputStream = awsService.downloadFile(name, user.getUserProfile());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(downloadInputStream.toByteArray());
 	}
