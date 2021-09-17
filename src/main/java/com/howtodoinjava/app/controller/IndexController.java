@@ -705,6 +705,9 @@ public class IndexController {
 		final String result = iUserService.validateVerificationToken(token);
 		if (result.equals("valid")) {
 			final User user = iUserService.getUser(token);
+			
+			user.setEnabled(true);
+			userRepo.save(user);
 			model.addAttribute("successMessage", "Account has been verified please log in now!");
 			return "login";
 		}

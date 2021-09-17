@@ -101,6 +101,7 @@ public class UserService implements IUserService {
 		user.setEmail(accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
 		user.setPhoneNo(accountDto.getPhoneNo());
+		user.setEnabled(false);
 		if (!isRecuiter) {
 			profile = new UserProfile();
 			profile.setEmail(accountDto.getEmail());

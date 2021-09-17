@@ -33,6 +33,10 @@ public class JwtUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException("User not found with username: " + username);
 		}
+		if(!user.isEnabled())
+		{
+			throw new UsernameNotFoundException("User not verified");
+		}
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		request.setAttribute("userObj", user);
 		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
