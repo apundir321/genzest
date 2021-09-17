@@ -593,7 +593,7 @@ input[type=file] {
 <%-- 							<form:errors path="vehicleType" cssClass="error"></form:errors> --%>
 <!--   </div> -->
   <div class="clear clearfix"></div>
-					<c:if test="${editable}">
+					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="course">Course <span>*</span></label>
 						<form:select class="form-control" path="course"  readonly="${!editable}" >
@@ -606,27 +606,9 @@ input[type=file] {
 						</form:select>
 						<form:errors path="course" cssClass="error"></form:errors>
 					</div>
-					</c:if>
 					
-					<c:if test="${not editable}">
-					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="course">Course <span>*</span></label>
-<%-- 						<form:select class="form-control" path="course"  readonly="${!editable}" > --%>
-<%-- 							<form:option value="">Select</form:option> --%>
-<%-- 							<form:option value="B.tech">B.tech</form:option> --%>
-<%-- 							<c:forEach var="course" items="${courses}"> --%>
-<%-- 								<form:option value="${course.id}" --%>
-<%-- 									label="${course.courseTypeName}" /> --%>
-<%-- 							</c:forEach> --%>
-<%-- 						</form:select> --%>
-<%-- 						<form:errors path="course" cssClass="error"></form:errors> --%>
-						
-						<form:input class="form-control" path="course"
-							placeholder="Course" 
-							 readonly="${!editable}" />
-					</div>
-					</c:if>
-
+					
+					
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="collegeName">College Name <span>*</span></label>
@@ -798,7 +780,7 @@ input[type=file] {
  					<label for="aadhar">Aadhar Card <span>*</span></label> <input 
  						type="file" name="aadhar" class="custom-file-input" 
  						id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> 
-						<c:if test="${not empty otherDetails.preference}">
+						<c:if test="${not empty studentDocs.aadharFileName}">
 							<h4 style="color: #f15336">
 								Aadhar Card uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.aadharFileName}">View</a></span>
 							</h4>
@@ -812,7 +794,7 @@ input[type=file] {
  						<input type="file" name="studentId" class="custom-file-input" 
  							id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
  					</div> 
- 					<c:if test="${not empty otherDetails.preference}">
+ 					<c:if test="${not empty studentDocs.studentIdFileName}">
 							<h4 style="color: #f15336">
 								Student Id uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.studentIdFileName}">View</a></span>
 							</h4>

@@ -537,7 +537,8 @@ public class IndexController {
 		userRepo.save(user);
 		model.put("successMessage", "Profile Updated!");
 		model.put("profile", user.getUserProfile());
-		model.put("otherDetails", user.getUserProfile().getOtherDetails());
+		model.put("otherDetails",  user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
+				: user.getUserProfile().getOtherDetails());
 		model.put("studentDocs", user.getUserProfile().getStudentDocuments());
 		return "edit";
 	}
