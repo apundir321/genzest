@@ -1,0 +1,78 @@
+.content .two h4{
+    text-align: center;
+    color: white;
+    margin-bottom: 4rem;
+    padding: 1rem;
+    color: #F15336;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+form .colbox{
+    
+}
+body{
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+}
+#imageUpload
+{
+    display: none;
+}
+
+#profileImage
+{
+    cursor: pointer;
+}
+
+#profile-container {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+#profile-container img {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+main .colbox label{
+    color: white;
+    margin-top:15px;
+    font-size: 1.5rem;
+}
+main .colboxb button{
+    background-color: #F15336;
+    color: white;
+    border: none;
+    border-radius: .5rem;
+    padding: 1rem;
+    font-weight: bold;
+    text-align: center;
+    width: 12rem;
+    
+}
+main .colboxb{
+    text-align: center;
+    margin-top: 25px;
+}
+main .form-row input[type="file"]{
+    background-color: white;
+    padding: .5rem;
+    border-radius: .3rem;
+}
+.address h4{
+	color: #F15336;
+    font-size: 1.9rem;
+    margin-top: 50px !important;
+    font-weight: bold;
+    text-align:center;
+}

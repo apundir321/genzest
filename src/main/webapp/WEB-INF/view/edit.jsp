@@ -276,7 +276,7 @@ input[type=file] {
 	<div class="wrapper">
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a href="index.html"><img
+				<a href="student-d.html"><img
 					src="assets-2/img/icons/Genzest Logo.png" alt=""
 					class="img-responsive logo"></a></a>
 
@@ -286,7 +286,7 @@ input[type=file] {
 					<br>
 
 					<li class="sidebar-item top"><a class="sidebar-link first"
-						href="index.html"><i class="fa fa-user-circle-o align-middle"
+						href="student-d.html"><i class="fa fa-user-circle-o align-middle"
 							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}
 							</b></span>
 							<p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p> </a>
@@ -322,14 +322,7 @@ input[type=file] {
 				</ul>
 
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-				<div class="container">
-					<div class="centered">
-						<b class="dot">.....</b><br> <a href="#"><b>Download
-								our App</b></a><br> <b class="dot">.....</b> <br> <a
-							class="blurtext"> Become a part of GenZest by Downloading our
-							App </a>
-					</div>
-				</div>
+				
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
 
 				<h4>
@@ -596,7 +589,7 @@ input[type=file] {
 					<c:if test="${editable}">
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="course">Course <span>*</span></label>
-						<form:select class="form-control" path="course"  readonly="${!editable}" >
+						<form:select class="form-control" path="course"  >
 							<form:option value="">Select</form:option>
 							<form:option value="B.tech">B.tech</form:option>
 							<c:forEach var="course" items="${courses}">
