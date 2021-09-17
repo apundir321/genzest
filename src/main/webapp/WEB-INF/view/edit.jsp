@@ -445,7 +445,7 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="email">Email <span>*</span></label>
 						<form:input class="form-control" path="email"
-							placeholder="Drop Your Mail Id" id="example-email-input"
+							placeholder="Drop Your Mail Id" type="email" id="example-email-input"
 							value="${user.email}"  readonly="${!editable}"/>
 						<form:errors path="email" cssClass="error"></form:errors>
 					</div>
