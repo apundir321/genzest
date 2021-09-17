@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 class GlobalControllerExceptionHandler {
   
     @ExceptionHandler(Exception.class)
-    public void handleConflict(HttpServletRequest request,HttpServletResponse response) {
-    	
+    public void handleConflict(Exception ex,HttpServletRequest request,HttpServletResponse response) {
+    	ex.printStackTrace();
     	try {
 			response.sendRedirect("/error.html");
 		} catch (IOException e) {
