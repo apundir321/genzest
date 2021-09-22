@@ -232,11 +232,11 @@
                     </div>
   <div class="form-group col-md-6">
     <label for="firstName">New Password <span>*</span></label>
-                            <form:input type="text" placeholder="New Password" class="form-control" path="newPassword"/>
+                            <form:input type="password" placeholder="New Password" class="form-control" path="newPassword"/>
   </div>
   <div class="form-group col-md-6">
     <label for="firstName">Confirm Password <span>*</span></label>
-                            <input type="text" placeholder="Confirm Password" class="form-control" name="confirmPassword"/>
+                            <input type="password" placeholder="Confirm Password" class="form-control" name="confirmPassword"/>
   </div>
   
   <form:input type="hidden" placeholder="token" class="form-control" path="token"/>

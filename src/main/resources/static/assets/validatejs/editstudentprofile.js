@@ -10,6 +10,38 @@
             return false;
         };
     }, "Only aphabets and dot allowed");
+    
+    
+    	jQuery.validator.addMethod("uploaddoc", function (value, element) {
+		var testDoc = !!document.getElementById("adhar");
+        if (testDoc) {
+            return true;
+        } else {
+           var value = $("#inputGroupFile01").val();
+           if(value == ""){
+				return	false;
+			}else{
+				return true;
+			}
+        };
+    }, "This field is required");
+	
+	
+	 	jQuery.validator.addMethod("uploadid", function (value, element) {
+		var testId = !!document.getElementById("studentId");
+        if (testId) {
+            return true;
+        } else {
+           var value = $("#inputGroupFile01").val();
+           if(value == ""){
+				return	false;
+			}else{
+				return true;
+			}
+        };
+    }, "This field is required");
+    
+    
 	
 	 jQuery.validator.addMethod("firstzero", function (value, element) {
         if (/^[1-9][0-9]*$/.test(value)) {
@@ -154,6 +186,9 @@
 						minlength: 6,
 						maxlength: 6,
 						digits: true,
+					},
+					aadhar: {
+						
 					}
 				},
 				errorElement: "em",
@@ -185,7 +220,14 @@
 					aadhar: "required",
 					studentId: "required",
 					inputother: "required",
+					aadhar: {
+						uploaddoc: true,
+					},
+					studentId: {
+						uploadid: true,
+					}
 				},
+				
 				errorElement: "em",
 				errorPlacement: function ( error, element ) {
 					// Add the `help-block` class to the error element

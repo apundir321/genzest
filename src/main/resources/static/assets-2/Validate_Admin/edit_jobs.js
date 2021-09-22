@@ -10,6 +10,10 @@
             return false;
         };
     }, "Only aphabets and dot allowed");
+    
+	
+
+	
 	
 	 jQuery.validator.addMethod("alphabet", function (value, element) {
         if (/^[a-zA-Z. ]*$/.test(value)) {

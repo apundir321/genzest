@@ -735,8 +735,7 @@ input[type=file] {
 										<c:forEach
 										var="category" items="${otherDetails.jobCategories}">
 										
-										<input  type="text"
-							placeholder="aadhar" class="form-control" value="${category.categoryName}" >
+										<input type="text" placeholder="aadhar" class="form-control" value="${category.categoryName}" >
 										</c:forEach>
 							</h4>
 							
@@ -787,11 +786,11 @@ input[type=file] {
 								Aadhar Card uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.aadharFileName}">View</a></span>
 							</h4>
 							
-							<input id="adhar" type="text"
+							<input id="adhar" type="hidden"
 							placeholder="aadhar" class="form-control" value="${studentDocs.aadharFileName}" >
 						</c:if>
  				</div> 
- 				
+	
 
  				<div class="form-group col-sm-6 col-xs-12 colbox"> 
  					<label for="studentId">Student Id <span>*</span></label> 
@@ -804,7 +803,7 @@ input[type=file] {
 								Student Id uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.studentIdFileName}">View</a></span>
 							</h4>
 							
-							<input id="studentId" type="text"
+							<input id="studentId" type="hidden"
 							placeholder="student id" class="form-control" value="${studentDocs.studentIdFileName}" >
 						</c:if>
  					
@@ -1017,22 +1016,39 @@ function myFunction() {
 			<c:remove var="successMessage" scope="request"/>
 	});
 	
-// 	$(document).ready(function(){
-// 		var x = document.getElementById("editState").value;
-// 		  $.ajax({
-// 				type: 'GET',
-// 				url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
-// 				success: function(result) {
-// 					var s = '';
-// 					for(var i = 0; i < result.length; i++) {
-// 						//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
-// 						s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
-// 					}
-// 					console.log(s);
-// 					$('#cityDropDown').html(s);
-// 				}
-// 			});
-// 	});
+ 	$(document).ready(function(){
+ 		var val =$('#paymentMethod').val();
+ 		if(val === "Bank Account"){
+ 	        document.getElementById('BA').style.display='block';
+ 	        document.getElementById('text').style.display='block';
+ 	        
+ 	        document.getElementById('AC').style.display='block';
+ 	        document.getElementById('text-1').style.display='block';
+ 	        
+ 	        document.getElementById('IC').style.display='block';
+ 	        document.getElementById('text-3').style.display='block';
+ 	      }
+ 	      else{
+ 	        document.getElementById('text').value=""; 
+ 	        document.getElementById('BA').style.display='none';
+ 	        document.getElementById('text').style.display='none';
+ 	        
+ 	        document.getElementById('AC').style.display='none';
+ 	        document.getElementById('text-1').style.display='none';
+ 	        
+ 	        document.getElementById('IC').style.display='none';
+ 	        document.getElementById('text-3').style.display='none';
+ 	      }
+ 	      
+ 	      if(val === "Wallet"){
+ 	    	  document.getElementById('UPI').style.display='block';
+ 	          document.getElementById('text-4').style.display='block';
+ 	      }
+ 	      else{
+ 	          document.getElementById('UPI').style.display='none';
+ 	          document.getElementById('text-4').style.display='none';
+ 	      }
+ 	});
 	
 	
 	$(document).ready(function(){

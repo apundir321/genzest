@@ -74,15 +74,15 @@
             		</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="https://www.flybunch.com/GenZest-2/Work/about-us.html"><i class="fa fa-rocket align-middle" style="font-size:21px"></i> <span class="align-middle"><b>About Us</b></span>
+					<a class="sidebar-link" href="https://genzest.com/about-us.html"><i class="fa fa-rocket align-middle" style="font-size:21px"></i> <span class="align-middle"><b>About Us</b></span>
                     </a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="https://www.flybunch.com/GenZest-2/Work/business.html"><i class='fa fa-archive align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Business</b></span>
+					<a class="sidebar-link" href="https://genzest.com/business.html"><i class='fa fa-archive align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Business</b></span>
                     </a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="https://www.flybunch.com/GenZest-2/Work/contact.html"><i class='fa fa-envelope-o align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Contact Us</b></span>
+					<a class="sidebar-link" href="https://genzest.com/contact.html"><i class='fa fa-envelope-o align-middle' style='font-size:19px'></i> <span class="align-middle"><b>Contact Us</b></span>
                     </a></li>
 				
 				</ul>
