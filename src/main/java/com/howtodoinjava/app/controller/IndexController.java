@@ -540,8 +540,9 @@ public class IndexController {
 
 		model.put("user", user);
 //			userProfile.setLastUpdated(new Date());
-		user.getUserProfile().setStudentDocuments(studentDocuments);
-		userRepo.save(user);
+		UserProfile userprofile = user.getUserProfile();
+		userprofile.setStudentDocuments(studentDocuments);
+		userProfileRepo.save(userprofile);
 		model.put("successMessage", "Profile Updated!");
 		model.put("profile", user.getUserProfile());
 		model.put("otherDetails",  user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()

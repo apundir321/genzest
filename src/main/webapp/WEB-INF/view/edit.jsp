@@ -503,13 +503,13 @@ input[type=file] {
 
 					<div class="clear clearfix"></div>
 						
-						<c:if test="${editable}">
+<%-- 						<c:if test="${editable}"> --%>
 					<div class="form-row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
 							<button type="submit">Save</button>
 						</div>
 					</div>
-					</c:if>
+<%-- 					</c:if> --%>
 
 				</form:form>
 
@@ -659,11 +659,11 @@ input[type=file] {
 								<form:option value="${state[1]}" label="${state[1]}" />
 							</c:forEach>
 						</form:select>
-						<c:if test="${not empty otherDetails.state}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;">${otherDetails.state}</span>
-							</h4>
-						</c:if>
+<%-- 						<c:if test="${not empty otherDetails.state}"> --%>
+<!-- 							<h4 style="color: #f15336"> -->
+<%-- 								Selected: <span style="color: #A4A4A4;">${otherDetails.state}</span> --%>
+<!-- 							</h4> -->
+<%-- 						</c:if> --%>
 						<form:errors path="state" cssClass="error"></form:errors>
 					</div>
 
@@ -678,11 +678,11 @@ input[type=file] {
 							</c:forEach>
 						</form:select>
 						<form:errors path="city" cssClass="error"></form:errors>
-						<c:if test="${not empty otherDetails.city}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;">${otherDetails.city}</span>
-							</h4>
-						</c:if>
+<%-- 						<c:if test="${not empty otherDetails.city}"> --%>
+<!-- 							<h4 style="color: #f15336"> -->
+<%-- 								Selected: <span style="color: #A4A4A4;">${otherDetails.city}</span> --%>
+<!-- 							</h4> -->
+<%-- 						</c:if> --%>
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
@@ -731,7 +731,16 @@ input[type=file] {
 								Selected: <span style="color: #A4A4A4;"><c:forEach
 										var="category" items="${otherDetails.jobCategories}">
 										<span>${category.categoryName}</span>&nbsp;&nbsp;</c:forEach></span>
+										
+										<c:forEach
+										var="category" items="${otherDetails.jobCategories}">
+										
+										<input  type="text"
+							placeholder="aadhar" class="form-control" value="${category.categoryName}" >
+										</c:forEach>
 							</h4>
+							
+							
 						</c:if>
 					</div>
 
@@ -746,11 +755,11 @@ input[type=file] {
 							<form:option value="Office Job">Office Job</form:option>
 						</form:select>
 						<form:errors path="preference" cssClass="error"></form:errors>
-						<c:if test="${not empty otherDetails.preference}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;">${otherDetails.preference}</span>
-							</h4>
-						</c:if>
+<%-- 						<c:if test="${not empty otherDetails.preference}"> --%>
+<!-- 							<h4 style="color: #f15336"> -->
+<%-- 								Selected: <span style="color: #A4A4A4;">${otherDetails.preference}</span> --%>
+<!-- 							</h4> -->
+<%-- 						</c:if> --%>
 					</div>
 
 					<div class="clear clearfix"></div>
@@ -777,6 +786,9 @@ input[type=file] {
 							<h4 style="color: #f15336">
 								Aadhar Card uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.aadharFileName}">View</a></span>
 							</h4>
+							
+							<input id="adhar" type="text"
+							placeholder="aadhar" class="form-control" value="${studentDocs.aadharFileName}" >
 						</c:if>
  				</div> 
  				
@@ -791,6 +803,9 @@ input[type=file] {
 							<h4 style="color: #f15336">
 								Student Id uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.studentIdFileName}">View</a></span>
 							</h4>
+							
+							<input id="studentId" type="text"
+							placeholder="student id" class="form-control" value="${studentDocs.studentIdFileName}" >
 						</c:if>
  					
  				</div> 
@@ -811,27 +826,28 @@ input[type=file] {
 				<div class="form-group col-md-3 ba-class">
 					<label for="inputother" style="display: none;" id="BA">Bank
 						Name <span>*</span>
-					</label> <input type="text" class="form-control" id="text" name="text"
-						style="display: none;" placeholder="Bank Name">
+					</label> 
+					<form:input type="text" class="form-control" id="text" name="text"
+						style="display: none;" placeholder="Bank Name" path="bankName"/>
 				</div>
 				<div class="form-group col-md-3 ba-class">
 					<label for="inputother" style="display: none;" id="AC">Account
 						Number <span>*</span>
-					</label> <input type="text" class="form-control" id="text-1" name="text"
-						style="display: none;" placeholder="Account Number">
+					</label> <form:input type="text" class="form-control" id="text-1" name="text"
+						style="display: none;" placeholder="Account Number" path="accountName"/>
 				</div>
 				<div class="form-group col-md-3 ba-class">
 					<label for="inputother" style="display: none;" id="IC">IFSC
 						Code <span>*</span>
-					</label> <input type="text" class="form-control" id="text-3" name="text"
-						style="display: none;" placeholder="IFSC Code">
+					</label> <form:input type="text" class="form-control" id="text-3" name="text"
+						style="display: none;" placeholder="IFSC Code" path="ifscCode"/>
 				</div>
 
 				<div class="form-group col-md-3 ba-class-1">
 					<label for="inputother" style="display: none;" id="UPI">UPI
 						<span>*</span>
-					</label> <input type="text" class="form-control" id="text-4" name="text"
-						style="display: none;" placeholder="UPI">
+					</label> <form:input type="text" class="form-control" id="text-4" name="text"
+						style="display: none;" placeholder="UPI" path="upiId"/>
 				</div>
 						
 

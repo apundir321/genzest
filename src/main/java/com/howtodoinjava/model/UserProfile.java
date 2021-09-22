@@ -74,8 +74,8 @@ public class UserProfile {
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private OtherUserDetails  otherDetails;
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name= "student_doc_id")
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_document_id", referencedColumnName = "id")
 	private StudentDocuments studentDocuments;
 	
 	public String getProfilePicFileName() {
