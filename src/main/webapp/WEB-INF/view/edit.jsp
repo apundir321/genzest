@@ -721,26 +721,16 @@ input[type=file] {
 							multiple="true" maxlength="5" minlength="1">
 							<form:option value="">Select</form:option>
 					
-							<c:forEach var="category" items="${categories}">
-								<form:option value="${category.id}"
-									label="${category.categoryName}" />
-							</c:forEach>
+<%-- 							<c:forEach var="category" items="${categories}"> --%>
+<%-- 								<option value="${category.id}" --%>
+<%-- 									label="${category.categoryName}" /> --%>
+									
+									
+<%-- 							</c:forEach> --%>
+
+ <form:options items="${categories}" itemValue="id" itemLabel="categoryName"/>
 						</form:select>
-						<c:if test="${not empty otherDetails.jobCategories}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;"><c:forEach
-										var="category" items="${otherDetails.jobCategories}">
-										<span>${category.categoryName}</span>&nbsp;&nbsp;</c:forEach></span>
-										
-										<c:forEach
-										var="category" items="${otherDetails.jobCategories}">
-										
-										<input type="text" placeholder="aadhar" class="form-control" value="${category.categoryName}" >
-										</c:forEach>
-							</h4>
-							
-							
-						</c:if>
+						
 					</div>
 
 

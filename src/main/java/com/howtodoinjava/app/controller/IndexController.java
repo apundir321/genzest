@@ -419,7 +419,8 @@ public class IndexController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateProfile.html")
-	public String updateProfile(@Valid @ModelAttribute("profile") UserProfile userProfile, BindingResult result,
+	public void updateProfile(HttpServletRequest request, HttpServletResponse response,
+			@Valid @ModelAttribute("profile") UserProfile userProfile, BindingResult result,
 
 			@RequestParam("profilepic") MultipartFile profilePicMultipart, Map<String, Object> model,
 			@RequestParam(required = false) String userProfileId) throws Exception {
@@ -437,10 +438,10 @@ public class IndexController {
 				model.put("profile", profile);
 			}
 		} else {
-
-			if (result.hasErrors()) {
-				return "edit";
-			}
+//
+//			if (result.hasErrors()) {
+//				return "edit";
+//			}
 
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			User user = userRepo.findByEmail(authentication.getName());
@@ -468,17 +469,19 @@ public class IndexController {
 			user.setUserProfile(profileData);
 			userRepo.save(user);
 			model.put("successMessage", "Profile Updated!");
-			model.put("profile", profileData);
-			model.put("otherDetails", user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
-					: user.getUserProfile().getOtherDetails());
-			model.put("studentDocs", user.getUserProfile().getStudentDocuments() == null ? new StudentDocuments()
-					: user.getUserProfile().getStudentDocuments());
+//			model.put("profile", profileData);
+//			model.put("otherDetails", user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
+//					: user.getUserProfile().getOtherDetails());
+//			model.put("studentDocs", user.getUserProfile().getStudentDocuments() == null ? new StudentDocuments()
+//					: user.getUserProfile().getStudentDocuments());
 		}
-		return "edit";
+		session.setAttribute("successMessage", "Profile Updated!");
+		response.sendRedirect("/edit.html");
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateOtherDetails.html")
-	public String updateOtherDetails(@Valid @ModelAttribute("otherDetails") OtherUserDetails otherDetails,
+	public void updateOtherDetails(HttpServletRequest request, HttpServletResponse response,
+			@Valid @ModelAttribute("otherDetails") OtherUserDetails otherDetails,
 			BindingResult result, Map<String, Object> model) throws Exception {
 
 		UserProfile profile;
@@ -488,9 +491,9 @@ public class IndexController {
 		model.put("dayPreference", new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findAll());
 		model.put("courses", courseRepo.findAll());
-		if (result.hasErrors()) {
-			return "edit";
-		}
+//		if (result.hasErrors()) {
+//			return "edit";
+//		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -501,16 +504,19 @@ public class IndexController {
 //			otherUserDetailsRepo.save(otherDetails);
 		user.getUserProfile().setOtherDetails(otherDetails);
 		userRepo.save(user);
-		model.put("successMessage", "Profile Updated!");
-		model.put("profile", user.getUserProfile());
-		model.put("otherDetails", otherDetails);
-		model.put("studentDocs", user.getUserProfile().getStudentDocuments() == null ? new StudentDocuments()
-				: user.getUserProfile().getStudentDocuments());
-		return "edit";
+		session.setAttribute("successMessage", "Profile Updated!");
+		response.sendRedirect("/edit.html");
+//		model.put("successMessage", "Profile Updated!");
+//		model.put("profile", user.getUserProfile());
+//		model.put("otherDetails", otherDetails);
+//		model.put("studentDocs", user.getUserProfile().getStudentDocuments() == null ? new StudentDocuments()
+//				: user.getUserProfile().getStudentDocuments());
+//		return "edit";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updatedocs.html")
-	public String updateDocs(@Valid @ModelAttribute("studentDocs") StudentDocuments studentDocuments,
+	public void updateDocs(HttpServletRequest request, HttpServletResponse response,
+			@Valid @ModelAttribute("studentDocs") StudentDocuments studentDocuments,
 			@RequestParam("aadhar") MultipartFile multipartFile,
 			@RequestParam("studentId") MultipartFile studentIdMultipart, BindingResult result,
 			Map<String, Object> model) throws Exception {
@@ -522,9 +528,9 @@ public class IndexController {
 		model.put("dayPreference", new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findAll());
 		model.put("courses", courseRepo.findAll());
-		if (result.hasErrors()) {
-			return "edit";
-		}
+//		if (result.hasErrors()) {
+//			return "edit";
+//		}
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
@@ -543,12 +549,13 @@ public class IndexController {
 		UserProfile userprofile = user.getUserProfile();
 		userprofile.setStudentDocuments(studentDocuments);
 		userProfileRepo.save(userprofile);
-		model.put("successMessage", "Profile Updated!");
-		model.put("profile", user.getUserProfile());
-		model.put("otherDetails",  user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
-				: user.getUserProfile().getOtherDetails());
-		model.put("studentDocs", user.getUserProfile().getStudentDocuments());
-		return "edit";
+		session.setAttribute("successMessage", "Profile Updated!");
+		response.sendRedirect("/edit.html");
+//		model.put("profile", user.getUserProfile());
+//		model.put("otherDetails",  user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
+//				: user.getUserProfile().getOtherDetails());
+//		model.put("studentDocs", user.getUserProfile().getStudentDocuments());
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updatePreferences.html")
@@ -587,9 +594,7 @@ public class IndexController {
 			userProfileRepo.save(profile);
 		}
 
-		User user = userRepo.findByEmail(authentication.getName());
-		model.put("user", user);
-
+		session.setAttribute("successMessage", "Profile Updated!");
 		response.sendRedirect("/edit.html");
 	}
 
@@ -839,16 +844,24 @@ public class IndexController {
 
 	@GetMapping("/login-error")
 	public String login(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession(false);
+		HttpSession sessionObj = request.getSession(false);
 		String errorMessage = null;
-		if (session != null) {
+		if (sessionObj != null) {
 			AuthenticationException ex = (AuthenticationException) session
 					.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
 			if (ex != null) {
 				errorMessage = ex.getMessage();
 			}
 		}
+		
+		String errorMsg = (String) session.getAttribute("errorLoginMessage");
+		
 		model.addAttribute("errorMessage", errorMessage);
+		if(errorMsg!=null)
+		{
+			model.addAttribute("errorLoginMessage", errorMsg);
+			model.addAttribute("errorMessage", null);
+		}
 		return "login";
 	}
 

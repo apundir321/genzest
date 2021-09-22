@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +26,9 @@ public class JwtUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	private UserRepository userDao;
-
+	
+	@Autowired
+	HttpSession session;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,6 +38,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 		if(!user.isEnabled())
 		{
+			session.setAttribute("errorLoginMessage", "Email is not verified!");
 			throw new UsernameNotFoundException("User not verified");
 		}
 		HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();

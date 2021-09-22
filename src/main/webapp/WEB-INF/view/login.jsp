@@ -278,6 +278,14 @@
 			<c:remove var="errorMessage" scope="request"/>
 	});
 	
+	$(document).ready(function(){
+		<c:if test="${not empty errorLoginMessage}">
+		toastr.error('${errorLoginMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="errorLoginMessage" scope="session"/>
+			<c:remove var="errorLoginMessage" scope="request"/>
+	});
+	
 	</script>
 
 	
