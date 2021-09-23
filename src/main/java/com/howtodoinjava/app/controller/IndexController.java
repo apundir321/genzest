@@ -160,9 +160,15 @@ public class IndexController {
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo
 				.findAllByApplicant(user);
 		model.put("appliedJobsCount", appliedJobs.size());
-		
-		List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategory(null);
-		model.put("matchingJobsCount", matchingJobs.size());
+		OtherUserDetails otherDetails = user.getUserProfile().getOtherDetails();
+		if(otherDetails!=null)
+		{
+			List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories());
+			model.put("matchingJobsCount", matchingJobs.size());
+		}else
+		{
+			model.put("matchingJobsCount", "0");
+		}
 		model.put("user", session.getAttribute("user"));
 		return "student-d";
 	}

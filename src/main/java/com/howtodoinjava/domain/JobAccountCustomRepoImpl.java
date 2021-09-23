@@ -1,5 +1,6 @@
 package com.howtodoinjava.domain;
 
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +15,12 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;import javax.persistence.criteria.Selection;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Repository;
 
 import com.howtodoinjava.dao.UserProfileRepository;
@@ -30,6 +32,7 @@ import com.howtodoinjava.entity.SearchCandidate;
 import com.howtodoinjava.entity.SearchJobEarning;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
+import com.howtodoinjava.model.JobCategory;
 import com.howtodoinjava.model.JobEarning;
 import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.UserProfile;
@@ -140,6 +143,35 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 		    
 		    
 	}
+	
+	
+	public List<JobAccount> findJobsByCategories(List<Category> categories) {
+		// TODO Auto-generated method stub
+		 CriteriaBuilder cb = em.getCriteriaBuilder();
+		    CriteriaQuery<JobAccount> cq = cb.createQuery(JobAccount.class);
+		    
+		    Root<JobAccount> job = cq.from(JobAccount.class);
+//		    List<Predicate> predicates = new ArrayList<>();
+//		    	if(category!=null)
+//		    	{
+//		    		predicates.add(cb.equal(job.get("category"), category));
+//		    	}
+//		        cq.where(predicates.toArray(new Predicate[0]));
+//
+//			    return em.createQuery(cq).getResultList();
+		    
+		    In<Category> inClause = cb.in(job.get("category"));
+		    
+		    for(Category category :  categories)
+		    {
+		    	inClause.value(category);
+		    }
+		    
+		    cq.select(job).where(inClause);
+		    return em.createQuery(cq).getResultList(); 
+		    
+	}
+	
 	
 	
 	public   List<Object[]> findJobAcountByCateory() {

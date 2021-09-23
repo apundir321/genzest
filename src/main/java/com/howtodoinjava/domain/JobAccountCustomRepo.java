@@ -19,6 +19,8 @@ public interface JobAccountCustomRepo {
 	
 	List<JobAccount> findJobsByCategory(Category category);
 	
+	public List<JobAccount> findJobsByCategories(List<Category> categories);
+	
 	public   List<Object[]> findJobAcountByCateory();
 	
 	public List<UserProfile> findProfileByProfileCriterias(SearchCandidate searchCandidate);
