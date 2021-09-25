@@ -504,6 +504,8 @@ public class IndexController {
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		otherDetails.setUserProfile(user.getUserProfile());
+		
+		otherDetails.setPreferences(user.getUserProfile().getOtherDetails().getPreferences());
 //			userProfile.setLastUpdated(new Date());
 //			
 
@@ -540,14 +542,27 @@ public class IndexController {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
+		StudentDocuments savedStudentDocuments = user.getUserProfile().getStudentDocuments();
 		if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
 			awsService.uploadFile(multipartFile, user.getUserProfile());
 			studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
+		}else
+		{
+			if(savedStudentDocuments!=null)
+			{
+				studentDocuments.setAadharFileName(savedStudentDocuments.getAadharFileName());
+			}
 		}
 
 		if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
 			awsService.uploadFile(studentIdMultipart, user.getUserProfile());
 			studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
+		}else
+		{
+			if(savedStudentDocuments!=null)
+			{
+				studentDocuments.setStudentIdFileName(savedStudentDocuments.getStudentIdFileName());
+			}
 		}
 
 		model.put("user", user);
