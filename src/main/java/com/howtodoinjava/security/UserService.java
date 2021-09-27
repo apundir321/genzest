@@ -150,7 +150,7 @@ public class UserService implements IUserService {
 		user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
 		user.setEmail(accountDto.getEmail());
 		user.setUsing2FA(accountDto.isUsing2FA());
-
+		user.setEnabled(true);
 //		profile = new UserProfile();
 //		profile.setEmail(accountDto.getEmail());
 //		profile.setFirstName(accountDto.getFirstName());
