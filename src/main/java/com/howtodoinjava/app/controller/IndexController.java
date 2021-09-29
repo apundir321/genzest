@@ -500,12 +500,17 @@ public class IndexController {
 //		if (result.hasErrors()) {
 //			return "edit";
 //		}
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		otherDetails.setUserProfile(user.getUserProfile());
+		OtherUserDetails savedUserDetails = user.getUserProfile().getOtherDetails();
+		if(savedUserDetails!=null)
+		{
+			otherDetails.setPreferences(savedUserDetails.getPreferences());
+		}
 		
-		otherDetails.setPreferences(user.getUserProfile().getOtherDetails().getPreferences());
 //			userProfile.setLastUpdated(new Date());
 //			
 
