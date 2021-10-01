@@ -59,7 +59,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
     
     private void constructEmailMessage(final OnRegistrationCompleteEvent event, final User user, final String token) {
-        final String recipientAddress = user.getEmail();
+      
+    	System.out.println("sending email");
+    	final String recipientAddress = user.getEmail();
         final String subject = "Registration Confirmation";
         final String confirmationUrl = event.getAppUrl() + "/registrationConfirm.html?token=" + token;
         final String message = messages.getMessage("message.regSuccLink", null, "You registered successfully. To confirm your registration, please click on the below link.", event.getLocale());
@@ -75,7 +77,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     public  void sendMailViaGodaddy(String from, String password,List<String> to,String subject,String text ) {
         try {
         	
-        	
+        	System.out.println("sending email");
           Properties props = System.getProperties();
           props.setProperty("mail.transport.protocol", "smtp");
           props.setProperty("mail.host", "smtpout.secureserver.net");
@@ -104,11 +106,13 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
                         transport.connect("smtpout.secureserver.net",from,password);
         transport.sendMessage(message,
          message.getRecipients(Message.RecipientType.TO));
+        
+        System.out.println("email sent");
         transport.close();
                        
          
         } catch (Exception e) {
-          
+        	System.out.println("exception occured");
         }
    }
 }
