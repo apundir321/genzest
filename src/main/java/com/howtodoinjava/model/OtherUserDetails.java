@@ -112,6 +112,8 @@ public OtherUserDetails() {
 	private String day;
 	private String timeSlot;
 	private Date lastUpdated;
+	
+	private String referralCode;
 //	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
@@ -300,6 +302,12 @@ public OtherUserDetails() {
 	}
 	public void setProfilePicFileName(String profilePicFileName) {
 		this.profilePicFileName = profilePicFileName;
+	}
+	public String getReferralCode() {
+		return referralCode;
+	}
+	public void setReferralCode(String referralCode) {
+		this.referralCode = referralCode;
 	}
 
 

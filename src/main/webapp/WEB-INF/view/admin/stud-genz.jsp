@@ -159,12 +159,12 @@ employer = new Array();
 employer.push('${profile.id}');
 employer.push('${profile.firstName}');
 employer.push('${profile.email}');
-employer.push('${profile.mobileNo}');
+employer.push('${profile.otherDetails.mobileNo}');
 employer.push('${profile.dob}');
 employer.push('${profile.gender}');
-employer.push('${profile.course}');
-employer.push('${profile.city}');
-employer.push('<a href="edit_stud.html?profileId=${profile.id}"><i class="fa fa-pencil"/></a>');
+employer.push('${profile.otherDetails.course}');
+employer.push('${profile.otherDetails.city}');
+employer.push('<a href="edit_stud.html?profileId=${profile.id}"><i class="fa fa-eye"/></a>');
 dataSet.push(employer);
 </c:forEach>
 	var dataSet1 = [
@@ -237,7 +237,7 @@ $(document).ready(function() {
             { title: "Course" },
 			{ title: "City" },
             {
-               title: "Edit"
+               title: "View"
             }
         ],
 		
@@ -440,7 +440,7 @@ $(document).ready(function() {
                        <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
                    </div>
                </div>   -->
-               <button class="csv"><a href="studedit-genz.html">Add  <i class="fa fa-plus" aria-hidden="true"></i></a></button>
+               <button class="csv"><a href="/downloadProfileJobs">Download CSV </a></button>
                <table id="example" class="display" width="100%"></table>
            </main>
 

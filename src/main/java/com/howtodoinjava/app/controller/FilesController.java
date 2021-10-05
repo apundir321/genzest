@@ -52,6 +52,18 @@ public class FilesController {
 	        .contentType(MediaType.parseMediaType("application/csv"))
 	        .body(file);
 	  }
+	 
+	 
+	 @GetMapping("/downloadProfileJobs")
+	  public ResponseEntity<Resource> downloadProfileJobs() {
+	    String filename = "profiles.csv";
+	    InputStreamResource file = new InputStreamResource(csvService.loadProfilesData());
+
+	    return ResponseEntity.ok()
+	        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+	        .contentType(MediaType.parseMediaType("application/csv"))
+	        .body(file);
+	  }
 
 
 }

@@ -112,6 +112,14 @@ public class CSVService {
 	    return in;
 	  }
   
+  public ByteArrayInputStream loadProfilesData() {
+	  Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		List<UserProfile> applications = (List<UserProfile>) userProfileRepo.findAll();
+	    ByteArrayInputStream in = profilesToCSV(applications);
+	    return in;
+	  }
+  
  
   
   
@@ -172,6 +180,40 @@ public class CSVService {
 	      throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
 	    }
 	  }
+  
+
+  public static ByteArrayInputStream profilesToCSV(List<UserProfile> userProfiles) {
+	    final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
+	    try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+	        CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
+	    	DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); 
+	    	for(UserProfile userProfile: userProfiles) {
+	    	 List<String> data = Arrays.asList(
+	    			 String.valueOf(userProfile.getId()),
+	    			 userProfile.getFirstName(),
+	    			 userProfile.getEmail(),
+	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getMobileNo(),
+	    					 userProfile.getDob()==null?"":dateFormat.format(userProfile.getDob()),
+	    			 
+	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getCourse(),
+	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getCity(),
+	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getState(),
+	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getStatus()
+	    			 );
+	    	
+	    
+
+	        csvPrinter.printRecord(data);
+	      
+	    	}
+	      csvPrinter.flush();
+	      return new ByteArrayInputStream(out.toByteArray());
+	    } catch (Exception e) {
+	      throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
+	    }
+	  }
+
+
   
   
   public static ByteArrayInputStream appliedJobsToCSV(List<JobAccountApplication> jobApplications) {

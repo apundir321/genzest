@@ -750,6 +750,12 @@ input[type=file] {
 <!-- 							</h4> -->
 <%-- 						</c:if> --%>
 					</div>
+					
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="referralCode">Referral Code <span>*</span></label>
+						<form:input id="postal-code" path="referralCode" type="text"
+							placeholder="zip or postal code" class="form-control" />
+					</div>
 
 					<div class="clear clearfix"></div>
 					<div class="form-row">

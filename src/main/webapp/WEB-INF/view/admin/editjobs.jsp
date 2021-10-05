@@ -399,7 +399,7 @@ table, td {
   
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="noOfVacancy">No of Vacancy <span>*</span></label>
-                                <form:input type="text" path="noOfVacancy" class="form-control input-number" min="1" max="100"/>
+                                <form:input type="text" path="noOfVacancy" class="form-control input-number" min="1" max="1000"/>
                             <form:errors path="noOfVacancy" cssClass="error"></form:errors>
   </div>
   

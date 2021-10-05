@@ -62,8 +62,8 @@
 						required: true,
 						digits:true,
 						aphadot: false,
-						min: 6,
-						max: 6
+						min-length: 6,
+						max-length: 6
 					}
 				},
 				errorElement: "em",

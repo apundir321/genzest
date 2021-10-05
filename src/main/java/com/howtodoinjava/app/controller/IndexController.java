@@ -367,7 +367,7 @@ public class IndexController {
 			registered = uService.registerNewUserAccount(userDto, isRecruiter);
 			eventPublisher
 					.publishEvent(new OnRegistrationCompleteEvent(registered, request.getLocale(), getAppUrl(request)));
-			model.put("successMessage", "User registered");
+			model.put("successMessage", "User registered please verify your account on your registered email id");
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.put("errorMessage", e.getMessage());
