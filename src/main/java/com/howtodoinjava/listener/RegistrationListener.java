@@ -55,12 +55,12 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 //        final SimpleMailMessage email = constructEmailMessage(event, user, token);
 //        mailSender.send(email);
        constructEmailMessage(event, user, token);
+
 //        mailSender.send(email);
     }
 
     
     private void constructEmailMessage(final OnRegistrationCompleteEvent event, final User user, final String token) {
-      
     	System.out.println("sending email");
     	final String recipientAddress = user.getEmail();
         final String subject = "Registration Confirmation";
@@ -75,6 +75,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         List<String> sendList = Arrays.asList(recipientAddress);
 ////        sendMailViaGodaddy("support@genzest.com", "support@genzest", sendList, subject, message + " \r\n" + confirmationUrl);
         sendMailViaAws("support@genzest.com", "support@genzest", sendList, subject, message + " \r\n" + confirmationUrl);
+
     }
     
     public  void sendMailViaGodaddy(String from, String password,List<String> to,String subject,String text ) {
