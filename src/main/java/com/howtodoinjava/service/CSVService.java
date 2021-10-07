@@ -192,13 +192,24 @@ public class CSVService {
 	    			 String.valueOf(userProfile.getId()),
 	    			 userProfile.getFirstName(),
 	    			 userProfile.getEmail(),
+	    			 userProfile.getGender(),
+	    			 userProfile.getParentsName(),
+	    			 userProfile.getBloodGroup(),
+	    			 userProfile.getDob()==null?"":dateFormat.format(userProfile.getDob()),
 	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getMobileNo(),
-	    					 userProfile.getDob()==null?"":dateFormat.format(userProfile.getDob()),
-	    			 
 	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getCourse(),
 	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getCity(),
 	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getState(),
-	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getStatus()
+	    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getStatus(),
+	    					 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getVehicleType(),
+	    			    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getAddressLine1(),
+	    			    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getAddressLine2(),
+	    			    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getStreetNo(),
+	    			    					 userProfile.getOtherDetails()==null?"":String.valueOf(userProfile.getOtherDetails().isHavePc()),
+	    			    			    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getCollegeName(),
+	    			    			    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getLandmark(),
+	    			    			    			 userProfile.getOtherDetails()==null?"":userProfile.getOtherDetails().getLocality()
+	    			 
 	    			 );
 	    	
 	    
