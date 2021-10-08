@@ -184,15 +184,25 @@ public class CSVService {
 				}
 
 				String preferences = "";
+				String degreeCompletionDate = "degreeCompletionDate not defined";
 				if (userProfile.getOtherDetails() != null) {
 					if (userProfile.getOtherDetails().getPreferences() != null) {
 						Set<DayPreference> prefs = userProfile.getOtherDetails().getPreferences();
 						for (DayPreference pref : prefs) {
-							preferences += pref.getDay() + "=" + pref.getTimeSlot().getTimeSlotName() + ",";
-						}
+							if(pref.getTimeSlot()!=null && pref.getDay()!=null) {
+							preferences += pref.getDay() + "=" + pref.getTimeSlot()==null?"TImeslot Not defined":pref.getTimeSlot().getTimeSlotName() + ",";
+							}
+							}
 
 					}
+					
+					if(userProfile.getOtherDetails().getDegreeCollegeCompletionDate()!=null)
+					{
+						degreeCompletionDate = dateFormat.format(userProfile.getOtherDetails().getDegreeCollegeCompletionDate());
+					}
 				}
+				
+				
 
 				List<String> data = Arrays.asList(String.valueOf(userProfile.getId()), userProfile.getFirstName(),
 						userProfile.getLastName(), userProfile.getEmail(), userProfile.getGender(),
@@ -214,8 +224,7 @@ public class CSVService {
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getCollegeName(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLandmark(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLocality(),
-						userProfile.getOtherDetails() == null ? ""
-								: dateFormat.format(userProfile.getOtherDetails().getDegreeCollegeCompletionDate()),
+								degreeCompletionDate,
 						jobCategories, preferences,
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getReferralCode()
 
