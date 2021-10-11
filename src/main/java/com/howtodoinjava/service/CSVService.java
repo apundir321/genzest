@@ -169,7 +169,7 @@ public class CSVService {
 		final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 		try (ByteArrayOutputStream out = new ByteArrayOutputStream();
 				CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			List<String> headers = Arrays.asList("Id", "First Name", "Last Name", "Email", "Gender", "Parents Name",
 					"Blood Group", "Date of birth", "Mobile No.", "Alternate Mobile No.", "Course", "City", "State",
 					"Status", "Vehicle Type", "Address Line1", "Address Line2", "Street No.", "Postal Code", "Have Pc",
