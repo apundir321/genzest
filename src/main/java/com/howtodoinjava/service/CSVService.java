@@ -170,6 +170,12 @@ public class CSVService {
 		try (ByteArrayOutputStream out = new ByteArrayOutputStream();
 				CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+			List<String> headers = Arrays.asList("Id", "First Name", "Last Name", "Email", "Gender", "Parents Name",
+					"Blood Group", "Date of birth", "Mobile No.", "Alternate Mobile No.", "Course", "City", "State",
+					"Status", "Vehicle Type", "Address Line1", "Address Line2", "Street No.", "Postal Code", "Have Pc",
+					"College Name", "Landmark", "Locality", "Degree Completion Date", "Job Categories", "Preferences",
+					"Referral Code", "Payment Method", "UPI Id", "Bank Name", "Account number", "IFSC code");
+			csvPrinter.printRecord(headers);
 			for (UserProfile userProfile : userProfiles) {
 
 				String jobCategories = "";
@@ -189,20 +195,19 @@ public class CSVService {
 					if (userProfile.getOtherDetails().getPreferences() != null) {
 						Set<DayPreference> prefs = userProfile.getOtherDetails().getPreferences();
 						for (DayPreference pref : prefs) {
-							if(pref.getTimeSlot()!=null && pref.getDay()!=null) {
-							preferences += pref.getDay() + "=" + pref.getTimeSlot()==null?"TImeslot Not defined":pref.getTimeSlot().getTimeSlotName() + ",";
+							if (pref.getTimeSlot() != null && pref.getDay() != null) {
+								preferences += pref.getDay() + "=" + pref.getTimeSlot() == null ? "TImeslot Not defined"
+										: pref.getTimeSlot().getTimeSlotName() + ",";
 							}
-							}
+						}
 
 					}
-					
-					if(userProfile.getOtherDetails().getDegreeCollegeCompletionDate()!=null)
-					{
-						degreeCompletionDate = dateFormat.format(userProfile.getOtherDetails().getDegreeCollegeCompletionDate());
+
+					if (userProfile.getOtherDetails().getDegreeCollegeCompletionDate() != null) {
+						degreeCompletionDate = dateFormat
+								.format(userProfile.getOtherDetails().getDegreeCollegeCompletionDate());
 					}
 				}
-				
-				
 
 				List<String> data = Arrays.asList(String.valueOf(userProfile.getId()), userProfile.getFirstName(),
 						userProfile.getLastName(), userProfile.getEmail(), userProfile.getGender(),
@@ -219,15 +224,30 @@ public class CSVService {
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getAddressLine1(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getAddressLine2(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getStreetNo(),
+						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getPostalCode(),
 						userProfile.getOtherDetails() == null ? ""
 								: String.valueOf(userProfile.getOtherDetails().isHavePc()),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getCollegeName(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLandmark(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLocality(),
-								degreeCompletionDate,
-						jobCategories, preferences,
-						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getReferralCode()
-
+						degreeCompletionDate, jobCategories, preferences,
+						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getReferralCode(),
+						userProfile.getStudentDocuments() == null ? ""
+								: userProfile.getStudentDocuments().getPaymentMethod(),
+						userProfile.getStudentDocuments() == null ? "" : userProfile.getStudentDocuments().getUpiId(),
+						userProfile.getStudentDocuments() == null ? ""
+								: userProfile.getStudentDocuments().getBankName(),
+						userProfile.getStudentDocuments() == null ? ""
+								: userProfile.getStudentDocuments().getAccountName(),
+						userProfile.getStudentDocuments() == null ? ""
+								: userProfile.getStudentDocuments().getIfscCode()
+								
+//								,
+//						userProfile.getStudentDocuments() == null || userProfile.getStudentDocuments().getAadharFileName() == null ? ""
+//								: "http://genzest.online/getProfilePic/" + userProfile.getStudentDocuments().getAadharFileName(),
+//						userProfile.getStudentDocuments() == null || userProfile.getStudentDocuments().getStudentIdFileName() == null ? ""
+//								: "http://genzest.online/getProfilePic/" + userProfile.getStudentDocuments().getStudentIdFileName()
+//						,userProfile.getProfilePicFileName() == null?"" : "http://genzest.online/getProfilePic/" +userProfile.getProfilePicFileName()
 				);
 
 				csvPrinter.printRecord(data);
