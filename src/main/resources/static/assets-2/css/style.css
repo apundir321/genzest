@@ -233,7 +233,7 @@
 			 }
 
 			.main{
-				height: 1200px;
+				height: auto;
 			}
 			.col-sm-3 {
 				width: 50%;
@@ -278,7 +278,7 @@
 				visibility: visible !important;
 			}
 			.main{
-				height: 1750px;
+				height: auto;
 			}
 			.card{
 				width: 170px;

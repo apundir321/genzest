@@ -121,12 +121,12 @@ public class CSVService {
 		return in;
 	}
 	
-	
 	public ByteArrayInputStream loadSelectedProfilesData(List<UserProfile> profiles) {
 		
 		ByteArrayInputStream in = profilesToCSV(profiles);
 		return in;
 	}
+
 
 	public static ByteArrayInputStream jobsToCSV(List<JobAccount> jobAccounts) {
 		final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
@@ -179,7 +179,9 @@ public class CSVService {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			List<String> headers = Arrays.asList("Id", "First Name", "Last Name", "Email", "Gender", "Parents Name",
 					"Blood Group", "Date of birth", "Mobile No.", "Alternate Mobile No.", "Course", "City", "State",
+
 					 "Vehicle Type", "Address Line1","Postal Code", "Have Pc",
+
 					"College Name", "Landmark", "Locality", "Degree Completion Date", "Job Categories", "Preferences",
 					"Referral Code", "Payment Method", "UPI Id", "Bank Name", "Account number", "IFSC code");
 			csvPrinter.printRecord(headers);
@@ -228,6 +230,7 @@ public class CSVService {
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getState(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getVehicleType(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getAddressLine1(),
+
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getPostalCode(),
 						userProfile.getOtherDetails() == null ? ""
 								: String.valueOf(userProfile.getOtherDetails().isHavePc()),
@@ -284,4 +287,6 @@ public class CSVService {
 			throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
 		}
 	}
+
 }
+
