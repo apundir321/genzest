@@ -85,10 +85,10 @@ public class JobAccountCustomRepoImpl implements JobAccountCustomRepo {
 		    	JobType jobType = jobTypeRepo.findById(Integer.parseInt(searchJob.getJobType())).get();
 		        predicates.add(cb.equal(job.get("jobType"), jobType));
 		    }
-		    if (!StringUtils.isEmpty(searchJob.getTimeSlot())) {
-		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchJob.getTimeSlot())).get();
-		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
-		    }
+//		    if (!StringUtils.isEmpty(searchJob.getTimeSlot())) {
+//		    	TimeSlot timeSlot = timeSlotRepo.findById(Integer.parseInt(searchJob.getTimeSlot())).get();
+//		        predicates.add(cb.equal(job.get("timeSlot"), timeSlot));
+//		    }
 		    
 		    if (!StringUtils.isEmpty(searchJob.getState())) {
 		        predicates.add(cb.equal(job.get("state"), searchJob.getState()));

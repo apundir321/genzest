@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.howtodoinjava.model.User;
 
 
@@ -35,7 +37,7 @@ public class JobAccount {
 	int id;
 	
 	@NotNull(message = "Please select Employer")
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
 	
@@ -43,11 +45,11 @@ public class JobAccount {
 	private String jobName;
 	
 	@NotNull(message = "Please select Category")
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "category_id")
 	private Category category;
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "jobtype_id")
 	private JobType jobType;
 	
@@ -92,7 +94,7 @@ public class JobAccount {
 	
 	private String day;
 	
-	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "slot_id")
 	private TimeSlot timeSlot;
 	
@@ -100,11 +102,11 @@ public class JobAccount {
 	private String status;
 	private Date createdDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "created_by")
 	private User createdBy;
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE })
 	@JoinTable(name = "job_timeslot", joinColumns = { @JoinColumn(name = "job_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "slot_id") })
 	private Set<TimeSlot> timeSlots = new HashSet<>();
@@ -225,6 +227,7 @@ public class JobAccount {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+	@JsonIgnore
 	public User getCreatedBy() {
 		return createdBy;
 	}

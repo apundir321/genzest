@@ -59,6 +59,15 @@
 		font-weight: bold;
 		text-decoration: none;
 	}
+	
+	.dataTables_paginate {
+	display:none}
+	
+	.dataTables_length{
+	display:none}
+	
+	.dataTables_info{
+	display:none}
 </style>
 
 <script>

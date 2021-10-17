@@ -376,7 +376,7 @@ table, td {
                             <form:select class="form-control" path="category">
                             <form:option value="">Select</form:option>
                             <c:forEach var="category" items="${categories}">  
-                            <form:option  value="${category.id}" label="${category.categoryName}" />
+                            	<form:option  value="${category.id}" label="${category.categoryName}" />
                             </c:forEach>
                             </form:select>
                             <form:errors path="category" cssClass="error"></form:errors>

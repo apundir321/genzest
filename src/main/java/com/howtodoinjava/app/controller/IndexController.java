@@ -73,6 +73,7 @@ import com.howtodoinjava.entity.MarkAttendence;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobApplication;
+import com.howtodoinjava.model.JobTimeSlot;
 import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.StudentDocuments;
 import com.howtodoinjava.model.User;
@@ -157,16 +158,13 @@ public class IndexController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
-		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo
-				.findAllByApplicant(user);
+		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(user);
 		model.put("appliedJobsCount", appliedJobs.size());
 		OtherUserDetails otherDetails = user.getUserProfile().getOtherDetails();
-		if(otherDetails!=null)
-		{
+		if (otherDetails != null) {
 			List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories());
 			model.put("matchingJobsCount", matchingJobs.size());
-		}else
-		{
+		} else {
 			model.put("matchingJobsCount", "0");
 		}
 		model.put("user", session.getAttribute("user"));
@@ -234,9 +232,9 @@ public class IndexController {
 			User user = (User) userRepo.findByEmail(authentication.getName());
 			model.put("user", user);
 			profile = user.getUserProfile();
-			courses = courseRepo.findAll();
+			courses = courseRepo.findByCourseTypeStatus("Active");
 			employers = employerRepo.findAll();
-			categories = categoryRepo.findAll();
+			categories = categoryRepo.findByCategoryStatus("Active");
 			userDetails = profile.getOtherDetails();
 			System.out.println(profile + "  *****");
 
@@ -245,8 +243,7 @@ public class IndexController {
 			e.printStackTrace();
 		}
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
-		if(userDetails!=null)
-		{
+		if (userDetails != null) {
 			model.put("cities", categoryRepo.getCitiesByState(profile.getOtherDetails().getState()));
 		}
 		model.put("profile", profile == null ? new UserProfile() : profile);
@@ -281,9 +278,9 @@ public class IndexController {
 		try {
 			Optional<UserProfile> profileEntity = userProfileRepo.findById(Integer.parseInt(profileId));
 			profile = profileEntity.get();
-			courses = courseRepo.findAll();
+			courses = courseRepo.findByCourseTypeStatus("Active");
 			employers = employerRepo.findAll();
-			categories = categoryRepo.findAll();
+			categories = categoryRepo.findByCategoryStatus("Active");
 			System.out.println(profile + "  *****");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -312,11 +309,11 @@ public class IndexController {
 		model.put("user", user);
 		List<Integer> appliedJobIds = new ArrayList<>();
 		try {
-			courses = courseRepo.findAll();
+			courses = courseRepo.findByCourseTypeStatus("Active");
 			employers = employerRepo.findAll();
-			categories = categoryRepo.findAll();
-			jobTypes = jobTypeRepo.findAll();
-			timeSlots = timeSlotRepo.findAll();
+			categories = categoryRepo.findByCategoryStatus("Active");
+			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
+			timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
 			List<JobAccount> jobsAccount = jobAccountCustomRepo.findJobsByCategory(null);
 
 			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
@@ -326,7 +323,11 @@ public class IndexController {
 
 			for (JobAccount jobAccount : jobsAccount) {
 				if (!appliedJobIds.contains(jobAccount.getId())) {
-					jobs.add(jobAccount);
+					if(jobAccount.getStatus()!=null && jobAccount.getStatus().equals("Open"))
+					{
+						jobs.add(jobAccount);
+					}
+					
 				}
 			}
 
@@ -390,12 +391,11 @@ public class IndexController {
 		User user = (User) session.getAttribute("user");
 		model.put("user", user);
 		try {
-			courses = courseRepo.findAll();
+			courses = courseRepo.findByCourseTypeStatus("Active");
 			employers = employerRepo.findAll();
-			categories = categoryRepo.findAll();
-			jobTypes = jobTypeRepo.findAll();
-			timeSlots = timeSlotRepo.findAll();
-
+			categories = categoryRepo.findByCategoryStatus("Active");
+			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
+			timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
 			List<JobAccount> jobsAccount = jobAccountCustomRepo.findJobsByJobCriterias(searchJob);
 
 			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
@@ -405,7 +405,11 @@ public class IndexController {
 
 			for (JobAccount jobAccount : jobsAccount) {
 				if (!appliedJobIds.contains(jobAccount.getId())) {
-					jobs.add(jobAccount);
+					if(jobAccount.getStatus()!=null && jobAccount.getStatus().equals("Open"))
+					{
+						jobs.add(jobAccount);
+					}
+					
 				}
 			}
 
@@ -420,7 +424,7 @@ public class IndexController {
 		model.put("timeSlots", timeSlots);
 		model.put("dayPreference", new DayPreference());
 		model.put("jobs", jobs);
-		model.put("searchJob", new SearchJobs());
+		model.put("searchJob", searchJob);
 		return "searchjobs";
 	}
 
@@ -434,10 +438,10 @@ public class IndexController {
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
-		model.put("categories", categoryRepo.findAll());
+		model.put("categories", categoryRepo.findByCategoryStatus("Active"));
 		model.put("dayPreference", new DayPreference());
-		model.put("timeSlots", timeSlotRepo.findAll());
-		model.put("courses", courseRepo.findAll());
+		model.put("timeSlots", timeSlotRepo.findByTimeSlotStatus("Active"));
+		model.put("courses", courseRepo.findByCourseTypeStatus("Active"));
 		if (userProfileId != null) {
 			profile = userService.getUserProfile(userProfileId);
 			if (profile != null) {
@@ -487,36 +491,36 @@ public class IndexController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateOtherDetails.html")
 	public void updateOtherDetails(HttpServletRequest request, HttpServletResponse response,
-			@Valid @ModelAttribute("otherDetails") OtherUserDetails otherDetails,
-			BindingResult result, Map<String, Object> model) throws Exception {
+			@Valid @ModelAttribute("otherDetails") OtherUserDetails otherDetails, BindingResult result,
+			Map<String, Object> model) throws Exception {
 
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
-		model.put("categories", categoryRepo.findAll());
+		model.put("categories", categoryRepo.findByCategoryStatus("Active"));
 		model.put("dayPreference", new DayPreference());
-		model.put("timeSlots", timeSlotRepo.findAll());
-		model.put("courses", courseRepo.findAll());
+		model.put("timeSlots", timeSlotRepo.findByTimeSlotStatus("Active"));
+		model.put("courses", courseRepo.findByCourseTypeStatus("Active"));
 //		if (result.hasErrors()) {
 //			return "edit";
 //		}
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		otherDetails.setUserProfile(user.getUserProfile());
 		OtherUserDetails savedUserDetails = user.getUserProfile().getOtherDetails();
-		if(savedUserDetails!=null)
-		{
+		if (savedUserDetails != null) {
+			otherDetails.setId(savedUserDetails.getId());
 			otherDetails.setPreferences(savedUserDetails.getPreferences());
+			UserProfile userProfile = user.getUserProfile();
+			userProfile.setOtherDetails(otherDetails);
+			userProfileRepo.save(userProfile);
+		} else {
+			UserProfile userProfile = user.getUserProfile();
+			userProfile.setOtherDetails(otherDetails);
+			userProfileRepo.save(userProfile);
 		}
-		
-//			userProfile.setLastUpdated(new Date());
-//			
-
-//			otherUserDetailsRepo.save(otherDetails);
-		user.getUserProfile().setOtherDetails(otherDetails);
-		userRepo.save(user);
 		session.setAttribute("successMessage", "Profile Updated!");
 		response.sendRedirect("/edit.html");
 //		model.put("successMessage", "Profile Updated!");
@@ -537,10 +541,10 @@ public class IndexController {
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
 		model.put("states", categoryRepo.getStatesByCountryId("100"));
-		model.put("categories", categoryRepo.findAll());
+		model.put("categories", categoryRepo.findByCategoryStatus("Active"));
 		model.put("dayPreference", new DayPreference());
-		model.put("timeSlots", timeSlotRepo.findAll());
-		model.put("courses", courseRepo.findAll());
+		model.put("timeSlots", timeSlotRepo.findByTimeSlotStatus("Active"));
+		model.put("courses", courseRepo.findByCourseTypeStatus("Active"));
 //		if (result.hasErrors()) {
 //			return "edit";
 //		}
@@ -548,33 +552,49 @@ public class IndexController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		StudentDocuments savedStudentDocuments = user.getUserProfile().getStudentDocuments();
-		if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
-			awsService.uploadFile(multipartFile, user.getUserProfile());
-			studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
-		}else
-		{
-			if(savedStudentDocuments!=null)
-			{
+		if (savedStudentDocuments != null) {
+			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
+				awsService.uploadFile(multipartFile, user.getUserProfile());
+				studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
+			} else {
 				studentDocuments.setAadharFileName(savedStudentDocuments.getAadharFileName());
-			}
-		}
 
-		if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
-			awsService.uploadFile(studentIdMultipart, user.getUserProfile());
-			studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
-		}else
-		{
-			if(savedStudentDocuments!=null)
-			{
+			}
+
+			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
+				awsService.uploadFile(studentIdMultipart, user.getUserProfile());
+				studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
+			} else {
+
 				studentDocuments.setStudentIdFileName(savedStudentDocuments.getStudentIdFileName());
-			}
-		}
 
-		model.put("user", user);
+			}
+
+			model.put("user", user);
 //			userProfile.setLastUpdated(new Date());
-		UserProfile userprofile = user.getUserProfile();
-		userprofile.setStudentDocuments(studentDocuments);
-		userProfileRepo.save(userprofile);
+			UserProfile userprofile = user.getUserProfile();
+			studentDocuments.setId(savedStudentDocuments.getId());
+			userprofile.setStudentDocuments(studentDocuments);
+			userProfileRepo.save(userprofile);
+		}
+		else
+		{
+			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
+				awsService.uploadFile(multipartFile, user.getUserProfile());
+				studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
+			} 
+
+			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
+				awsService.uploadFile(studentIdMultipart, user.getUserProfile());
+				studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
+			} 
+
+			model.put("user", user);
+//			userProfile.setLastUpdated(new Date());
+			UserProfile userprofile = user.getUserProfile();
+			userprofile.setStudentDocuments(studentDocuments);
+			userProfileRepo.save(userprofile);
+		}
 		session.setAttribute("successMessage", "Profile Updated!");
 		response.sendRedirect("/edit.html");
 //		model.put("profile", user.getUserProfile());
@@ -593,12 +613,9 @@ public class IndexController {
 		UserProfile profile = userRepo.findByEmail(authentication.getName()).getUserProfile();
 		Set<DayPreference> preferences = null;
 		OtherUserDetails otherUserDetails = profile.getOtherDetails();
-		if(otherUserDetails!=null)
-		{
+		if (otherUserDetails != null) {
 			preferences = profile.getOtherDetails().getPreferences();
-		}
-		else
-		{	
+		} else {
 			otherUserDetails = new OtherUserDetails();
 			preferences = new HashSet<>();
 		}
@@ -679,7 +696,15 @@ public class IndexController {
 		User user = userRepo.findByEmail(auth.getName());
 		model.put("user", user);
 		
-		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicant(user);
+		List<JobAccountApplication> applications = new ArrayList<JobAccountApplication>();
+		
+		for(JobAccountApplication accountApplication : jobAccountApplicationRepo.findAllByApplicant(user))
+		{
+			if(accountApplication.getStatus()!=null && accountApplication.getStatus().equals("OPEN"))
+			{
+				applications.add(accountApplication);
+			}
+		}
 		model.put("applications", applications);
 		return "appliedjobs";
 	}
@@ -705,10 +730,11 @@ public class IndexController {
 	}
 
 	@RequestMapping(value = "/markAttendencePost.html", method = RequestMethod.POST)
-	public void markAttendence(@ModelAttribute("markAttendence") MarkAttendence markAttendence, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+	public void markAttendence(@ModelAttribute("markAttendence") MarkAttendence markAttendence,
+			HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
 //		String checkInTime = request.getParameter("checkinTime");
 //		String checkoutTime = request.getParameter("checkoutTime");
-		
+
 		String checkInTime = markAttendence.getCheckinTime();
 		String checkoutTime = markAttendence.getCheckoutTime();
 		String applicationId = request.getParameter("applicationId");
@@ -723,9 +749,9 @@ public class IndexController {
 			jobAccountApplicationRepo.save(application);
 			session.setAttribute("successMessage", "Attendence Marked");
 			response.sendRedirect("/appliedjobs.html");
-		}else {
-		session.setAttribute("errorMessage", "Input details invalid");
-		response.sendRedirect("/markAttendence.html");
+		} else {
+			session.setAttribute("errorMessage", "Input details invalid");
+			response.sendRedirect("/markAttendence.html");
 		}
 	}
 
@@ -734,7 +760,8 @@ public class IndexController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName() + "  &&&&&&7");
 		User user = (User) session.getAttribute("user");
-		ByteArrayOutputStream downloadInputStream = null;;
+		ByteArrayOutputStream downloadInputStream = null;
+		;
 		try {
 			downloadInputStream = awsService.downloadFile(name, user.getUserProfile());
 		} catch (Exception e) {
@@ -743,6 +770,45 @@ public class IndexController {
 		}
 
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(downloadInputStream.toByteArray());
+	}
+	
+	@GetMapping("/getProfilePic/{name}/{userProfileId}")
+	public ResponseEntity<byte[]> downloadFileByUserProfileId(@PathVariable String name,@PathVariable String userProfileId ) {
+		
+		ByteArrayOutputStream downloadInputStream = null;
+		UserProfile profile = userProfileRepo.findById(Integer.parseInt(userProfileId)).get();
+		try {
+			downloadInputStream = awsService.downloadFile(name, profile);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(downloadInputStream.toByteArray());
+	}
+
+	@RequestMapping("/viewjobs-genz.html")
+	public String showUpdateJob(Map<String, Object> model, @RequestParam String jobId) {
+		List<TimeSlot> timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
+		List<Category> categories = categoryRepo.findByCategoryStatus("Active");
+		List<Employer> employers = employerRepo.findAll();
+		if (jobId != null) {
+			Optional<JobAccount> jobAccountEntity = jobAccountRepo.findById(Integer.parseInt(jobId));
+			if (jobAccountEntity.isPresent()) {
+				model.put("jobAccount", jobAccountEntity.get());
+			}
+		} else {
+			model.put("jobAccount", new JobAccount());
+		}
+		model.put("timeSlots", timeSlots);
+		model.put("categories", categories);
+		model.put("employers", employers);
+		model.put("jobTimeSlot", new JobTimeSlot());
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("states", categoryRepo.getStatesByCountryId("100"));
+		model.put("user", user);
+		return "viewjobs";
 	}
 
 	private String getAppUrl(HttpServletRequest request) {
@@ -757,7 +823,7 @@ public class IndexController {
 		final String result = iUserService.validateVerificationToken(token);
 		if (result.equals("valid")) {
 			final User user = iUserService.getUser(token);
-			
+
 			user.setEnabled(true);
 			userRepo.save(user);
 			model.addAttribute("successMessage", "Account has been verified please log in now!");
@@ -879,12 +945,11 @@ public class IndexController {
 				errorMessage = ex.getMessage();
 			}
 		}
-		
+
 		String errorMsg = (String) session.getAttribute("errorLoginMessage");
-		
+
 		model.addAttribute("errorMessage", errorMessage);
-		if(errorMsg!=null)
-		{
+		if (errorMsg != null) {
 			model.addAttribute("errorLoginMessage", errorMsg);
 			model.addAttribute("errorMessage", null);
 		}
@@ -908,7 +973,7 @@ public class IndexController {
 		session.setAttribute("successMessage", "Successfully Withdrawed");
 		res.sendRedirect("/appliedjobs.html");
 	}
-	
+
 	@RequestMapping("/error.html")
 	public String error() throws IOException {
 

@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,7 +31,7 @@ public class OtherUserDetails {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@OneToOne(mappedBy = "otherDetails")
+	@OneToOne(mappedBy = "otherDetails",orphanRemoval = true)
 	private UserProfile userProfile;
 	
 public OtherUserDetails() {
@@ -46,7 +47,7 @@ public OtherUserDetails() {
 	private String alternateMobileNo;
 	
 
-
+	private String specialization;
 	
 //	@NotNull
 //	@NotEmpty(message = "Please Select Course")
@@ -115,12 +116,12 @@ public OtherUserDetails() {
 	
 	private String referralCode;
 //	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE, CascadeType.REFRESH  },orphanRemoval = true)
 	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	public List<Category> jobCategories; 
 	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE ,CascadeType.REFRESH },orphanRemoval = true)
 	@JoinTable(name = "profile_preference", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "preference_id") })
 	private Set<DayPreference> preferences = new HashSet<>();
@@ -308,6 +309,12 @@ public OtherUserDetails() {
 	}
 	public void setReferralCode(String referralCode) {
 		this.referralCode = referralCode;
+	}
+	public String getSpecialization() {
+		return specialization;
+	}
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 
 

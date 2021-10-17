@@ -307,14 +307,18 @@
                     <div class="form-row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
                             <h4>Time-Slot <span>*</span></h4>
-                            <form:select class="form-control" path="timeSlotName">
-                              <form:option class="first-op" value="">Select</form:option> 
-                              <form:option value="8:00am - 5:00pm"></form:option>
-                              <form:option  value="9:30am - 6:30pm"></form:option>
-                              <form:option value="12:00pm - 8:00pm"></form:option>
-                              <form:option value="1:00pm - 10:00pm"></form:option>
-                              <form:option value="1pm"></form:option>
-                            </form:select>
+<%--                             <form:select class="form-control" path="timeSlotName"> --%>
+<%--                               <form:option class="first-op" value="">Select</form:option>  --%>
+<%--                               <form:option value="8:00am - 5:00pm"></form:option> --%>
+<%--                               <form:option  value="9:30am - 6:30pm"></form:option> --%>
+<%--                               <form:option value="12:00pm - 8:00pm"></form:option> --%>
+<%--                               <form:option value="1:00pm - 10:00pm"></form:option> --%>
+<%--                               <form:option value="1pm"></form:option> --%>
+<%--                             </form:select> --%>
+
+
+							 <form:input class="form-control" path="timeSlotName"
+								placeholder="Time Slot Name" id="example-tel-input" />
                              <form:errors path="timeSlotName" cssClass="error"></form:errors>
                           </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">

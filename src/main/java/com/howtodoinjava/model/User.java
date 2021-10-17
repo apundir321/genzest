@@ -41,6 +41,8 @@ public class User {
     private String password;
 
     private boolean enabled;
+    
+    private String status;
 
     private boolean isUsing2FA;
     
@@ -202,6 +204,14 @@ public class User {
 
 	public void setRecruiterProfile(RecruiterProfile recruiterProfile) {
 		this.recruiterProfile = recruiterProfile;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

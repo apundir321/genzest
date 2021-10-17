@@ -34,6 +34,13 @@
     margin: 1rem;
     padding: 1.5rem;
 }
+
+.content .row .card1 .fa-user{
+    background-color: #BEC747;
+    border-radius: .5rem;
+    margin: 1rem;
+    padding: 1.5rem;
+}
 main .card1 .card-body h5{
     font-size: 3rem;
     color: white;
@@ -42,6 +49,7 @@ main .card1{
     border: 1px solid #212130;
     border-radius: .9rem;
     background-color: #212130;
+    height:100%
 }
 main .container-fluid1{
     margin: 2rem;

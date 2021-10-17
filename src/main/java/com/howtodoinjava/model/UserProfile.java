@@ -69,6 +69,9 @@ public class UserProfile {
 //	@NotEmpty(message = "Please Select Blood Group")
 	private String bloodGroup;
 	
+	
+	private String status;
+	
 //	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 //	@JoinColumn(name = "otherdetails_id")
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -162,6 +165,14 @@ public class UserProfile {
 //	public void setOrganization(Organization organization) {
 //		this.organization = organization;
 //	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	
 
 //	public Category getCategory() {

@@ -308,19 +308,21 @@
 								class="form-control" type="hidden" />
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
                             <h4>Category <span>*</span></h4>
-                            <form:select  path="categoryName" class="form-control">
-                              <form:option class="first-op" value="">Select</form:option> 
-                              <form:option value="Banking & Insurance"/>
-                              <form:option  value="Billing"/>
-                              <form:option  value="Customer Service"/>
-                              <form:option value="Designing"/>
-                              <form:option value="Finance & Accouting"/>
-                              <form:option value="Healthcare"/>
-                              <form:option value="HR"/>
-                              <form:option value="Manufacturing"/>
-                              <form:option value="Sales & Marketing"/>
-                            </form:select>
+<%--                             <form:select  path="categoryName" class="form-control"> --%>
+<%--                               <form:option class="first-op" value="">Select</form:option>  --%>
+<%--                               <form:option value="Banking & Insurance"/> --%>
+<%--                               <form:option  value="Billing"/> --%>
+<%--                               <form:option  value="Customer Service"/> --%>
+<%--                               <form:option value="Designing"/> --%>
+<%--                               <form:option value="Finance & Accouting"/> --%>
+<%--                               <form:option value="Healthcare"/> --%>
+<%--                               <form:option value="HR"/> --%>
+<%--                               <form:option value="Manufacturing"/> --%>
+<%--                               <form:option value="Sales & Marketing"/> --%>
+<%--                             </form:select> --%>
                             
+                             <form:input class="form-control" path="categoryName"
+								placeholder="Category Name" id="example-tel-input" />
                             <form:errors path="categoryName" cssClass="error"></form:errors>
                           </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">

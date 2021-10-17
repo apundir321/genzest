@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +24,7 @@
 <link href="assets-2/css/style.css" rel="stylesheet">
 <link href="assets-2/css/style2.css" rel="stylesheet">
 <link href="assets-2/css/style3.css" rel="stylesheet">
+<link href="assets/css/jquery-ui.css" rel="stylesheet">
 <link href="assets-2/css/edit.css" rel="stylesheet">
 <link
 	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
@@ -51,10 +52,27 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+
+<!-- 	    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script> -->
+<!--     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+	rel="stylesheet">
+
+
+
 <style>
-.main {
-	height: 2200px;
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
 }
+</style>
+
+<style>
+
 /* xs */
 @media ( max-width : 767px) {
 	.main {
@@ -137,6 +155,258 @@ table thead {
 }
 </style>
 
+<style>
+	.sidebar-content .sidebar-nav .fa-user-circle-o{
+		font-size: 4rem;
+		vertical-align: middle;
+	}
+	.sidebar-content .sidebar-nav .fa-angle-down{
+		font-size: 1.8rem;
+	}
+	.sidebar .sidebar-nav .sidebar-item .first {
+		height: 90px !important; 
+	}
+	.container-fluid0 .row .col-lg-6 h5{
+		font-size: 20px;
+		color: #A4A4A4;
+	}
+    main .card1{
+        margin-bottom: 2rem;
+    }
+    main .card1 .fa-users{
+        background-color: #2769EE;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        margin: 1rem;
+        font-size: 2.5rem;
+    }
+    main .card1 .fa-smile-o{
+        background-color: #BEC747;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        margin: 1rem;
+        font-size: 2.5rem;
+    }
+    main .card1 .fa-newspaper-o{
+        background-color: #27BEEE;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        margin: 1rem;
+        font-size: 2.5rem;
+    }
+    main .card1 .fa-file-text-o{
+        background-color: #DF2C57;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        margin: 1rem;
+        font-size: 2.5rem;
+    }
+    main .card1 .fa-thumbs-o-down{
+        background-color: #EE9827;
+        border-radius: .5rem;
+        padding: 1.5rem;
+        margin: 1rem;
+        font-size: 2.5rem;
+    }
+
+    .dropbtn {
+        background-color: #212130;
+        color: rgba(233, 236, 239, 0.5);
+        font-weight: 600;
+        padding: 16px;
+        font-size: 14px;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+        background-color: #212130;
+        }
+
+        .dropdown {
+        position: relative;
+        display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #212130;
+            min-width: 260px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: rgba(233, 236, 239, 0.5);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .dropdown a:hover {
+            background-color: black;
+            font-weight: bold;
+        }
+
+        .show {display: block;}
+
+        .sidebar .sidebar-nav .sidebar-item a {
+            height: 60px;
+        }
+
+        .card {
+            border-radius: 1.4rem;
+            width: 50%;
+            height: 217px;
+        }
+
+   /* xs */
+	@media (max-width: 767px) {
+		main{
+			height: 800px;
+		}
+	}
+    
+        /* sm */
+        @media (min-width: 768px) and (max-width: 991px) {
+            table{
+            overflow: auto;
+            display: block;
+        }
+        } 
+
+        /* xs */
+        @media (max-width: 767px) {
+            table{
+            overflow: auto;
+            display: block;
+        }
+        }
+        .sidebar .sidebar-nav .sidebar-item a {
+    height: 55px;
+}
+</style>
+
+<style>
+.avatar-upload {
+	position: relative;
+	max-width: 140px;
+	margin: 20px auto;
+	margin-left: 2px;
+}
+
+.avatar-upload .avatar-edit {
+	position: absolute;
+	right: 12px;
+	z-index: 1;
+	top: 10px;
+}
+
+.avatar-upload .avatar-edit input {
+	display: none;
+}
+
+.avatar-upload .avatar-edit input+label {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	margin-bottom: 0;
+	border-radius: 100%;
+	background: #FFFFFF;
+	border: 1px solid transparent;
+	box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+	cursor: pointer;
+	font-weight: normal;
+	transition: all .2s ease-in-out;
+}
+
+.avatar-upload .avatar-edit input+label:hover {
+	background: #f1f1f1;
+	border-color: #d6d6d6;
+}
+
+.avatar-upload .avatar-edit input+label:after {
+	content: "\f040";
+	font-family: 'FontAwesome';
+	color: #757575;
+	position: absolute;
+	top: 5px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	margin: auto;
+}
+
+.avatar-upload .avatar-preview {
+	width: 134px;
+	height: 134px;
+	position: relative;
+	border-radius: 100%;
+	border: 6px solid #F8F8F8;
+	box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-upload .avatar-preview>div {
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.colbox span {
+	color: red;
+	font-size: 17px;
+}
+
+input[type=file] {
+	color: white;
+}
+
+.ba-class {
+	margin-top: 16px;
+}
+
+.ba-class-1 {
+	margin-top: -16px;
+}
+
+.ba-class label {
+	color: white;
+}
+
+.ba-class-1 label {
+	color: white;
+}
+
+.ba-class label span {
+	color: red;
+	font-size: 17px;
+}
+
+.ba-class-1 label span {
+	color: red;
+	font-size: 17px;
+}
+
+.upload-img {
+	margin-top: -12px;
+}
+
+</style>
+
 </head>
 
 <body>
@@ -168,14 +438,14 @@ table thead {
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
+					<a class="sidebar-link" href="#"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
 					</a></li>
 
 					<li class="sidebar-item">
-					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
+					<a class="sidebar-link" href="#"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
                     </a></li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                     <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span>
                     </a></li>
 
@@ -187,28 +457,49 @@ table thead {
                     <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
                     </a></li>
 
-
+                    <li class="sidebar-item active">
+                        <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="access-right-genz.html">Access Right</a>
+                                <a href="team-genz.html">Team</a>
+                                <a href="category-genz.html">Category</a>
+                                <a href="jobtype-genz.html">Job Types</a>
+                                <a href="timeslot-genz.html">Time Slot</a>
+                                <a href="bloodgrp-genz.html">Blood Group</a>
+                                <a href="course-genz.html">Courses</a>
+                                <a href="vehicle-genz.html">Vehicle Type</a>
+                                <a href="citystate-genz.html">City Country State</a>
+                            </div>
+                          </div>
+                    </li>
 				
 				</ul>
 
-				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-				<!-- <div class="container">
-					<div class="centered">
-						<b class="dot">.....</b><br>
-						<a href="#"><b>Download our App</b></a><br>
-						<b class="dot" >.....</b>
-						<br>
-						<a class="blurtext">
-							Become a part of GenZest by Downloading our App
-						</a>
-					</div>
-				  </div> -->
-				<!-- DOWNLOAD APP TRANSPARENT BOX -->
-
-				<!-- <h4><b>Genzest Admin</b></h4>
-				<p>© 2021 All Rights Reserved</p> -->
 			</div>
 		</nav>
+
+        <script>
+            /* When the user clicks on the button, 
+            toggle between hiding and showing the dropdown content */
+            function myFunction() {
+              document.getElementById("myDropdown").classList.toggle("show");
+            }
+            
+            // Close the dropdown if the user clicks outside of it
+            window.onclick = function(event) {
+              if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                  }
+                }
+              }
+            }
+            </script>
 
 		<div class="main">
 			<!-- ---------------TOP BAR-------------- -->
@@ -237,9 +528,12 @@ table thead {
 
 			<main class="content">
 
+				<a href="profile.html"><button class="back"
+									style="float: right; margin: 1rem; color: white;">
+									Back <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+								</button></a>
 
-
-				<form:form action="/updateProfile.html" method="post"
+				<form:form action="/genz_updateProfile.html" method="post"
 					modelAttribute="profile" enctype="multipart/form-data"
 					id="studentprofileform">
 
@@ -263,10 +557,7 @@ table thead {
 							<h4>General Details (data once entered can not be altered)</h4>
 						</div>
 						<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-							<a href="profile.html"><button class="back"
-									style="float: right; margin: 1rem; color: white;">
-									Back <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-								</button></a>
+							
 						</div>
 					</div>
 
@@ -283,14 +574,14 @@ table thead {
 										<!-- 				            </div> -->
 										<c:if test="${not empty profile.profilePicFileName}">
 											<div id="imagePreview"
-												style="background-image: url(/getProfilePic/${profile.profilePicFileName});">
+												style="background-image: url(/getProfilePic/${profile.profilePicFileName}/${profile.id});">
 											</div>
 										</c:if>
 
 										<c:if test="${empty profile.profilePicFileName}">
 											<div id="imagePreview"
 												style="background-image: url(assets-2/img/icons/avatar-gz.png);">
-												</div>
+												--></div>
 										</c:if>
 
 									</div>
@@ -302,11 +593,12 @@ table thead {
 
 					</div>
 
-
+					<form:input path="id" placeholder="First Name"
+							class="form-control" type="hidden"  />
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="firstName">First Name <span>*</span></label>
 						<form:input path="firstName" placeholder="First Name"
-							class="form-control" type="text" value="${user.firstName}" readonly="${!editable}" />
+							class="form-control" type="text" />
 						<form:errors path="firstName" cssClass="error"></form:errors>
 
 					</div>
@@ -314,7 +606,7 @@ table thead {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="lastName">Last Name <span>*</span></label>
 						<form:input path="lastName" placeholder="Last Name"
-							class="form-control" type="text" value="${user.lastName}" readonly="${!editable}" />
+							class="form-control" type="text"   />
 						<form:errors path="lastName" cssClass="error"></form:errors>
 					</div>
 
@@ -323,15 +615,15 @@ table thead {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="email">Email <span>*</span></label>
 						<form:input class="form-control" path="email"
-							placeholder="Drop Your Mail Id" id="example-email-input"
-							value="${user.email}" />
+							placeholder="Drop Your Mail Id" type="email" id="example-email-input"
+							  />
 						<form:errors path="email" cssClass="error"></form:errors>
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="parentsName">Parent's Name <span>*</span></label>
 						<form:input path="parentsName" placeholder="Parents Name"
-							class="form-control" type="text" />
+							class="form-control" type="text"  />
 						<form:errors path="parentsName" cssClass="error"></form:errors>
 					</div>
 
@@ -340,7 +632,7 @@ table thead {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="gender">Gender <span>*</span></label>
-						<form:select path="gender" class="form-control">
+						<form:select path="gender" class="form-control"  >
 							<form:option class="first-op" value="">Select</form:option>
 							<form:option value="Male">Male</form:option>
 							<form:option value="Female">Female</form:option>
@@ -352,7 +644,7 @@ table thead {
 						<label for="dob">Date of Birth <span>*</span></label>
 						<form:input type="date" class="form-control" path="dob"
 							onfocusout="ageCalculation()" placeholder="DD/MM/YYYY"
-							name="birthday" />
+							name="birthday"  />
 						<form:errors path="dob" cssClass="error"></form:errors>
 
 					</div>
@@ -363,7 +655,7 @@ table thead {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="bloodGroup">Blood Group <span>*</span></label>
-						<form:select path="bloodGroup" class="form-control">
+						<form:select path="bloodGroup" class="form-control"  >
 							<form:option value="">Please Select</form:option>
 							<form:option value="AB-"></form:option>
 							<form:option value="O-"></form:option>
@@ -380,11 +672,14 @@ table thead {
 					</div>
 
 					<div class="clear clearfix"></div>
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!-- 							<button type="submit">Save</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+						
+<%-- 						<c:if test="${editable}"> --%>
+					<div class="form-row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+							<button type="submit">Save</button>
+						</div>
+					</div>
+<%-- 					</c:if> --%>
 
 				</form:form>
 
@@ -392,9 +687,9 @@ table thead {
 					<h4>Other Details</h4>
 				</div>
 
-				<form:form action="/updateOtherDetails.html" method="post"
+				<form:form action="/genz_updateOtherDetails.html?userProfileId=${profile.id}" method="post"
 					modelAttribute="otherDetails" enctype="multipart/form-data"
-					id="studentprofileform">
+					id="otherdetailsform">
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="mobileNo">Mobile No <span>*</span></label>
 						<form:input class="form-control" path="mobileNo"
@@ -414,10 +709,10 @@ table thead {
 					<div class="clear clearfix"></div>
 					
 					  <div class="form-group col-sm-6 col-xs-12 colbox">
-					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
+					    <label for="degreeCollegeCompletionDate">Tentative Degree Completion Date <span>*</span></label>
 												<form:input class="form-control" type="date" 
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
-													path="degreeCollegeCompletionDate" />
+													path="degreeCollegeCompletionDate"/>
 					  </div>
 					  
 					  	  <script>
@@ -461,20 +756,21 @@ table thead {
 <%-- 							<form:errors path="vehicleType" cssClass="error"></form:errors> --%>
 <!--   </div> -->
   <div class="clear clearfix"></div>
-
+					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="course">Course <span>*</span></label>
-						<form:select class="form-control" path="course">
+						<form:select class="form-control" path="course"  >
 							<form:option value="">Select</form:option>
-							<form:option value="B.tech">B.tech</form:option>
 							<c:forEach var="course" items="${courses}">
-								<form:option value="${course.id}"
+								<form:option value="${course.courseTypeName}"
 									label="${course.courseTypeName}" />
 							</c:forEach>
 						</form:select>
 						<form:errors path="course" cssClass="error"></form:errors>
 					</div>
-
+					
+					
+					
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="collegeName">College Name <span>*</span></label>
@@ -532,11 +828,11 @@ table thead {
 								<form:option value="${state[1]}" label="${state[1]}" />
 							</c:forEach>
 						</form:select>
-						<c:if test="${not empty otherDetails.state}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;">${otherDetails.state}</span>
-							</h4>
-						</c:if>
+<%-- 						<c:if test="${not empty otherDetails.state}"> --%>
+<!-- 							<h4 style="color: #f15336"> -->
+<%-- 								Selected: <span style="color: #A4A4A4;">${otherDetails.state}</span> --%>
+<!-- 							</h4> -->
+<%-- 						</c:if> --%>
 						<form:errors path="state" cssClass="error"></form:errors>
 					</div>
 
@@ -546,16 +842,16 @@ table thead {
 						<label for="city">City <span>*</span></label>
 						<form:select path="city" id="cityDropDown" class="form-control">
 							<option value="">Select</option>
-							<c:forEach var="state" items="${states}">
-								<form:option value="${state[1]}" label="${state[1]}" />
+							<c:forEach var="city" items="${cities}">
+								<form:option value="${city[1]}" label="${city[1]}" />
 							</c:forEach>
 						</form:select>
 						<form:errors path="city" cssClass="error"></form:errors>
-						<c:if test="${not empty otherDetails.city}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;">${otherDetails.city}</span>
-							</h4>
-						</c:if>
+<%-- 						<c:if test="${not empty otherDetails.city}"> --%>
+<!-- 							<h4 style="color: #f15336"> -->
+<%-- 								Selected: <span style="color: #A4A4A4;">${otherDetails.city}</span> --%>
+<!-- 							</h4> -->
+<%-- 						</c:if> --%>
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
@@ -594,18 +890,16 @@ table thead {
 							multiple="true" maxlength="5" minlength="1">
 							<form:option value="">Select</form:option>
 					
-							<c:forEach var="category" items="${categories}">
-								<form:option value="${category.id}"
-									label="${category.categoryName}" />
-							</c:forEach>
+<%-- 							<c:forEach var="category" items="${categories}"> --%>
+<%-- 								<option value="${category.id}" --%>
+<%-- 									label="${category.categoryName}" /> --%>
+									
+									
+<%-- 							</c:forEach> --%>
+
+ <form:options items="${categories}" itemValue="id" itemLabel="categoryName"/>
 						</form:select>
-						<c:if test="${not empty otherDetails.jobCategories}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;"><c:forEach
-										var="category" items="${otherDetails.jobCategories}">
-										<span>${category.categoryName}</span>&nbsp;&nbsp;</c:forEach></span>
-							</h4>
-						</c:if>
+						
 					</div>
 
 
@@ -617,146 +911,173 @@ table thead {
 							<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
 							<form:option value="Field Job">Field Job</form:option>
 							<form:option value="Office Job">Office Job</form:option>
+							<form:option value="Office Job">No Preference</form:option>
 						</form:select>
 						<form:errors path="preference" cssClass="error"></form:errors>
-						<c:if test="${not empty otherDetails.preference}">
-							<h4 style="color: #f15336">
-								Selected: <span style="color: #A4A4A4;">${otherDetails.preference}</span>
-							</h4>
-						</c:if>
+<%-- 						<c:if test="${not empty otherDetails.preference}"> --%>
+<!-- 							<h4 style="color: #f15336"> -->
+<%-- 								Selected: <span style="color: #A4A4A4;">${otherDetails.preference}</span> --%>
+<!-- 							</h4> -->
+<%-- 						</c:if> --%>
+					</div>
+					
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="referralCode">Referral Code <span>*</span></label>
+						<form:input id="postal-code" path="referralCode" type="text"
+							placeholder="Referral code" class="form-control" />
 					</div>
 
 					<div class="clear clearfix"></div>
-<!-- 					<div class="form-row"> -->
-<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!-- 							<button type="submit">Save</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+					<div class="form-row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+							<button type="submit">Save</button>
+						</div>
+					</div>
 
 				</form:form>
 				
-<%-- 				<form:form action="/updatedocs.html" method="post" modelAttribute="studentDocs" enctype="multipart/form-data"> --%>
+				<form:form action="/genz_updatedocs.html?userProfileId=${profile.id}" method="post" modelAttribute="studentDocs" enctype="multipart/form-data"
+				id="uploaddocumentform">
 
-<!-- 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address">  -->
-<!--  					<h4>Upload Documents</h4>  -->
-<!--  				</div>  -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 address"> 
+ 					<h4>Upload Documents</h4> 
+ 				</div> 
 
-<!--  				<div class="form-group col-sm-6 col-xs-12 colbox">  -->
-<!--  					<label for="aadhar">Aadhar Card <span>*</span></label> <input  -->
-<!--  						type="file" name="aadhar" class="custom-file-input"  -->
-<!--  						id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">  -->
+ 				<div class="form-group col-sm-6 col-xs-12 colbox"> 
+ 					<label for="aadhar">Aadhar Card <span>*</span></label> <input 
+ 						type="file" name="aadhar" class="custom-file-input" 
+ 						id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> 
+						<c:if test="${not empty studentDocs.aadharFileName}">
+							<h4 style="color: #f15336">
+								Aadhar Card uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.aadharFileName}">View</a></span>
+							</h4>
+							
+							<input id="adhar" type="hidden"
+							placeholder="aadhar" class="form-control" value="${studentDocs.aadharFileName}" >
+						</c:if>
+ 				</div> 
+	
 
-<!--  				</div>  -->
+ 				<div class="form-group col-sm-6 col-xs-12 colbox"> 
+ 					<label for="studentId">Student Id <span>*</span></label> 
+ 					<div class="custom-file"> 
+ 						<input type="file" name="studentId" class="custom-file-input" 
+ 							id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+ 					</div> 
+ 					<c:if test="${not empty studentDocs.studentIdFileName}">
+							<h4 style="color: #f15336">
+								Student Id uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.studentIdFileName}">View</a></span>
+							</h4>
+							
+							<input id="studentId" type="hidden"
+							placeholder="student id" class="form-control" value="${studentDocs.studentIdFileName}" >
+						</c:if>
+ 					
+ 				</div> 
 
-<!--  				<div class="form-group col-sm-6 col-xs-12 colbox">  -->
-<!--  					<label for="studentId">Student Id <span>*</span></label>  -->
-<!--  					<div class="custom-file">  -->
-<!--  						<input type="file" name="studentId" class="custom-file-input"  -->
-<!--  							id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> -->
-<!--  					</div>  -->
-<!--  				</div>  -->
+				<div class="clear clearfix"></div> 
 
-<!-- 				<div class="clear clearfix"></div>  -->
+ 				<div class="form-group col-sm-3 col-xs-12 colbox"> 
+ 					<label for="paymentMethod">Payment Method <span>*</span></label> 
+					<form:select onchange='checkItem(this.value)' class="form-control" 
+						path="paymentMethod">
+						<form:option class="first-op" value="">Select</form:option>
+						<form:option value="Bank Account"></form:option>
+						<form:option value="Wallet"></form:option>
+					</form:select>
+					<form:errors path="paymentMethod" cssClass="error"></form:errors>
+				</div>
 
-<!--  				<div class="form-group col-sm-3 col-xs-12 colbox">  -->
-<!--  					<label for="paymentMethod">Payment Method <span>*</span></label>  -->
-<%-- 					<form:select onchange='checkItem(this.value)' class="form-control"  --%>
-<%-- 						path="paymentMethod"> --%>
-<%-- 						<form:option class="first-op" value="">Select</form:option> --%>
-<%-- 						<form:option value="Bank Account"></form:option> --%>
-<%-- 						<form:option value="Wallet"></form:option> --%>
-<%-- 					</form:select> --%>
-<%-- 					<form:errors path="paymentMethod" cssClass="error"></form:errors> --%>
-<!-- 				</div> -->
+				<div class="form-group col-md-3 ba-class">
+					<label for="inputother" style="display: none;" id="BA">Bank
+						Name <span>*</span>
+					</label> 
+					<form:input type="text" class="form-control" id="text" name="text"
+						style="display: none;" placeholder="Bank Name" path="bankName"/>
+				</div>
+				<div class="form-group col-md-3 ba-class">
+					<label for="inputother" style="display: none;" id="AC">Account
+						Number <span>*</span>
+					</label> <form:input type="text" class="form-control" id="text-1" name="text"
+						style="display: none;" placeholder="Account Number" path="accountName"/>
+				</div>
+				<div class="form-group col-md-3 ba-class">
+					<label for="inputother" style="display: none;" id="IC">IFSC
+						Code <span>*</span>
+					</label> <form:input type="text" class="form-control" id="text-3" name="text"
+						style="display: none;" placeholder="IFSC Code" path="ifscCode"/>
+				</div>
 
-<!-- 				<div class="form-group col-md-3 ba-class"> -->
-<!-- 					<label for="inputother" style="display: none;" id="BA">Bank -->
-<!-- 						Name <span>*</span> -->
-<!-- 					</label> <input type="text" class="form-control" id="text" name="text" -->
-<!-- 						style="display: none;" placeholder="Bank Name"> -->
-<!-- 				</div> -->
-<!-- 				<div class="form-group col-md-3 ba-class"> -->
-<!-- 					<label for="inputother" style="display: none;" id="AC">Account -->
-<!-- 						Number <span>*</span> -->
-<!-- 					</label> <input type="text" class="form-control" id="text-1" name="text" -->
-<!-- 						style="display: none;" placeholder="Account Number"> -->
-<!-- 				</div> -->
-<!-- 				<div class="form-group col-md-3 ba-class"> -->
-<!-- 					<label for="inputother" style="display: none;" id="IC">IFSC -->
-<!-- 						Code <span>*</span> -->
-<!-- 					</label> <input type="text" class="form-control" id="text-3" name="text" -->
-<!-- 						style="display: none;" placeholder="IFSC Code"> -->
-<!-- 				</div> -->
-
-<!-- 				<div class="form-group col-md-3 ba-class-1"> -->
-<!-- 					<label for="inputother" style="display: none;" id="UPI">UPI -->
-<!-- 						<span>*</span> -->
-<!-- 					</label> <input type="text" class="form-control" id="text-4" name="text" -->
-<!-- 						style="display: none;" placeholder="UPI"> -->
-<!-- 				</div> -->
+				<div class="form-group col-md-3 ba-class-1">
+					<label for="inputother" style="display: none;" id="UPI">UPI
+						<span>*</span>
+					</label> <form:input type="text" class="form-control" id="text-4" name="text"
+						style="display: none;" placeholder="UPI" path="upiId"/>
+				</div>
 						
 
-<!-- 				<div class="form-row"> -->
-<!-- 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!-- 						<button onClick="bankandwallet()" type="submit">Save</button> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
+				<div class="form-row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+						<button onClick="bankandwallet()" type="submit">Save</button>
+					</div>
+				</div>
 
-<%-- 				</form:form> --%>
+				</form:form>
 
 				<div class="container-fluid">
 					<div class="row two">
 						<div class="container-fluid">
 
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<h4>Time slots choosen by Student</h4>
+								<h4>Your Availability (You may provide convenient day and
+									timeslots when you are free for doing a job)</h4>
 							</div>
 
 						</div>
 					</div>
 					<div class="form-row">
-<%-- 						<form:form action="/updatePreferences.html" method="post" --%>
-<%-- 							modelAttribute="dayPreference"> --%>
-<!-- 							<div class="form-row"> -->
+						<form:form action="/genz_updatePreferences.html?userProfileId=${profile.id}" method="post"
+							modelAttribute="dayPreference">
+							<div class="form-row">
 
-<!-- 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
-<!-- 									<h4> -->
-<!-- 										Days <span>*</span> -->
-<!-- 									</h4> -->
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+									<h4>
+										Days <span>*</span>
+									</h4>
 
-<%-- 									<form:select id="timeslotDay" class="form-control" path="day"> --%>
-<%-- 										<form:option class="first-op" value="">Select</form:option> --%>
-<%-- 										<form:option value="Monday"></form:option> --%>
-<%-- 										<form:option value="Tuesday"></form:option> --%>
-<%-- 										<form:option value="Wednesday"></form:option> --%>
-<%-- 										<form:option value="Thrusday"></form:option> --%>
-<%-- 										<form:option value="Friday"></form:option> --%>
-<%-- 										<form:option value="Saturday"></form:option> --%>
-<%-- 										<form:option value="Sunday"></form:option> --%>
-<%-- 									</form:select> --%>
-<!-- 									<div id="confirmMessageDay" class="error"></div> -->
-<!-- 								</div> -->
+									<form:select id="timeslotDay" class="form-control" path="day">
+										<form:option class="first-op" value="">Select</form:option>
+										<form:option value="Monday"></form:option>
+										<form:option value="Tuesday"></form:option>
+										<form:option value="Wednesday"></form:option>
+										<form:option value="Thursday"></form:option>
+										<form:option value="Friday"></form:option>
+										<form:option value="Saturday"></form:option>
+										<form:option value="Sunday"></form:option>
+									</form:select>
+									<div id="confirmMessageDay" class="error"></div>
+								</div>
 
-<!-- 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
-<!-- 									<h4> -->
-<!-- 										Time-Slots <span>*</span> -->
-<!-- 									</h4> -->
-<%-- 									<form:select id="timeSlot" class="form-control" path="timeSlot"> --%>
-<%-- 										<form:option value="">Select</form:option> --%>
-<%-- 										<c:forEach var="timeSlot" items="${timeSlots}"> --%>
-<%-- 											<form:option value="${timeSlot.id}" --%>
-<%-- 												label="${timeSlot.timeSlotName}" /> --%>
-<%-- 										</c:forEach> --%>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
+									<h4>
+										Time-Slots <span>*</span>
+									</h4>
+									<form:select id="timeSlot" class="form-control" path="timeSlot">
+										<form:option value="">Select</form:option>
+										<c:forEach var="timeSlot" items="${timeSlots}">
+											<form:option value="${timeSlot.id}"
+												label="${timeSlot.timeSlotName}" />
+										</c:forEach>
 
-<%-- 									</form:select> --%>
-<!-- 									<div id="confirmMessage" class="error"></div> -->
-<!-- 								</div> -->
+									</form:select>
+									<div id="confirmMessage" class="error"></div>
+								</div>
 
-<!-- 							</div> -->
-<!-- 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
-<!-- 								<button type="submit" onclick="return validate()">Add</button> -->
-<!-- 							</div> -->
-<%-- 						</form:form> --%>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
+								<button type="submit" onclick="return validate()">Add</button>
+							</div>
+						</form:form>
 						<br /> <br />
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
 							<table id="myTable">
@@ -764,7 +1085,7 @@ table thead {
 									<tr>
 										<th scope="col">Days</th>
 										<th scope="col">Time-Slots</th>
-<!-- 										<th scope="col">Action</th> -->
+										<th scope="col">Action</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -790,14 +1111,15 @@ table thead {
 
 				</div>
 			</main>
-		
+
 		</div>
 	</div>
-	<script>
-		$(document).ready( function () {
-			$('#table_id').DataTable();
-		} );
-	</script>
+	<script src="assets-2/js/app.js"></script>
+	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
+	<script src="assets/js/jquery-1.11.1.js"></script>
+	<script src="assets/js/jquery-ui.min.js"></script>
+	<script src="assets/js/jquery.validate.js"></script>
+	<script src="assets/validatejs/editstudentprofile.js"></script>
 	<script>
         $("#profileImage").click(function(e) {
         $("#imageUpload").click();
@@ -815,8 +1137,254 @@ table thead {
     });
     </script>
 
-	<script src="assets-2/js/app.js"></script>
-	<script src="https://material-ui.com/components/tables/#DataTable.js"></script>
+	<script>
+function myFunction() {
+  var x = document.getElementById("editState").value;
+  $.ajax({
+		type: 'GET',
+		url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
+		success: function(result) {
+			var s = '';
+			for(var i = 0; i < result.length; i++) {
+				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
+			}
+			console.log(s);
+			$('#cityDropDown').html(s);
+		}
+	});
+}
+</script>
+
+	<script type="text/javascript">
+    function validate() {
+        var timeSlot = document.getElementById("timeSlot").value;
+        var timeslotDay = document.getElementById("timeslotDay").value;
+        if(!timeslotDay){
+        	document.getElementById("confirmMessageDay").innerHTML = "Day Not Selected";
+        	return false;
+        }
+        
+        if(!timeSlot){
+        	document.getElementById("confirmMessage").innerHTML = "TimeSlot Not Selected";
+        	return false;
+        }
+        return true;
+    }
+</script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
+	});
+	
+ 	$(document).ready(function(){
+ 		var val =$('#paymentMethod').val();
+ 		if(val === "Bank Account"){
+ 	        document.getElementById('BA').style.display='block';
+ 	        document.getElementById('text').style.display='block';
+ 	        
+ 	        document.getElementById('AC').style.display='block';
+ 	        document.getElementById('text-1').style.display='block';
+ 	        
+ 	        document.getElementById('IC').style.display='block';
+ 	        document.getElementById('text-3').style.display='block';
+ 	      }
+ 	      else{
+ 	        document.getElementById('text').value=""; 
+ 	        document.getElementById('BA').style.display='none';
+ 	        document.getElementById('text').style.display='none';
+ 	        
+ 	        document.getElementById('AC').style.display='none';
+ 	        document.getElementById('text-1').style.display='none';
+ 	        
+ 	        document.getElementById('IC').style.display='none';
+ 	        document.getElementById('text-3').style.display='none';
+ 	      }
+ 	      
+ 	      if(val === "Wallet"){
+ 	    	  document.getElementById('UPI').style.display='block';
+ 	          document.getElementById('text-4').style.display='block';
+ 	      }
+ 	      else{
+ 	          document.getElementById('UPI').style.display='none';
+ 	          document.getElementById('text-4').style.display='none';
+ 	      }
+ 	});
+	
+	
+	$(document).ready(function(){
+		<c:if test="${not empty warningMessage}">
+		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="warningMessage" scope="session"/>
+			<c:remove var="warningMessage" scope="request"/>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
+	});
+	
+	</script>
+
+
+	<script>
+	$(function() {
+	    $("#birthday").datepicker({
+	       //showOn: both - datepicker will appear clicking the input box as well as the calendar icon
+	       //showOn: button - datepicker will appear only on clicking the calendar icon
+	       showOn: 'both',
+	       //you can use your local path also eg. buttonImage: 'images/x_office_calendar.png'
+	       buttonImage: 'https://theonlytutorials.com/demo/x_office_calendar.png',
+	       buttonImageOnly: true,
+	       changeMonth: true,
+	       changeYear: true,
+	       showAnim: 'slideDown',
+	       duration: 'fast',
+	       dateFormat: 'dd-mm-yy'
+	    });
+	});
+	</script>
+
+	<script>
+  function ageCalculation(){
+
+	  var currentDate = new Date();
+	  var val = document.getElementById("dob").value;
+	  var birthDate = new Date(val);
+	  var difference = currentDate - birthDate;
+	  
+	  var differenceInYears = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
+	  if(birthDate > currentDate) {
+	    window.alert("Please Select Valid Date of Birth ");
+	    document.getElementById('dob').value = "";
+	  } else {
+		  return true;
+	  }
+	}
+  </script>
+
+	<script>
+  function ageCalculationtwo(){
+
+	  var currentDate = new Date();
+	  var val = document.getElementById("degreeCollegeCompletionDate").value;
+	  var birthDate = new Date(val);
+	  var difference = currentDate - birthDate;
+	  
+	  var differenceInYears = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
+	  if(birthDate > currentDate) {
+	    window.alert("You cannot be complete your degree in the future");
+	    document.getElementById('degreeCollegeCompletionDate').value = "";
+	  } else {
+		  return true;
+	  }
+	}
+  </script>
+
+	<script>
+  
+  function readURL(input) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function(e) {
+	            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+	            $('#imagePreview').hide();
+	            $('#imagePreview').fadeIn(650);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	$("#imageUpload").change(function() {
+	    readURL(this);
+	});
+  
+  </script>
+
+	<script>
+  var itm = document.getElementById('paymentMethod');
+  function checkItem(val)
+  {
+      if(val === "Bank Account"){
+        document.getElementById('BA').style.display='block';
+        document.getElementById('text').style.display='block';
+        
+        document.getElementById('AC').style.display='block';
+        document.getElementById('text-1').style.display='block';
+        
+        document.getElementById('IC').style.display='block';
+        document.getElementById('text-3').style.display='block';
+      }
+      else{
+        document.getElementById('text').value=""; 
+        document.getElementById('BA').style.display='none';
+        document.getElementById('text').style.display='none';
+        
+        document.getElementById('AC').style.display='none';
+        document.getElementById('text-1').style.display='none';
+        
+        document.getElementById('IC').style.display='none';
+        document.getElementById('text-3').style.display='none';
+      }
+      
+      if(val === "Wallet"){
+    	  document.getElementById('UPI').style.display='block';
+          document.getElementById('text-4').style.display='block';
+      }
+      else{
+          document.getElementById('UPI').style.display='none';
+          document.getElementById('text-4').style.display='none';
+      }
+  }
+  </script>
+
+	<script>
+  	function bankandwallet(){
+  	  var value = document.getElementById('paymentMethod').value;
+  		var BA = document.getElementById("text").value;
+  		var AC = document.getElementById("text-1").value;
+  		var IFSC = document.getElementById("text-3").value;
+  		var UPI = document.getElementById("text-4").value;
+  		 if(value === "Bank Account"){
+  			 console.log("in bank acc.");
+  			 if(BA === ""){
+  				 console.log("in bank name.");
+  				 window.alert("Please Fill Bank Name");
+  				 return false;
+  			 }else{
+  				 return true;
+  			 }
+  			 if(AC === ""){
+  				 window.alert("Please Fill Account Number");
+  				return false;
+  			 }else {
+  				 return true;
+  			 }
+  			 if(IFSC === ""){
+  				 window.alert("Please Fill IFSC Code");
+  				return false;
+  			 }else{
+  				 return true;
+  			 }
+  		 }else if(value === "Wallet"){
+  			 
+  			 if(UPI === ""){
+  				 window.alert("Please Fill UPI");
+  				 return false;
+  			 }else{
+  				 return true;
+  			 }
+  		 }
+  	}
+  </script>
 
 
 </body>

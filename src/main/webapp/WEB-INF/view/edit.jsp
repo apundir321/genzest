@@ -427,16 +427,17 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="firstName">First Name <span>*</span></label>
+						
 						<form:input path="firstName" placeholder="First Name"
-							class="form-control" type="text" value="${user.firstName}" readonly="${!editable}" />
+							class="form-control" type="text" value="${user.firstName}" readonly="true" />
 						<form:errors path="firstName" cssClass="error"></form:errors>
-
+						
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="lastName">Last Name <span>*</span></label>
 						<form:input path="lastName" placeholder="Last Name"
-							class="form-control" type="text" value="${user.lastName}" readonly="${!editable}" />
+							class="form-control" type="text" value="${user.lastName}" readonly="true"/>
 						<form:errors path="lastName" cssClass="error"></form:errors>
 					</div>
 
@@ -446,14 +447,20 @@ input[type=file] {
 						<label for="email">Email <span>*</span></label>
 						<form:input class="form-control" path="email"
 							placeholder="Drop Your Mail Id" type="email" id="example-email-input"
-							value="${user.email}"  readonly="${!editable}"/>
+							value="${user.email}"  readonly="true"/>
 						<form:errors path="email" cssClass="error"></form:errors>
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="parentsName">Parent's Name <span>*</span></label>
+						<c:if test="${empty profile.parentsName }">
 						<form:input path="parentsName" placeholder="Parents Name"
-							class="form-control" type="text"  readonly="${!editable}"/>
+							class="form-control" type="text" />
+							</c:if>
+							<c:if test="${not empty profile.parentsName }">
+							<form:input path="parentsName" placeholder="Parents Name"
+							class="form-control" type="text" readOnly="true" />
+							</c:if>
 						<form:errors path="parentsName" cssClass="error"></form:errors>
 					</div>
 
@@ -462,19 +469,32 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="gender">Gender <span>*</span></label>
-						<form:select path="gender" class="form-control"  readonly="${!editable}">
+						<c:if test="${empty profile.gender }">
+						<form:select path="gender" class="form-control">
 							<form:option class="first-op" value="">Select</form:option>
 							<form:option value="Male">Male</form:option>
 							<form:option value="Female">Female</form:option>
-						</form:select>
+						</form:select></c:if>
+						<c:if test="${not empty profile.gender }">
+						<form:input path="gender" placeholder="Gender"
+							class="form-control" type="text" readOnly="true" />
+						</c:if>
 						<form:errors path="gender" cssClass="error"></form:errors>
 					</div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
+					
 						<label for="dob">Date of Birth <span>*</span></label>
-						<form:input type="date" class="form-control" path="dob"
+						<c:if test="${empty profile.dob }">
+							<form:input type="date" class="form-control" path="dob"
 							onfocusout="ageCalculation()" placeholder="DD/MM/YYYY"
-							name="birthday"  readonly="${!editable}"/>
+							name="birthday"/>
+							</c:if>
+							<c:if test="${not empty profile.dob }">
+							<form:input type="date" class="form-control" path="dob"
+							onfocusout="ageCalculation()" placeholder="DD/MM/YYYY"
+							name="birthday" readonly="true"/>
+							</c:if>
 						<form:errors path="dob" cssClass="error"></form:errors>
 
 					</div>
@@ -485,7 +505,8 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="bloodGroup">Blood Group <span>*</span></label>
-						<form:select path="bloodGroup" class="form-control"  readonly="${!editable}">
+						<c:if test="${empty profile.bloodGroup }">
+						<form:select path="bloodGroup" class="form-control">
 							<form:option value="">Please Select</form:option>
 							<form:option value="AB-"></form:option>
 							<form:option value="O-"></form:option>
@@ -498,6 +519,12 @@ input[type=file] {
 							<form:option value="DK">Don't Know</form:option>
 
 						</form:select>
+						</c:if>
+						<c:if test="${not empty profile.bloodGroup }">
+						<form:input type="text" class="form-control" path="bloodGroup"
+							 placeholder="Blood Group"
+							name="bloodgroup" readonly="true"/>
+						</c:if>
 						<form:errors path="bloodGroup" cssClass="error"></form:errors>
 					</div>
 
@@ -523,7 +550,7 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="mobileNo">Mobile No <span>*</span></label>
 						<form:input class="form-control" path="mobileNo"
-							placeholder="Mobile no" id="example-tel-input"
+							placeholder="Mobile no" id="mobileNo"
 							value="${user.phoneNo}" />
 
 						<form:errors path="mobileNo" cssClass="error"></form:errors>
@@ -532,14 +559,15 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="alternateMobileNo">Alternate Mobile No <span>*</span></label>
 						<form:input class="form-control" path="alternateMobileNo"
-							placeholder="Mobile no" id="example-tel-input" />
+							placeholder="Alternate Mobile no" id="alternateMobileNo" />
 						<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
+						<div id="alternateMobileNoDiv" class="error"></div>
 					</div>
 
 					<div class="clear clearfix"></div>
 					
 					  <div class="form-group col-sm-6 col-xs-12 colbox">
-					    <label for="degreeCollegeCompletionDate">Degree Completion Date <span>*</span></label>
+					    <label for="degreeCollegeCompletionDate">Tentative Degree Completion Date <span>*</span></label>
 												<form:input class="form-control" type="date" 
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
 													path="degreeCollegeCompletionDate"/>
@@ -585,15 +613,26 @@ input[type=file] {
 <%-- 							</form:select> --%>
 <%-- 							<form:errors path="vehicleType" cssClass="error"></form:errors> --%>
 <!--   </div> -->
+
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="specialization">Specialization <span></span></label>
+						<form:input class="form-control" path="specialization"
+							placeholder="Specialization field" id="specialization" />
+						<form:errors path="specialization" cssClass="error"></form:errors>
+						
+					</div>
+
   <div class="clear clearfix"></div>
 					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="course">Course <span>*</span></label>
 						<form:select class="form-control" path="course"  >
+						
 							<form:option value="">Select</form:option>
 							<form:option value="B.tech">B.tech</form:option>
 							<c:forEach var="course" items="${courses}">
-								<form:option value="${course.id}"
+								<form:option value="${course.courseTypeName}"
 									label="${course.courseTypeName}" />
 							</c:forEach>
 						</form:select>
@@ -687,13 +726,32 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="locality">Locality <span>*</span></label>
-						<%-- <form:select name="locality" class="form-control">
-								<form:option value="">Please select</form:option>
-								<form:option value="sec49">Sec 49</form:option>
-							</form:select> --%>
-
-						<form:input class="form-control" type="text"
-							placeholder="Locality" id="locality" path="locality" />
+						 <form:select path="locality" name="locality" class="form-control">
+						 <form:option value="">Please Select</form:option>
+								<form:option value="Aerodrum Road">Aerodrum Road</form:option>
+								<form:option value="Annapurna Road">Annapurna Road</form:option>
+								<form:option value="Dewas Naka">Dewas Naka</form:option>
+								<form:option value="Jail Road">Jail Road</form:option>
+								<form:option value="Jawahar Marg">Jawahar Marg</form:option>
+								<form:option value="Khandwa Road">Khandwa Road</form:option>
+								<form:option value="Malharganj">Malharganj</form:option>
+								<form:option value="Malwa Mill">Malwa Mill</form:option>
+								<form:option value="Manik Bagh">Manik Bagh</form:option>
+								<form:option value="Musakhedi">Musakhedi</form:option>
+								<form:option value="Navlakha">Navlakha</form:option>
+								<form:option value="Palasia">Palasia</form:option>
+								<form:option value="Palda">Palda</form:option>
+								<form:option value="Rajendra Nagar">Rajendra Nagar</form:option>
+								<form:option value="Ram Bagh">Ram Bagh</form:option>
+								<form:option value="Rau">Rau</form:option>
+								<form:option value="RNT Marg">RNT Marg</form:option>
+								<form:option value="Sapna Sangeeta">Sapna Sangeeta</form:option>
+								<form:option value="Super Corridor">Super Corridor</form:option>
+								<form:option value="Vijay Nagar">Vijay Nagar</form:option>
+								
+							</form:select>
+<%-- 						<form:input class="form-control" type="text" --%>
+<%-- 							placeholder="Locality" id="locality" path="locality" /> --%>
 					</div>
 
 					<div class="clear clearfix"></div>
@@ -742,6 +800,7 @@ input[type=file] {
 							<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
 							<form:option value="Field Job">Field Job</form:option>
 							<form:option value="Office Job">Office Job</form:option>
+							<form:option value="Office Job">No Preference</form:option>
 						</form:select>
 						<form:errors path="preference" cssClass="error"></form:errors>
 <%-- 						<c:if test="${not empty otherDetails.preference}"> --%>
@@ -760,7 +819,7 @@ input[type=file] {
 					<div class="clear clearfix"></div>
 					<div class="form-row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-							<button type="submit">Save</button>
+							<button type="submit" onclick="return checkAlternateMobileNo()">Save</button>
 						</div>
 					</div>
 
@@ -880,7 +939,7 @@ input[type=file] {
 										<form:option value="Monday"></form:option>
 										<form:option value="Tuesday"></form:option>
 										<form:option value="Wednesday"></form:option>
-										<form:option value="Thrusday"></form:option>
+										<form:option value="Thursday"></form:option>
 										<form:option value="Friday"></form:option>
 										<form:option value="Saturday"></form:option>
 										<form:option value="Sunday"></form:option>
@@ -1215,6 +1274,25 @@ function myFunction() {
   		 }
   	}
   </script>
+  
+     <script>
+    function checkAlternateMobileNo() {
+        var mobile = $("#mobileNo").val();
+        var alternateMobile = $("#alternateMobileNo").val();
+        if (mobile == alternateMobile){
+            $("#alternateMobileNoDiv").html("Alternate Mobile Number can not be same as mobile no.");
+            return false;
+        }else
+        	{
+        	
+        	return true;
+        	
+        	}
+        
+        
+    }
+  
+    </script>
 
 
 </body>

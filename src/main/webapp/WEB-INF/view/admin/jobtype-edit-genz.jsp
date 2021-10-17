@@ -309,14 +309,18 @@
 								class="form-control" type="hidden" />
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
                             <h4>Job Type <span>*</span></h4>
-							<form:select  path="jobTypeName" class="form-control">
-                              <form:option class="first-op" value="">Select</form:option> 
-                              <form:option value="Other Onsite Job"/>
-                              <form:option  value="Remote/Online Job"/>
-                              <form:option  value="Field Job"/>
-                              <form:option value="Office Job"/>
-                              <form:option value="Freelance"/>
-                            </form:select>
+<%-- 							<form:select  path="jobTypeName" class="form-control"> --%>
+<%--                               <form:option class="first-op" value="">Select</form:option>  --%>
+<%--                               <form:option value="Other Onsite Job"/> --%>
+<%--                               <form:option  value="Remote/Online Job"/> --%>
+<%--                               <form:option  value="Field Job"/> --%>
+<%--                               <form:option value="Office Job"/> --%>
+<%--                               <form:option value="Freelance"/> --%>
+<%--                             </form:select> --%>
+
+
+ 							<form:input class="form-control" path="jobTypeName"
+								placeholder="Job Type Name" id="example-tel-input" />
                             <form:errors path="jobTypeName" cssClass="error"></form:errors>
                           </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">

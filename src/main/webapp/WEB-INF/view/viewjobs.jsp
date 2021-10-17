@@ -193,63 +193,42 @@
 
 
 				<ul class="sidebar-nav">
-				<br>
+					<br>
 
-				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b></span>
-						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Administrator</p>
-            		</a>
-				</li>
+					<li class="sidebar-item top"><a class="sidebar-link first"
+						href="index.html"><i class="fa fa-user-circle-o align-middle"
+							aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}
+							</b></span>
+							<p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p> </a>
+					</li>
 
-					<li class="sidebar-item">
-					<a class="sidebar-link" href="genzest-d.html"><i class="align-middle" data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
-            		</a></li>
-
-					<li class="sidebar-item active">
-					<a class="sidebar-link" href="jobs-genz.html"><i class="fa fa-building-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Jobs/ Openings</b></span>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="student-d.html"><i class="align-middle"
+							data-feather="home"></i> <span class="align-middle"><b>Dashboard</b></span>
 					</a></li>
 
-					<li class="sidebar-item">
-					<a class="sidebar-link" href="selectedstud-genz.html"><i class="fa fa-user-o align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Selected Student</b></span>
-					</a></li>
 
-					<li class="sidebar-item">
-					<a class="sidebar-link" href="earning-genz.html"><i class="fa fa-money align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student Earning</b></span>
-					</a></li>
 
-					<li class="sidebar-item">
-					<a class="sidebar-link" href="employer-genz.html"><i class="fa fa-users align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Employer</b></span>
-                    </a></li>
+					<li class="sidebar-item active"><a class="sidebar-link"
+						href="profile.html"><i class="fa fa-user-o align-middle"
+							style="font-size: 19px"></i> <span class="align-middle"><b>My
+									Profile</b></span> </a></li>
 
-                    <li class="sidebar-item">
-                    <a class="sidebar-link" href="stud-genz.html"><i class="fa fa-smile-o align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Student</b></span>
-                    </a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="searchjobs.html"><i class="fa fa-search align-middle"
+							style="font-size: 19px"></i> <span class="align-middle"><b>Search
+									Jobs</b></span> </a></li>
 
-                    <li class="sidebar-item">
-                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
-                    </a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="earning.html"><i class="fa fa-money align-middle"
+							style="font-size: 19px"></i> <span class="align-middle"><b>My
+									Earnings</b></span> </a></li>
 
-                    <li class="sidebar-item">
-                    <a class="sidebar-link" href="searchjobs-genz.html"><i class="fa fa-magic align-middle" aria-hidden="true" style="font-size:19px"></i> <span class="align-middle"><b>Search Job</b></span>
-                    </a></li>
+					<li class="sidebar-item"><a class="sidebar-link"
+						href="appliedjobs.html"><i
+							class='fa fa-check-square-o align-middle' style='font-size: 19px'></i>
+							<span class="align-middle"><b>Applied Jobs</b></span> </a></li>
 
-                    <li class="sidebar-item">
-                        <div class="dropdown">
-                            <button onclick="myFunction()" class="dropbtn"><i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;  Master  <i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                            <div id="myDropdown" class="dropdown-content">
-                                <a href="access-right-genz.html">Access Right</a>
-                                <a href="team-genz.html">Team</a>
-                                <a href="category-genz.html">Category</a>
-                                <a href="jobtype-genz.html">Job Types</a>
-                                <a href="timeslot-genz.html">Time Slot</a>
-                                <a href="bloodgrp-genz.html">Blood Group</a>
-                                <a href="course-genz.html">Courses</a>
-                                <a href="vehicle-genz.html">Vehicle Type</a>
-                                <a href="citystate-genz.html">City Country State</a>
-                            </div>
-                          </div>
-                    </li>
-				
 				</ul>
 
 				<!-- DOWNLOAD APP TRANSPARENT BOX -->
@@ -300,7 +279,7 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-2/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Update Job</b></h4>
+			   <h4><b>Jobs/ Openings</b></h4>
 
 			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -344,7 +323,7 @@
 				
                 <div class="container-fluid">
                     <form:form action="/updatejobs-genz.html" method="post" modelAttribute="jobAccount">
-		<div class="form-group col-sm-6 col-xs-12 colbox">
+<div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="employer">Employer <span>*</span></label>
     						<form:input path="id" type="hidden"/>
                             <form:select class="form-control" path="employer">
@@ -543,57 +522,25 @@
 		
 
 
+
+
                      </form:form>
                      
                      
                </div>
 
 			 <div class="container-fluid">
-                <div class="row two">
-                    <div class="container-fluid">
+<!--                 <div class="row two"> -->
+<!--                     <div class="container-fluid"> -->
                 
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h4>Add Time Slots (You may provide additional timeslots for this job)</h4>
-                        </div>
+<!--                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
+<!--                             <h4>Add Time Slots (You may provide additional timeslots for this job)</h4> -->
+<!--                         </div> -->
                         
-                    </div>
-                </div>
+<!--                     </div> -->
+<!--                 </div> -->
                     <div class="form-row">
-                       <form:form action="/updateJobTimeSlots.html" method="post"
-					modelAttribute="jobTimeSlot">
-                            <div class="form-row">
-                            
-<!--                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
-<!--                                 <h4>Days <span>*</span></h4> -->
-                        
-<!--                                 <select class="form-control" required> -->
-<!--                                     <option value="">Select</option>  -->
-<!--                                     <option value="Monday">Monday</option> -->
-<!--                                     <option value="Tuesday">Tuesday</option> -->
-<!--                                     <option value="Wednesday">Wednesday</option> -->
-<!--                                     <option value="Thrusday">Thrusday</option> -->
-<!--                                     <option value="Friday">Friday</option> -->
-<!--                                     <option value="Saturday">Saturday</option> -->
-<!--                                     <option value="Sunday">Sunday</option> -->
-<!--                                 </select> -->
-<!--                             </div> -->
-                     <form:input id="id" name="id" type="hidden" placeholder="id" class="form-control" path="jobId" value="${jobAccount.id}"/>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                                <h4>Time-Slots <span>*</span></h4>
-                                <form:select class="form-control" path="timeSlot">
-										<form:option value="">Select</form:option>
-										<c:forEach var="timeSlot" items="${timeSlots}">
-											<form:option value="${timeSlot.id}"
-												label="${timeSlot.timeSlotName}" />
-										</c:forEach>
-									</form:select>
-                            </div>
-                            
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                                <button type="submit">Add</button>
-                            </div>
-                        </form:form>
+
                         <br/><br/>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxtable">
                                 <table id="myTable">
@@ -619,9 +566,9 @@
                                <br>
                                 
                                 <!-- <button onclick="myCreateFunction()">Create row</button> -->
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                                    <button onclick="myDeleteFunction()">Delete row</button>
-                                </div>
+<!--                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb"> -->
+<!--                                     <button onclick="myDeleteFunction()">Delete row</button> -->
+<!--                                 </div> -->
                                 
                                 <script>
                                 function myCreateFunction() {

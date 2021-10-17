@@ -4,7 +4,6 @@
     text-transform: capitalize;
     margin-top: 1rem;
    /*  display: block !important; */
-   display:none;
     visibility: visible !important;
 }
 .dataTables_wrapper .dataTables_filter label{
@@ -53,7 +52,7 @@
 
 .dataTables_wrapper .dataTables_paginate .paginate_button{
     margin-left: .7rem;
-    display:none;
+    
 }
 
 .dataTables_wrapper .dataTables_paginate span a{
@@ -73,7 +72,7 @@
     font-size: 1.5rem;
     margin: 2.5rem;
     margin-left: 0rem;
-    display:none;
+    
 }
 .dataTables_wrapper select{
     /* background-color: #2E2E40; */

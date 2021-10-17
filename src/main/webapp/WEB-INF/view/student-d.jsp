@@ -143,9 +143,9 @@
                         <div class="col-lg-4">
                           <div class="card1">
                             <div class="card-body">
-                              <i class="fa fa-money" aria-hidden="true"></i>  
-                              <p class="card-text"><a href="earning.html">My Earning</a></p>
-                              <h5>0</h5>
+                              <i class="fa fa-user" aria-hidden="true"></i>  
+                              <p class="card-text"><a href="profile.html">Complete Your Profile</a></p>
+                             
                             </div>
                           </div>
                         </div>

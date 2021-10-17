@@ -1,12 +1,16 @@
 package com.howtodoinjava.app.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -15,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,20 +29,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.howtodoinjava.OnRegistrationCompleteEvent;
+import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.domain.CategoryRepo;
+import com.howtodoinjava.domain.JobAccountCustomRepo;
 import com.howtodoinjava.dto.PasswordDto;
 import com.howtodoinjava.dto.UserDto;
+import com.howtodoinjava.entity.JobAccount;
+import com.howtodoinjava.entity.JobAccountApplication;
+import com.howtodoinjava.entity.JobData;
+import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.error.InvalidOldPasswordException;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.VerificationToken;
 import com.howtodoinjava.security.ISecurityUserService;
 import com.howtodoinjava.security.IUserService;
+import com.howtodoinjava.service.CSVService;
 import com.howtodoinjava.util.GenericResponse;
 
 @RestController
@@ -62,6 +75,18 @@ public class RegistrationRestController {
 
     @Autowired
     private Environment env;
+    
+    @Autowired
+	HttpSession session;
+	
+	@Autowired
+	CSVService csvService;
+	
+	@Autowired
+	JobAccountCustomRepo jobAccountCustomRepo;
+	
+	@Autowired
+	JobAccountApplicationRepo jobAccountApplicationRepo;
     
     
     @Autowired
@@ -206,4 +231,83 @@ public class RegistrationRestController {
 		
 		return categoryRepo.getCitiesByState(id);
 	}
+	
+	 @RequestMapping(method = RequestMethod.POST, value = "/getSearchedJobs")
+		public ResponseEntity<?> getSearchedJobs(@RequestBody SearchJobs searchJob, Map<String, Object> model) throws JsonProcessingException {
+		 System.out.println("downloading csv");
+		 User user = (User) session.getAttribute("user");
+		 
+		 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+			model.put("user", user);
+			LinkedList<JobData> csvData = new LinkedList();
+			JobData headerJobData = new JobData();
+			headerJobData.setJobName("Job Name");
+			headerJobData.setEmployer("Employer Name");
+			headerJobData.setJobType("Job type");
+			headerJobData.setCategory("Category Name");
+			headerJobData.setNoOfVacancy("No. of vacancy");
+			headerJobData.setVacancyForMale("Vacancy for male");
+			headerJobData.setVacancyForFemale("Vacancy for female");
+			headerJobData.setVacancyForOther("Vacancy for other");
+			headerJobData.setDescription("Description");
+			headerJobData.setState("State");
+			headerJobData.setCity("City");
+			headerJobData.setJobCode("Job Code");
+			headerJobData.setLocality("Locality");
+			headerJobData.setJobDate("Job Date");
+			headerJobData.setPostalCode("Postal Code");
+			headerJobData.setRate("rate");
+			headerJobData.setCreatedDate("Created Date");
+			csvData.add(headerJobData);
+		 List<JobAccount> jobs = new ArrayList<>();
+		 List<Integer> appliedJobIds = new ArrayList<>();
+		 List<JobAccount> jobsAccount = jobAccountCustomRepo.findJobsByJobCriterias(searchJob);
+
+			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
+			for (JobAccountApplication accountApplication : jobApplications) {
+				appliedJobIds.add(accountApplication.getJob().getId());
+			}
+
+			for (JobAccount jobAccount : jobsAccount) {
+				if (!appliedJobIds.contains(jobAccount.getId())) {
+					if(jobAccount.getStatus()!=null && jobAccount.getStatus().equals("Open"))
+					{
+						JobData jobData = new JobData();
+						jobData.setJobName(jobAccount.getJobName());
+						jobData.setEmployer(jobAccount.getEmployer().getEmployerName());
+						jobData.setJobType(jobAccount.getJobType().getJobTypeName());
+						jobData.setCategory(jobAccount.getCategory().getCategoryName());
+						jobData.setNoOfVacancy(String.valueOf(jobAccount.getNoOfVacancy()));
+						jobData.setVacancyForMale(String.valueOf(jobAccount.getVacancyForMale()));
+						jobData.setVacancyForFemale(String.valueOf(jobAccount.getVacancyForFemale()));
+						jobData.setVacancyForOther(String.valueOf(jobAccount.getVacancyForOther()));
+						jobData.setDescription(jobAccount.getDescription());
+						jobData.setState(jobAccount.getState());
+						jobData.setCity(jobAccount.getCity());
+						jobData.setJobCode(jobAccount.getJobCode());
+						jobData.setLocality(jobAccount.getLocality());
+						jobData.setJobDate(dateFormat.format(jobAccount.getJobDate()));
+						jobData.setPostalCode(jobAccount.getPostalCode());
+						jobData.setRate(String.valueOf(jobAccount.getRate()));
+						jobData.setCreatedDate(dateFormat.format(jobAccount.getCreatedDate()));
+						
+						
+						csvData.add(jobData);
+					}
+					
+				}
+			}
+			
+//		    String filename = "searchedJobs.csv";
+//		    InputStreamResource file = new InputStreamResource(csvService.jobsToCSV(jobs));
+//	
+//		    return ResponseEntity.ok()
+//		        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+//		        .contentType(MediaType.parseMediaType("application/csv"))
+//		        .body(file);
+			
+		
+			
+			return ResponseEntity.ok(csvData);
+	 }
 }

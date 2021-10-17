@@ -318,17 +318,20 @@
 <!--                               <option>MBA/ M Tech/ ME</option> -->
 <!--                             </select> -->
 
-							<form:select  path="courseTypeName" class="form-control">
-                              <form:option class="first-op" value="">Select</form:option> 
-                              <form:option value="BA/ B Com/ Other Courses"/>
-                              <form:option  value="BE/ B Tech"/>
-                              <form:option  value="BBA/ B Sc"/>
-                              <form:option value="MBBS/ BDS/ BAMS/ BHMS"/>
-                              <form:option value="LLB/ LLM"/>
-                              <form:option  value="CA/ CS"/>
-                              <form:option value="Other PG Course"/>
-                              <form:option value="MBA/ M Tech/ ME"/>
-                            </form:select>
+<%-- 							<form:select  path="courseTypeName" class="form-control"> --%>
+<%--                               <form:option class="first-op" value="">Select</form:option>  --%>
+<%--                               <form:option value="BA/ B Com/ Other Courses"/> --%>
+<%--                               <form:option  value="BE/ B Tech"/> --%>
+<%--                               <form:option  value="BBA/ B Sc"/> --%>
+<%--                               <form:option value="MBBS/ BDS/ BAMS/ BHMS"/> --%>
+<%--                               <form:option value="LLB/ LLM"/> --%>
+<%--                               <form:option  value="CA/ CS"/> --%>
+<%--                               <form:option value="Other PG Course"/> --%>
+<%--                               <form:option value="MBA/ M Tech/ ME"/> --%>
+<%--                             </form:select> --%>
+
+							 <form:input class="form-control" path="courseTypeName"
+								placeholder="Course Name" id="example-tel-input" />
                             <form:errors path="courseTypeName" cssClass="error"></form:errors>
                           </div>
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">

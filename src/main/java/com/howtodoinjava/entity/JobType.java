@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.howtodoinjava.model.User;
 
 @Entity
@@ -54,7 +55,7 @@ public class JobType {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
+	@JsonIgnore
 	public User getCreatedBy() {
 		return createdBy;
 	}

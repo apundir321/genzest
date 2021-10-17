@@ -90,6 +90,11 @@ public class UserService implements IUserService {
 			throw new UserAlreadyExistException(
 					"There is an account with that email address: " + accountDto.getEmail());
 		}
+		
+		if(phoneExists(accountDto.getPhoneNo())) {
+			throw new UserAlreadyExistException(
+					"There is already an account with that phone no. : " + accountDto.getPhoneNo());
+		}
 		Role role = null;
 		UserProfile profile = null;
 		RecruiterProfile recruiterProfile = null;
@@ -108,6 +113,7 @@ public class UserService implements IUserService {
 			profile.setFirstName(accountDto.getFirstName());
 			profile.setLastName(accountDto.getLastName());
 			role = roleRepository.findByName("ROLE_EMPLOYEE");
+//			profile.setUser(user);
 			if (role == null) {
 				role = new Role();
 				role.setName("ROLE_EMPLOYEE");
@@ -308,6 +314,13 @@ public class UserService implements IUserService {
 
 	private boolean emailExists(final String email) {
 		return userRepository.findByEmail(email) != null;
+	}
+	
+	private boolean phoneExists(final String mobileNo) {
+		
+		List<User> users = userRepository.findByPhoneNo(mobileNo);
+		
+		return users.size()>0;
 	}
 
 //    @Override

@@ -136,7 +136,7 @@
                 <div class="container log shadow">
 <form:form action="/signup.html" modelAttribute="userDto" id="signupForm">
                     <div class="form-row" style="text-align: center">
-                    <h4 style="font-size: 22px;color: #F15336;">Create Genzest Account</h4>
+                    <h4 style="font-size: 22px;color: #F15336;">Create Genzest Account </h4><label for="firstName">(Verify your email to login once you have finished signed up process) </label>
                     </div>
   <div class="form-group col-md-6">
     <label for="firstName">First Name <span>*</span></label>

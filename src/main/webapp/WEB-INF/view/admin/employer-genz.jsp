@@ -254,6 +254,7 @@ $(document).ready(function() {
             { title: "Phone" },
             { title: "City" },
 			
+            { title: "Date" },
             { title: "Edit" }
             // {
             //     data: null,

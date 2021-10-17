@@ -15,6 +15,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.howtodoinjava.model.User;
 
 @Entity
@@ -33,7 +34,7 @@ public class Category {
 	@NotEmpty
 	private String categoryCode;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.REMOVE,CascadeType.REFRESH})
 	@JoinColumn(name = "created_by")
 	private User createdBy;
 
@@ -57,7 +58,7 @@ public class Category {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-
+	
 	public String getCategoryStatus() {
 		return categoryStatus;
 	}
@@ -73,7 +74,7 @@ public class Category {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
-
+	@JsonIgnore
 	public User getCreatedBy() {
 		return createdBy;
 	}

@@ -22,5 +22,7 @@ public interface CategoryRepo extends JpaRepository<Category, Integer>{
 	    
 	    
 	    Category findByCategoryName(String categoryName);
+	    
+	    List<Category> findByCategoryStatus(String categoryStatus);
 
 }

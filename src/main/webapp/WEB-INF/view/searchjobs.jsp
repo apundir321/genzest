@@ -112,6 +112,7 @@ jobArray.push('${job.category.categoryName}');
 jobArray.push('${job.noOfVacancy}');
 jobArray.push('${job.city}');
 jobArray.push('${job.jobDate}');
+jobArray.push('<a href="viewjobs-genz.html?jobId=${job.id}"><i class="fa fa-eye"/></a>');
 jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}">')
 dataSet.push(jobArray);
 </c:forEach>
@@ -128,6 +129,7 @@ $(document).ready(function() {
             { title: "No of vacancy" },
             { title: "City" },
             { title: "Date of Job" },
+            {title: "View"},
             { title: "Apply" }
         ],
 		
@@ -277,12 +279,12 @@ $(document).ready(function() {
                         
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
                             <h4>Date From <span>*</span></h4>
-                            <form:input path="dateFrom" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                            <form:input path="dateFrom" id="dateFrom" class="form-control" type="date" placeholder="MM/DD/YYYY"  name="Effectivefrom" />
                          </div>
 
                          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
                             <h4>Date To <span>*</span></h4>
-                            <form:input path="dateTo" class="form-control" type="date" placeholder="MM/DD/YYYY" id="Effectivefrom" name="Effectivefrom" />
+                            <form:input path="dateTo" id="dateTo" class="form-control" type="date" placeholder="MM/DD/YYYY" name="Effectivefrom" />
                          </div>
                         
                         <div class="form-row last">
@@ -292,10 +294,10 @@ $(document).ready(function() {
                         </div>
                        
                       </form:form>
-						<c:if test="${jobs.size() > 0 }">   
+<%-- 						<c:if test="${jobs.size() > 0 }">    --%>
 
 <div style="padding-top: 20%">
-<button class="csv"><a href="/downloadJobs">Download CSV</a></button>
+<button class="csv"><a onclick="searchJob()">Download CSV</a></button>
 <table id="example" class="display" width="100%"></table>
 </div>
 <!--  <table class="table"> -->
@@ -340,7 +342,7 @@ $(document).ready(function() {
                             <button type="submit" onclick="applyJob()">Apply</button>
                         </div>
                       </div>
-                      </c:if>
+<%--                       </c:if> --%>
                 </div>
 			</main>
 		</div>
@@ -360,7 +362,116 @@ $(document).ready(function() {
         }
         location.href = "/applyJob?jobId="+ids;
     }
-	</script>
+	
+	
+	
+		function searchJob()
+    {
+//         var checkboxes = document.getElementsByName('applyJob');
+//         var selected = new Array();
+//         var ids = "";
+//         for (var i=0; i<checkboxes.length; i++) {
+//             if (checkboxes[i].checked) {
+//                 selected.push(checkboxes[i].value);
+//                 ids += checkboxes[i].value + ",";
+//             }
+//         }
+//         location.href = "/applyJob?jobId="+ids;
+
+		var categoryId = document.getElementById("jobCategory").value;
+		var employerId = document.getElementById("employerName").value;
+		var timeSlot = document.getElementById("timeSlot").value;
+		var jobType = document.getElementById("jobType").value;
+		var employerId = document.getElementById("employerName").value;
+		var dateFrom = document.getElementById("dateFrom").value;
+		var dateTo = document.getElementById("dateTo").value;
+		var city = document.getElementById("city").value;
+		
+		var searchJobJson = {};
+		searchJobJson['jobCategory'] = categoryId;
+		searchJobJson['jobType'] = jobType;
+		searchJobJson['employerName'] = employerId;
+		searchJobJson['timeSlot'] = timeSlot;
+		searchJobJson['city'] = city;
+		searchJobJson['dateFrom'] = dateFrom;
+		searchJobJson['dateTo'] = dateTo;
+		
+		
+		postData('/getSearchedJobs', searchJobJson)
+		  .then(data => 
+			  data.json().then(res=>{
+				  console.log(JSON.stringify(res));
+				  exportCSVFile( res, "searchedjobs.csv")
+				  
+			  })
+		  );
+		
+    }
+		
+		
+		async function postData(url = '', data = {}) {
+			  // Default options are marked with *
+			  const response = await fetch(url, {
+			    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+			    mode: 'cors', // no-cors, *cors, same-origin
+			    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+			    credentials: 'same-origin', // include, *same-origin, omit
+			    headers: {
+			      'Content-Type': 'application/json'
+			      // 'Content-Type': 'application/x-www-form-urlencoded',
+			    },
+			    redirect: 'follow', // manual, *follow, error
+			    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+			    body: JSON.stringify(data) // body data type must match "Content-Type" header
+			  });
+			  return response; // parses JSON response into native JavaScript objects
+			}
+
+		function convertToCSV(objArray) {
+		    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+		    var str = '';
+
+		    for (var i = 0; i < array.length; i++) {
+		        var line = '';
+		        for (var index in array[i]) {
+		            if (line != '') line += ','
+
+		            line += array[i][index];
+		        }
+
+		        str += line + '\r\n';
+		    }
+
+		    return str;
+		}
+
+		function exportCSVFile( items, fileTitle) {
+		    
+		    // Convert Object to JSON
+		    var jsonObject = JSON.stringify(items);
+
+		    var csv = this.convertToCSV(jsonObject);
+
+		    var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
+
+		    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+		    if (navigator.msSaveBlob) { // IE 10+
+		        navigator.msSaveBlob(blob, exportedFilenmae);
+		    } else {
+		        var link = document.createElement("a");
+		        if (link.download !== undefined) { // feature detection
+		            // Browsers that support HTML5 download attribute
+		            var url = URL.createObjectURL(blob);
+		            link.setAttribute("href", url);
+		            link.setAttribute("download", exportedFilenmae);
+		            link.style.visibility = 'hidden';
+		            document.body.appendChild(link);
+		            link.click();
+		            document.body.removeChild(link);
+		        }
+		    }
+		}
+		</script>
 
 	<script src="assets-1/js/app.js"></script>
 

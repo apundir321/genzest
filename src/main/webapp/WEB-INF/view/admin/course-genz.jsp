@@ -29,12 +29,19 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<!-- Latest compiled and minified CSS -->
+	   <script src="//code.jquery.com/jquery-3.5.1.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 
-<script src="//code.jquery.com/jquery-3.5.1.js"></script>
+
 <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+
+ 
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 <style>
 	.sidebar-content .sidebar-nav .fa-user-circle-o{
@@ -182,6 +189,7 @@ courseType.push('${courseType.courseTypeName}');
 courseType.push('${courseType.courseTypeStatus}');
 courseType.push('${courseType.createdDate}'); 
 courseType.push('<a href="course-edit-genz.html?courseId=${courseType.id}"><i class="fa fa-pencil"/></a>')
+courseType.push('<a href="deletecourse.html?courseId=${courseType.id}"  onclick="return confirm(\'Are you sure?\')"><i class="fa fa-trash"/></a>');
 dataSet.push(courseType);
 </c:forEach>
 	var cate = [
@@ -252,6 +260,10 @@ $(document).ready(function() {
 			
             {
                title : 'Edit'
+            },
+
+            {
+               title : 'Delete'
             }
         ],
 		
@@ -449,6 +461,34 @@ $(document).ready(function() {
 		$(document).ready( function () {
 			$('#table_id').DataTable();
 		} );
+	</script>
+	
+		<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
+	});
+	
+	
+	$(document).ready(function(){
+		<c:if test="${not empty warningMessage}">
+		toastr.warning('${warningMessage}', 'Warning Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="warningMessage" scope="session"/>
+			<c:remove var="warningMessage" scope="request"/>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
+	});
+	
 	</script>
 	<script src="assets-1/js/app.js"></script>
 
