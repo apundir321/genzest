@@ -1134,14 +1134,13 @@ public class AdminController {
 				selectedProfilesIds.add(selectedProfile.getUserProfile().getId());
 			}
 			
-			for(OtherUserDetails profile : userDetails)
-			{
-				
-				if(!selectedProfilesIds.contains(profile.getUserProfile().getId()))
-				{
-					if(profile.getUserProfile().getStatus()==null || profile.getUserProfile().getStatus().equals(""))
-					{
-						profiles.add(profile.getUserProfile());
+			for (OtherUserDetails profile : userDetails) {
+				if (profile.getUserProfile() != null) {
+					if (!selectedProfilesIds.contains(profile.getUserProfile().getId())) {
+						if (profile.getUserProfile().getStatus() == null
+								|| profile.getUserProfile().getStatus().equals("")) {
+							profiles.add(profile.getUserProfile());
+						}
 					}
 				}
 			}
