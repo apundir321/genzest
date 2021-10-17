@@ -755,6 +755,16 @@ input[type=file] {
 <%-- 							</form:select> --%>
 <%-- 							<form:errors path="vehicleType" cssClass="error"></form:errors> --%>
 <!--   </div> -->
+
+<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="specialization">Specialization <span></span></label>
+						<form:input class="form-control" path="specialization"
+							placeholder="Specialization field" id="specialization" />
+						<form:errors path="specialization" cssClass="error"></form:errors>
+						
+					</div>
+
+
   <div class="clear clearfix"></div>
 					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
@@ -854,15 +864,37 @@ input[type=file] {
 <%-- 						</c:if> --%>
 					</div>
 
-					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="locality">Locality <span>*</span></label>
-						<%-- <form:select name="locality" class="form-control">
-								<form:option value="">Please select</form:option>
-								<form:option value="sec49">Sec 49</form:option>
-							</form:select> --%>
 
-						<form:input class="form-control" type="text"
-							placeholder="Locality" id="locality" path="locality" />
+
+
+<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="locality">Locality <span>*</span></label>
+						 <form:select path="locality" name="locality" class="form-control">
+						 <form:option value="">Please Select</form:option>
+								<form:option value="Aerodrum Road">Aerodrum Road</form:option>
+								<form:option value="Annapurna Road">Annapurna Road</form:option>
+								<form:option value="Dewas Naka">Dewas Naka</form:option>
+								<form:option value="Jail Road">Jail Road</form:option>
+								<form:option value="Jawahar Marg">Jawahar Marg</form:option>
+								<form:option value="Khandwa Road">Khandwa Road</form:option>
+								<form:option value="Malharganj">Malharganj</form:option>
+								<form:option value="Malwa Mill">Malwa Mill</form:option>
+								<form:option value="Manik Bagh">Manik Bagh</form:option>
+								<form:option value="Musakhedi">Musakhedi</form:option>
+								<form:option value="Navlakha">Navlakha</form:option>
+								<form:option value="Palasia">Palasia</form:option>
+								<form:option value="Palda">Palda</form:option>
+								<form:option value="Rajendra Nagar">Rajendra Nagar</form:option>
+								<form:option value="Ram Bagh">Ram Bagh</form:option>
+								<form:option value="Rau">Rau</form:option>
+								<form:option value="RNT Marg">RNT Marg</form:option>
+								<form:option value="Sapna Sangeeta">Sapna Sangeeta</form:option>
+								<form:option value="Super Corridor">Super Corridor</form:option>
+								<form:option value="Vijay Nagar">Vijay Nagar</form:option>
+								
+							</form:select>
+<%-- 						<form:input class="form-control" type="text" --%>
+<%-- 							placeholder="Locality" id="locality" path="locality" /> --%>
 					</div>
 
 					<div class="clear clearfix"></div>
