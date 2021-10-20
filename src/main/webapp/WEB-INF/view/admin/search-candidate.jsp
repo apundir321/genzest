@@ -467,6 +467,8 @@ dataSet.push(jobArray);
 							<h4>
 								Category <span>*</span>
 							</h4>
+							<form:input id="jobCategoryId" path="jobCategoryId" placeholder="Job Category"
+							class="form-control" type="hidden" />
 <%-- 							<form:select class="form-control" path="jobCategory"> --%>
 <%-- 								<form:option value="">Select</form:option> --%>
 <%-- 								<c:forEach var="category" items="${categories}"> --%>
@@ -632,13 +634,15 @@ function myFunction() {
 	function searchProfiles()
     {
 
-		var categoryId = document.getElementById("jobCategory").value;
+		var categoryId = document.getElementById("jobCategoryId").value;
 		if(categoryId==undefined || categoryId==="")
 			{
 			alert("please select a jobId");
 			}
 		else{
-		 location.href = "/downloadSearchCandidates?categoryId="+categoryId;
+		var endpoint = "/downloadSearchCandidates?categoryId="+categoryId;
+		var endpointURI = encodeURI(endpoint); 
+		 location.href = endpointURI;
 		}
 		
 		

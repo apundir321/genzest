@@ -183,7 +183,7 @@ public class CSVService {
 					 "Vehicle Type", "Address Line1","Postal Code", "Have Pc",
 
 					"College Name", "Landmark", "Locality", "Degree Completion Date", "Job Categories", "Preferences",
-					"Referral Code", "Payment Method", "UPI Id", "Bank Name", "Account number", "IFSC code");
+					"Referral Code", "Payment Method", "UPI Id", "Bank Name", "Account number", "IFSC code","Adhar card","Student Id","Profile Pic");
 			csvPrinter.printRecord(headers);
 			for (UserProfile userProfile : userProfiles) {
 
@@ -249,12 +249,12 @@ public class CSVService {
 						userProfile.getStudentDocuments() == null ? ""
 								: userProfile.getStudentDocuments().getIfscCode()
 								
-//								,
-//						userProfile.getStudentDocuments() == null || userProfile.getStudentDocuments().getAadharFileName() == null ? ""
-//								: "http://genzest.online/getProfilePic/" + userProfile.getStudentDocuments().getAadharFileName(),
-//						userProfile.getStudentDocuments() == null || userProfile.getStudentDocuments().getStudentIdFileName() == null ? ""
-//								: "http://genzest.online/getProfilePic/" + userProfile.getStudentDocuments().getStudentIdFileName()
-//						,userProfile.getProfilePicFileName() == null?"" : "http://genzest.online/getProfilePic/" +userProfile.getProfilePicFileName()
+								,
+						userProfile.getStudentDocuments() == null || userProfile.getStudentDocuments().getAadharFileName() == null ? ""
+								: "http://genzest.online/getProfilePic/" + userProfile.getStudentDocuments().getAadharFileName()+"/"+userProfile.getId(),
+						userProfile.getStudentDocuments() == null || userProfile.getStudentDocuments().getStudentIdFileName() == null ? ""
+								: "http://genzest.online/getProfilePic/" + userProfile.getStudentDocuments().getStudentIdFileName()+"/"+userProfile.getId()
+						,userProfile.getProfilePicFileName() == null?"" : "http://genzest.online/getProfilePic/" +userProfile.getProfilePicFileName()+"/"+userProfile.getId()
 				);
 
 				csvPrinter.printRecord(data);

@@ -1146,6 +1146,7 @@ public class AdminController {
 			}
 			
 			SearchCandidate searchCandidate = new SearchCandidate();
+			searchCandidate.setJobCategoryId(String.valueOf(jobAccount.getCategory().getId()));
 			searchCandidate.setJobCategory(jobAccount.getCategory().getCategoryName());
 			searchCandidate.setEmployerName(jobAccount.getEmployer().getEmployerName());
 			searchCandidate.setJobType(jobAccount.getJobType().getJobTypeName());

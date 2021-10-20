@@ -279,7 +279,7 @@
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-2/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Jobs/ Openings</b></h4>
+			   <h4><b>View Job</b></h4>
 
 			   <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -316,7 +316,7 @@
                             <h4>General profile (data once entered can not be altered)</h4>
                         </div> -->
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <button class="back" style="float: right; margin: 1rem;"><a href="jobs-genz.html">Back  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
+                            <button class="back" style="float: right; margin: 1rem;"><a href="searchjobs.html">Back  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i></a></button>
                         </div>
                     </div>
                 </div>
@@ -326,18 +326,20 @@
 <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="employer">Employer <span>*</span></label>
     						<form:input path="id" type="hidden"/>
-                            <form:select class="form-control" path="employer">
-                            <form:option value="">Select</form:option>
-                            <c:forEach var="employer" items="${employers}">  
-                            <form:option  value="${employer}" label="${employer.employerName}" />
-                            </c:forEach>
-                            </form:select>
+<%--                             <form:select class="form-control" path="employer"> --%>
+<%--                             <form:option value="">Select</form:option> --%>
+<%--                             <c:forEach var="employer" items="${employers}">   --%>
+<%--                             <form:option  value="${employer}" label="${employer.employerName}" /> --%>
+<%--                             </c:forEach> --%>
+<%--                             </form:select> --%>
+                            
+                             <input id="jobName" value="${jobAccount.employer.employerName}" placeholder="Employer" class="form-control" readonly="true"/>
                             <form:errors path="employer" cssClass="error"></form:errors>
   </div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="jobName">Job Title <span>*</span></label>
-                            <form:input id="jobName" path="jobName" placeholder="Job Title" class="form-control"/>
+                            <form:input id="jobName" path="jobName" placeholder="Job Title" class="form-control" readonly="true"/>
                             <form:errors path="jobName" cssClass="error"></form:errors>
   </div>
   
@@ -345,25 +347,28 @@
     
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="category">Job Categories <span>*</span></label>
-                            <form:select class="form-control" path="category">
-                            <form:option value="">Select</form:option>
-                            <c:forEach var="category" items="${categories}">  
-                            <form:option  value="${category}" label="${category.categoryName}" />
-                            </c:forEach>
-                            </form:select>
+<%--                             <form:select class="form-control" path="category"> --%>
+<%--                             <form:option value="">Select</form:option> --%>
+<%--                             <c:forEach var="category" items="${categories}">   --%>
+<%--                             <form:option  value="${category}" label="${category.categoryName}" /> --%>
+<%--                             </c:forEach> --%>
+<%--                             </form:select> --%>
+                             <input id="category" value="${jobAccount.category.categoryName}" placeholder="Category" class="form-control" readonly="true"/>
                             <form:errors path="category" cssClass="error"></form:errors>
   </div>
   
   
    <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="jobType">Job Type <span>*</span></label>
-                               <form:select class="form-control" path="jobType">
-                                 <form:option value="">Select</form:option>
-                                 <c:forEach var="jobType" items="${jobTypes}">
-									<form:option value="${jobType}"
-										label="${jobType.jobTypeName}" />
-								</c:forEach>
-                               </form:select>
+<%--                                <form:select class="form-control" path="jobType"> --%>
+<%--                                  <form:option value="">Select</form:option> --%>
+<%--                                  <c:forEach var="jobType" items="${jobTypes}"> --%>
+<%-- 									<form:option value="${jobType}" --%>
+<%-- 										label="${jobType.jobTypeName}" /> --%>
+<%-- 								</c:forEach> --%>
+<%--                                </form:select> --%>
+                               
+                               <input id="jobType" value="${jobType.jobTypeName}" placeholder="Job Type" class="form-control" readonly="true"/>
                             <form:errors path="jobType" cssClass="error"></form:errors>
   </div>
   
@@ -371,7 +376,7 @@
   
   <div class="form-group col-sm-6 col-xs-12 colbox">
     <label for="noOfVacancy">No of Vacancy <span>*</span></label>
-                                <form:input type="text" path="noOfVacancy" class="form-control input-number" min="1" max="1000"/>
+                                <form:input type="text" path="noOfVacancy" class="form-control input-number" min="1" max="1000" readonly="true"/>
                             <form:errors path="noOfVacancy" cssClass="error"></form:errors>
   </div>
   
@@ -390,11 +395,11 @@
   
    <div class="form-group col-md-6 col-xs-12 colbox" style="display:none;" id="male-label">
           <label for="malevac" style="color: white; margin-top: 15px; font-size: 1.5rem;" >Vacancy For Male <span>*</span></label>
-          <input type="text" class="form-control" id="male" name="malevac" style="display: none;" placeholder="Vacancy For Male">
+          <input type="text" class="form-control" id="male" name="malevac" style="display: none;" placeholder="Vacancy For Male" readonly="true">
       </div>
       <div class="form-group col-md-6 col-xs-12 colbox" style="display:none;" id="female-label">
           <label for="femalevac" style="color: white; margin-top: 15px; font-size: 1.5rem;">Vacancy For Female <span>*</span></label>
-          <input type="text" class="form-control" id="female" name="femalevac" style="display: none;" placeholder="Vacancy For Female">
+          <input type="text" class="form-control" id="female" name="femalevac" style="display: none;" placeholder="Vacancy For Female" readonly="true">
       </div>
       
       
@@ -458,7 +463,7 @@
 
                          <div class=" form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="rate">Rate (per hr) <span>*</span></label>
-                            <form:input class="form-control" placeholder="Rate"  path="rate"/>
+                            <form:input class="form-control" placeholder="Rate"  path="rate" readonly="true"/>
                             <form:errors path="rate" cssClass="error"></form:errors>
                          </div>
 
@@ -467,13 +472,15 @@
 							<label>
 								State <span>*</span>
 							</label>
-							<form:select id="editState" path="state" class="form-control" onchange="myFunction()">
-								<form:option class="first-op" value="">Select</form:option>
-									<c:forEach var="state" items="${states}">
-									<form:option value="${state[1]}"
-										label="${state[1]}" />
-								</c:forEach>
-							</form:select>
+<%-- 							<form:select id="editState" path="state" class="form-control" onchange="myFunction()"> --%>
+<%-- 								<form:option class="first-op" value="">Select</form:option> --%>
+<%-- 									<c:forEach var="state" items="${states}"> --%>
+<%-- 									<form:option value="${state[1]}" --%>
+<%-- 										label="${state[1]}" /> --%>
+<%-- 								</c:forEach> --%>
+<%-- 							</form:select> --%>
+
+							<form:input class="form-control" placeholder="state"  path="state" readonly="true"/>
 						</div>
 						
 						  <div class="clear clearfix"></div>
@@ -482,31 +489,33 @@
 							<label>
 								City <span>*</span>
 							</label>
-							<form:select path="city" id="cityDropDown" class="form-control">
-							<option value="">Select</option>
-							<c:forEach var="city" items="${cities}">
-								<form:option value="${city[1]}" label="${city[1]}" />
-							</c:forEach>
-						</form:select>
+<%-- 							<form:select path="city" id="cityDropDown" class="form-control"> --%>
+<!-- 							<option value="">Select</option> -->
+<%-- 							<c:forEach var="city" items="${cities}"> --%>
+<%-- 								<form:option value="${city[1]}" label="${city[1]}" /> --%>
+<%-- 							</c:forEach> --%>
+<%-- 						</form:select> --%>
+						
+						<form:input class="form-control" placeholder="city"  path="city" readonly="true"/>
 						</div>
                          
                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="locality"> Locality <span>*</span></label>
-                            <form:input  type="text" placeholder="Locality" class="form-control" path="locality"/>
+                            <form:input  type="text" placeholder="Locality" class="form-control" path="locality" readonly="true"/>
                          </div>
                          
                            <div class="clear clearfix"></div>
                          
                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
                             <label for="postal-code"> Postal Code <span>*</span></label>
-                             <form:input  path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
+                             <form:input  path="postalCode" type="text" placeholder="zip or postal code" class="form-control" readonly="true"/>
                          </div>
                    
  
  
 						 <div class="form-group col-sm-6 col-xs-12 colbox">
 						    <label for="jobName">Description <span>*</span></label>
-						          <form:textarea class="form-control" placeholder="Description" path="description" />
+						          <form:textarea class="form-control" placeholder="Description" path="description"  readonly="true"/>
 						  </div>
   
                      
@@ -515,15 +524,6 @@
 <!--                             <h4> Job Code </h4> -->
 <%--                            <form:input path="jobCode" width="100%" type="text" style="padding: 1rem; width: 100%;"/> --%>
 <!--                          </div> -->
-
-                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-                            <button onClick="malefemalevalid(); checkequality();" type="submit">Save</button>
-                         </div>
-		
-
-
-
-
                      </form:form>
                      
                      

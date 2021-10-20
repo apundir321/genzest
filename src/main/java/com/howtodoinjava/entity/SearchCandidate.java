@@ -2,6 +2,7 @@ package com.howtodoinjava.entity;
 
 public class SearchCandidate {
 	
+	private String jobCategoryId;
 	private String jobCategory;
 	private String jobType;
 	private String timeSlot;
@@ -50,6 +51,12 @@ public class SearchCandidate {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public String getJobCategoryId() {
+		return jobCategoryId;
+	}
+	public void setJobCategoryId(String jobCategoryId) {
+		this.jobCategoryId = jobCategoryId;
 	}
 
 }

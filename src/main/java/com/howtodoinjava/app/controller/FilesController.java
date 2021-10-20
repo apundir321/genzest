@@ -126,7 +126,7 @@ public class FilesController {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			User user = userRepo.findByEmail(authentication.getName());
 			List<Integer> selectedProfilesIds = new ArrayList<>();
-		Category category =jobCategoryRepo.findByCategoryName(categoryId);
+		Category category =jobCategoryRepo.findById(Integer.parseInt(categoryId)).get();
 		
 		SearchCandidate candidate = new SearchCandidate();
 		candidate.setJobCategory(String.valueOf(category.getId()));
@@ -145,14 +145,13 @@ public class FilesController {
 			selectedProfilesIds.add(selectedProfile.getUserProfile().getId());
 		}
 		
-		for(OtherUserDetails profile : userDetails)
-		{
-			
-			if(!selectedProfilesIds.contains(profile.getUserProfile().getId()))
-			{
-				if(profile.getUserProfile().getStatus()==null || profile.getUserProfile().getStatus().equals(""))
-				{
-					profiles.add(profile.getUserProfile());
+		for (OtherUserDetails profile : userDetails) {
+			if (profile.getUserProfile() != null) {
+				if (!selectedProfilesIds.contains(profile.getUserProfile().getId())) {
+					if (profile.getUserProfile().getStatus() == null
+							|| profile.getUserProfile().getStatus().equals("")) {
+						profiles.add(profile.getUserProfile());
+					}
 				}
 			}
 		}
