@@ -981,7 +981,7 @@ input[type=file] {
  						id="inputGroupFile01" aria-describedby="inputGroupFileAddon01"> 
 						<c:if test="${not empty studentDocs.aadharFileName}">
 							<h4 style="color: #f15336">
-								Aadhar Card uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.aadharFileName}">View</a></span>
+								Aadhar Card uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.aadharFileName}/${profile.id}">View</a></span>
 							</h4>
 							
 							<input id="adhar" type="hidden"
@@ -998,7 +998,7 @@ input[type=file] {
  					</div> 
  					<c:if test="${not empty studentDocs.studentIdFileName}">
 							<h4 style="color: #f15336">
-								Student Id uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.studentIdFileName}">View</a></span>
+								Student Id uploaded : <span style="color: #A4A4A4;"><a href="/getProfilePic/${studentDocs.studentIdFileName}/${profile.id}">View</a></span>
 							</h4>
 							
 							<input id="studentId" type="hidden"
