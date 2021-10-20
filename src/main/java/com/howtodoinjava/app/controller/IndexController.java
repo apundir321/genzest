@@ -171,7 +171,7 @@ public class IndexController {
 		return "student-d";
 	}
 
-	@RequestMapping("/index.html")
+	@RequestMapping(value = {"/index.html","/"})
 	public String index(Map<String, Object> model) {
 //		Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
 //		System.out.println(authentication.getName()+"  &&&&&&7");

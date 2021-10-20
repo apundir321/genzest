@@ -811,7 +811,7 @@ input[type=file] {
 					</div>
 					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="referralCode">Referral Code <span>*</span></label>
+						<label for="referralCode">Referral Code <span>(Optional)</span></label>
 						<form:input id="postal-code" path="referralCode" type="text"
 							placeholder="Referral code" class="form-control" />
 					</div>
