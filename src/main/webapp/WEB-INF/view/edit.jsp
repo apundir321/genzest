@@ -268,6 +268,8 @@ input[type=file] {
 	margin-top: -12px;
 }
 
+
+.container-check { border:2px solid #ccc; width:100%; height: 100px; overflow-y: scroll; }
 </style>
 
 </head>
@@ -775,19 +777,11 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="jobCategories">Job Categories (Select Upto 5)<span>*</span></label>
-						<form:select class="form-control" path="jobCategories"
-							multiple="true" maxlength="5" minlength="1">
-							<form:option value="">Select</form:option>
-					
-<%-- 							<c:forEach var="category" items="${categories}"> --%>
-<%-- 								<option value="${category.id}" --%>
-<%-- 									label="${category.categoryName}" /> --%>
-									
-									
-<%-- 							</c:forEach> --%>
-
- <form:options items="${categories}" itemValue="id" itemLabel="categoryName"/>
-						</form:select>
+						
+						
+						<div class="container-check">
+    						<form:checkboxes  items = "${categories}"  itemValue="id" itemLabel="categoryName" path = "jobCategories" /><br/></td> 
+						</div>
 						
 					</div>
 
@@ -816,6 +810,12 @@ input[type=file] {
 							placeholder="Referral code" class="form-control" />
 					</div>
 
+<!-- 					<div class="form-group col-sm-6 col-xs-12 colbox"> -->
+<!-- 						<div class="container-check"> -->
+<%--     					<form:checkboxes  items = "${categories}"  itemValue="id" itemLabel="categoryName" path = "jobCategories" /><br/></td>  --%>
+<!-- </div> -->
+
+<!-- 					</div> -->
 					<div class="clear clearfix"></div>
 					<div class="form-row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">

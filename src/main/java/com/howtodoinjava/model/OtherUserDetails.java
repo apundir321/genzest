@@ -116,12 +116,12 @@ public OtherUserDetails() {
 	
 	private String referralCode;
 //	
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE, CascadeType.REFRESH  },orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "category_id") })
 	public List<Category> jobCategories; 
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE ,CascadeType.REFRESH },orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_preference", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "preference_id") })
 	private Set<DayPreference> preferences = new HashSet<>();

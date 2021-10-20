@@ -4,15 +4,21 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.mail.Message;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +26,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +51,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.profile.internal.Profile;
-import com.amazonaws.services.appstream.model.Session;
+import javax.mail.Session;
 import com.howtodoinjava.OnRegistrationCompleteEvent;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
@@ -152,6 +159,9 @@ public class IndexController {
 
 	@Autowired
 	private ISecurityUserService securityService;
+	
+	 @Autowired
+	 private MessageSource messages;
 
 	@RequestMapping("/student-d.html")
 	public String home(Map<String, Object> model) {
@@ -759,7 +769,7 @@ public class IndexController {
 	public ResponseEntity<byte[]> downloadFile(@PathVariable String name) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(authentication.getName() + "  &&&&&&7");
-		User user = (User) session.getAttribute("user");
+		User user = userRepo.findByEmail(authentication.getName());
 		ByteArrayOutputStream downloadInputStream = null;
 		;
 		try {
@@ -858,7 +868,8 @@ public class IndexController {
 			if (user != null) {
 				final String token = UUID.randomUUID().toString();
 				iUserService.createPasswordResetTokenForUser(user, token);
-				mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
+//				mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, user));
+				constructEmailMessage(getAppUrl(request), user, token);
 				session.setAttribute("successMessage", "Forgot password link has been sent to your email id");
 			} else {
 				session.setAttribute("errorMessage", "No username has been found by this id");
@@ -979,5 +990,73 @@ public class IndexController {
 
 		return "error";
 	}
+	
+	
+	private void constructEmailMessage(final String appUrl, final User user, final String token) {
+    	System.out.println("sending email");
+    	final String recipientAddress = user.getEmail();
+        final String subject = "Reset Password";
+//        final String confirmationUrl = appUrl + "/registrationConfirm.html?token=" + token;
+//        final String message = messages.getMessage("message.regSuccLink", null, "You registered successfully. To confirm your registration, please click on the below link.", event.getLocale());
+        final String url = appUrl + "/user/changePassword?token=" + token;
+		final String message = "Reset Password";
+        
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(recipientAddress);
+        email.setSubject(subject);
+        email.setText(message + " \r\n" + url);
+        email.setFrom(env.getProperty("support.email"));
+//        return email;
+        List<String> sendList = Arrays.asList(recipientAddress);
+////        sendMailViaGodaddy("support@genzest.com", "support@genzest", sendList, subject, message + " \r\n" + confirmationUrl);
+        sendMailViaAws("support@genzest.com", "support@genzest", sendList, subject, message + " \r\n" + url);
+
+    }
+	
+	
+	 public  void sendMailViaAws(String from, String password,List<String> to,String subject,String text ) {
+	        try {
+	        	String SMTP_USERNAME = "AKIAR6ST375ZJTBO7IEQ";
+	        	 String SMTP_PASSWORD = "BAyh53Fh4w6NQUF0o2ZRd6K8mKforvYGYZMUUAwdF4uF";
+	        	 String HOST = "email-smtp.us-east-2.amazonaws.com";
+	        	 int PORT = 587;
+	        	System.out.println("sending email");
+	          Properties props = System.getProperties();
+	          props.setProperty("mail.transport.protocol", "smtp");
+	          props.setProperty("mail.host", "smtpout.secureserver.net");
+	          props.put("mail.smtp.port", PORT);
+	 
+	         props.put("mail.smtp.auth", "true");
+//	         props.setProperty("mail.user", from);
+//	         props.setProperty("mail.password", password);
+	         
+	        Session mailSession = Session.getDefaultInstance(props, null);
+	        // mailSession.setDebug(true);
+	        Transport transport = mailSession.getTransport("smtp");
+	        MimeMessage message = new MimeMessage(mailSession);
+	        message.setSentDate(new java.util.Date());
+	        message.setSubject(subject);
+	        message.setFrom(new InternetAddress(from));
+	        for (int i=0;i < to.size();i++)
+	        {
+	                                         
+	         message.addRecipient(Message.RecipientType.TO, new  
+	          InternetAddress(to.get(i)));
+	        }
+	               
+	        message.setText(text);
+	 
+	                        transport.connect(HOST,SMTP_USERNAME,SMTP_PASSWORD);
+	        transport.sendMessage(message,
+	         message.getRecipients(Message.RecipientType.TO));
+	        
+	        System.out.println("email sent");
+	        transport.close();
+	                       
+	         
+	        } catch (Exception e) {
+	        	System.out.println("exception occured");
+	        }
+	   }
 
 }
