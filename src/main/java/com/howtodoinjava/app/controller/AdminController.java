@@ -1575,6 +1575,12 @@ public class AdminController {
 		UserProfile userProfile = userOptional.get();
 		userProfile.setStatus("DELETED");
 		userprofileRepo.save(userProfile);
+		
+		String email = userProfile.getEmail();
+		User user = userRepo.findByEmail(email);
+		int serialNumber = (int) ((Math.random() * (10000 - 1)) + 1);
+		user.setEmail(email+"_DELETED_"+serialNumber);
+		userRepo.save(user);
 		session.setAttribute("successMessage", "Profile Deleted!");
 		res.sendRedirect("/stud-genz.html");
 	}
