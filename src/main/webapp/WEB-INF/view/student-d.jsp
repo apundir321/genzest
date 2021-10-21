@@ -145,7 +145,7 @@
                             <div class="card-body">
                               <i class="fa fa-user" aria-hidden="true"></i>  
                               <p class="card-text"><a href="profile.html">My Profile</a></p>
-                             <div style="color: white;font-size: smaller;">(Only Completed profiles are visible to recruiter)</div>
+                             <div style="color: white;font-size: smaller;">(Only Completed profiles are visible to recruiters)</div>
                             </div>
                           </div>
                         </div>

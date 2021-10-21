@@ -389,6 +389,8 @@ public class IndexController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.put("errorMessage", e.getMessage());
+			model.put("userDto", userDto);
+			return "signup";
 		}
 		return "login";
 	}

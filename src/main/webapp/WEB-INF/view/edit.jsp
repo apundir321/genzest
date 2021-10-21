@@ -270,6 +270,8 @@ input[type=file] {
 
 
 .container-check { border:2px solid #ccc; width:100%; height: 100px; overflow-y: scroll; }
+
+.checkbox {color:black}
 </style>
 
 </head>
@@ -779,8 +781,8 @@ input[type=file] {
 						<label for="jobCategories">Job Categories (Select Upto 5)<span>*</span></label>
 						
 						
-						<div class="container-check">
-    						<form:checkboxes  items = "${categories}"  itemValue="id" itemLabel="categoryName" path = "jobCategories" /><br/></td> 
+						<div class="container-check ">
+    						<form:checkboxes  items = "${categories}" element="div"   itemValue="id" itemLabel="categoryName" path = "jobCategories" onchange="checkBoxLimit()" /><br/></td> 
 						</div>
 						
 					</div>
@@ -1291,6 +1293,25 @@ function myFunction() {
         	}
         
         
+    }
+    
+    
+    function checkBoxLimit() {
+    	var checkBoxGroup = document.getElementsByName('jobCategories');			
+    	var limit = 5;
+    	for (var i = 0; i < checkBoxGroup.length; i++) {
+    		checkBoxGroup[i].onclick = function() {
+    			var checkedcount = 0;
+    			for (var i = 0; i < checkBoxGroup.length; i++) {
+    				checkedcount += (checkBoxGroup[i].checked) ? 1 : 0;
+    			}
+    			if (checkedcount > limit) {
+    				console.log("You can select maximum of " + limit + " Job Categories.");
+    				alert("You can select maximum of " + limit + " Job Categories.");						
+    				this.checked = false;
+    			}
+    		}
+    	}
     }
   
     </script>
