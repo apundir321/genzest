@@ -172,7 +172,14 @@ public class IndexController {
 		model.put("appliedJobsCount", appliedJobs.size());
 		OtherUserDetails otherDetails = user.getUserProfile().getOtherDetails();
 		if (otherDetails != null) {
-			List<JobAccount> matchingJobs = jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories());
+			List<JobAccount> matchingJobs = new ArrayList<>();
+			for(JobAccount account : jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories()))
+			{
+				if(account.getStatus().equals("Open"))
+				{
+					matchingJobs.add(account);
+				}
+			}
 			model.put("matchingJobsCount", matchingJobs.size());
 		} else {
 			model.put("matchingJobsCount", "0");
@@ -629,25 +636,98 @@ public class IndexController {
 			otherUserDetails = new OtherUserDetails();
 			preferences = new HashSet<>();
 		}
-
-		for (DayPreference pref : preferences) {
-			if (pref.getDay().equals(dayPreference.getDay())) {
-				preference = pref;
-				pref.setTimeSlot(dayPreference.getTimeSlot());
+		
+		DayPreference savedPref = getPreference(preferences, dayPreference);
+		
+		if(savedPref != null)
+		{
+			if(!savedPref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName()))
+			{
+				preferences.add(dayPreference);
+				otherUserDetails.setPreferences(preferences);
+				profile.setOtherDetails(otherUserDetails);
+				userProfileRepo.save(profile);
+				session.setAttribute("successMessage", "Profile Updated!");
+				
+			}else
+			{
+				session.setAttribute("errorMessage", "Time Slot already added!");
 			}
 		}
-
-		if (preference == null) {
-			otherUserDetails.getPreferences().add(dayPreference);
-			profile.setOtherDetails(otherUserDetails);
-			userProfileRepo.save(profile);
-		} else {
+		else
+		{
+			preferences.add(dayPreference);
 			otherUserDetails.setPreferences(preferences);
 			profile.setOtherDetails(otherUserDetails);
 			userProfileRepo.save(profile);
+			session.setAttribute("successMessage", "Profile Updated!");
 		}
+		
+		
+//		for (DayPreference pref : preferences) {
+//			if (pref.getDay().equals(dayPreference.getDay())  && pref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName())) {
+//				preference = pref;
+//				pref.setTimeSlot(dayPreference.getTimeSlot());
+//			}
+//		}
+//
+//		if (preference == null) {
+//			otherUserDetails.getPreferences().add(dayPreference);
+//			profile.setOtherDetails(otherUserDetails);
+//			userProfileRepo.save(profile);
+//		} else {
+//			otherUserDetails.setPreferences(preferences);
+//			profile.setOtherDetails(otherUserDetails);
+//			userProfileRepo.save(profile);
+//		}
+		
+		
 
-		session.setAttribute("successMessage", "Profile Updated!");
+		
+		response.sendRedirect("/edit.html");
+	}
+	
+	
+	public DayPreference getPreference(Set<DayPreference> preferences,DayPreference dayPreference)
+	{
+		DayPreference preference = null;
+		for(DayPreference pref : preferences)
+		{
+			if (pref.getDay().equals(dayPreference.getDay()))
+			{
+				preference = pref;
+			}
+		}
+		return preference;
+		
+	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/deletePreference.html")
+	public void deletePreferences(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam String preferenceId) throws Exception {
+		System.out.println("***********88(((((((((((9");
+		DayPreference preference = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserProfile profile = userRepo.findByEmail(authentication.getName()).getUserProfile();
+		Set<DayPreference> preferences = new HashSet<>();
+		OtherUserDetails otherUserDetails = profile.getOtherDetails();
+		if (otherUserDetails != null) {
+			for(DayPreference prefer: profile.getOtherDetails().getPreferences())
+			{
+				if(prefer.getId()!=Integer.parseInt(preferenceId))
+				{
+					preferences.add(prefer);
+				}
+			}
+			
+			otherUserDetails.setPreferences(preferences);
+			profile.setOtherDetails(otherUserDetails);
+			userProfileRepo.save(profile);
+			session.setAttribute("successMessage", "Timeslot Deleted!");
+			
+		}
+		
 		response.sendRedirect("/edit.html");
 	}
 

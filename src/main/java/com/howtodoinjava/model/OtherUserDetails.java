@@ -106,6 +106,8 @@ public OtherUserDetails() {
 //	@NotNull(message = "Please select value")
 	private boolean havePc;
 	
+	private String doHavePc;
+	
 //	@NotNull
 //	@NotEmpty(message = "Please select preference.")
 	private String preference;
@@ -315,6 +317,12 @@ public OtherUserDetails() {
 	}
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
+	}
+	public String getDoHavePc() {
+		return doHavePc;
+	}
+	public void setDoHavePc(String doHavePc) {
+		this.doHavePc = doHavePc;
 	}
 
 

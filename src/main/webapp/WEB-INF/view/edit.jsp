@@ -654,13 +654,13 @@ input[type=file] {
 					<div class="clear clearfix"></div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="havePc">Do You Have Own PC <span>*</span></label>
-						<form:select class="form-control" path="havePc">
-							<form:option class="first-op" value="false">Select</form:option>
+						<label for="doHavePc">Do You Have Own PC <span>*</span></label>
+						<form:select class="form-control" path="doHavePc">
+							<form:option class="first-op" value="">Select</form:option>
 							<form:option value="true">Yes</form:option>
 							<form:option value="false">No</form:option>
 						</form:select>
-						<form:errors path="havePc" cssClass="error"></form:errors>
+						<form:errors path="doHavePc" cssClass="error"></form:errors>
 					</div>
 					<div class="clear clearfix"></div>
 					<div class="form-group col-sm-6 col-xs-12 colbox">
@@ -982,6 +982,7 @@ input[type=file] {
 										<tr>	
 											<th scope="row">${dayPreference.day}</th>
 											<td>${dayPreference.timeSlot.timeSlotName}</td>
+											<td><a href="deletePreference.html?preferenceId=${dayPreference.id}"  onclick="return confirm('Are you sure?')"><i class="fa fa-trash"/></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
