@@ -84,6 +84,7 @@ public OtherUserDetails() {
 //	@NotNull
 //	@NotEmpty(message = "Please Enter Locality.")
 	private String locality;
+	private String otherLocality;
 	private String landmark;
 	private String country;
 //	@NotNull
@@ -323,6 +324,12 @@ public OtherUserDetails() {
 	}
 	public void setDoHavePc(String doHavePc) {
 		this.doHavePc = doHavePc;
+	}
+	public String getOtherLocality() {
+		return otherLocality;
+	}
+	public void setOtherLocality(String otherLocality) {
+		this.otherLocality = otherLocality;
 	}
 
 

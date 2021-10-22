@@ -714,10 +714,10 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="city">City <span>*</span></label>
-						<form:select path="city" id="cityDropDown" class="form-control">
+						<form:select path="city" id="cityDropDown" class="form-control" onchange="selectLocality()">
 							<option value="">Select</option>
 							<c:forEach var="city" items="${cities}">
-								<form:option value="${city[1]}" label="${city[1]}" />
+								<form:option  value="${city[1]}" label="${city[1]}"  />
 							</c:forEach>
 						</form:select>
 						<form:errors path="city" cssClass="error"></form:errors>
@@ -728,9 +728,9 @@ input[type=file] {
 <%-- 						</c:if> --%>
 					</div>
 
-					<div class="form-group col-sm-6 col-xs-12 colbox">
+					<div class="form-group col-sm-6 col-xs-12 colbox" id="localityDiv">
 						<label for="locality">Locality <span>*</span></label>
-						 <form:select path="locality" name="locality" class="form-control">
+						 <form:select path="otherLocality" name="locality" class="form-control">
 						 <form:option value="">Please Select</form:option>
 								<form:option value="Aerodrum Road">Aerodrum Road</form:option>
 								<form:option value="Annapurna Road">Annapurna Road</form:option>
@@ -756,6 +756,12 @@ input[type=file] {
 							</form:select>
 <%-- 						<form:input class="form-control" type="text" --%>
 <%-- 							placeholder="Locality" id="locality" path="locality" /> --%>
+					</div>
+					
+					<div class="form-group col-sm-6 col-xs-12 colbox" id="localityInputDiv">
+						<label for="locality">Locality <span>*</span></label>
+						<form:input class="form-control" type="text"
+  							placeholder="Locality" id="locality" path="locality" />  
 					</div>
 
 					<div class="clear clearfix"></div>
@@ -1037,8 +1043,10 @@ function myFunction() {
 		url: '${pageContext.request.contextPath}/loadCitiesByState/' + x,
 		success: function(result) {
 			var s = '';
+			s+= '<option value="">Select</option>'
 			for(var i = 0; i < result.length; i++) {
 				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+				
 				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
 			}
 			console.log(s);
@@ -1313,6 +1321,36 @@ function myFunction() {
     		}
     	}
     }
+    
+    
+    function selectLocality()
+    {
+    	var city = document.getElementById('cityDropDown').value;
+    	if(city==="Indore")
+    	{
+    		document.getElementById('localityInputDiv').style.display = 'none';
+    		document.getElementById('localityDiv').style.display = 'block';
+    	}else
+    	{
+    		document.getElementById('localityDiv').style.display = 'none';
+    		document.getElementById('localityInputDiv').style.display = 'block';
+    	}
+    	
+    }
+    
+    
+    $(document).ready(function(){
+    	var city = document.getElementById('cityDropDown').value;
+    	if(city==="Indore")
+    	{
+    		document.getElementById('localityInputDiv').style.display = 'none';
+    		document.getElementById('localityDiv').style.display = 'block';
+    	}else
+    	{
+    		document.getElementById('localityDiv').style.display = 'none';
+    		document.getElementById('localityInputDiv').style.display = 'block';
+    	}
+	});
   
     </script>
 
