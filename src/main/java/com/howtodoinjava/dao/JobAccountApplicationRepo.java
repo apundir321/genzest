@@ -26,5 +26,7 @@ public interface JobAccountApplicationRepo extends JpaRepository<JobAccountAppli
 	public void deleteAppliedJob(User applicant,JobAccount job);
 	
 	public List<JobAccountApplication> findAllByApplicantAndStatus(User applicant, String status);
+	
+	public List<JobAccountApplication> findAllByStatus(String status);
 
 }

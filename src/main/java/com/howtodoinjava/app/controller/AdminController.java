@@ -140,8 +140,23 @@ public class AdminController {
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		model.put("category", new Category());
-		List<JobAccountApplication> applications = jobAccountApplicationRepo.findAllByApplicantAndStatus((User)model.get("user"),"SELECTED");
-		List<JobAccountApplication> presentApplications = jobAccountApplicationRepo.findAllByApplicantAndStatus((User)model.get("user"),"MARKED");
+		List<JobAccountApplication> applications = new ArrayList<>();
+				
+				for(JobAccountApplication application : jobAccountApplicationRepo.findAllByStatus("SELECTED"))
+				{
+					if(!application.getJob().getStatus().equals("Deleted"))
+					{
+						applications.add(application);
+					}
+				}
+		List<JobAccountApplication> presentApplications = new ArrayList<>();
+				for(JobAccountApplication application : jobAccountApplicationRepo.findAllByStatus("MARKED"))
+				{
+					if(!application.getJob().getStatus().equals("Deleted"))
+					{
+						presentApplications.add(application);
+					}
+				}
 		
 		model.put("applications", applications);
 		model.put("presentApplications", presentApplications);

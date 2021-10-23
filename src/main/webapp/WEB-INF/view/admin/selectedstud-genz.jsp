@@ -201,7 +201,7 @@ jobArray.push('${application.job.rate}');
 jobArray.push('${application.applicant.email}');
 jobArray.push('${application.applicant.userProfile.otherDetails.mobileNo}');
 jobArray.push('${application.applicant.userProfile.otherDetails.city}');
-jobArray.push('<a href="edit_stud.html?profileId=${application.applicant.id}">View</a>');
+jobArray.push('<a href="edit_stud.html?profileId=${application.applicant.userProfile.id}">View</a>');
 
 
 dataSet.push(jobArray);

@@ -786,13 +786,12 @@ public class IndexController {
 		model.put("message", "HowToDoInJava Reader !!");
 		User user = userRepo.findByEmail(auth.getName());
 		model.put("user", user);
-		
+
 		List<JobAccountApplication> applications = new ArrayList<JobAccountApplication>();
-		
-		for(JobAccountApplication accountApplication : jobAccountApplicationRepo.findAllByApplicant(user))
-		{
-			if(accountApplication.getStatus()!=null && accountApplication.getStatus().equals("OPEN"))
-			{
+
+		for (JobAccountApplication accountApplication : jobAccountApplicationRepo.findAllByApplicant(user)) {
+			if (!accountApplication.getJob().getStatus().equals("Deleted")) {
+
 				applications.add(accountApplication);
 			}
 		}
