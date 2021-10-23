@@ -626,7 +626,6 @@ public class IndexController {
 	@RequestMapping(method = RequestMethod.POST, value = "/updatePreferences.html")
 	public void searchJobs(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("dayPreference") DayPreference dayPreference, Map<String, Object> model) throws Exception {
-		System.out.println("***********88(((((((((((9");
 		DayPreference preference = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		UserProfile profile = userRepo.findByEmail(authentication.getName()).getUserProfile();

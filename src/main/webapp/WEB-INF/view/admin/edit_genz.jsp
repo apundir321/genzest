@@ -153,6 +153,10 @@ table thead {
 		width: auto !important;
 	}
 }
+
+.container-check { border:2px solid #ccc; width:100%; height: 100px; overflow-y: scroll; }
+
+.checkbox {color:black}
 </style>
 
 <style>
@@ -693,7 +697,7 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="mobileNo">Mobile No <span>*</span></label>
 						<form:input class="form-control" path="mobileNo"
-							placeholder="Mobile no" id="example-tel-input"
+							placeholder="Mobile no" id="mobileNo"
 							value="${user.phoneNo}" />
 
 						<form:errors path="mobileNo" cssClass="error"></form:errors>
@@ -702,8 +706,9 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="alternateMobileNo">Alternate Mobile No <span>*</span></label>
 						<form:input class="form-control" path="alternateMobileNo"
-							placeholder="Mobile no" id="example-tel-input" />
+							placeholder="Alternate Mobile no" id="alternateMobileNo" />
 						<form:errors path="alternateMobileNo" cssClass="error"></form:errors>
+						<div id="alternateMobileNoDiv" class="error"></div>
 					</div>
 
 					<div class="clear clearfix"></div>
@@ -756,7 +761,8 @@ input[type=file] {
 <%-- 							<form:errors path="vehicleType" cssClass="error"></form:errors> --%>
 <!--   </div> -->
 
-<div class="form-group col-sm-6 col-xs-12 colbox">
+
+					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="specialization">Specialization <span></span></label>
 						<form:input class="form-control" path="specialization"
 							placeholder="Specialization field" id="specialization" />
@@ -764,13 +770,14 @@ input[type=file] {
 						
 					</div>
 
-
   <div class="clear clearfix"></div>
 					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="course">Course <span>*</span></label>
 						<form:select class="form-control" path="course"  >
+						
 							<form:option value="">Select</form:option>
+							<form:option value="B.tech">B.tech</form:option>
 							<c:forEach var="course" items="${courses}">
 								<form:option value="${course.courseTypeName}"
 									label="${course.courseTypeName}" />
@@ -792,13 +799,13 @@ input[type=file] {
 					<div class="clear clearfix"></div>
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="havePc">Do You Have Own PC <span>*</span></label>
-						<form:select class="form-control" path="havePc">
-							<form:option class="first-op" value="false">Select</form:option>
+						<label for="doHavePc">Do You Have Own PC <span>*</span></label>
+						<form:select class="form-control" path="doHavePc">
+							<form:option class="first-op" value="">Select</form:option>
 							<form:option value="true">Yes</form:option>
 							<form:option value="false">No</form:option>
 						</form:select>
-						<form:errors path="havePc" cssClass="error"></form:errors>
+						<form:errors path="doHavePc" cssClass="error"></form:errors>
 					</div>
 					<div class="clear clearfix"></div>
 					<div class="form-group col-sm-6 col-xs-12 colbox">
@@ -850,10 +857,10 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="city">City <span>*</span></label>
-						<form:select path="city" id="cityDropDown" class="form-control">
+						<form:select path="city" id="cityDropDown" class="form-control" onchange="selectLocality()">
 							<option value="">Select</option>
 							<c:forEach var="city" items="${cities}">
-								<form:option value="${city[1]}" label="${city[1]}" />
+								<form:option  value="${city[1]}" label="${city[1]}"  />
 							</c:forEach>
 						</form:select>
 						<form:errors path="city" cssClass="error"></form:errors>
@@ -864,12 +871,9 @@ input[type=file] {
 <%-- 						</c:if> --%>
 					</div>
 
-
-
-
-<div class="form-group col-sm-6 col-xs-12 colbox">
+					<div class="form-group col-sm-6 col-xs-12 colbox" id="localityDiv">
 						<label for="locality">Locality <span>*</span></label>
-						 <form:select path="locality" name="locality" class="form-control">
+						 <form:select path="otherLocality" name="locality" class="form-control">
 						 <form:option value="">Please Select</form:option>
 								<form:option value="Aerodrum Road">Aerodrum Road</form:option>
 								<form:option value="Annapurna Road">Annapurna Road</form:option>
@@ -896,6 +900,12 @@ input[type=file] {
 <%-- 						<form:input class="form-control" type="text" --%>
 <%-- 							placeholder="Locality" id="locality" path="locality" /> --%>
 					</div>
+					
+					<div class="form-group col-sm-6 col-xs-12 colbox" id="localityInputDiv">
+						<label for="locality">Locality <span>*</span></label>
+						<form:input class="form-control" type="text"
+  							placeholder="Locality" id="locality" path="locality" />  
+					</div>
 
 					<div class="clear clearfix"></div>
 
@@ -918,19 +928,11 @@ input[type=file] {
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="jobCategories">Job Categories (Select Upto 5)<span>*</span></label>
-						<form:select class="form-control" path="jobCategories"
-							multiple="true" maxlength="5" minlength="1">
-							<form:option value="">Select</form:option>
-					
-<%-- 							<c:forEach var="category" items="${categories}"> --%>
-<%-- 								<option value="${category.id}" --%>
-<%-- 									label="${category.categoryName}" /> --%>
-									
-									
-<%-- 							</c:forEach> --%>
-
- <form:options items="${categories}" itemValue="id" itemLabel="categoryName"/>
-						</form:select>
+						
+						
+						<div class="container-check ">
+    						<form:checkboxes  items = "${categories}" element="div"   itemValue="id" itemLabel="categoryName" path = "jobCategories" onchange="checkBoxLimit()" /><br/></td> 
+						</div>
 						
 					</div>
 
@@ -954,15 +956,21 @@ input[type=file] {
 					</div>
 					
 					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="referralCode">Referral Code <span>*</span></label>
+						<label for="referralCode">Referral Code <span>(Optional)</span></label>
 						<form:input id="postal-code" path="referralCode" type="text"
 							placeholder="Referral code" class="form-control" />
 					</div>
 
+<!-- 					<div class="form-group col-sm-6 col-xs-12 colbox"> -->
+<!-- 						<div class="container-check"> -->
+<%--     					<form:checkboxes  items = "${categories}"  itemValue="id" itemLabel="categoryName" path = "jobCategories" /><br/></td>  --%>
+<!-- </div> -->
+
+<!-- 					</div> -->
 					<div class="clear clearfix"></div>
 					<div class="form-row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 colboxb">
-							<button type="submit">Save</button>
+							<button type="submit" onclick="return checkAlternateMobileNo()">Save</button>
 						</div>
 					</div>
 
@@ -1125,6 +1133,7 @@ input[type=file] {
 										<tr>	
 											<th scope="row">${dayPreference.day}</th>
 											<td>${dayPreference.timeSlot.timeSlotName}</td>
+											<td><a href="genz_deletePreference.html?preferenceId=${dayPreference.id}&userProfileId=${profile.id}"  onclick="return confirm('Are you sure?')"><i class="fa fa-trash"/></a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -1416,6 +1425,36 @@ function myFunction() {
   			 }
   		 }
   	}
+  	
+  	 function selectLocality()
+     {
+     	var city = document.getElementById('cityDropDown').value;
+     	if(city==="Indore")
+     	{
+     		document.getElementById('localityInputDiv').style.display = 'none';
+     		document.getElementById('localityDiv').style.display = 'block';
+     	}else
+     	{
+     		document.getElementById('localityDiv').style.display = 'none';
+     		document.getElementById('localityInputDiv').style.display = 'block';
+     	}
+     	
+     }
+     
+     
+     $(document).ready(function(){
+     	var city = document.getElementById('cityDropDown').value;
+     	if(city==="Indore")
+     	{
+     		document.getElementById('localityInputDiv').style.display = 'none';
+     		document.getElementById('localityDiv').style.display = 'block';
+     	}else
+     	{
+     		document.getElementById('localityDiv').style.display = 'none';
+     		document.getElementById('localityInputDiv').style.display = 'block';
+     	}
+ 	});
+   
   </script>
 
 

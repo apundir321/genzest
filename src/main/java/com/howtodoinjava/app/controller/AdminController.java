@@ -353,7 +353,7 @@ public class AdminController {
 		StudentDocuments savedStudentDocuments = userProfile.getStudentDocuments();
 		if (savedStudentDocuments != null) {
 			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
-				awsService.uploadFile(multipartFile, user.getUserProfile());
+				awsService.uploadFile(multipartFile, userProfile);
 				studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
 			} else {
 				studentDocuments.setAadharFileName(savedStudentDocuments.getAadharFileName());
@@ -361,7 +361,7 @@ public class AdminController {
 			}
 
 			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
-				awsService.uploadFile(studentIdMultipart, user.getUserProfile());
+				awsService.uploadFile(studentIdMultipart, userProfile);
 				studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
 			} else {
 
@@ -409,36 +409,109 @@ public class AdminController {
 		System.out.println("***********88(((((((((((9");
 		DayPreference preference = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		UserProfile profile = this.userprofileRepo.findById(Integer.parseInt(userProfileId)).get();
+		UserProfile userProfile = this.userprofileRepo.findById(Integer.parseInt(userProfileId)).get();
 		Set<DayPreference> preferences = null;
-		OtherUserDetails otherUserDetails = profile.getOtherDetails();
+		OtherUserDetails otherUserDetails = userProfile.getOtherDetails();
 		if (otherUserDetails != null) {
-			preferences = profile.getOtherDetails().getPreferences();
+			preferences = userProfile.getOtherDetails().getPreferences();
 		} else {
 			otherUserDetails = new OtherUserDetails();
 			preferences = new HashSet<>();
 		}
-
-		for (DayPreference pref : preferences) {
-			if (pref.getDay().equals(dayPreference.getDay())) {
-				preference = pref;
-				pref.setTimeSlot(dayPreference.getTimeSlot());
+		
+		DayPreference savedPref = getPreference(preferences, dayPreference);
+		
+		if(savedPref != null)
+		{
+			if(!savedPref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName()))
+			{
+				preferences.add(dayPreference);
+				otherUserDetails.setPreferences(preferences);
+				userProfile.setOtherDetails(otherUserDetails);
+				userprofileRepo.save(userProfile);
+				session.setAttribute("successMessage", "Profile Updated!");
+				
+			}else
+			{
+				session.setAttribute("errorMessage", "Time Slot already added!");
 			}
 		}
-
-		if (preference == null) {
-			otherUserDetails.getPreferences().add(dayPreference);
-			profile.setOtherDetails(otherUserDetails);
-			this.userprofileRepo.save(profile);
-		} else {
+		else
+		{
+			preferences.add(dayPreference);
 			otherUserDetails.setPreferences(preferences);
-			profile.setOtherDetails(otherUserDetails);
-			userprofileRepo.save(profile);
+			userProfile.setOtherDetails(otherUserDetails);
+			userprofileRepo.save(userProfile);
+			session.setAttribute("successMessage", "Profile Updated!");
 		}
+		
+		
+//		for (DayPreference pref : preferences) {
+//			if (pref.getDay().equals(dayPreference.getDay())  && pref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName())) {
+//				preference = pref;
+//				pref.setTimeSlot(dayPreference.getTimeSlot());
+//			}
+//		}
+//
+//		if (preference == null) {
+//			otherUserDetails.getPreferences().add(dayPreference);
+//			profile.setOtherDetails(otherUserDetails);
+//			userProfileRepo.save(profile);
+//		} else {
+//			otherUserDetails.setPreferences(preferences);
+//			profile.setOtherDetails(otherUserDetails);
+//			userProfileRepo.save(profile);
+//		}
+		
+		
 
-		session.setAttribute("successMessage", "Profile Updated!");
+		
 		response.sendRedirect("/edit_stud.html?profileId="+userProfileId);
 	}
+	
+	
+	public DayPreference getPreference(Set<DayPreference> preferences,DayPreference dayPreference)
+	{
+		DayPreference preference = null;
+		for(DayPreference pref : preferences)
+		{
+			if (pref.getDay().equals(dayPreference.getDay()))
+			{
+				preference = pref;
+			}
+		}
+		return preference;
+		
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/genz_deletePreference.html")
+	public void deletePreferences(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam String preferenceId,@RequestParam(required = false) String userProfileId) throws Exception {
+		System.out.println("***********88(((((((((((9");
+		DayPreference preference = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		UserProfile userProfile = this.userprofileRepo.findById(Integer.parseInt(userProfileId)).get();
+		Set<DayPreference> preferences = new HashSet<>();
+		OtherUserDetails otherUserDetails = userProfile.getOtherDetails();
+		if (otherUserDetails != null) {
+			for(DayPreference prefer: userProfile.getOtherDetails().getPreferences())
+			{
+				if(prefer.getId()!=Integer.parseInt(preferenceId))
+				{
+					preferences.add(prefer);
+				}
+			}
+			
+			otherUserDetails.setPreferences(preferences);
+			userProfile.setOtherDetails(otherUserDetails);
+			userprofileRepo.save(userProfile);
+			session.setAttribute("successMessage", "Timeslot Deleted!");
+			
+		}
+		
+		response.sendRedirect("/edit_stud.html?profileId="+userProfileId);
+	}
+
 
 
 
