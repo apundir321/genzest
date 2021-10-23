@@ -963,7 +963,14 @@ public class AdminController {
 			categories = categoryRepo.findByCategoryStatus("Active");
 			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
 			timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
-			jobs = jobAccountRepo.findAll();
+			jobs = new ArrayList<>();
+			for(JobAccount account : jobAccountCustomRepo.findJobsByJobCriterias(searchJob))
+			{
+				if(!account.getStatus().equals("Deleted")) {
+					jobs.add(account);
+				}
+			}
+			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
