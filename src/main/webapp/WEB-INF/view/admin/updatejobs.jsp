@@ -640,12 +640,14 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                      <c:forEach var="timeSlot" items="${jobAccount.timeSlots}">
                                         <tr>
-                                        	 <c:forEach var="timeSlot" items="${jobAccount.timeSlots}">	
+                                        	 	
                                           <th scope="row">${jobAccount.jobCode}</th>
                                           <td>${timeSlot.timeSlotName}</td>
-                                          </c:forEach>
+                                         
                                         </tr>
+                                         </c:forEach>
                                       </tbody>
                                     <!-- <tr>
                                     <td>Row1 cell1</td>

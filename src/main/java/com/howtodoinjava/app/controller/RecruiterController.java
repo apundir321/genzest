@@ -202,7 +202,7 @@ public class RecruiterController {
 			to.setRate(from.getRate());
 			to.setState(from.getState());
 			to.setStatus(from.getStatus());
-			to.setTimeSlot(from.getTimeSlot());
+//			to.setTimeSlot(from.getTimeSlot());
 			to.setVacancyForFemale(from.getVacancyForFemale());
 			to.setVacancyForMale(from.getVacancyForMale());
 			to.setVacancyForOther(from.getVacancyForOther());

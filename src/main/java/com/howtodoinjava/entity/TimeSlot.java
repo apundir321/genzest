@@ -20,7 +20,7 @@ import com.howtodoinjava.model.User;
 public class TimeSlot {
 	
 	@Id
-	@Column(unique = true, nullable = false)
+	@Column( nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 	@NotEmpty

@@ -136,7 +136,7 @@ public class CSVService {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 			for (JobAccount jobAccount : jobAccounts) {
 				List<String> data = Arrays.asList(jobAccount.getJobCode(), jobAccount.getEmployer().getEmployerName(),
-						jobAccount.getTimeSlot() == null ? null : jobAccount.getTimeSlot().getTimeSlotName(),
+						jobAccount.getTimeSlots() == null ? null : "",
 						jobAccount.getCategory() == null ? null : jobAccount.getCategory().getCategoryName(),
 						String.valueOf(jobAccount.getNoOfVacancy()), jobAccount.getCity(),
 						dateFormat.format(jobAccount.getJobDate()), jobAccount.getStatus());
@@ -205,8 +205,7 @@ public class CSVService {
 						Set<DayPreference> prefs = userProfile.getOtherDetails().getPreferences();
 						for (DayPreference pref : prefs) {
 							if (pref.getTimeSlot() != null && pref.getDay() != null) {
-								preferences += pref.getDay() + "=" + pref.getTimeSlot() == null ? "TImeslot Not defined"
-										: pref.getTimeSlot().getTimeSlotName() + ",";
+								preferences += pref.getDay() + "=" + pref.getTimeSlot().getTimeSlotName()+",";
 							}
 						}
 
@@ -275,8 +274,8 @@ public class CSVService {
 			for (JobAccountApplication jobApplication : jobApplications) {
 				List<String> data = Arrays.asList(String.valueOf(jobApplication.getId()),
 						jobApplication.getJob().getJobName(), jobApplication.getJob().getCategory().getCategoryName(),
-						jobApplication.getJob().getTimeSlot() == null ? null
-								: jobApplication.getJob().getTimeSlot().getTimeSlotName(),
+						jobApplication.getJob().getTimeSlots() == null ? null
+								: "",
 						jobApplication.getApplicant().getEmail(), jobApplication.getApplicant().getPhoneNo(),
 						dateFormat.format(jobApplication.getApplicationDate()));
 				csvPrinter.printRecord(data);

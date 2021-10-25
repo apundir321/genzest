@@ -184,7 +184,9 @@ jobArray.push('${profile.applicant.userProfile.otherDetails.course}');
 jobArray.push('${profile.applicant.userProfile.otherDetails.city}');
 jobArray.push('${profile.applicant.userProfile.otherDetails.havePc}');
 jobArray.push('<a href="edit_stud.html?profileId=${profile.applicant.userProfile.id}">View</a>');
-jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${profile.id}" id="defaultCheck1_${profile.id}">')
+
+jobArray.push('<c:if test="${profile.status eq 'SELECTED'}">SELECTED</c:if> <c:if test="${profile.status eq 'OPEN'}"><input class="form-check-input" name="applyJob" type="checkbox" value="${profile.id}" id="defaultCheck1_${profile.id}"></c:if>')
+// jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${profile.id}" id="defaultCheck1_${profile.id}">')
 
 dataSet.push(jobArray);
 </c:forEach>

@@ -193,6 +193,7 @@
 var dataSet = new Array();
 <c:forEach items="${applications}" var="application" varStatus="status">
 jobArray = new Array();
+jobArray.push('${application.job.jobCode}');
 jobArray.push('${application.applicant.firstName}');
 jobArray.push('${application.job.employer.employerName}');
 jobArray.push('${application.job.category.categoryName}');
@@ -267,6 +268,7 @@ $(document).ready(function() {
     $('#example').DataTable( {
         data: dataSet,
         columns: [
+        	{title: "Job Code"},
         	{ title: "Candidate" },
             { title: "Employer" },
             { title: "Category" },

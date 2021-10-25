@@ -1,7 +1,9 @@
 package com.howtodoinjava.entity;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,13 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -96,23 +95,23 @@ public class JobAccount {
 	
 	private String day;
 	
-	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "slot_id")
-	private TimeSlot timeSlot;
+//	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
+//	@JoinColumn(name = "slot_id")
+//	private TimeSlot timeSlot;
 	
 	
 	private String status;
 	private Date createdDate;
 	
+
 	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "created_by")
 	private User createdBy;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "job_timeslot", joinColumns = { @JoinColumn(name = "job_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "slot_id") })
 	private Set<TimeSlot> timeSlots = new HashSet<>();
-	
 	
 	private String action;
 	public int getId() {
@@ -255,7 +254,7 @@ public class JobAccount {
 				+ ", vacancyForMale=" + vacancyForMale + ", vacancyForOther=" + vacancyForOther + ", effectiveFrom="
 				+ effectiveFrom + ", effectiveTill=" + effectiveTill + ", jobDate=" + jobDate + ", rate=" + rate
 				+ ", locality=" + locality + ", description=" + description + ", jobCode=" + jobCode + ", state="
-				+ state + ", city=" + city + ", postalCode=" + postalCode + ", day=" + day + ", timeSlot=" + timeSlot
+				+ state + ", city=" + city + ", postalCode=" + postalCode + ", day=" + day 
 				+ ", status=" + status + ", createdDate=" + createdDate + ", createdBy=" + createdBy + ", timeSlots="
 				+ timeSlots + ", action=" + action + "]";
 	}
@@ -265,23 +264,12 @@ public class JobAccount {
 	public void setDay(String day) {
 		this.day = day;
 	}
-	public TimeSlot getTimeSlot() {
-		return timeSlot;
-	}
-	public void setTimeSlot(TimeSlot timeSlot) {
-		this.timeSlot = timeSlot;
-	}
+
 	public Date getJobDate() {
 		return jobDate;
 	}
 	public void setJobDate(Date jobDate) {
 		this.jobDate = jobDate;
-	}
-	public Set<TimeSlot> getTimeSlots() {
-		return timeSlots;
-	}
-	public void setTimeSlots(Set<TimeSlot> timeSlots) {
-		this.timeSlots = timeSlots;
 	}
 	public String getOtherLocality() {
 		return otherLocality;
@@ -289,5 +277,14 @@ public class JobAccount {
 	public void setOtherLocality(String otherLocality) {
 		this.otherLocality = otherLocality;
 	}
+	public Set<TimeSlot> getTimeSlots() {
+		return timeSlots;
+	}
+	public void setTimeSlots(Set<TimeSlot> timeSlots) {
+		this.timeSlots = timeSlots;
+	}
+	
+
+	
 
 }

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1595,9 +1596,13 @@ public class AdminController {
 				List<Object[]> cityObj = categoryRepo.getCityByCityName(account.getCity());
 				String cityName = (String) cityObj.get(0)[1];
 				int serialNumber = (int) ((Math.random() * (1000 - 1)) + 1);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(account.getJobDate() );
+				int year = cal.get(Calendar.YEAR);
+				int month =  account.getJobDate().getMonth()+1;
 				String jobCode = account.getEmployer().getClientCode() + "_" + cityName.substring(0,3).toUpperCase() + "_"
-						+ account.getCategory().getCategoryCode() + "_" + account.getJobDate().getMonth()
-						+ account.getJobDate().getDate() + account.getJobDate().getYear() + "_" + serialNumber;
+						+ account.getCategory().getCategoryCode() + "_" + month
+						+ account.getJobDate().getDate() + year + "_" + serialNumber;
 
 				account.setJobCode(jobCode);
 				System.out.println(account);
@@ -1674,7 +1679,7 @@ public class AdminController {
 		to.setRate(from.getRate());
 		to.setState(from.getState());
 		to.setStatus(from.getStatus());
-		to.setTimeSlot(from.getTimeSlot());
+//		to.setTimeSlot(from.getTimeSlot());
 		to.setVacancyForFemale(from.getVacancyForFemale());
 		to.setVacancyForMale(from.getVacancyForMale());
 		to.setVacancyForOther(from.getVacancyForOther());

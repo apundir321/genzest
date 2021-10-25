@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -182,7 +183,8 @@ var dataSet = new Array();
 jobArray = new Array();
 jobArray.push('${profile.id}');
 jobArray.push('${profile.firstName}');
-jobArray.push('${profile.dob}');
+jobArray.push('<fmt:formatDate value="${profile.dob}" var="dateString" pattern="dd/MM/yyyy" />${dateString}');
+
 jobArray.push('${profile.email}');
 jobArray.push('${profile.otherDetails.mobileNo}');
 jobArray.push('${profile.gender}');
@@ -191,6 +193,7 @@ jobArray.push('${profile.otherDetails.city}');
 jobArray.push('${profile.otherDetails.havePc}');
 jobArray.push('<a href="edit_stud.html?profileId=${profile.id}">View</a>');
 jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${profile.id}" id="defaultCheck1_${profile.id}">')
+
 
 
 dataSet.push(jobArray);

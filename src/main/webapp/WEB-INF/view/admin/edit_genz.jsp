@@ -960,6 +960,12 @@ input[type=file] {
 						<form:input id="postal-code" path="referralCode" type="text"
 							placeholder="Referral code" class="form-control" />
 					</div>
+					
+					 <div class="form-group col-sm-6 col-xs-12 colbox">
+						    <label for="description">Description <span></span></label>
+						          <form:textarea class="form-control" placeholder="Description" path="description" />
+						  </div>
+  
 
 <!-- 					<div class="form-group col-sm-6 col-xs-12 colbox"> -->
 <!-- 						<div class="container-check"> -->

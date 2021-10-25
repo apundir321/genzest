@@ -118,6 +118,8 @@ public OtherUserDetails() {
 	private Date lastUpdated;
 	
 	private String referralCode;
+	
+	private String description;
 //	
 	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
@@ -330,6 +332,12 @@ public OtherUserDetails() {
 	}
 	public void setOtherLocality(String otherLocality) {
 		this.otherLocality = otherLocality;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 

@@ -3,8 +3,10 @@ package com.howtodoinjava.app.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.mail.Message;
+import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -50,8 +53,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.auth.profile.internal.Profile;
-import javax.mail.Session;
 import com.howtodoinjava.OnRegistrationCompleteEvent;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
@@ -79,7 +80,6 @@ import com.howtodoinjava.entity.JobType;
 import com.howtodoinjava.entity.MarkAttendence;
 import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
-import com.howtodoinjava.model.JobApplication;
 import com.howtodoinjava.model.JobTimeSlot;
 import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.StudentDocuments;
@@ -170,14 +170,46 @@ public class IndexController {
 		model.put("user", user);
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(user);
 		model.put("appliedJobsCount", appliedJobs.size());
+		List<String> userPreferenceList = new ArrayList<>();
+		if(user.getUserProfile().getOtherDetails()!=null) {
+		for(DayPreference preference :user.getUserProfile().getOtherDetails().getPreferences())
+		{
+			String pref = preference.getDay()+"_"+preference.getTimeSlot().getTimeSlotName();
+			userPreferenceList.add(pref);
+		}
+		}
 		OtherUserDetails otherDetails = user.getUserProfile().getOtherDetails();
 		if (otherDetails != null) {
 			List<JobAccount> matchingJobs = new ArrayList<>();
+			
 			for(JobAccount account : jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories()))
 			{
 				if(account.getStatus().equals("Open"))
 				{
-					matchingJobs.add(account);
+					if(userPreferenceList.size()>0)
+					{
+						boolean isJobMatchedWithUserPreference = false;
+						for(TimeSlot timeSlot : account.getTimeSlots())
+						{
+							Calendar c = Calendar.getInstance();
+					        c.setTime(account.getJobDate());
+					        String dayWeekText = new SimpleDateFormat("EEEE").format(account.getJobDate());
+					        String jobPrefence = dayWeekText+"_"+timeSlot.getTimeSlotName();
+					        if(userPreferenceList.contains(jobPrefence))
+					        {
+					        	isJobMatchedWithUserPreference = true;
+					        }
+						}
+						
+						if(isJobMatchedWithUserPreference)
+						{
+							matchingJobs.add(account);
+						}
+						
+						
+					}else {
+						matchingJobs.add(account);
+					}
 				}
 			}
 			model.put("matchingJobsCount", matchingJobs.size());
