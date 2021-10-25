@@ -279,8 +279,18 @@ public class AdminController {
 				model.put("editable", false);
 			}
 			if (!StringUtils.isEmpty(profilePicMultipart.getOriginalFilename())) {
-				awsService.uploadFile(profilePicMultipart, profileData);
-				profileData.setProfilePicFileName(profilePicMultipart.getOriginalFilename());
+				String profilePicName = null;
+				String extension = null;
+				int i = profilePicMultipart.getOriginalFilename().lastIndexOf('.');
+				if (i > 0) {
+				    extension =  profilePicMultipart.getOriginalFilename().substring(i+1);
+				    profilePicName = userProfile.getEmail()+"_"+userProfile.getId()+"."+extension;
+				}else
+				{
+					profilePicName = profilePicMultipart.getOriginalFilename();
+				}
+				awsService.uploadFile(profilePicMultipart, profileData,profilePicName);
+				profileData.setProfilePicFileName(profilePicName);
 			}
 
 			model.put("user", user);
@@ -368,16 +378,36 @@ public class AdminController {
 		StudentDocuments savedStudentDocuments = userProfile.getStudentDocuments();
 		if (savedStudentDocuments != null) {
 			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
-				awsService.uploadFile(multipartFile, userProfile);
-				studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
+				String profilePicName = null;
+				String extension = null;
+				int i = multipartFile.getOriginalFilename().lastIndexOf('.');
+				if (i > 0) {
+				    extension =  multipartFile.getOriginalFilename().substring(i+1);
+				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_aadhar."+extension;
+				}else
+				{
+					profilePicName = multipartFile.getOriginalFilename();
+				}
+				awsService.uploadFile(multipartFile, userProfile,profilePicName);
+				studentDocuments.setAadharFileName(profilePicName);
 			} else {
 				studentDocuments.setAadharFileName(savedStudentDocuments.getAadharFileName());
 
 			}
 
 			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
-				awsService.uploadFile(studentIdMultipart, userProfile);
-				studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
+				String profilePicName = null;
+				String extension = null;
+				int i = studentIdMultipart.getOriginalFilename().lastIndexOf('.');
+				if (i > 0) {
+				    extension =  studentIdMultipart.getOriginalFilename().substring(i+1);
+				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_studentID."+extension;
+				}else
+				{
+					profilePicName = studentIdMultipart.getOriginalFilename();
+				}
+				awsService.uploadFile(studentIdMultipart, userProfile,profilePicName);
+				studentDocuments.setStudentIdFileName(profilePicName);
 			} else {
 
 				studentDocuments.setStudentIdFileName(savedStudentDocuments.getStudentIdFileName());
@@ -394,13 +424,33 @@ public class AdminController {
 		else
 		{
 			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
-				awsService.uploadFile(multipartFile, user.getUserProfile());
-				studentDocuments.setAadharFileName(multipartFile.getOriginalFilename());
+				String profilePicName = null;
+				String extension = null;
+				int i = multipartFile.getOriginalFilename().lastIndexOf('.');
+				if (i > 0) {
+				    extension =  multipartFile.getOriginalFilename().substring(i+1);
+				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_aadhar."+extension;
+				}else
+				{
+					profilePicName = multipartFile.getOriginalFilename();
+				}
+				awsService.uploadFile(multipartFile, user.getUserProfile(),profilePicName);
+				studentDocuments.setAadharFileName(profilePicName);
 			} 
 
 			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
-				awsService.uploadFile(studentIdMultipart, user.getUserProfile());
-				studentDocuments.setStudentIdFileName(studentIdMultipart.getOriginalFilename());
+				String profilePicName = null;
+				String extension = null;
+				int i = studentIdMultipart.getOriginalFilename().lastIndexOf('.');
+				if (i > 0) {
+				    extension =  studentIdMultipart.getOriginalFilename().substring(i+1);
+				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_studentID."+extension;
+				}else
+				{
+					profilePicName = studentIdMultipart.getOriginalFilename();
+				}
+				awsService.uploadFile(studentIdMultipart, user.getUserProfile(),profilePicName);
+				studentDocuments.setStudentIdFileName(profilePicName);
 			} 
 
 			model.put("user", user);
@@ -1585,6 +1635,7 @@ public class AdminController {
 			savedJobAccount.setLocality(jobAccount.getLocality());
 			savedJobAccount.setPostalCode(jobAccount.getPostalCode());
 			savedJobAccount.setDescription(jobAccount.getDescription());
+			savedJobAccount.setOtherLocality(jobAccount.getOtherLocality());
 			model.put("jobAccount", jobAccountRepo.save(savedJobAccount));
 			session.setAttribute("successMessage", "Job Updated!");
 		}
@@ -1628,6 +1679,7 @@ public class AdminController {
 		to.setVacancyForMale(from.getVacancyForMale());
 		to.setVacancyForOther(from.getVacancyForOther());
 		to.setJobType(from.getJobType());
+		to.setOtherLocality(from.getOtherLocality());
 		return to;
 
 	}

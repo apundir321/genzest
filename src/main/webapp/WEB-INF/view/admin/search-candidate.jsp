@@ -344,7 +344,7 @@ dataSet.push(jobArray);
 					<li class="sidebar-item active"><a class="sidebar-link"
 						href="searchcandi-genz.html"><i
 							class="fa fa-search align-middle" style="font-size: 19px"></i> <span
-							class="align-middle"><b>Search Candidate</b></span> </a></li>
+							class="align-middle"><b>Search Student</b></span> </a></li>
 
 					<li class="sidebar-item"><a class="sidebar-link"
 						href="searchjobs-genz.html"><i
@@ -404,7 +404,7 @@ dataSet.push(jobArray);
 					src="assets-1/img/icons/Shape@1X (3).png">
 				</a>
 				<h4>
-					<b>Search Candidate</b>
+					<b>Search Student</b>
 				</h4>
 
 				<div class="navbar-collapse collapse">

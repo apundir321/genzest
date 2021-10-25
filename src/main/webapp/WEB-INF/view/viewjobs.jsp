@@ -381,15 +381,7 @@
   </div>
   
   
-    <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="preference">Gender Preference <span>*</span></label>
-                            <select onchange='checkItem(this.value)' class="form-control" name="preference" id="preference">
-                            <option value="">Select</option>
-                            <option value="yes">Yes</option>
-                            <option value="no">No</option>
-                            </select>
-                            <form:errors path="employer" cssClass="error"></form:errors>
-  </div>
+   
   
     <div class="clear clearfix"></div>
   

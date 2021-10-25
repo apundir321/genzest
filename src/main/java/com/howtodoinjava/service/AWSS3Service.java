@@ -8,9 +8,9 @@ import com.howtodoinjava.model.UserProfile;
 
 public interface AWSS3Service {
 
-	void uploadFile(MultipartFile multipartFile,UserProfile profile)  throws Exception;
+	void uploadFile(MultipartFile multipartFile,UserProfile profile,String name)  throws Exception;
 	
-	void uploadGenericFile(MultipartFile multipartFile)  throws Exception;
+	void uploadGenericFile(MultipartFile multipartFile,String name)  throws Exception;
 	
 	public ByteArrayOutputStream downloadFile(String keyName,UserProfile profile) throws Exception;
 	

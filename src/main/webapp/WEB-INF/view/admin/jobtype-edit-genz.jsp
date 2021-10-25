@@ -215,7 +215,7 @@
                     </a></li>
 
                     <li class="sidebar-item">
-                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
+                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Student</b></span>
                     </a></li>
 
                     <li class="sidebar-item">

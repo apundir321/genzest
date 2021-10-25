@@ -619,13 +619,7 @@ input[type=file] {
 <!--   </div> -->
 
 
-					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="specialization">Specialization <span></span></label>
-						<form:input class="form-control" path="specialization"
-							placeholder="Specialization field" id="specialization" />
-						<form:errors path="specialization" cssClass="error"></form:errors>
-						
-					</div>
+					
 
   <div class="clear clearfix"></div>
 					
@@ -643,7 +637,13 @@ input[type=file] {
 						<form:errors path="course" cssClass="error"></form:errors>
 					</div>
 					
-					
+					<div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="specialization">Specialization <span></span></label>
+						<form:input class="form-control" path="specialization"
+							placeholder="Specialization field" id="specialization" />
+						<form:errors path="specialization" cssClass="error"></form:errors>
+						
+					</div>
 					
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">

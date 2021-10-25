@@ -84,6 +84,8 @@ public class JobAccount {
 	
 	private String locality;
 	
+	private String otherLocality;
+	
 	private String description;
 	
 	private String jobCode;
@@ -280,6 +282,12 @@ public class JobAccount {
 	}
 	public void setTimeSlots(Set<TimeSlot> timeSlots) {
 		this.timeSlots = timeSlots;
+	}
+	public String getOtherLocality() {
+		return otherLocality;
+	}
+	public void setOtherLocality(String otherLocality) {
+		this.otherLocality = otherLocality;
 	}
 
 }

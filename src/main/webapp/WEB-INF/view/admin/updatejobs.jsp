@@ -226,7 +226,7 @@
                     </a></li>
 
                     <li class="sidebar-item">
-                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
+                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Student</b></span>
                     </a></li>
 
                     <li class="sidebar-item">
@@ -503,7 +503,7 @@
 							<label>
 								City <span>*</span>
 							</label>
-							<form:select path="city" id="cityDropDown" class="form-control">
+							<form:select path="city" id="cityDropDown" class="form-control" onchange="selectLocality()">
 							<option value="">Select</option>
 							<c:forEach var="city" items="${cities}">
 								<form:option value="${city[1]}" label="${city[1]}" />
@@ -511,10 +511,46 @@
 						</form:select>
 						</div>
                          
-                         <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox">
-                            <label for="locality"> Locality <span>*</span></label>
-                            <form:input  type="text" placeholder="Locality" class="form-control" path="locality"/>
-                         </div>
+<!--                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 colbox"> -->
+<!--                             <label for="locality"> Locality <span>*</span></label> -->
+<%--                             <form:input  type="text" placeholder="Locality" class="form-control" path="locality"/> --%>
+<!--                          </div> -->
+                           <div class="form-group col-sm-6 col-xs-12 colbox" id="localityDiv">
+						<label for="locality">Locality <span>*</span></label>
+						 <form:select path="otherLocality" name="locality" class="form-control">
+						 <form:option value="">Please Select</form:option>
+								<form:option value="Aerodrum Road">Aerodrum Road</form:option>
+								<form:option value="Annapurna Road">Annapurna Road</form:option>
+								<form:option value="Dewas Naka">Dewas Naka</form:option>
+								<form:option value="Jail Road">Jail Road</form:option>
+								<form:option value="Jawahar Marg">Jawahar Marg</form:option>
+								<form:option value="Khandwa Road">Khandwa Road</form:option>
+								<form:option value="Malharganj">Malharganj</form:option>
+								<form:option value="Malwa Mill">Malwa Mill</form:option>
+								<form:option value="Manik Bagh">Manik Bagh</form:option>
+								<form:option value="Musakhedi">Musakhedi</form:option>
+								<form:option value="Navlakha">Navlakha</form:option>
+								<form:option value="Palasia">Palasia</form:option>
+								<form:option value="Palda">Palda</form:option>
+								<form:option value="Rajendra Nagar">Rajendra Nagar</form:option>
+								<form:option value="Ram Bagh">Ram Bagh</form:option>
+								<form:option value="Rau">Rau</form:option>
+								<form:option value="RNT Marg">RNT Marg</form:option>
+								<form:option value="Sapna Sangeeta">Sapna Sangeeta</form:option>
+								<form:option value="Super Corridor">Super Corridor</form:option>
+								<form:option value="Vijay Nagar">Vijay Nagar</form:option>
+								
+							</form:select>
+<%-- 						<form:input class="form-control" type="text" --%>
+<%-- 							placeholder="Locality" id="locality" path="locality" /> --%>
+					</div>
+					
+					<div class="form-group col-sm-6 col-xs-12 colbox" id="localityInputDiv">
+						<label for="locality">Locality <span>*</span></label>
+						<form:input class="form-control" type="text"
+  							placeholder="Locality" id="locality" path="locality" />  
+					</div>
+                         
                          
                            <div class="clear clearfix"></div>
                          
@@ -797,11 +833,7 @@
             
         });
     </script>
-	<script>
-		$(document).ready( function () {
-			$('#table_id').DataTable();
-		} );
-	</script>
+	
     <script>
         $("#profileImage").click(function(e) {
         $("#imageUpload").click();
@@ -827,6 +859,7 @@ function myFunction() {
 		url: '${pageContext.request.contextPath }/loadCitiesByState/' + x,
 		success: function(result) {
 			var s = '';
+			s+= '<option value="">Select</option>';
 			for(var i = 0; i < result.length; i++) {
 				//s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
 				s += '<option value="'+result[i][1]+'">'+result[i][1]+'</option>'
@@ -836,6 +869,36 @@ function myFunction() {
 		}
 	});
 }
+
+
+function selectLocality()
+{
+	var city = document.getElementById('cityDropDown').value;
+	if(city==="Indore")
+	{
+		document.getElementById('localityInputDiv').style.display = 'none';
+		document.getElementById('localityDiv').style.display = 'block';
+	}else
+	{
+		document.getElementById('localityDiv').style.display = 'none';
+		document.getElementById('localityInputDiv').style.display = 'block';
+	}
+	
+}
+
+
+$(document).ready(function(){
+	var city = document.getElementById('cityDropDown').value;
+	if(city==="Indore")
+	{
+		document.getElementById('localityInputDiv').style.display = 'none';
+		document.getElementById('localityDiv').style.display = 'block';
+	}else
+	{
+		document.getElementById('localityDiv').style.display = 'none';
+		document.getElementById('localityInputDiv').style.display = 'block';
+	}
+});
 </script>
 
 	<script src="assets-2/js/app.js"></script>

@@ -229,7 +229,7 @@
                     </a></li>
 
                     <li class="sidebar-item">
-                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Candidate</b></span>
+                    <a class="sidebar-link" href="searchcandi-genz.html"><i class="fa fa-search align-middle" style="font-size:19px"></i> <span class="align-middle"><b>Search Student</b></span>
                     </a></li>
 
                     <li class="sidebar-item">
@@ -408,7 +408,7 @@
   </div>
 
   <div class="form-group col-sm-6 col-xs-12 colbox">
-    <label for="firstName">Client Code <span>*</span></label>
+    <label for="firstName">Client Code <span>(3 character unique code)*</span></label>
                             <form:input id="clientcode" name="clientcode" type="text" path="clientCode" placeholder="Client Code" class="form-control"/>
                             <form:errors path="clientCode" cssClass="error"></form:errors>
   </div>

@@ -43,10 +43,10 @@ public class AWSS3ServiceImpl implements AWSS3Service {
 	// @Async annotation ensures that the method is executed in a different background thread 
 	// but not consume the main thread.
 	@Async
-	public void uploadFile(final MultipartFile multipartFile,UserProfile profile) throws Exception {
+	public void uploadFile(final MultipartFile multipartFile,UserProfile profile,String name) throws Exception {
 		LOGGER.info("File upload in progress.");
 		try {
-			final File file = convertMultiPartFileToFile(multipartFile);
+			final File file = convertMultiPartFileToFile(multipartFile,name);
 			uploadFileToS3Bucket(bucketName, file,profile.getId());
 			LOGGER.info("File upload is completed.");
 			file.delete();	// To remove the file locally created in the project folder.
@@ -57,10 +57,10 @@ public class AWSS3ServiceImpl implements AWSS3Service {
 	}
 	
 	@Async
-	public void uploadGenericFile(final MultipartFile multipartFile) throws Exception {
+	public void uploadGenericFile(final MultipartFile multipartFile,String name) throws Exception {
 		LOGGER.info("File upload in progress.");
 		try {
-			final File file = convertMultiPartFileToFile(multipartFile);
+			final File file = convertMultiPartFileToFile(multipartFile,name);
 			uploadGenericFileToS3Bucket(bucketName, file);
 			LOGGER.info("File upload is completed.");
 			file.delete();	// To remove the file locally created in the project folder.
@@ -70,8 +70,8 @@ public class AWSS3ServiceImpl implements AWSS3Service {
 		}
 	}
 
-	private File convertMultiPartFileToFile(final MultipartFile multipartFile) {
-		final File file = new File(multipartFile.getOriginalFilename());
+	private File convertMultiPartFileToFile(final MultipartFile multipartFile,String name) {
+		final File file = new File(name);
 		try (final FileOutputStream outputStream = new FileOutputStream(file)) {
 			outputStream.write(multipartFile.getBytes());
 		} catch (final IOException ex) {
