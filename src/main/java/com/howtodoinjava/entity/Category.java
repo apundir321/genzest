@@ -22,7 +22,7 @@ import com.howtodoinjava.model.User;
 public class Category {
 	
 	@Id
-	@Column(unique = true, nullable = false)
+	@Column(nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int id;
 	

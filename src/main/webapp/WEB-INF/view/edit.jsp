@@ -628,7 +628,7 @@ input[type=file] {
 						<form:select class="form-control" path="course"  >
 						
 							<form:option value="">Select</form:option>
-							<form:option value="B.tech">B.tech</form:option>
+							
 							<c:forEach var="course" items="${courses}">
 								<form:option value="${course.courseTypeName}"
 									label="${course.courseTypeName}" />

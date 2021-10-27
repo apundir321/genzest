@@ -1,5 +1,6 @@
 package com.howtodoinjava.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -121,10 +122,10 @@ public OtherUserDetails() {
 	
 	private String description;
 //	
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "category_id") })
-	public List<Category> jobCategories; 
+			@JoinColumn(name = "cat_id") })
+	public List<Category> jobCategories = new ArrayList<>(); 
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_preference", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
