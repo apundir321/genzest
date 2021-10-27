@@ -359,9 +359,10 @@ public class IndexController {
 		List<Category> categories = null;
 		List<JobType> jobTypes = null;
 		List<TimeSlot> timeSlots = null;
+		List<JobAccount> matchingJobs = new ArrayList<>();
 		List<JobAccount> jobs = new ArrayList<JobAccount>();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = (User) session.getAttribute("user");
+		User user = (User) userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		List<Integer> appliedJobIds = new ArrayList<>();
 		try {
@@ -370,23 +371,57 @@ public class IndexController {
 			categories = categoryRepo.findByCategoryStatus("Active");
 			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
 			timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
-			List<JobAccount> jobsAccount = jobAccountCustomRepo.findJobsByCategory(null);
+			
 
 			List<JobAccountApplication> jobApplications = jobAccountApplicationRepo.findAllByApplicant(user);
 			for (JobAccountApplication accountApplication : jobApplications) {
 				appliedJobIds.add(accountApplication.getJob().getId());
 			}
 
-			for (JobAccount jobAccount : jobsAccount) {
-				if (!appliedJobIds.contains(jobAccount.getId())) {
-					if(jobAccount.getStatus()!=null && jobAccount.getStatus().equals("Open"))
-					{
-						jobs.add(jobAccount);
-					}
-					
+//			for (JobAccount jobAccount : jobsAccount) {
+//				if (!appliedJobIds.contains(jobAccount.getId())) {
+//					if(jobAccount.getStatus()!=null && jobAccount.getStatus().equals("Open"))
+//					{
+//						jobs.add(jobAccount);
+//					}
+//					
+//				}
+//			}
+			List<String> userPreferenceList = new ArrayList<>();
+			if (user.getUserProfile().getOtherDetails() != null) {
+				for (DayPreference preference : user.getUserProfile().getOtherDetails().getPreferences()) {
+					String pref = preference.getDay() + "_" + preference.getTimeSlot().getTimeSlotName();
+					userPreferenceList.add(pref);
 				}
 			}
+			OtherUserDetails otherDetails = user.getUserProfile().getOtherDetails();
+			if (otherDetails != null) {
 
+				for (JobAccount account : jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories())) {
+					if (account.getStatus().equals("Open")  && !appliedJobIds.contains(account.getId())) {
+						if (userPreferenceList.size() > 0) {
+							boolean isJobMatchedWithUserPreference = false;
+							for (TimeSlot timeSlot : account.getTimeSlots()) {
+								Calendar c = Calendar.getInstance();
+								c.setTime(account.getJobDate());
+								String dayWeekText = new SimpleDateFormat("EEEE").format(account.getJobDate());
+								String jobPrefence = dayWeekText + "_" + timeSlot.getTimeSlotName();
+								if (userPreferenceList.contains(jobPrefence)) {
+									isJobMatchedWithUserPreference = true;
+								}
+							}
+
+							if (isJobMatchedWithUserPreference) {
+								matchingJobs.add(account);
+							}
+
+						} else {
+							matchingJobs.add(account);
+						}
+					}
+				}
+
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -397,7 +432,7 @@ public class IndexController {
 		model.put("categories", categories);
 		model.put("jobTypes", jobTypes);
 		model.put("timeSlots", timeSlots);
-		model.put("jobs", jobs);
+		model.put("jobs", matchingJobs);
 		model.put("searchJob", new SearchJobs());
 		return "searchjobs";
 	}
