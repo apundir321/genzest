@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,7 +87,7 @@
     // [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
     // [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
     // [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "${profile.id}", "${profile.firstName}", "${profile.email}", "${user.phoneNo}", "${profile.dob}", "${profile.gender}", "${otherDetails.course}", "${otherDetails.city}" ]
+    [ "${profile.id}", "${profile.firstName}", "${profile.email}", "${user.phoneNo}", '<fmt:formatDate value="${profile.dob}" var="dateString" pattern="dd/MM/yyyy" />${dateString}', "${profile.gender}", "${otherDetails.course}", "${otherDetails.city}" ]
     // [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
     // [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
     // [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],

@@ -168,6 +168,13 @@ public class IndexController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = (User) userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
+		boolean isCompleteYouModal = false;
+		if(user.getUserProfile().getParentsName()==null || user.getUserProfile().getParentsName().equals(""))
+		{
+			isCompleteYouModal = true;
+		}
+		
+		model.put("isCompleteYouModal", isCompleteYouModal);
 		List<JobAccountApplication> appliedJobs = jobAccountApplicationRepo.findAllByApplicant(user);
 		model.put("appliedJobsCount", appliedJobs.size());
 		List<String> userPreferenceList = new ArrayList<>();

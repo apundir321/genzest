@@ -89,6 +89,10 @@
 	#password-error{
 		text-align:left;
 	}
+	
+	.toast-top-center{
+	margin-top: 8%;
+	}
 </style>
 
 </head>
@@ -263,6 +267,10 @@
             
             		<script type="text/javascript">
 	$(document).ready(function(){
+		toastr.options = {
+			    positionClass: 'toast-top-center'
+			};
+		
 		<c:if test="${not empty successMessage}">
 		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
 		</c:if>

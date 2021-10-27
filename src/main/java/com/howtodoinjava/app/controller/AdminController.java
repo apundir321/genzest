@@ -102,24 +102,22 @@ public class AdminController {
 
 	@Autowired
 	JobAccountCustomRepo jobAccountCustomRepo;
-	
+
 	@Autowired
 	JobAccountApplicationRepo jobAccountApplicationRepo;
 
 	@Autowired
 	LocationRepository locationRepo;
-	
+
 	@Autowired
 	SelectedProfilesRepo selectedProfileRepo;
-	
+
 	@Autowired
 	JobEarningRepo jobEarningRepo;
-	
-	
+
 	@Autowired
 	HttpSession session;
-	
-	
+
 	@Autowired
 	UserProfileService userService;
 
@@ -142,23 +140,19 @@ public class AdminController {
 		model.put("user", user);
 		model.put("category", new Category());
 		List<JobAccountApplication> applications = new ArrayList<>();
-				
-				for(JobAccountApplication application : jobAccountApplicationRepo.findAllByStatus("SELECTED"))
-				{
-					if(!application.getJob().getStatus().equals("Deleted"))
-					{
-						applications.add(application);
-					}
-				}
+
+		for (JobAccountApplication application : jobAccountApplicationRepo.findAllByStatus("SELECTED")) {
+			if (!application.getJob().getStatus().equals("Deleted")) {
+				applications.add(application);
+			}
+		}
 		List<JobAccountApplication> presentApplications = new ArrayList<>();
-				for(JobAccountApplication application : jobAccountApplicationRepo.findAllByStatus("MARKED"))
-				{
-					if(!application.getJob().getStatus().equals("Deleted"))
-					{
-						presentApplications.add(application);
-					}
-				}
-		
+		for (JobAccountApplication application : jobAccountApplicationRepo.findAllByStatus("MARKED")) {
+			if (!application.getJob().getStatus().equals("Deleted")) {
+				presentApplications.add(application);
+			}
+		}
+
 		model.put("applications", applications);
 		model.put("presentApplications", presentApplications);
 		return "admin/selectedstud-genz";
@@ -192,26 +186,23 @@ public class AdminController {
 		model.put("dayPreference", new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findByTimeSlotStatus("Active"));
 		OtherUserDetails userDetails = profile.getOtherDetails();
-		if(userDetails==null)
-		{
-			model.put("otherDetails",new OtherUserDetails());
+		if (userDetails == null) {
+			model.put("otherDetails", new OtherUserDetails());
 			model.put("states", categoryRepo.getStatesByCountryId("100"));
-		}else
-		{
+		} else {
 			model.put("otherDetails", userDetails);
 			model.put("states", categoryRepo.getStatesByCountryId("100"));
 			if (userDetails != null) {
 				model.put("cities", categoryRepo.getCitiesByState(profile.getOtherDetails().getState()));
 			}
 		}
-		if(profile.getParentsName()==null)
-		{
+		if (profile.getParentsName() == null) {
 			model.put("editable", true);
-		}else
-		{
+		} else {
 			model.put("editable", false);
 		}
-		StudentDocuments studentDocuments = profile.getStudentDocuments()==null?new StudentDocuments():profile.getStudentDocuments();
+		StudentDocuments studentDocuments = profile.getStudentDocuments() == null ? new StudentDocuments()
+				: profile.getStudentDocuments();
 		model.put("studentDocs", studentDocuments);
 
 		return "admin/edit_genz";
@@ -222,11 +213,9 @@ public class AdminController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		List<UserProfile> userProfiles = new ArrayList<>();
 		List<UserProfile> profiles = (List<UserProfile>) userprofileRepo.findAll();
-		
-		for(UserProfile profile : profiles)
-		{
-			if(profile.getStatus()==null || profile.getStatus().equals(""))
-			{
+
+		for (UserProfile profile : profiles) {
+			if (profile.getStatus() == null || profile.getStatus().equals("")) {
 				userProfiles.add(profile);
 			}
 		}
@@ -235,9 +224,7 @@ public class AdminController {
 		model.put("profiles", userProfiles);
 		return "admin/stud-genz";
 	}
-	
-	
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/genz_updateProfile.html")
 	public void updateProfile(HttpServletRequest request, HttpServletResponse response,
 			@Valid @ModelAttribute("profile") UserProfile userProfile, BindingResult result,
@@ -262,11 +249,11 @@ public class AdminController {
 //			if (result.hasErrors()) {
 //				return "edit";
 //			}
-			
+
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			User user = userRepo.findByEmail(authentication.getName());
-			UserProfile profileData =this.userprofileRepo.findById(userProfile.getId()).get();
-			
+			UserProfile profileData = this.userprofileRepo.findById(userProfile.getId()).get();
+
 			profileData.setFirstName(userProfile.getFirstName());
 			profileData.setLastName(userProfile.getLastName());
 			profileData.setEmail(userProfile.getEmail());
@@ -284,13 +271,12 @@ public class AdminController {
 				String extension = null;
 				int i = profilePicMultipart.getOriginalFilename().lastIndexOf('.');
 				if (i > 0) {
-				    extension =  profilePicMultipart.getOriginalFilename().substring(i+1);
-				    profilePicName = userProfile.getEmail()+"_"+userProfile.getId()+"."+extension;
-				}else
-				{
+					extension = profilePicMultipart.getOriginalFilename().substring(i + 1);
+					profilePicName = userProfile.getEmail() + "_" + userProfile.getId() + "." + extension;
+				} else {
 					profilePicName = profilePicMultipart.getOriginalFilename();
 				}
-				awsService.uploadFile(profilePicMultipart, profileData,profilePicName);
+				awsService.uploadFile(profilePicMultipart, profileData, profilePicName);
 				profileData.setProfilePicFileName(profilePicName);
 			}
 
@@ -298,7 +284,7 @@ public class AdminController {
 			;
 //			user.setUserProfile(profileData);
 //			userRepo.save(user);
-			
+
 			this.userprofileRepo.save(profileData);
 			model.put("successMessage", "Profile Updated!");
 //			model.put("profile", profileData);
@@ -308,14 +294,13 @@ public class AdminController {
 //					: user.getUserProfile().getStudentDocuments());
 		}
 		session.setAttribute("successMessage", "Profile Updated!");
-		response.sendRedirect("/edit_stud.html?profileId="+userProfile.getId());
+		response.sendRedirect("/edit_stud.html?profileId=" + userProfile.getId());
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/genz_updateOtherDetails.html")
 	public void updateOtherDetails(HttpServletRequest request, HttpServletResponse response,
 			@Valid @ModelAttribute("otherDetails") OtherUserDetails otherDetails, BindingResult result,
-			Map<String, Object> model,@RequestParam(required = false) String userProfileId) throws Exception {
+			Map<String, Object> model, @RequestParam(required = false) String userProfileId) throws Exception {
 
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
@@ -337,16 +322,16 @@ public class AdminController {
 		if (savedUserDetails != null) {
 			otherDetails.setId(savedUserDetails.getId());
 			otherDetails.setPreferences(savedUserDetails.getPreferences());
-			
+
 			userProfile.setOtherDetails(otherDetails);
 			this.userprofileRepo.save(userProfile);
 		} else {
-			
+
 			userProfile.setOtherDetails(otherDetails);
 			this.userprofileRepo.save(userProfile);
 		}
 		session.setAttribute("successMessage", "Profile Updated!");
-		response.sendRedirect("/edit_stud.html?profileId="+userProfile.getId());
+		response.sendRedirect("/edit_stud.html?profileId=" + userProfile.getId());
 //		model.put("successMessage", "Profile Updated!");
 //		model.put("profile", user.getUserProfile());
 //		model.put("otherDetails", otherDetails);
@@ -360,7 +345,7 @@ public class AdminController {
 			@Valid @ModelAttribute("studentDocs") StudentDocuments studentDocuments,
 			@RequestParam("aadhar") MultipartFile multipartFile,
 			@RequestParam("studentId") MultipartFile studentIdMultipart, BindingResult result,
-			Map<String, Object> model,@RequestParam(required = false) String userProfileId) throws Exception {
+			Map<String, Object> model, @RequestParam(required = false) String userProfileId) throws Exception {
 
 		UserProfile profile;
 		model.put("dayPreference", new DayPreference());
@@ -383,13 +368,13 @@ public class AdminController {
 				String extension = null;
 				int i = multipartFile.getOriginalFilename().lastIndexOf('.');
 				if (i > 0) {
-				    extension =  multipartFile.getOriginalFilename().substring(i+1);
-				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_aadhar."+extension;
-				}else
-				{
+					extension = multipartFile.getOriginalFilename().substring(i + 1);
+					profilePicName = user.getUserProfile().getEmail() + "_" + user.getUserProfile().getId() + "_aadhar."
+							+ extension;
+				} else {
 					profilePicName = multipartFile.getOriginalFilename();
 				}
-				awsService.uploadFile(multipartFile, userProfile,profilePicName);
+				awsService.uploadFile(multipartFile, userProfile, profilePicName);
 				studentDocuments.setAadharFileName(profilePicName);
 			} else {
 				studentDocuments.setAadharFileName(savedStudentDocuments.getAadharFileName());
@@ -401,13 +386,13 @@ public class AdminController {
 				String extension = null;
 				int i = studentIdMultipart.getOriginalFilename().lastIndexOf('.');
 				if (i > 0) {
-				    extension =  studentIdMultipart.getOriginalFilename().substring(i+1);
-				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_studentID."+extension;
-				}else
-				{
+					extension = studentIdMultipart.getOriginalFilename().substring(i + 1);
+					profilePicName = user.getUserProfile().getEmail() + "_" + user.getUserProfile().getId()
+							+ "_studentID." + extension;
+				} else {
 					profilePicName = studentIdMultipart.getOriginalFilename();
 				}
-				awsService.uploadFile(studentIdMultipart, userProfile,profilePicName);
+				awsService.uploadFile(studentIdMultipart, userProfile, profilePicName);
 				studentDocuments.setStudentIdFileName(profilePicName);
 			} else {
 
@@ -421,38 +406,36 @@ public class AdminController {
 			studentDocuments.setId(savedStudentDocuments.getId());
 			userProfile.setStudentDocuments(studentDocuments);
 			this.userprofileRepo.save(userProfile);
-		}
-		else
-		{
+		} else {
 			if (!StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
 				String profilePicName = null;
 				String extension = null;
 				int i = multipartFile.getOriginalFilename().lastIndexOf('.');
 				if (i > 0) {
-				    extension =  multipartFile.getOriginalFilename().substring(i+1);
-				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_aadhar."+extension;
-				}else
-				{
+					extension = multipartFile.getOriginalFilename().substring(i + 1);
+					profilePicName = user.getUserProfile().getEmail() + "_" + user.getUserProfile().getId() + "_aadhar."
+							+ extension;
+				} else {
 					profilePicName = multipartFile.getOriginalFilename();
 				}
-				awsService.uploadFile(multipartFile, user.getUserProfile(),profilePicName);
+				awsService.uploadFile(multipartFile, user.getUserProfile(), profilePicName);
 				studentDocuments.setAadharFileName(profilePicName);
-			} 
+			}
 
 			if (!StringUtils.isEmpty(studentIdMultipart.getOriginalFilename())) {
 				String profilePicName = null;
 				String extension = null;
 				int i = studentIdMultipart.getOriginalFilename().lastIndexOf('.');
 				if (i > 0) {
-				    extension =  studentIdMultipart.getOriginalFilename().substring(i+1);
-				    profilePicName = user.getUserProfile().getEmail()+"_"+user.getUserProfile().getId()+"_studentID."+extension;
-				}else
-				{
+					extension = studentIdMultipart.getOriginalFilename().substring(i + 1);
+					profilePicName = user.getUserProfile().getEmail() + "_" + user.getUserProfile().getId()
+							+ "_studentID." + extension;
+				} else {
 					profilePicName = studentIdMultipart.getOriginalFilename();
 				}
-				awsService.uploadFile(studentIdMultipart, user.getUserProfile(),profilePicName);
+				awsService.uploadFile(studentIdMultipart, user.getUserProfile(), profilePicName);
 				studentDocuments.setStudentIdFileName(profilePicName);
-			} 
+			}
 
 			model.put("user", user);
 //			userProfile.setLastUpdated(new Date());
@@ -461,7 +444,7 @@ public class AdminController {
 			userprofileRepo.save(userProfile);
 		}
 		session.setAttribute("successMessage", "Profile Updated!");
-		response.sendRedirect("/edit_stud.html?profileId="+userProfile.getId());
+		response.sendRedirect("/edit_stud.html?profileId=" + userProfile.getId());
 //		model.put("profile", user.getUserProfile());
 //		model.put("otherDetails",  user.getUserProfile().getOtherDetails() == null ? new OtherUserDetails()
 //				: user.getUserProfile().getOtherDetails());
@@ -471,7 +454,8 @@ public class AdminController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/genz_updatePreferences.html")
 	public void searchJobs(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("dayPreference") DayPreference dayPreference, Map<String, Object> model,@RequestParam(required = false) String userProfileId) throws Exception {
+			@ModelAttribute("dayPreference") DayPreference dayPreference, Map<String, Object> model,
+			@RequestParam(required = false) String userProfileId) throws Exception {
 		System.out.println("***********88(((((((((((9");
 		DayPreference preference = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -484,34 +468,28 @@ public class AdminController {
 			otherUserDetails = new OtherUserDetails();
 			preferences = new HashSet<>();
 		}
-		
+
 		DayPreference savedPref = getPreference(preferences, dayPreference);
-		
-		if(savedPref != null)
-		{
-			if(!savedPref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName()))
-			{
+
+		if (savedPref != null) {
+			if (!savedPref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName())) {
 				preferences.add(dayPreference);
 				otherUserDetails.setPreferences(preferences);
 				userProfile.setOtherDetails(otherUserDetails);
 				userprofileRepo.save(userProfile);
 				session.setAttribute("successMessage", "Profile Updated!");
-				
-			}else
-			{
+
+			} else {
 				session.setAttribute("errorMessage", "Time Slot already added!");
 			}
-		}
-		else
-		{
+		} else {
 			preferences.add(dayPreference);
 			otherUserDetails.setPreferences(preferences);
 			userProfile.setOtherDetails(otherUserDetails);
 			userprofileRepo.save(userProfile);
 			session.setAttribute("successMessage", "Profile Updated!");
 		}
-		
-		
+
 //		for (DayPreference pref : preferences) {
 //			if (pref.getDay().equals(dayPreference.getDay())  && pref.getTimeSlot().getTimeSlotName().equals(dayPreference.getTimeSlot().getTimeSlotName())) {
 //				preference = pref;
@@ -528,31 +506,24 @@ public class AdminController {
 //			profile.setOtherDetails(otherUserDetails);
 //			userProfileRepo.save(profile);
 //		}
-		
-		
 
-		
-		response.sendRedirect("/edit_stud.html?profileId="+userProfileId);
+		response.sendRedirect("/edit_stud.html?profileId=" + userProfileId);
 	}
-	
-	
-	public DayPreference getPreference(Set<DayPreference> preferences,DayPreference dayPreference)
-	{
+
+	public DayPreference getPreference(Set<DayPreference> preferences, DayPreference dayPreference) {
 		DayPreference preference = null;
-		for(DayPreference pref : preferences)
-		{
-			if (pref.getDay().equals(dayPreference.getDay()))
-			{
+		for (DayPreference pref : preferences) {
+			if (pref.getDay().equals(dayPreference.getDay())) {
 				preference = pref;
 			}
 		}
 		return preference;
-		
+
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/genz_deletePreference.html")
 	public void deletePreferences(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam String preferenceId,@RequestParam(required = false) String userProfileId) throws Exception {
+			@RequestParam String preferenceId, @RequestParam(required = false) String userProfileId) throws Exception {
 		System.out.println("***********88(((((((((((9");
 		DayPreference preference = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -560,26 +531,21 @@ public class AdminController {
 		Set<DayPreference> preferences = new HashSet<>();
 		OtherUserDetails otherUserDetails = userProfile.getOtherDetails();
 		if (otherUserDetails != null) {
-			for(DayPreference prefer: userProfile.getOtherDetails().getPreferences())
-			{
-				if(prefer.getId()!=Integer.parseInt(preferenceId))
-				{
+			for (DayPreference prefer : userProfile.getOtherDetails().getPreferences()) {
+				if (prefer.getId() != Integer.parseInt(preferenceId)) {
 					preferences.add(prefer);
 				}
 			}
-			
+
 			otherUserDetails.setPreferences(preferences);
 			userProfile.setOtherDetails(otherUserDetails);
 			userprofileRepo.save(userProfile);
 			session.setAttribute("successMessage", "Timeslot Deleted!");
-			
+
 		}
-		
-		response.sendRedirect("/edit_stud.html?profileId="+userProfileId);
+
+		response.sendRedirect("/edit_stud.html?profileId=" + userProfileId);
 	}
-
-
-
 
 	@RequestMapping(method = RequestMethod.GET, value = "/category-edit-genz.html")
 	public String editCategoryGet(Map<String, Object> model) {
@@ -622,7 +588,7 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "admin/category-edit-genz";
 		}
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -632,10 +598,8 @@ public class AdminController {
 				model.put("category", categoryEntity.get());
 			}
 		} else {
-			if(category.getId()==0)
-			{
-				if(categoryRepo.findByCategoryName(category.getCategoryName())!=null)
-				{
+			if (category.getId() == 0) {
+				if (categoryRepo.findByCategoryName(category.getCategoryName()) != null) {
 					model.put("errorMessage", "Category already Exists");
 					model.put("category", category);
 					return "admin/category-edit-genz";
@@ -645,18 +609,16 @@ public class AdminController {
 				categoryRepo.save(category);
 				model.put("category", categoryRepo.save(category));
 				model.put("successMessage", "Category created");
-			}
-			else
-			{
+			} else {
 				category.setCreatedDate(new Date());
 				category.setCreatedBy(user);
 				categoryRepo.save(category);
 				model.put("category", categoryRepo.save(category));
 				model.put("successMessage", "Category Updated");
 			}
-			
+
 		}
-		
+
 		return "admin/category-edit-genz";
 	}
 
@@ -673,14 +635,14 @@ public class AdminController {
 		return "admin/jobtype-genz";
 	}
 
-	
 	@RequestMapping("/approveStud.html")
-	public void approveStud(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
-		
+	public void approveStud(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)
+			throws IOException {
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		String applicationId = request.getParameter("applicationId");
-		
+
 		if (!StringUtils.isEmpty(applicationId)) {
 			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
 					.findById(Long.parseLong(applicationId));
@@ -688,74 +650,65 @@ public class AdminController {
 			application.setStatus("APPROVED");
 			jobAccountApplicationRepo.save(application);
 			Date checkinDate = new Date();
-			checkinDate.setHours( Integer.valueOf(   application.getCheckinTime().split(":")[0]));
-			checkinDate.setMinutes(Integer.valueOf( application.getCheckinTime().split(":")[1]));
-			
-			
+			checkinDate.setHours(Integer.valueOf(application.getCheckinTime().split(":")[0]));
+			checkinDate.setMinutes(Integer.valueOf(application.getCheckinTime().split(":")[1]));
+
 			Date checkoutDate = new Date();
-			
-			checkoutDate.setHours( Integer.valueOf(   application.getCheckoutTime().split(":")[0]));
-			checkoutDate.setMinutes(Integer.valueOf( application.getCheckoutTime().split(":")[1]));
-			 long difference_In_Time
-             = checkoutDate.getTime() - checkinDate.getTime();
-			 long difference_In_Hours
-             = (difference_In_Time
-                / (1000 * 60 * 60))
-               % 24;
-			 
-			 int totalAmount = (int)difference_In_Hours*application.getJob().getRate();
+
+			checkoutDate.setHours(Integer.valueOf(application.getCheckoutTime().split(":")[0]));
+			checkoutDate.setMinutes(Integer.valueOf(application.getCheckoutTime().split(":")[1]));
+			long difference_In_Time = checkoutDate.getTime() - checkinDate.getTime();
+			long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
+
+			int totalAmount = (int) difference_In_Hours * application.getJob().getRate();
 			JobEarning earning = new JobEarning();
 			earning.setApplicantUser(user);
 			earning.setJobAccount(application.getJob());
 			earning.setPresentDate(new Date());
 			earning.setStatus("CREATED");
 			earning.setTotalEarning(totalAmount);
-			earning.setTotalHours((int)difference_In_Hours);
+			earning.setTotalHours((int) difference_In_Hours);
 			jobEarningRepo.save(earning);
 			session.setAttribute("successMessage", "Student Application Approved!!");
 			response.sendRedirect("/selectedstud-genz.html");
-		}else
-		{
-		session.setAttribute("errorMessage", "Didn't find any application with this id, please choose another one.");
-		response.sendRedirect("/selectedstud-genz.html");
+		} else {
+			session.setAttribute("errorMessage",
+					"Didn't find any application with this id, please choose another one.");
+			response.sendRedirect("/selectedstud-genz.html");
 		}
 	}
-	
-	
-	
+
 	@RequestMapping("/rejectStud.html")
-	public void rejectStud(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
-		
+	public void rejectStud(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)
+			throws IOException {
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		String applicationId = request.getParameter("applicationId");
-		
+
 		if (!StringUtils.isEmpty(applicationId)) {
 			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
 					.findById(Long.parseLong(applicationId));
 			JobAccountApplication application = jobApplication.get();
 			application.setStatus("REJECTED");
 			jobAccountApplicationRepo.save(application);
-			
-			
+
 			session.setAttribute("successMessage", "Student Application Rejected!!");
 			response.sendRedirect("/selectedstud-genz.html");
-		}else
-		{
-		session.setAttribute("errorMessage", "Didn't find any application with this id, please choose another one.");
-		response.sendRedirect("/selectedstud-genz.html");
+		} else {
+			session.setAttribute("errorMessage",
+					"Didn't find any application with this id, please choose another one.");
+			response.sendRedirect("/selectedstud-genz.html");
 		}
 	}
-	
+
 	@RequestMapping("/jobtype-edit-genz.html")
 	public String editJobType(Map<String, Object> model, @RequestParam(required = false) String jobTypeId) {
-		
+
 		model.put("jobType", new JobType());
-		if(jobTypeId!=null)
-		{
+		if (jobTypeId != null) {
 			Optional<JobType> jobType = jobTypeRepo.findById(Integer.parseInt(jobTypeId));
-			if(jobType.isPresent())
-			{
+			if (jobType.isPresent()) {
 				model.put("jobType", jobType.get());
 			}
 		}
@@ -778,10 +731,8 @@ public class AdminController {
 				model.put("jobType", jobTypeEntity.get());
 			}
 		} else {
-			if(jobType.getId()==0)
-			{
-				if(jobTypeRepo.findByJobTypeName(jobType.getJobTypeName())!=null)
-				{
+			if (jobType.getId() == 0) {
+				if (jobTypeRepo.findByJobTypeName(jobType.getJobTypeName()) != null) {
 					model.put("errorMessage", "JobType already Exists");
 					model.put("jobType", jobType);
 					return "admin/jobtype-edit-genz";
@@ -791,8 +742,7 @@ public class AdminController {
 				jobTypeRepo.save(jobType);
 				model.put("jobType", jobTypeRepo.save(jobType));
 				model.put("successMessage", "Job Type created");
-			}else
-			{
+			} else {
 				jobType.setCreatedDate(new Date());
 				jobType.setCreatedBy(userRepo.findById(2L).get());
 				jobTypeRepo.save(jobType);
@@ -818,7 +768,7 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/course-genz";
 	}
-	
+
 //	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/genzest-d.html")
 	public String showAdminPage(Map<String, Object> model) {
@@ -852,17 +802,15 @@ public class AdminController {
 
 	@RequestMapping("/course-edit-genz.html")
 	public String editCourseType(Map<String, Object> model, @RequestParam(required = false) String courseId) {
-		
+
 		model.put("courseType", new CourseType());
-		if(courseId!=null)
-		{
+		if (courseId != null) {
 			Optional<CourseType> courseType = courseRepo.findById(Integer.parseInt(courseId));
-			if(courseType.isPresent())
-			{
+			if (courseType.isPresent()) {
 				model.put("courseType", courseType.get());
 			}
 		}
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -884,11 +832,9 @@ public class AdminController {
 				model.put("courseType", courseTypeEntity.get());
 			}
 		} else {
-			
-			if(courseType.getId()==0)
-			{
-				if(courseRepo.findByCourseTypeName(courseType.getCourseTypeName())!=null)
-				{
+
+			if (courseType.getId() == 0) {
+				if (courseRepo.findByCourseTypeName(courseType.getCourseTypeName()) != null) {
 					model.put("errorMessage", "Course already Exists");
 					model.put("courseType", courseType);
 					return "admin/course-edit-genz";
@@ -898,8 +844,7 @@ public class AdminController {
 				courseRepo.save(courseType);
 				model.put("courseType", courseRepo.save(courseType));
 				model.put("successMessage", "Course created");
-			}else
-			{
+			} else {
 				courseType.setCreatedDate(new Date());
 				courseType.setCreatedBy(user);
 				courseRepo.save(courseType);
@@ -908,7 +853,7 @@ public class AdminController {
 			}
 
 		}
-		
+
 		model.put("user", user);
 		return "admin/course-edit-genz";
 	}
@@ -925,11 +870,9 @@ public class AdminController {
 				model.put("timeSlot", timeSLotEntity.get());
 			}
 		} else {
-			
-			if(timeSlot.getId()==0)
-			{
-				if(timeSlotRepo.findByTimeSlotName(timeSlot.getTimeSlotName())!=null)
-				{
+
+			if (timeSlot.getId() == 0) {
+				if (timeSlotRepo.findByTimeSlotName(timeSlot.getTimeSlotName()) != null) {
 					model.put("errorMessage", "Timeslot already Exists");
 					model.put("timeSlot", timeSlot);
 					return "admin/timeslot-edit-genz";
@@ -938,12 +881,11 @@ public class AdminController {
 				timeSlot.setCreatedBy(userRepo.findById(2L).get());
 				model.put("timeSlot", timeSlotRepo.save(timeSlot));
 				model.put("successMessage", "Time slot created");
-			}else
-			{
-			timeSlot.setCreatedDate(new Date());
-			timeSlot.setCreatedBy(userRepo.findById(2L).get());
-			model.put("timeSlot", timeSlotRepo.save(timeSlot));
-			model.put("successMessage", "Time slot Updated");
+			} else {
+				timeSlot.setCreatedDate(new Date());
+				timeSlot.setCreatedBy(userRepo.findById(2L).get());
+				model.put("timeSlot", timeSlotRepo.save(timeSlot));
+				model.put("successMessage", "Time slot Updated");
 			}
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -1015,13 +957,11 @@ public class AdminController {
 			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
 			timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
 			jobs = new ArrayList<>();
-			for(JobAccount account : jobAccountCustomRepo.findJobsByJobCriterias(searchJob))
-			{
-				if(!account.getStatus().equals("Deleted")) {
+			for (JobAccount account : jobAccountCustomRepo.findJobsByJobCriterias(searchJob)) {
+				if (!account.getStatus().equals("Deleted")) {
 					jobs.add(account);
 				}
 			}
-			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -1045,15 +985,12 @@ public class AdminController {
 
 	@RequestMapping("/timeslot-edit-genz.html")
 	public String editTimeSlot(Map<String, Object> model, @RequestParam(required = false) String timeSlotId) {
-		
-		
+
 		model.put("timeSlot", new TimeSlot());
-		
-		if(timeSlotId!=null)
-		{
+
+		if (timeSlotId != null) {
 			Optional<TimeSlot> timeSlot = timeSlotRepo.findById(Integer.parseInt(timeSlotId));
-			if(timeSlot.isPresent())
-			{
+			if (timeSlot.isPresent()) {
 				model.put("timeSlot", timeSlot.get());
 			}
 		}
@@ -1134,17 +1071,14 @@ public class AdminController {
 				model.put("employer", employerEntity.get());
 			}
 		} else {
-			if(employer.getId()==0)
-			{
-				if(employerRepo.findByEmployerName(employer.getEmployerName())!=null)
-				{
+			if (employer.getId() == 0) {
+				if (employerRepo.findByEmployerName(employer.getEmployerName()) != null) {
 					model.put("errorMessage", "Employer Name already Exists");
 					model.put("employer", employer);
 					return "admin/emp-edit-genz";
 				}
-				
-				if(employerRepo.findByClientCode(employer.getClientCode())!=null)
-				{
+
+				if (employerRepo.findByClientCode(employer.getClientCode()) != null) {
 					model.put("errorMessage", "Employer code already exists");
 					model.put("employer", employer);
 					return "admin/emp-edit-genz";
@@ -1152,12 +1086,11 @@ public class AdminController {
 				employer.setCreatedDate(new Date());
 				model.put("employer", employerRepo.save(employer));
 				model.put("successMessage", "Employer created!");
-			}else
-			{
-			
-			employer.setCreatedDate(new Date());
-			model.put("employer", employerRepo.save(employer));
-			model.put("successMessage", "Employer created!");
+			} else {
+
+				employer.setCreatedDate(new Date());
+				model.put("employer", employerRepo.save(employer));
+				model.put("successMessage", "Employer created!");
 			}
 		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -1196,13 +1129,11 @@ public class AdminController {
 					newLoc.setLocation(location);
 					emp.getLocations().add(newLoc);
 					employerRepo.save(emp);
-					
+
 					model.put("successMessage", "Location added!");
 				}
 				model.put("employer", emp);
-			}
-			else
-			{
+			} else {
 				model.put("warningMessage", "No Employer present for this id");
 			}
 		}
@@ -1225,7 +1156,7 @@ public class AdminController {
 		try {
 			courses = courseRepo.findByCourseTypeStatus("Active");
 			employers = employerRepo.findAll();
-			categories =categoryRepo.findByCategoryStatus("Active");
+			categories = categoryRepo.findByCategoryStatus("Active");
 			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
 			timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
 
@@ -1247,11 +1178,11 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/search-candidate";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/searchJobInfo.html")
-	public String showCandidateInfo(HttpServletRequest request,HttpServletResponse response,
-			Map<String, Object> model) throws Exception {
-		
+	public String showCandidateInfo(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)
+			throws Exception {
+
 		List<UserProfile> profiles = new ArrayList<>();
 		String jobId = request.getParameter("jobId");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -1259,9 +1190,8 @@ public class AdminController {
 		model.put("user", user);
 		List<Integer> selectedProfilesIds = new ArrayList<>();
 		JobAccount job = jobAccountRepo.findByJobCode(jobId);
-		
-		if(job!=null)
-		{
+
+		if (job != null) {
 			JobAccount jobAccount = job;
 			SearchCandidate candidate = new SearchCandidate();
 			candidate.setJobCategory(String.valueOf(jobAccount.getCategory().getId()));
@@ -1270,16 +1200,15 @@ public class AdminController {
 //			candidate.setJobType(String.valueOf(jobAccount.getJobType().getId()));
 //			candidate.setState(jobAccount.getState());
 //			candidate.setCity(jobAccount.getCity());
-		
-			
-			List<OtherUserDetails> userDetails = (List<OtherUserDetails>) jobAccountCustomRepo.findProfileBySearchJob(candidate);
-			
-			List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
-			for(SelectedProfile selectedProfile : applications)
-			{
+
+			List<OtherUserDetails> userDetails = (List<OtherUserDetails>) jobAccountCustomRepo
+					.findProfileBySearchJob(candidate);
+
+			List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User) model.get("user"));
+			for (SelectedProfile selectedProfile : applications) {
 				selectedProfilesIds.add(selectedProfile.getUserProfile().getId());
 			}
-			
+
 			for (OtherUserDetails profile : userDetails) {
 				if (profile.getUserProfile() != null) {
 					if (!selectedProfilesIds.contains(profile.getUserProfile().getId())) {
@@ -1290,7 +1219,7 @@ public class AdminController {
 					}
 				}
 			}
-			
+
 			SearchCandidate searchCandidate = new SearchCandidate();
 			searchCandidate.setJobCategoryId(String.valueOf(jobAccount.getCategory().getId()));
 			searchCandidate.setJobCategory(jobAccount.getCategory().getCategoryName());
@@ -1298,15 +1227,16 @@ public class AdminController {
 			searchCandidate.setJobType(jobAccount.getJobType().getJobTypeName());
 			searchCandidate.setState(jobAccount.getState());
 			searchCandidate.setCity(jobAccount.getCity());
+			searchCandidate.setLocality(jobAccount.getLocality());
+			searchCandidate.setOtherLocality(jobAccount.getOtherLocality());
+			model.put("jobId", jobAccount.getId());
 			model.put("searchCandidate", searchCandidate);
 			model.put("successMessage", "Refined results has been posted!");
-		}
-		else
-		{
+		} else {
 			model.put("errorMessage", "Not able to find job by this Job Id");
 			model.put("searchCandidate", new SearchCandidate());
 		}
-		
+
 //		List<CourseType> courses = null;
 //		List<Employer> employers = null;
 //		List<Category> categories = null;
@@ -1336,11 +1266,9 @@ public class AdminController {
 //		model.put("states", categoryRepo.getStatesByCountryId("100"));
 //		model.put("successMessage", "Refined Results has been posted!");
 		model.put("profiles", profiles);
-		
+
 		return "admin/search-candidate";
 	}
-
-
 
 	@RequestMapping(method = RequestMethod.POST, value = "/searchCandidates.html")
 	public String searchCandidate(@ModelAttribute("searchCandidate") SearchCandidate searchCandidate,
@@ -1381,7 +1309,7 @@ public class AdminController {
 
 	@RequestMapping("/selectProfiles")
 	public void applyJob(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
-			@RequestParam String profilesId,HttpSession session) throws IOException {
+			@RequestParam String profilesId, HttpSession session) throws IOException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (profilesId.contains(",")) {
 			String[] profilesIds = profilesId.split(",");
@@ -1397,8 +1325,9 @@ public class AdminController {
 //						selectedProfile.setSelectedBy(user);
 //						selectedProfileRepo.save(selectedProfile);
 //					}
-					
-					Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo.findById(Long.parseLong(profile));
+
+					Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
+							.findById(Long.parseLong(profile));
 					if (jobApplication.isPresent()) {
 						JobAccountApplication application = jobApplication.get();
 						application.setStatus("SELECTED");
@@ -1417,8 +1346,9 @@ public class AdminController {
 //				selectedProfile.setSelectedBy(user);
 //				selectedProfileRepo.save(selectedProfile);
 //			}
-			
-			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo.findById(Long.parseLong(profilesId));
+
+			Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
+					.findById(Long.parseLong(profilesId));
 			if (jobApplication.isPresent()) {
 				JobAccountApplication application = jobApplication.get();
 				application.setStatus("SELECTED");
@@ -1426,13 +1356,79 @@ public class AdminController {
 			}
 
 		}
-		session.setAttribute("successMessage", "Profiles Selected"); 
+		session.setAttribute("successMessage", "Profiles Selected");
 //		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
 //		model.put("applications", applications);
 		response.sendRedirect("/selectedstud-genz.html");
-		
+
 	}
-	
+
+	@RequestMapping("/selectStudentProfiles")
+	public void selectStudentProfiles(HttpServletRequest request, HttpServletResponse response,
+			Map<String, Object> model, @RequestParam String profilesId, @RequestParam String jobId, HttpSession session)
+			throws IOException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		JobAccount savedJob = jobAccountRepo.findById(Integer.parseInt(jobId)).get();
+		if (profilesId.contains(",")) {
+			
+			String[] profilesIds = profilesId.split(",");
+			if (profilesIds.length > 0) {
+				for (String profile : profilesIds) {
+					Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profile));
+					if (userProfileOptional.isPresent()) {
+						User savedUser = userRepo.findByUserProfile(userProfileOptional.get());
+						JobAccountApplication application = jobAccountApplicationRepo.findByApplicantAndJob(savedUser,
+								savedJob);
+						if (application == null ) {
+							JobAccountApplication jobAccountApplication = new JobAccountApplication();
+							jobAccountApplication.setJob(savedJob);
+							jobAccountApplication.setApplicationDate(new Date());
+							jobAccountApplication.setStatus("SELECTED");
+							jobAccountApplication.setApplicant(savedUser);
+							jobAccountApplicationRepo.save(jobAccountApplication);
+						}
+						else if(application !=null && application.getStatus().equals("OPEN"))
+						{
+							application.setStatus("SELECTED");
+							jobAccountApplicationRepo.save(application);
+						}
+
+					}
+
+				}
+			}
+		} else {
+			Optional<UserProfile> userProfileOptional = userprofileRepo.findById(Integer.parseInt(profilesId));
+			if (userProfileOptional.isPresent()) {
+				User savedUser = userRepo.findByUserProfile(userProfileOptional.get());
+				JobAccountApplication application = jobAccountApplicationRepo.findByApplicantAndJob(savedUser,
+						savedJob);
+				if (application == null ) {
+					JobAccountApplication jobAccountApplication = new JobAccountApplication();
+					jobAccountApplication.setJob(savedJob);
+					jobAccountApplication.setApplicationDate(new Date());
+					jobAccountApplication.setStatus("SELECTED");
+					jobAccountApplication.setApplicant(savedUser);
+					jobAccountApplicationRepo.save(jobAccountApplication);
+				}
+				else if(application !=null && application.getStatus().equals("OPEN"))
+				{
+					application.setStatus("SELECTED");
+					jobAccountApplicationRepo.save(application);
+				}
+
+			}
+
+//			}
+
+		}
+		session.setAttribute("successMessage", "Profiles Selected");
+//		List<SelectedProfile> applications = selectedProfileRepo.findAllBySelectedBy((User)model.get("user"));
+//		model.put("applications", applications);
+		response.sendRedirect("/selectedstud-genz.html");
+
+	}
+
 	@RequestMapping(value = "/editAttendence.html", method = RequestMethod.GET)
 	public String markAttendence(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,
 			@RequestParam String applicationId) {
@@ -1443,20 +1439,20 @@ public class AdminController {
 		Optional<JobAccountApplication> jobApplication = jobAccountApplicationRepo
 				.findById(Long.parseLong(applicationId));
 		JobAccountApplication application = jobApplication.get();
-		
+
 		MarkAttendence markAttendence = new MarkAttendence();
 		markAttendence.setCheckinTime(application.getCheckinTime());
 		markAttendence.setCheckoutTime(application.getCheckoutTime());
 		model.put("markAttendence", markAttendence);
 		return "admin/editattendence";
 	}
-	
-	
+
 	@RequestMapping(value = "/editAttendencePost.html", method = RequestMethod.POST)
-	public String markAttendence(@ModelAttribute("markAttendence") MarkAttendence markAttendence, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+	public String markAttendence(@ModelAttribute("markAttendence") MarkAttendence markAttendence,
+			HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
 //		String checkInTime = request.getParameter("checkinTime");
 //		String checkoutTime = request.getParameter("checkoutTime");
-		
+
 		String checkInTime = markAttendence.getCheckinTime();
 		String checkoutTime = markAttendence.getCheckoutTime();
 		String applicationId = request.getParameter("applicationId");
@@ -1479,7 +1475,6 @@ public class AdminController {
 		return "admin/editattendence";
 	}
 
-	
 	@RequestMapping("/jobs-genz.html")
 	public String showJobs(Map<String, Object> model) {
 		List<JobAccount> jobs = new ArrayList<JobAccount>();
@@ -1535,8 +1530,6 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/updatejobs";
 	}
-	
-	
 
 	@RequestMapping(method = RequestMethod.POST, value = "/updateJobTimeSlots.html")
 	public void searchJobs(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response,
@@ -1551,7 +1544,7 @@ public class AdminController {
 			model.put("successMessage", "Time slot added to this Job");
 		} else {
 			model.put("warningMessage", "Time slot is already present to this job");
-		}	
+		}
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
@@ -1597,12 +1590,12 @@ public class AdminController {
 				String cityName = (String) cityObj.get(0)[1];
 				int serialNumber = (int) ((Math.random() * (1000 - 1)) + 1);
 				Calendar cal = Calendar.getInstance();
-				cal.setTime(account.getJobDate() );
+				cal.setTime(account.getJobDate());
 				int year = cal.get(Calendar.YEAR);
-				int month =  account.getJobDate().getMonth()+1;
-				String jobCode = account.getEmployer().getClientCode() + "_" + cityName.substring(0,3).toUpperCase() + "_"
-						+ account.getCategory().getCategoryCode() + "_" + month
-						+ account.getJobDate().getDate() + year + "_" + serialNumber;
+				int month = account.getJobDate().getMonth() + 1;
+				String jobCode = account.getEmployer().getClientCode() + "_" + cityName.substring(0, 3).toUpperCase()
+						+ "_" + account.getCategory().getCategoryCode() + "_" + month + account.getJobDate().getDate()
+						+ year + "_" + serialNumber;
 
 				account.setJobCode(jobCode);
 				System.out.println(account);
@@ -1610,7 +1603,7 @@ public class AdminController {
 			});
 //			jobAccount.setCreatedDate(new Date());
 //			jobAccount.setCreatedBy(userRepo.findById(2L).get());
-			
+
 		}
 		model.put("successMessage", "Job Created!");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -1624,10 +1617,9 @@ public class AdminController {
 	public String updateJob(HttpServletRequest request, HttpServletResponse response,
 			@ModelAttribute("jobAccount") JobAccount jobAccount, Map<String, Object> model,
 			@RequestParam(required = false) String jobAccountId) {
-		
+
 		Optional<JobAccount> jobAccountoptional = jobAccountRepo.findById(jobAccount.getId());
-		if(jobAccountoptional.isPresent())
-		{
+		if (jobAccountoptional.isPresent()) {
 			JobAccount savedJobAccount = jobAccountoptional.get();
 			savedJobAccount.setEmployer(jobAccount.getEmployer());
 			savedJobAccount.setCategory(jobAccount.getCategory());
@@ -1643,12 +1635,10 @@ public class AdminController {
 			savedJobAccount.setOtherLocality(jobAccount.getOtherLocality());
 			model.put("jobAccount", jobAccountRepo.save(savedJobAccount));
 			session.setAttribute("successMessage", "Job Updated!");
-		}
-		else
-		{
+		} else {
 			session.setAttribute("errorMessage", "Job not found by this Id");
 		}
-		
+
 		try {
 			response.sendRedirect("/jobs-genz.html");
 		} catch (IOException e) {
@@ -1688,17 +1678,16 @@ public class AdminController {
 		return to;
 
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/appliedJobs.html")
 	public String appliedJobs(Map<String, Object> model, @RequestParam(required = false) String jobId) {
 
 		List<JobAccountApplication> profiles = null;
 		List<UserProfile> userProfiles = new ArrayList<>();
 		if (jobId != null) {
-			
+
 			try {
-				
+
 				Optional<JobAccount> job = jobAccountRepo.findById(Integer.parseInt(jobId));
 				profiles = jobAccountApplicationRepo.findByJob(job.get());
 //				for(JobAccountApplication accountApplication : profiles)
@@ -1712,96 +1701,99 @@ public class AdminController {
 			}
 
 		}
-		
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		return "admin/applied-jobs";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/deleteProfile.html")
-	public void deleteProfile(HttpServletRequest request, HttpServletResponse res,@RequestParam String userProfileId) throws IOException {
-		
+	public void deleteProfile(HttpServletRequest request, HttpServletResponse res, @RequestParam String userProfileId)
+			throws IOException {
+
 		Optional<UserProfile> userOptional = userprofileRepo.findById(Integer.parseInt(userProfileId));
-		
+
 		UserProfile userProfile = userOptional.get();
 		userProfile.setStatus("DELETED");
 		userprofileRepo.save(userProfile);
-		
+
 		String email = userProfile.getEmail();
 		User user = userRepo.findByEmail(email);
 		int serialNumber = (int) ((Math.random() * (10000 - 1)) + 1);
-		user.setEmail(email+"_DELETED_"+serialNumber);
+		user.setEmail(email + "_DELETED_" + serialNumber);
 		userRepo.save(user);
 		session.setAttribute("successMessage", "Profile Deleted!");
 		res.sendRedirect("/stud-genz.html");
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/deletejob.html")
-	public void deletejob(HttpServletRequest request, HttpServletResponse res,@RequestParam String jobId) throws IOException {
-		
+	public void deletejob(HttpServletRequest request, HttpServletResponse res, @RequestParam String jobId)
+			throws IOException {
+
 		Optional<JobAccount> jobOptional = jobAccountRepo.findById(Integer.parseInt(jobId));
-		
+
 		JobAccount jobAccount = jobOptional.get();
 		jobAccount.setStatus("Deleted");
 		session.setAttribute("successMessage", "Job Deleted!");
 		jobAccountRepo.save(jobAccount);
 		res.sendRedirect("/jobs-genz.html");
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/deletecourse.html")
-	public void deletecourse(HttpServletRequest request, HttpServletResponse res,@RequestParam String courseId) throws IOException {
-		
+	public void deletecourse(HttpServletRequest request, HttpServletResponse res, @RequestParam String courseId)
+			throws IOException {
+
 		Optional<CourseType> courseOptional = courseRepo.findById(Integer.parseInt(courseId));
-		
+
 		CourseType courseType = courseOptional.get();
 		courseType.setCourseTypeStatus("DELETED");
-		
+
 		courseRepo.save(courseType);
 		session.setAttribute("successMessage", "Course Deleted!");
 		res.sendRedirect("/course-genz.html");
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/deletetimeslot.html")
-	public void deletetimeslot(HttpServletRequest request, HttpServletResponse res,@RequestParam String timeSlotId) throws IOException {
-		
+	public void deletetimeslot(HttpServletRequest request, HttpServletResponse res, @RequestParam String timeSlotId)
+			throws IOException {
+
 		Optional<TimeSlot> timeSlotOptional = timeSlotRepo.findById(Integer.parseInt(timeSlotId));
-		
+
 		TimeSlot timeSlot = timeSlotOptional.get();
 		timeSlot.setTimeSlotStatus("DELETED");
-		
+
 		timeSlotRepo.save(timeSlot);
 		session.setAttribute("successMessage", "TimeSlot Deleted!");
 		res.sendRedirect("/timeslot-genz.html");
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/deleteCategory.html")
-	public void deleteCategory(HttpServletRequest request, HttpServletResponse res,@RequestParam String categoryId) throws IOException {
-		
+	public void deleteCategory(HttpServletRequest request, HttpServletResponse res, @RequestParam String categoryId)
+			throws IOException {
+
 		Optional<Category> categoryOptional = categoryRepo.findById(Integer.parseInt(categoryId));
-		
+
 		Category category = categoryOptional.get();
 		category.setCategoryStatus("DELETED");
-		
+
 		categoryRepo.save(category);
 		session.setAttribute("successMessage", "Category Deleted!");
 		res.sendRedirect("/category-genz.html");
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/deletejobtype.html")
-	public void deletejobtype(HttpServletRequest request, HttpServletResponse res,@RequestParam String jobTypeId) throws IOException {
-		
+	public void deletejobtype(HttpServletRequest request, HttpServletResponse res, @RequestParam String jobTypeId)
+			throws IOException {
+
 		Optional<JobType> jobTypeOptional = jobTypeRepo.findById(Integer.parseInt(jobTypeId));
-		
+
 		JobType jobType = jobTypeOptional.get();
 		jobType.setJobTypeStatus("DELETED");
-		
+
 		jobTypeRepo.save(jobType);
 		session.setAttribute("successMessage", "Job Type Deleted!");
 		res.sendRedirect("/jobtype-genz.html");
 	}
-	
-
 
 }

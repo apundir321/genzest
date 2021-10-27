@@ -1,56 +1,71 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Genzest">
-	<meta name="author" content="Genzest">
-	
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Genzest">
+<meta name="author" content="Genzest">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-	<title>Genzest</title>
-
-	<link href="assets-1/css/app.css" rel="stylesheet">
-    
-
-	<link href="assets-1/css/style.css" rel="stylesheet">
-	<link href="assets-1/css/style2.css" rel="stylesheet">
-
-  
-	<link href="assets-2/css/app.css" rel="stylesheet">
-
-	<link href="assets-2/css/style.css" rel="stylesheet">
-	<link href="assets-2/css/style2.css" rel="stylesheet">
-	<link href="assets-2/css/style3.css" rel="stylesheet">
-
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-	<!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Genzest</title>
 
-  <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-  
-  <script src="//code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-  
-  
-  
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<link href="assets-1/css/app.css" rel="stylesheet">
+
+
+<link href="assets-1/css/style.css" rel="stylesheet">
+<link href="assets-1/css/style2.css" rel="stylesheet">
+
+
+<link href="assets-2/css/app.css" rel="stylesheet">
+
+<link href="assets-2/css/style.css" rel="stylesheet">
+<link href="assets-2/css/style2.css" rel="stylesheet">
+<link href="assets-2/css/style3.css" rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
+	rel="stylesheet">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<link
+	href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+<script src="//code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
+
+
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link
+	href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+	rel="stylesheet">
 
 <style>
 .sidebar-content .sidebar-nav .fa-user-circle-o {
@@ -412,13 +427,9 @@ dataSet.push(jobArray);
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						<li class="nav-item">
-							<i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a>
-						</li>
-						<li class="nav-item dropdown">
-						
-						
-						</li>
+						<li class="nav-item"><i class="fa fa-sign-out"
+							aria-hidden="true"></i>&nbsp;<a href="/logout"> Logout </a></li>
+						<li class="nav-item dropdown"></li>
 					</ul>
 				</div>
 				<a class="nav-link dropdown-toggle d-none d-sm-inline-block"
@@ -433,176 +444,230 @@ dataSet.push(jobArray);
 			</nav>
 
 			<main class="content">
-			<div class="container-fluid1">
-				<div class="row firstrow">
-					<div class="col-lg-12">
-						<h4>Minimum One Value Required To Fetch The Data</h4>
+				<div class="container-fluid1">
+					<div class="row firstrow">
+						<div class="col-lg-12">
+							<h4>Minimum One Value Required To Fetch The Data</h4>
+						</div>
 					</div>
-				</div>
-				<form:form action="/searchJobInfo.html" method="get">
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+					<form:form action="/searchJobInfo.html" method="get">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
 							<h4>
 								JobId <span>*</span>
 							</h4>
-<%-- 							<form:select class="form-control" path="jobCategory"> --%>
-<%-- 								<form:option value="">Select</form:option> --%>
-<%-- 								<c:forEach var="category" items="${categories}"> --%>
-<%-- 									<form:option value="${category.id}" --%>
-<%-- 										label="${category.categoryName}" /> --%>
-<%-- 								</c:forEach> --%>
-<%-- 							</form:select> --%>
+							<%-- 							<form:select class="form-control" path="jobCategory"> --%>
+							<%-- 								<form:option value="">Select</form:option> --%>
+							<%-- 								<c:forEach var="category" items="${categories}"> --%>
+							<%-- 									<form:option value="${category.id}" --%>
+							<%-- 										label="${category.categoryName}" /> --%>
+							<%-- 								</c:forEach> --%>
+							<%-- 							</form:select> --%>
 
-<input  placeholder="First Name"
-							class="form-control" type="text" name="jobId" />
+							<input placeholder="First Name" class="form-control" type="text"
+								name="jobId" />
 						</div>
-						
+
 						<div class="form-row last">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
-							<button type="submit">Get Data</button>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
+								<button type="submit">Get Data</button>
+							</div>
 						</div>
-					</div>
-				</form:form>
-				
-				<form:form action="/searchCandidates.html" method="post"
-					modelAttribute="searchCandidate">
-					<div class="form-row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-							<h4>
-								Category <span>*</span>
-							</h4>
-							<form:input id="jobCategoryId" path="jobCategoryId" placeholder="Job Category"
-							class="form-control" type="hidden" />
-<%-- 							<form:select class="form-control" path="jobCategory"> --%>
-<%-- 								<form:option value="">Select</form:option> --%>
-<%-- 								<c:forEach var="category" items="${categories}"> --%>
-<%-- 									<form:option value="${category.id}" --%>
-<%-- 										label="${category.categoryName}" /> --%>
-<%-- 								</c:forEach> --%>
-<%-- 							</form:select> --%>
+					</form:form>
+
+					<form:form action="/searchCandidates.html" method="post"
+						modelAttribute="searchCandidate">
+						<input id="jobId" value="${jobId}" type="hidden">
+						<div class="form-row">
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+								<h4>
+									Category <span>*</span>
+								</h4>
+								<form:input id="jobCategoryId" path="jobCategoryId"
+									placeholder="Job Category" class="form-control" type="hidden" />
+								<%-- 							<form:select class="form-control" path="jobCategory"> --%>
+								<%-- 								<form:option value="">Select</form:option> --%>
+								<%-- 								<c:forEach var="category" items="${categories}"> --%>
+								<%-- 									<form:option value="${category.id}" --%>
+								<%-- 										label="${category.categoryName}" /> --%>
+								<%-- 								</c:forEach> --%>
+								<%-- 							</form:select> --%>
+
+								<form:input id="jobCategory" path="jobCategory"
+									placeholder="Job Category" class="form-control" type="text" />
+							</div>
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+								<h4>
+									Job Type <span>*</span>
+								</h4>
+								<%-- 							<form:select class="form-control" path="jobType"> --%>
+								<%-- 								<form:option value="">Select</form:option> --%>
+								<%-- 								<c:forEach var="jobType" items="${jobTypes}"> --%>
+								<%-- 									<form:option value="${jobType.id}" --%>
+								<%-- 										label="${jobType.jobTypeName}" /> --%>
+								<%-- 								</c:forEach> --%>
+								<%-- 							</form:select> --%>
+
+								<form:input path="jobType" placeholder="Job Type"
+									class="form-control" type="text" />
+							</div>
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
+								<h4>
+									Employer <span>*</span>
+								</h4>
+								<%-- 							<form:select class="form-control" path="employerName"> --%>
+								<%-- 								<form:option value="">Select</form:option> --%>
+								<%-- 								<c:forEach var="employer" items="${employers}"> --%>
+								<%-- 									<form:option value="${employer.id}" --%>
+								<%-- 										label="${employer.employerName}" /> --%>
+								<%-- 								</c:forEach> --%>
+								<%-- 							</form:select> --%>
+
+								<form:input path="employerName" placeholder="Employer"
+									class="form-control" type="text" />
+							</div>
+
+
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
+								<h4>
+									State <span>*</span>
+								</h4>
+								<form:input path="state" placeholder="State"
+									class="form-control" type="text" />
+
+							</div>
 							
-							<form:input id="jobCategory" path="jobCategory" placeholder="Job Category"
-							class="form-control" type="text" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-							<h4>
-								Job Type <span>*</span>
-							</h4>
-<%-- 							<form:select class="form-control" path="jobType"> --%>
-<%-- 								<form:option value="">Select</form:option> --%>
-<%-- 								<c:forEach var="jobType" items="${jobTypes}"> --%>
-<%-- 									<form:option value="${jobType.id}" --%>
-<%-- 										label="${jobType.jobTypeName}" /> --%>
-<%-- 								</c:forEach> --%>
-<%-- 							</form:select> --%>
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox" >
+								<h4>
+									City <span>*</span>
+								</h4>
+								<form:input path="city" id="cityDropDown" placeholder="City"
+									class="form-control" type="text" />
+							</div>
+							
+							
+							
 
-<form:input path="jobType" placeholder="Job Type"
-							class="form-control" type="text" />
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 searchjobs">
-							<h4>
-								Employer <span>*</span>
-							</h4>
-<%-- 							<form:select class="form-control" path="employerName"> --%>
-<%-- 								<form:option value="">Select</form:option> --%>
-<%-- 								<c:forEach var="employer" items="${employers}"> --%>
-<%-- 									<form:option value="${employer.id}" --%>
-<%-- 										label="${employer.employerName}" /> --%>
-<%-- 								</c:forEach> --%>
-<%-- 							</form:select> --%>
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"
+								id="localityDiv" style="float: right">
+								<h4>
+									Locality <span>*</span>
+								</h4>
+								<form:select path="otherLocality" name="locality"
+									class="form-control">
+									<form:option value="">Please Select</form:option>
+									<form:option value="Aerodrum Road">Aerodrum Road</form:option>
+									<form:option value="Annapurna Road">Annapurna Road</form:option>
+									<form:option value="Dewas Naka">Dewas Naka</form:option>
+									<form:option value="Jail Road">Jail Road</form:option>
+									<form:option value="Jawahar Marg">Jawahar Marg</form:option>
+									<form:option value="Khandwa Road">Khandwa Road</form:option>
+									<form:option value="Malharganj">Malharganj</form:option>
+									<form:option value="Malwa Mill">Malwa Mill</form:option>
+									<form:option value="Manik Bagh">Manik Bagh</form:option>
+									<form:option value="Musakhedi">Musakhedi</form:option>
+									<form:option value="Navlakha">Navlakha</form:option>
+									<form:option value="Palasia">Palasia</form:option>
+									<form:option value="Palda">Palda</form:option>
+									<form:option value="Rajendra Nagar">Rajendra Nagar</form:option>
+									<form:option value="Ram Bagh">Ram Bagh</form:option>
+									<form:option value="Rau">Rau</form:option>
+									<form:option value="RNT Marg">RNT Marg</form:option>
+									<form:option value="Sapna Sangeeta">Sapna Sangeeta</form:option>
+									<form:option value="Super Corridor">Super Corridor</form:option>
+									<form:option value="Vijay Nagar">Vijay Nagar</form:option>
 
-<form:input path="employerName" placeholder="Employer"
-							class="form-control" type="text" />
-						</div>
+								</form:select>
+								<%-- 						<form:input class="form-control" type="text" --%>
+								<%-- 							placeholder="Locality" id="locality" path="locality" /> --%>
+							</div>
 
-						
-						 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								State <span>*</span>
-							</h4>
-							<form:input path="state" placeholder="State"
-							class="form-control" type="text" />
+							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox"
+								id="localityInputDiv">
+								<h4>
+									Locality <span>*</span>
+								</h4>
+								<form:input class="form-control" type="text"
+									placeholder="Locality" id="locality" path="locality" />
+							</div>
 
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 colbox">
-							<h4>
-								City <span>*</span>
-							</h4>
-							<form:input path="city" placeholder="City"
-							class="form-control" type="text" />
+						<!-- 					<div class="form-row last"> -->
+						<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol"> -->
+						<!-- 							<button type="submit">Get Data</button> -->
+						<!-- 						</div> -->
+						<!-- 					</div> -->
+					</form:form>
+
+					<%-- 				<c:if test="${profiles.size() > 0 }"> --%>
+
+
+					<!-- 					<table class="table"> -->
+					<!-- 						<thead> -->
+
+					<!-- 							<tr> -->
+					<!-- 								<th scope="col">S No.</th> -->
+					<!-- 								<th scope="col">Name</th> -->
+					<!-- 								<th scope="col">Dob</th> -->
+					<!-- 								<th scope="col">Email</th> -->
+					<!-- 								<th scope="col">Phone</th> -->
+					<!-- 								<th scope="col">Gender</th> -->
+					<!-- 								<th scope="col">Course</th> -->
+					<!-- 								<th scope="col">Vehicle</th> -->
+					<!-- 								<th scope="col">Blood Group</th> -->
+					<!-- 								<th scope="col">City</th> -->
+					<!-- 								<th scope="col">Computer</th> -->
+					<!-- 								<th scope="col">View</th> -->
+					<!-- 							</tr> -->
+					<!-- 						</thead> -->
+					<!-- 						<tbody> -->
+					<%-- 							<c:forEach var="profile" items="${profiles}"> --%>
+					<!-- 								<tr> -->
+					<%-- 									<th scope="row">${profile.id}</th> --%>
+					<%-- 									<td>${profile.firstName}</td> --%>
+					<%-- 									<td>${profile.dob}</td> --%>
+					<%-- 									<td>${profile.email}</td> --%>
+					<%-- 									<td>${profile.mobileNo}</td> --%>
+					<%-- 									<td>${profile.gender}</td> --%>
+					<%-- 									<td>${profile.course}</td> --%>
+					<%-- 									<td>${profile.vehicleType}</td> --%>
+					<%-- 									<td>${profile.bloodGroup}</td> --%>
+					<%-- 									<td>${profile.city}</td> --%>
+					<%-- 									<td>${profile.havePc}</td> --%>
+					<%-- 									<td><a href="edit_stud.html?profileId=${profile.id}">View</a></td> --%>
+					<!-- 								</tr> -->
+					<%-- 							</c:forEach> --%>
+					<!-- 						</tbody> -->
+					<!-- 					</table> -->
+					<div style="margin-top: 50%">
+						<button class="csv">
+							<a onclick="searchProfiles()">Download CSV</a>
+						</button>
+						<table id="example" class="display" width="100%"></table>
+					</div>
+
+					<div class="form-row last">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
+							<button type="submit" onclick="selectProfiles()">Select
+								Profiles</button>
 						</div>
 					</div>
-<!-- 					<div class="form-row last"> -->
-<!-- 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol"> -->
-<!-- 							<button type="submit">Get Data</button> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-				</form:form>
+					<%-- 				</c:if> --%>
 
-<%-- 				<c:if test="${profiles.size() > 0 }"> --%>
-
-
-<!-- 					<table class="table"> -->
-<!-- 						<thead> -->
-
-<!-- 							<tr> -->
-<!-- 								<th scope="col">S No.</th> -->
-<!-- 								<th scope="col">Name</th> -->
-<!-- 								<th scope="col">Dob</th> -->
-<!-- 								<th scope="col">Email</th> -->
-<!-- 								<th scope="col">Phone</th> -->
-<!-- 								<th scope="col">Gender</th> -->
-<!-- 								<th scope="col">Course</th> -->
-<!-- 								<th scope="col">Vehicle</th> -->
-<!-- 								<th scope="col">Blood Group</th> -->
-<!-- 								<th scope="col">City</th> -->
-<!-- 								<th scope="col">Computer</th> -->
-<!-- 								<th scope="col">View</th> -->
-<!-- 							</tr> -->
-<!-- 						</thead> -->
-<!-- 						<tbody> -->
-<%-- 							<c:forEach var="profile" items="${profiles}"> --%>
-<!-- 								<tr> -->
-<%-- 									<th scope="row">${profile.id}</th> --%>
-<%-- 									<td>${profile.firstName}</td> --%>
-<%-- 									<td>${profile.dob}</td> --%>
-<%-- 									<td>${profile.email}</td> --%>
-<%-- 									<td>${profile.mobileNo}</td> --%>
-<%-- 									<td>${profile.gender}</td> --%>
-<%-- 									<td>${profile.course}</td> --%>
-<%-- 									<td>${profile.vehicleType}</td> --%>
-<%-- 									<td>${profile.bloodGroup}</td> --%>
-<%-- 									<td>${profile.city}</td> --%>
-<%-- 									<td>${profile.havePc}</td> --%>
-<%-- 									<td><a href="edit_stud.html?profileId=${profile.id}">View</a></td> --%>
-<!-- 								</tr> -->
-<%-- 							</c:forEach> --%>
-<!-- 						</tbody> -->
-<!-- 					</table> -->
-<div style="margin-top: 40%">
-<button class="csv"><a onclick="searchProfiles()">Download CSV</a></button>
- <table id="example" class="display" width="100%"></table>
- </div>
- 
- <div class="form-row last">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lastcol">
-                            <button type="submit" onclick="selectProfiles()">Select Profiles</button>
-                        </div>
-                      </div>
-<%-- 				</c:if> --%>
-
-			</div>
+				</div>
 
 			</main>
 
 
 		</div>
 	</div>
-<script>
+	<script>
 	
 	function selectProfiles()
     {
         var checkboxes = document.getElementsByName('applyJob');
         var selected = new Array();
+        
+        var jobId = document.getElementById('jobId').value;
         var ids = "";
         for (var i=0; i<checkboxes.length; i++) {
             if (checkboxes[i].checked) {
@@ -610,11 +675,11 @@ dataSet.push(jobArray);
                 ids += checkboxes[i].value + ",";
             }
         }
-        location.href = "/selectProfiles?profilesId="+ids;
+        location.href = "/selectStudentProfiles?profilesId="+ids+"&jobId="+jobId;
     }
 	</script>
 
-<script>
+	<script>
 function myFunction() {
 	  var x = document.getElementById("editState").value;
 	  $.ajax({
@@ -632,7 +697,7 @@ function myFunction() {
 		});
 	}
 	</script>
-	
+
 	<script>
 	function searchProfiles()
     {
@@ -715,10 +780,10 @@ function myFunction() {
 		        }
 		    }
 		}
-		</script>	
-	
-	
-			<script type="text/javascript">
+		</script>
+
+
+	<script type="text/javascript">
 
 			
 			$(document).ready(function(){
@@ -764,6 +829,19 @@ function myFunction() {
 
 	$(".warning").click(function(){
 		toastr.warning('It is for your kind warning', 'Warning', {timeOut: 5000})
+	});
+	
+	$(document).ready(function(){
+		var city = document.getElementById('cityDropDown').value;
+		if(city==="Indore")
+		{
+			document.getElementById('localityInputDiv').style.display = 'none';
+			document.getElementById('localityDiv').style.display = 'block';
+		}else
+		{
+			document.getElementById('localityDiv').style.display = 'none';
+			document.getElementById('localityInputDiv').style.display = 'block';
+		}
 	});
 </script>
 

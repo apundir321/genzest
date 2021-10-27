@@ -10,6 +10,20 @@ public class SearchCandidate {
 	private String city;
 	private String state;
 	private String gender;
+	private String locality;
+	private String otherLocality;
+	public String getLocality() {
+		return locality;
+	}
+	public void setLocality(String locality) {
+		this.locality = locality;
+	}
+	public String getOtherLocality() {
+		return otherLocality;
+	}
+	public void setOtherLocality(String otherLocality) {
+		this.otherLocality = otherLocality;
+	}
 	public String getJobCategory() {
 		return jobCategory;
 	}
