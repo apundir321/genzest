@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -187,7 +188,7 @@ jobArray.push('${job.noOfVacancy}');
 jobArray.push('${job.employer.employerName}');
 jobArray.push('${job.status}');
 jobArray.push('${job.createdBy.firstName}');
-jobArray.push('${job.createdDate}');
+jobArray.push('<fmt:formatDate value="${job.jobDate}" var="dateString" pattern="dd/MM/yyyy" />${dateString}');
 
 jobArray.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-pencil"/></a>');
 jobArray.push('<a href="deletejob.html?jobId=${job.id}"  onclick="return confirm(\'Are you sure?\')"><i class="fa fa-trash"/></a>');
@@ -264,7 +265,7 @@ $(document).ready(function() {
             { title: "Company" },
             { title: "Status" },
 			{ title: "Created By" },
-			{ title: "Created Date" },
+			{ title: "Job Date" },
 			{
 				 title: "Edit"
 			},{

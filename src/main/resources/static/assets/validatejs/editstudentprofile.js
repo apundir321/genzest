@@ -217,8 +217,7 @@
 			
 				$( "#uploaddocumentform" ).validate( {
 				rules: {
-					UPI: "required",
-					paymentMethod: "required",
+					
 					aadhar: "required",
 					studentId: "required",
 					inputother: "required",

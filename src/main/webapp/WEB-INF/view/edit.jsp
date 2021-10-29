@@ -649,7 +649,7 @@ input[type=file] {
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="collegeName">College Name <span>*</span></label>
 						<form:input id="collage-name" path="collegeName" type="text"
-							placeholder="Collage-name" class="form-control" />
+							placeholder="College-name" class="form-control" />
 						<form:errors path="collegeName" cssClass="error"></form:errors>
 					</div>
 
@@ -876,8 +876,9 @@ input[type=file] {
 
  				<div class="form-group col-sm-3 col-xs-12 colbox"> 
  					<label for="paymentMethod">Payment Method <span>*</span></label> 
-					<form:select onchange='checkItem(this.value)' class="form-control" 
-						path="paymentMethod">
+
+					<form:select  class="form-control" 
+ 						path="paymentMethod"> 
 						<form:option class="first-op" value="">Select</form:option>
 						<form:option value="Bank Account"></form:option>
 						<form:option value="Wallet"></form:option>
@@ -1313,6 +1314,7 @@ function myFunction() {
     			for (var i = 0; i < checkBoxGroup.length; i++) {
     				checkedcount += (checkBoxGroup[i].checked) ? 1 : 0;
     			}
+    			
     			if (checkedcount > limit) {
     				console.log("You can select maximum of " + limit + " Job Categories.");
     				alert("You can select maximum of " + limit + " Job Categories.");						

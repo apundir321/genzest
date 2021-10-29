@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,7 +113,7 @@ jobArray.push('<c:forEach var="timeSlot" items="${job.timeSlots}">${timeSlot.tim
 jobArray.push('${job.category.categoryName}');
 jobArray.push('${job.noOfVacancy}');
 jobArray.push('${job.city}');
-jobArray.push('${job.jobDate}');
+jobArray.push('<fmt:formatDate value="${job.jobDate}" var="dateString" pattern="dd/MM/yyyy" />${dateString}');
 jobArray.push('<a href="viewjobs-genz.html?jobId=${job.id}"><i class="fa fa-eye"/></a>');
 jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}">')
 dataSet.push(jobArray);
