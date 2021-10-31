@@ -224,7 +224,7 @@ table thead {
 }
 
 .error {
-	color: #ff0000;
+	color: #a94442;
 	font-style: italic;
 	font-weight: bold;
 }
@@ -572,7 +572,7 @@ input[type=file] {
 					
 					  <div class="form-group col-sm-6 col-xs-12 colbox">
 					    <label for="degreeCollegeCompletionDate">Tentative Degree Completion Date <span>*</span></label>
-												<form:input class="form-control" type="date" 
+												<form:input class="form-control" type="date" onchange="ageCalculationtwo()" 
 													placeholder="MM/DD/YYYY" id="degreeCollegeCompletionDate"
 													path="degreeCollegeCompletionDate"/>
 					  </div>
@@ -1175,15 +1175,15 @@ function myFunction() {
 
 	<script>
   function ageCalculationtwo(){
-
-	  var currentDate = new Date();
+	var futureDateval = "2099-12-12";
+	var futureDate = new Date(futureDateval);
 	  var val = document.getElementById("degreeCollegeCompletionDate").value;
 	  var birthDate = new Date(val);
-	  var difference = currentDate - birthDate;
 	  
-	  var differenceInYears = Math.floor(difference / (1000 * 60 * 60 * 24 * 365.25));
-	  if(birthDate > currentDate) {
-	    window.alert("You cannot be complete your degree in the future");
+	  
+		
+	  if(birthDate > futureDate) {
+	    window.alert("Date selected is out of range");
 	    document.getElementById('degreeCollegeCompletionDate').value = "";
 	  } else {
 		  return true;
@@ -1289,10 +1289,27 @@ function myFunction() {
   
      <script>
     function checkAlternateMobileNo() {
+    	
+    	var checkedcount = 0;
+    	var checkBoxGroup = document.getElementsByName('jobCategories');			
+    	
+    	
+    			for (var i = 0; i < checkBoxGroup.length; i++) {
+    				checkedcount += (checkBoxGroup[i].checked) ? 1 : 0;
+    			}
+    			
+    			if (checkedcount == 0) {
+    				console.log("Please select atleast one job category");
+    				alert("Please select atleast one job category");						
+    				return false;
+    			}
+    		
+    	
         var mobile = $("#mobileNo").val();
         var alternateMobile = $("#alternateMobileNo").val();
         if (mobile == alternateMobile){
             $("#alternateMobileNoDiv").html("Alternate Mobile Number can not be same as mobile no.");
+            document.getElementById("alternateMobileNoDiv").scrollIntoView();
             return false;
         }else
         	{
