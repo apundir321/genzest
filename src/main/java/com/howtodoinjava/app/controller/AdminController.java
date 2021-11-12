@@ -737,6 +737,7 @@ public class AdminController {
 					model.put("jobType", jobType);
 					return "admin/jobtype-edit-genz";
 				}
+				jobType.setJobTypeStatus("Active");
 				jobType.setCreatedDate(new Date());
 				jobType.setCreatedBy(userRepo.findById(2L).get());
 				jobTypeRepo.save(jobType);
@@ -776,14 +777,14 @@ public class AdminController {
 		User user = userRepo.findByEmail(authentication.getName());
 		model.put("user", user);
 		System.out.println(user.getRoles());
-		model.put("courseCount", courseRepo.count());
+		model.put("courseCount", courseRepo.findByCourseTypeStatus("Active").size());
 		model.put("employersCount", employerRepo.count());
-		model.put("categoriesCount", categoryRepo.count());
+		model.put("categoriesCount", categoryRepo.findByCategoryStatus("Active").size());
 		model.put("dayPreference", new DayPreference());
-		model.put("timeSlotsCount", timeSlotRepo.count());
+		model.put("timeSlotsCount", timeSlotRepo.findByTimeSlotStatus("Active").size());
 		model.put("studentCount", userprofileRepo.count());
-		model.put("jobsCount", jobAccountRepo.count());
-		model.put("jobTypeCount", jobTypeRepo.count());
+		model.put("jobsCount", jobAccountRepo.findByStatus("Open").size());
+		model.put("jobTypeCount", jobTypeRepo.findByJobTypeStatus("Active").size());
 		List<Object[]> categoryJobs = jobAccountCustomRepo.findJobAcountByCateory();
 
 		List<CategoryCount> counts = new ArrayList<>();

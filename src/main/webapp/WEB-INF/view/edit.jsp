@@ -553,10 +553,16 @@ input[type=file] {
 					id="otherdetailsform">
 					<div class="form-group col-sm-6 col-xs-12 colbox">
 						<label for="mobileNo">Mobile No <span>*</span></label>
+						<c:if test="${empty otherDetails.mobileNo }">
 						<form:input class="form-control" path="mobileNo"
 							placeholder="Mobile no" id="mobileNo"
 							value="${user.phoneNo}" />
-
+						</c:if>
+						<c:if test="${not empty otherDetails.mobileNo }">
+						<form:input class="form-control" path="mobileNo"
+							placeholder="Mobile no" id="mobileNo"
+							 />
+						</c:if>
 						<form:errors path="mobileNo" cssClass="error"></form:errors>
 					</div>
 

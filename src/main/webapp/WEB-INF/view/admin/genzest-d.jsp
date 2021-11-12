@@ -340,7 +340,8 @@
                         <div class="col-lg-4">
                             <div class="card1">
                               <div class="card-body">
-                                <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+<!--                                 <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> -->
+<img class="sec1" src="assets/img/icons/Icons-Fill-Text documet.png">
                                 <p class="card-text"><a href="/course-genz.html">Courses</a></p>
                                 <h5>${courseCount}</h5>
                               </div>

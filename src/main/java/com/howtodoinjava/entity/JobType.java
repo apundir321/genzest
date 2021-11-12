@@ -25,7 +25,6 @@ public class JobType {
 	int id;
 	@NotEmpty
 	private String jobTypeName;
-	@NotEmpty
 	private String jobTypeStatus;
 	private Date createdDate;
 	

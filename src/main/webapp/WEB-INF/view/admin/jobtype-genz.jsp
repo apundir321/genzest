@@ -183,7 +183,7 @@ jobType.push('${jobType.jobTypeName}');
 jobType.push('${jobType.jobTypeStatus}');
 jobType.push('${jobType.createdDate}');
 jobType.push('<a href="jobtype-edit-genz.html?jobTypeId=${jobType.id}"><i class="fa fa-pencil"/></a>');
-jobType.push('<a href="deletejobtype.html?jobTypeId=${jobType.id}"  onclick="return confirm(\'Are you sure?\')"><i class="fa fa-pencil"/></a>');
+jobType.push('<a href="deletejobtype.html?jobTypeId=${jobType.id}"  onclick="return confirm(\'Are you sure?\')"><i class="fa fa-trash"/></a>');
 dataSet.push(jobType);
 </c:forEach>
 

@@ -323,15 +323,15 @@
 								placeholder="Job Type Name" id="example-tel-input" />
                             <form:errors path="jobTypeName" cssClass="error"></form:errors>
                           </div>
-                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs">
-                        <h4>Status <span>*</span></h4>
-                         <form:select path="jobTypeStatus" class="form-control">
-                          <form:option class="first-op" value="">Select</form:option> 
-                          <form:option value="Active">Active</form:option>
-                          <form:option value="In-Active">In-Active</form:option>
-                        </form:select>
-                        <form:errors path="jobTypeStatus" cssClass="error"></form:errors>
-                      </div>
+<!--                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 searchjobs"> -->
+<!--                         <h4>Status <span>*</span></h4> -->
+<%--                          <form:select path="jobTypeStatus" class="form-control"> --%>
+<%--                           <form:option class="first-op" value="">Select</form:option>  --%>
+<%--                           <form:option value="Active">Active</form:option> --%>
+<%--                           <form:option value="In-Active">In-Active</form:option> --%>
+<%--                         </form:select> --%>
+<%--                         <form:errors path="jobTypeStatus" cssClass="error"></form:errors> --%>
+<!--                       </div> -->
       
                     </div>
                     <div class="form-row last">
