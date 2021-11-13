@@ -563,12 +563,27 @@ table, td {
                              <form:input  path="postalCode" type="text" placeholder="zip or postal code" class="form-control" />
                          </div>
                    
- 
- 
 						 <div class="form-group col-sm-6 col-xs-12 colbox">
 						    <label for="jobName">Description <span>*</span></label>
 						          <form:textarea class="form-control" placeholder="Description" path="description" />
 						  </div>
+						  
+						   <div class="clear clearfix"></div>
+						  
+						  <div class="form-group col-sm-6 col-xs-12 colbox">
+						<label for="jobCategories">Time slots<span>*</span></label>
+						
+						
+						<div class="container-check ">
+    						<form:select class="form-control" path="timeSlotsList" multiple="true">
+	<form:options items="${timeSlots}" itemValue="id" itemLabel="timeSlotName"/>
+</form:select> 
+						</div>
+						
+						
+						
+						
+					</div>
   
                      
 

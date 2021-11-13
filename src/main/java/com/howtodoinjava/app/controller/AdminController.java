@@ -37,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.organizations.model.Account;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.LocationRepository;
@@ -1583,7 +1584,7 @@ public class AdminController {
 				account.setCreatedBy(userRepo.findById(2L).get());
 				account.setStatus("Open");
 				account.setJobDate(Date.from(date.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-
+			
 //				Optional<TimeSlot> slot1 = timeSlotRepo.findById(6);
 //				account.getTimeSlots().add(slot1.get());
 //				
@@ -1676,6 +1677,7 @@ public class AdminController {
 		to.setVacancyForOther(from.getVacancyForOther());
 		to.setJobType(from.getJobType());
 		to.setOtherLocality(from.getOtherLocality());
+		to.getTimeSlots().addAll(from.getTimeSlotsList());
 		return to;
 
 	}

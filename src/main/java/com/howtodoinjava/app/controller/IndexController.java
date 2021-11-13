@@ -283,6 +283,7 @@ public class IndexController {
 		List<Employer> employers = null;
 		List<Category> categories = null;
 		OtherUserDetails userDetails = null;
+		List<JobType> jobTypes = null;
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			User user = (User) userRepo.findByEmail(authentication.getName());
@@ -291,6 +292,7 @@ public class IndexController {
 			courses = courseRepo.findByCourseTypeStatus("Active");
 			employers = employerRepo.findAll();
 			categories = categoryRepo.findByCategoryStatus("Active");
+			jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
 			userDetails = profile.getOtherDetails();
 			System.out.println(profile + "  *****");
 
@@ -308,6 +310,7 @@ public class IndexController {
 		model.put("categories", categories);
 		model.put("dayPreference", new DayPreference());
 		model.put("timeSlots", timeSlotRepo.findAll());
+		model.put("jobTypes",jobTypes);
 		if (userDetails == null) {
 			model.put("otherDetails", new OtherUserDetails());
 		} else {

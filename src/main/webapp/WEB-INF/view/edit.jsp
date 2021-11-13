@@ -801,14 +801,19 @@ input[type=file] {
 
 
 					<div class="form-group col-sm-6 col-xs-12 colbox">
-						<label for="preference">Preference <span>*</span></label>
+						<label for="preference">Job Type <span>*</span></label>
 						<form:select path="preference" class="form-control">
 							<form:option class="first-op" value="">Select</form:option>
-							<form:option value="Other Onsite Job (Warehouse/Factory etc)">Other Onsite Job (Warehouse/Factory etc)</form:option>
-							<form:option value="Remote/ Online Job">Remote/ Online Job</form:option>
-							<form:option value="Field Job">Field Job</form:option>
-							<form:option value="Office Job">Office Job</form:option>
-							<form:option value="Office Job">No Preference</form:option>
+							<c:forEach var="jobType" items="${jobTypes}">
+											<form:option value="${jobType.jobTypeName}"
+												label="${jobType.jobTypeName}" />
+										</c:forEach>
+<%-- 							<form:option value="Other Onsite Job (Warehouse/Factory etc)">Other Onsite Job (Warehouse/Factory etc)</form:option> --%>
+<%-- 							<form:option value="Remote/ Online Job">Remote/ Online Job</form:option> --%>
+<%-- 							<form:option value="Field Job">Field Job</form:option> --%>
+<%-- 							<form:option value="Office Job">Office Job</form:option> --%>
+<%-- 							<form:option value="Office Job">No Preference</form:option> --%>
+
 						</form:select>
 						<form:errors path="preference" cssClass="error"></form:errors>
 <%-- 						<c:if test="${not empty otherDetails.preference}"> --%>

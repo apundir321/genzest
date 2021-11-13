@@ -1,6 +1,5 @@
 package com.howtodoinjava.entity;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.howtodoinjava.model.User;
 
 
@@ -94,6 +95,10 @@ public class JobAccount {
 	private String postalCode;
 	
 	private String day;
+	
+	@JsonInclude()
+	@Transient
+	private List<TimeSlot> timeSlotsList;
 	
 //	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
 //	@JoinColumn(name = "slot_id")
@@ -282,6 +287,12 @@ public class JobAccount {
 	}
 	public void setTimeSlots(Set<TimeSlot> timeSlots) {
 		this.timeSlots = timeSlots;
+	}
+	public List<TimeSlot> getTimeSlotsList() {
+		return timeSlotsList;
+	}
+	public void setTimeSlotsList(List<TimeSlot> timeSlotsList) {
+		this.timeSlotsList = timeSlotsList;
 	}
 	
 
