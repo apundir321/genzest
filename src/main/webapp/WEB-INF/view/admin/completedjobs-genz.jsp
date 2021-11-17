@@ -190,9 +190,9 @@ jobArray.push('${job.status}');
 jobArray.push('${job.createdBy.firstName}');
 jobArray.push('<fmt:formatDate value="${job.jobDate}" var="dateString" pattern="dd/MM/yyyy" />${dateString}');
 
-jobArray.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-pencil"/></a>');
-jobArray.push('<a href="deletejob.html?jobId=${job.id}"  onclick="return confirm(\'Are you sure?\')"><i class="fa fa-trash"/></a>');
-jobArray.push('<a href="appliedJobs.html?jobId=${job.id}">Applied</a>');
+jobArray.push('<a href="updatejobs-genz.html?jobId=${job.id}"><i class="fa fa-eye"/></a>');
+
+// jobArray.push('<a href="appliedJobs.html?jobId=${job.id}">Applied</a>');
 
 dataSet.push(jobArray);
 </c:forEach>
@@ -267,12 +267,7 @@ $(document).ready(function() {
 			{ title: "Created By" },
 			{ title: "Job Date" },
 			{
-				 title: "Edit"
-			},{
-				 title: "Delete"
-			},
-			{
-				 title: "Applied Jobs"
+				 title: "view"
 			}
 //             {
 //                 data: null,
@@ -287,6 +282,8 @@ $(document).ready(function() {
 //                 orderable: false
 //             }
         ],
+        
+        
 		
     } );
 } );
@@ -391,7 +388,7 @@ $(document).ready(function() {
 				<a class="sidebar-toggle js-sidebar-toggle">
 					<img src="assets-1/img/icons/Shape@1X (3).png">
                </a>
-			   <h4><b>Jobs/ Openings</b></h4>
+			   <h4><b>Completed Jobs</b></h4>
 
 			  <div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
@@ -471,9 +468,9 @@ $(document).ready(function() {
                        <a class="paginate_button next disabled" aria-controls="example" data-dt-idx="2" tabindex="-1" id="example_next">Next</a>
                    </div>
                </div>   -->
-              <a style="color:#fff; " href="editjobs-genz.html"> <button class="csv">Add  <i class="fa fa-plus" aria-hidden="true"></i></button></a>
+<!--               <a style="color:#fff; " href="editjobs-genz.html"> <button class="csv">Add  <i class="fa fa-plus" aria-hidden="true"></i></button></a> -->
               
-              <a style="color:#fff; " href="completedjobs-genz.html" > <button class="csv" style="margin-right: 1em;">Jobs Completed</button></a>
+<!--               <a style="color:#fff; " href="completedjobs-genz.html" > <button class="csv" style="margin-right: 1em;">Jobs Completed</button></a> -->
                <div class="table_genz">
                <table id="example" class="display" width="100%"></table>
                </div> 
@@ -511,9 +508,7 @@ $(document).ready(function() {
 	</script>
     <script>
 		$(document).ready( function () {
-			$('#table_id').DataTable({
-		        "order": [[ 3, "desc" ]]
-		    });
+			$('#table_id').DataTable();
 		} );
 	</script>
 	

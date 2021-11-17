@@ -1487,6 +1487,17 @@ public class AdminController {
 		model.put("user", user);
 		return "admin/jobs-genz";
 	}
+	
+	@RequestMapping("/completedjobs-genz.html")
+	public String showCompletedJobs(Map<String, Object> model) {
+		List<JobAccount> jobs = new ArrayList<JobAccount>();
+		jobs = jobAccountRepo.findByStatus("Deleted");
+		model.put("jobs", jobs);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		User user = userRepo.findByEmail(authentication.getName());
+		model.put("user", user);
+		return "admin/completedjobs-genz";
+	}
 
 	@RequestMapping("/editjobs-genz.html")
 	public String showEditJob(Map<String, Object> model) {
