@@ -232,7 +232,7 @@ public class CSVService {
 
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getPostalCode(),
 						userProfile.getOtherDetails() == null ? ""
-								: String.valueOf(userProfile.getOtherDetails().isHavePc()),
+								: String.valueOf(userProfile.getOtherDetails().getDoHavePc()),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getCollegeName(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLandmark(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLocality(),

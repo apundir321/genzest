@@ -106,7 +106,7 @@ public OtherUserDetails() {
 	private String city;
 	
 //	@NotNull(message = "Please select value")
-	private boolean havePc;
+//	private boolean havePc;
 	
 	private String doHavePc;
 	
@@ -218,12 +218,12 @@ public OtherUserDetails() {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public boolean isHavePc() {
-		return havePc;
-	}
-	public void setHavePc(boolean havePc) {
-		this.havePc = havePc;
-	}
+//	public boolean isHavePc() {
+//		return havePc;
+//	}
+//	public void setHavePc(boolean havePc) {
+//		this.havePc = havePc;
+//	}
 	public String getPreference() {
 		return preference;
 	}

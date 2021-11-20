@@ -29,6 +29,7 @@ import com.howtodoinjava.dao.VerificationTokenRepository;
 import com.howtodoinjava.dto.UserDto;
 import com.howtodoinjava.error.UserAlreadyExistException;
 import com.howtodoinjava.model.NewLocationToken;
+import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.PasswordResetToken;
 import com.howtodoinjava.model.RecruiterProfile;
 import com.howtodoinjava.model.Role;
@@ -211,6 +212,8 @@ public class UserService implements IUserService {
 				roleRepository.save(role);
 			}
 			roles.add(role);
+			
+		
 		} else {
 //			recruiterProfile = new RecruiterProfile();
 //			recruiterProfile.setEmail(accountDto.getEmail());
