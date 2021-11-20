@@ -140,7 +140,7 @@ public class AdminController {
 	    	try {
 	        XSSFRow row = worksheet.getRow(i);
 	        String name = row.getCell(0).getStringCellValue();
-	        String email = row.getCell(1).getStringCellValue();
+	        String email = row.getCell(1)==null?"":row.getCell(1).getStringCellValue();
 	        String phone =String.valueOf( row.getCell(2).getRawValue());
 	        
 	        UserDto userDto = new UserDto();
