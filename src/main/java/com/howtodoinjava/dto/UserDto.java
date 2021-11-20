@@ -13,14 +13,11 @@ public class UserDto {
     @Size(min = 1, message = "Please enter first name")
     private String firstName;
 
-    @NotNull
-    @Size(min = 1, message = "Please enter last name")
+    
     private String lastName;
 
     private String password;
 
-    @NotNull
-    @Size(min = 1)
     private String matchingPassword;
     
     @NotNull

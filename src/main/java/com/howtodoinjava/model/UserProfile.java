@@ -43,7 +43,6 @@ public class UserProfile {
 	private String firstName;
 	
 //	@NotNull
-	@NotEmpty(message = "Please enter last name")
 	private String lastName;
 	
 //	@NotNull

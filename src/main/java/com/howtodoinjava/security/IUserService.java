@@ -19,6 +19,8 @@ public interface IUserService {
     
     public User registerAdminAccount(final UserDto accountDto,boolean isRecuiter) throws Exception;
 
+    public User registerBulkUserUpload(final UserDto accountDto, boolean isRecuiter) throws Exception;
+    
     User getUser(String verificationToken);
 
     void saveRegisteredUser(User user);

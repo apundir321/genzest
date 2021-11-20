@@ -173,6 +173,62 @@ public class UserService implements IUserService {
 		user.setRecruiterProfile(recruiterProfile);
 		return userRepository.save(user);
 	}
+	
+	
+	
+	
+	public User registerBulkUserUpload(final UserDto accountDto, boolean isRecuiter) throws Exception {
+		if (emailExists(accountDto.getEmail())) {
+			throw new UserAlreadyExistException(
+					"There is an account with that email address: " + accountDto.getEmail());
+		}
+		if(phoneExists(accountDto.getPhoneNo())) {
+			throw new UserAlreadyExistException(
+					"There is already an account with that phone no. : " + accountDto.getPhoneNo());
+		}
+		Role role = null;
+		UserProfile profile = null;
+		RecruiterProfile recruiterProfile = null;
+		final User user = new User();
+		List<Role> roles = new ArrayList<Role>();
+		user.setFirstName(accountDto.getFirstName());
+		user.setLastName(accountDto.getLastName());
+		user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
+		user.setEmail(accountDto.getEmail());
+		user.setUsing2FA(accountDto.isUsing2FA());
+		user.setPhoneNo(accountDto.getPhoneNo());
+		user.setEnabled(true);
+		if (!isRecuiter) {
+			profile = new UserProfile();
+			profile.setEmail(accountDto.getEmail());
+			profile.setFirstName(accountDto.getFirstName());
+			profile.setLastName(accountDto.getLastName());
+			role = roleRepository.findByName("ROLE_EMPLOYEE");
+//			profile.setUser(user);
+			if (role == null) {
+				role = new Role();
+				role.setName("ROLE_EMPLOYEE");
+				roleRepository.save(role);
+			}
+			roles.add(role);
+		} else {
+//			recruiterProfile = new RecruiterProfile();
+//			recruiterProfile.setEmail(accountDto.getEmail());
+//			recruiterProfile.setFirstName(accountDto.getFirstName());
+//			recruiterProfile.setLastName(accountDto.getLastName());
+//			role = roleRepository.findByName("ROLE_RECRUITER");
+			if (role == null) {
+				role = new Role();
+				role.setName("ROLE_RECRUITER");
+				roleRepository.save(role);
+			}
+			roles.add(role);
+		}
+		user.setRoles(roles);
+		user.setUserProfile(profile);
+		user.setRecruiterProfile(recruiterProfile);
+		return userRepository.save(user);
+	}
 
 	@Override
 	public User getUser(final String verificationToken) {

@@ -1,14 +1,12 @@
 package com.howtodoinjava.app.controller;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,27 +15,27 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.joda.time.Days;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.organizations.model.Account;
 import com.howtodoinjava.dao.JobAccountApplicationRepo;
 import com.howtodoinjava.dao.JobEarningRepo;
 import com.howtodoinjava.dao.LocationRepository;
@@ -51,6 +49,7 @@ import com.howtodoinjava.domain.JobAccountCustomRepo;
 import com.howtodoinjava.domain.JobAccountRepo;
 import com.howtodoinjava.domain.JobTypeRepo;
 import com.howtodoinjava.domain.TimeSlotRepo;
+import com.howtodoinjava.dto.UserDto;
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.CategoryCount;
 import com.howtodoinjava.entity.CourseType;
@@ -71,6 +70,7 @@ import com.howtodoinjava.model.OtherUserDetails;
 import com.howtodoinjava.model.StudentDocuments;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
+import com.howtodoinjava.security.IUserService;
 import com.howtodoinjava.service.AWSS3Service;
 import com.howtodoinjava.service.UserProfileService;
 
@@ -124,7 +124,51 @@ public class AdminController {
 
 	@Autowired
 	AWSS3Service awsService;
+	
+	@Autowired
+	IUserService uService;
 
+	@PostMapping("/uploadDataFile")
+	public void mapReapExcelDatatoDB(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model,@RequestParam("file") MultipartFile reapExcelDataFile) throws IOException {
+	    
+	    
+	    XSSFWorkbook workbook = new XSSFWorkbook(reapExcelDataFile.getInputStream());
+	    XSSFSheet worksheet = workbook.getSheetAt(0);
+	    
+	    for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
+	       
+	    	try {
+	        XSSFRow row = worksheet.getRow(i);
+	        String name = row.getCell(0).getStringCellValue();
+	        String email = row.getCell(1).getStringCellValue();
+	        String phone =String.valueOf( row.getCell(2).getRawValue());
+	        
+	        UserDto userDto = new UserDto();
+	        userDto.setFirstName(name);
+	        userDto.setPhoneNo(phone);
+	        if(email!=null && !email.equals(""))
+	        {
+	        	userDto.setEmail(email);
+	        }
+	        else {
+	        	userDto.setEmail(phone+"@genzest.com");
+	        }
+	        
+	        userDto.setPassword(phone+"_"+name);
+	        
+	        
+				uService.registerBulkUserUpload(userDto, false);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	       
+	    }
+	    session.setAttribute("successMessage", "Data Uploaded!");
+		response.sendRedirect("/genzest-d.html");
+	}
+	
+	
 	@RequestMapping("/category-genz.html")
 	public String category(Map<String, Object> model) {
 		List<Category> categories = categoryRepo.findByCategoryStatus("Active");

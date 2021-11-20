@@ -24,12 +24,17 @@
 	<link href="assets-1/css/style.css" rel="stylesheet">
 	<link href="assets-1/css/style2.css" rel="stylesheet">
 
+	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400&display=swap" rel="stylesheet">
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 <style>
 	.sidebar-content .sidebar-nav .fa-user-circle-o{
@@ -347,6 +352,20 @@
                               </div>
                             </div>
                         </div>
+                        
+                        
+                         <div class="col-lg-4">
+                            <div class="card1">
+                              <div class="card-body">
+<!--                                 <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> -->
+<i class="fa fa-users align-middle"></i> 
+                               <form action="/uploadDataFile" method="post"
+					enctype="multipart/form-data">
+					<input type="file" name="file" class="form-control" /> <button type="submit" class="btn" style="background: #F15336;color: white;margin-top: 1em">Bulk Upload</button>
+				</form>
+                              </div>
+                            </div>
+                        </div>
                       </div>
                 </div>
 
@@ -375,11 +394,41 @@
                         </div>
                     </div>
                 </div>
+                
+                
+
+				
 			</main>
 
 		
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		<c:if test="${not empty successMessage}">
+		toastr.success('${successMessage}', 'Success Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="successMessage" scope="session"/>
+			<c:remove var="successMessage" scope="request"/>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorMessage}">
+		toastr.error('${errorMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="errorMessage" scope="session"/>
+			<c:remove var="errorMessage" scope="request"/>
+	});
+	
+	$(document).ready(function(){
+		<c:if test="${not empty errorLoginMessage}">
+		toastr.error('${errorLoginMessage}', 'Error Alert', {timeOut: 5000})
+		</c:if>
+		<c:remove var="errorLoginMessage" scope="session"/>
+			<c:remove var="errorLoginMessage" scope="request"/>
+	});
+	
+	</script>
 
 	<script src="assets-1/js/app.js"></script>
 
