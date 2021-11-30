@@ -171,8 +171,18 @@ public class AdminController {
 	
 	@RequestMapping("/category-genz.html")
 	public String category(Map<String, Object> model) {
-		List<Category> categories = categoryRepo.findByCategoryStatus("Active");
-		if (categories.size() > 0) {
+		List<Category> categories = new ArrayList<>();
+		List<Category> savedCategories = categoryRepo.findAll();
+		
+		if (savedCategories.size() > 0) {
+			for(Category cat : savedCategories)
+			{
+				if(!cat.getCategoryStatus().equals("DELETED"))
+				{
+					categories.add(cat);
+				}
+			}
+			
 			model.put("categories", categories);
 		}
 		return "admin/category-genz";
@@ -657,7 +667,6 @@ public class AdminController {
 			} else {
 				category.setCreatedDate(new Date());
 				category.setCreatedBy(user);
-				categoryRepo.save(category);
 				model.put("category", categoryRepo.save(category));
 				model.put("successMessage", "Category Updated");
 			}
@@ -669,8 +678,15 @@ public class AdminController {
 
 	@RequestMapping("/jobtype-genz.html")
 	public String jobType(Map<String, Object> model) {
-
-		List<JobType> jobTypes = jobTypeRepo.findByJobTypeStatus("Active");
+		List<JobType> jobTypes = new ArrayList<>();
+		List<JobType> savedjobTypes = jobTypeRepo.findAll();
+		for(JobType jobType: savedjobTypes)
+		{
+			if(!jobType.getJobTypeStatus().equals("DELETED"))
+			{
+				jobTypes.add(jobType);
+			}
+		}
 		if (jobTypes.size() > 0) {
 			model.put("jobTypes", jobTypes);
 		}
@@ -804,8 +820,16 @@ public class AdminController {
 
 	@RequestMapping("/course-genz.html")
 	public String course(Map<String, Object> model) {
-
-		List<CourseType> courseTypes = courseRepo.findByCourseTypeStatus("Active");
+		List<CourseType> courseTypes = new ArrayList<>();
+		
+		List<CourseType> savedCourseTypes = courseRepo.findAll();
+		for(CourseType courseType : savedCourseTypes)
+		{
+			if(!courseType.getCourseTypeStatus().equals("DELETED"))
+			{
+				courseTypes.add(courseType);
+			}
+		}
 		if (courseTypes.size() > 0) {
 			model.put("courseTypes", courseTypes);
 		}
@@ -942,9 +966,16 @@ public class AdminController {
 
 	@RequestMapping("/timeslot-genz.html")
 	public String timeSlot(Map<String, Object> model) {
-
+		List<TimeSlot> timeSlots = new ArrayList<>();
 //		jobAccountRepo.deleteAll();
-		List<TimeSlot> timeSlots = timeSlotRepo.findByTimeSlotStatus("Active");
+		List<TimeSlot> savedTimeSlots = timeSlotRepo.findAll();
+		for(TimeSlot timeslot : savedTimeSlots)
+		{
+			if(!timeslot.getTimeSlotStatus().equals("DELETED"))
+			{
+				timeSlots.add(timeslot);
+			}
+		}
 		if (timeSlots.size() > 0) {
 			model.put("timeSlots", timeSlots);
 		}

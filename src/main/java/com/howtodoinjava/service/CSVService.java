@@ -13,7 +13,6 @@ import java.util.Set;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.QuoteMode;
-import org.hibernate.graph.spi.AppliedGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -35,8 +34,6 @@ import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.DayPreference;
 import com.howtodoinjava.entity.JobAccount;
 import com.howtodoinjava.entity.JobAccountApplication;
-import com.howtodoinjava.model.JobApplication;
-import com.howtodoinjava.model.JobCategory;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
 import com.howtodoinjava.security.UserService;
@@ -185,8 +182,9 @@ public class CSVService {
 					"College Name", "Landmark", "Locality", "Degree Completion Date", "Job Categories", "Preferences",
 					"Referral Code", "Payment Method", "UPI Id", "Bank Name", "Account number", "IFSC code","Adhar card","Student Id","Profile Pic");
 			csvPrinter.printRecord(headers);
+			
 			for (UserProfile userProfile : userProfiles) {
-
+				if (userProfile.getStatus() == null || userProfile.getStatus().equals("")) {
 				String jobCategories = "";
 				if (userProfile.getOtherDetails() != null) {
 					if (userProfile.getOtherDetails().getJobCategories() != null) {
@@ -235,7 +233,7 @@ public class CSVService {
 								: String.valueOf(userProfile.getOtherDetails().getDoHavePc()),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getCollegeName(),
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLandmark(),
-						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLocality(),
+						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getLocality()==null?userProfile.getOtherDetails().getOtherLocality():userProfile.getOtherDetails().getLocality(),
 						degreeCompletionDate, jobCategories, preferences,
 						userProfile.getOtherDetails() == null ? "" : userProfile.getOtherDetails().getReferralCode(),
 						userProfile.getStudentDocuments() == null ? ""
@@ -257,7 +255,7 @@ public class CSVService {
 				);
 
 				csvPrinter.printRecord(data);
-
+				}
 			}
 			csvPrinter.flush();
 			return new ByteArrayInputStream(out.toByteArray());

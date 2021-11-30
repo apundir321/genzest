@@ -91,6 +91,8 @@ import com.howtodoinjava.security.UserService;
 import com.howtodoinjava.service.AWSS3Service;
 import com.howtodoinjava.service.UserProfileService;
 
+
+
 @Controller
 public class IndexController {
 
@@ -314,6 +316,7 @@ public class IndexController {
 		if (userDetails == null) {
 			model.put("otherDetails", new OtherUserDetails());
 		} else {
+			
 			model.put("otherDetails", userDetails);
 		}
 		if (profile.getParentsName() == null) {
@@ -356,7 +359,7 @@ public class IndexController {
 	}
 
 	@RequestMapping("/searchjobs.html")
-	public String searchjobs(Map<String, Object> model) {
+	public String searchjobs(Map<String, Object> model,@RequestParam(name = "matching",required = false) String matchingValue) {
 		List<CourseType> courses = null;
 		List<Employer> employers = null;
 		List<Category> categories = null;
@@ -402,7 +405,7 @@ public class IndexController {
 
 				for (JobAccount account : jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories())) {
 					if (account.getStatus().equals("Open")  && !appliedJobIds.contains(account.getId())) {
-						if (userPreferenceList.size() > 0) {
+						if (userPreferenceList.size() > 0 && (matchingValue!=null && matchingValue.equals("true"))) {
 							boolean isJobMatchedWithUserPreference = false;
 							for (TimeSlot timeSlot : account.getTimeSlots()) {
 								Calendar c = Calendar.getInstance();

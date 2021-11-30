@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -130,7 +131,7 @@ public OtherUserDetails() {
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_preference", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "preference_id") })
-	private Set<DayPreference> preferences = new HashSet<>();
+	private Set<DayPreference> preferences = new TreeSet<>(new MyDayComparator());
 
 	
 	public String getCourse() {

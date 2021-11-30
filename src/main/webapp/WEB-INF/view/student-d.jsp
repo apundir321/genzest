@@ -153,7 +153,7 @@
                           <div class="card1">
                             <div class="card-body">
                               <i class="fa fa-building-o align-middle" ></i>
-                              <p class="card-text"><a href="searchjobs.html">Matching Jobs</a></p>
+                              <p class="card-text"><a href="searchjobs.html?matching=true">Matching Jobs</a></p>
                               <h5>${matchingJobsCount}</h5>
                             </div>
                           </div>

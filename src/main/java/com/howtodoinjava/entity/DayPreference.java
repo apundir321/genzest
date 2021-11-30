@@ -1,5 +1,7 @@
 package com.howtodoinjava.entity;
 
+import java.util.Comparator;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,5 +46,6 @@ public class DayPreference {
 	public void setTimeSlot(TimeSlot timeSlot) {
 		this.timeSlot = timeSlot;
 	}
+	
 
 }
