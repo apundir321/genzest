@@ -19,9 +19,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.howtodoinjava.entity.Category;
 import com.howtodoinjava.entity.DayPreference;
 
@@ -122,6 +124,10 @@ public OtherUserDetails() {
 	private String referralCode;
 	
 	private String description;
+	
+	@JsonIgnore
+	@Transient
+	private List<ShowPreference> showPreferences;
 //	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "profile_category", joinColumns = { @JoinColumn(name = "profile_id") }, inverseJoinColumns = {
@@ -340,6 +346,12 @@ public OtherUserDetails() {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public List<ShowPreference> getShowPreferences() {
+		return showPreferences;
+	}
+	public void setShowPreferences(List<ShowPreference> showPreferences) {
+		this.showPreferences = showPreferences;
 	}
 
 

@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class DayPreference {
+public class DayPreference implements Comparable<DayPreference>{
 	
 	@Id
 	@Column(unique = true, nullable = false)
@@ -45,6 +45,11 @@ public class DayPreference {
 	}
 	public void setTimeSlot(TimeSlot timeSlot) {
 		this.timeSlot = timeSlot;
+	}
+	@Override
+	public int compareTo(DayPreference o) {
+		// TODO Auto-generated method stub
+		return this.day.compareTo(o.getDay());
 	}
 	
 

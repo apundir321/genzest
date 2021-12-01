@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -16,6 +18,7 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -82,6 +85,7 @@ import com.howtodoinjava.entity.SearchJobs;
 import com.howtodoinjava.entity.TimeSlot;
 import com.howtodoinjava.model.JobTimeSlot;
 import com.howtodoinjava.model.OtherUserDetails;
+import com.howtodoinjava.model.ShowPreference;
 import com.howtodoinjava.model.StudentDocuments;
 import com.howtodoinjava.model.User;
 import com.howtodoinjava.model.UserProfile;
@@ -90,6 +94,8 @@ import com.howtodoinjava.security.IUserService;
 import com.howtodoinjava.security.UserService;
 import com.howtodoinjava.service.AWSS3Service;
 import com.howtodoinjava.service.UserProfileService;
+
+import io.jsonwebtoken.lang.Collections;
 
 
 
@@ -316,7 +322,14 @@ public class IndexController {
 		if (userDetails == null) {
 			model.put("otherDetails", new OtherUserDetails());
 		} else {
+			List<DayPreference> dayPreferencesList = new ArrayList<DayPreference>();
+			for(DayPreference pref : userDetails.getPreferences())
+			{
+					dayPreferencesList.add(pref);
+			}
 			
+			java.util.Collections.sort(dayPreferencesList);
+			model.put("preferencesData",dayPreferencesList);
 			model.put("otherDetails", userDetails);
 		}
 		if (profile.getParentsName() == null) {

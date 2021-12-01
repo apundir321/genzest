@@ -998,7 +998,7 @@ input[type=file] {
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="dayPreference" items="${otherDetails.preferences}">
+									<c:forEach var="dayPreference" items="${preferencesData}">
 										<tr>	
 											<th scope="row">${dayPreference.day}</th>
 											<td>${dayPreference.timeSlot.timeSlotName}</td>
