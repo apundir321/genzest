@@ -460,7 +460,12 @@ public class IndexController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		java.util.Collections.sort(matchingJobs, new Comparator<JobAccount>() {
+	        @Override
+	        public int compare(JobAccount o1, JobAccount o2) {
+	            return o1.getJobDate().compareTo(o2.getJobDate());
+	        }
+	    });
 		model.put("courses", courses);
 		model.put("employers", employers);
 		model.put("categories", categories);
@@ -956,6 +961,12 @@ public class IndexController {
 				applications.add(accountApplication);
 			}
 		}
+		java.util.Collections.sort(applications, new Comparator<JobAccountApplication>() {
+	        @Override
+	        public int compare(JobAccountApplication o1, JobAccountApplication o2) {
+	            return o1.getApplicationDate().compareTo(o2.getApplicationDate());
+	        }
+	    });
 		model.put("applications", applications);
 		return "appliedjobs";
 	}
