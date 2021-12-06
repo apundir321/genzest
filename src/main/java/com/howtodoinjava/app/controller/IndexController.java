@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -285,6 +286,15 @@ public class IndexController {
 
 	@RequestMapping("/edit.html")
 	public String edit(Map<String, Object> model) {
+		
+		 HashMap<String, Integer> dayMap = new HashMap<>();
+		    dayMap.put("Monday", 1);
+		    dayMap.put("Tuesday", 2);
+		    dayMap.put("Wednesday", 3);
+		    dayMap.put("Thursday", 4);
+		    dayMap.put("Friday", 5);
+		    dayMap.put("Saturday", 6);
+		    dayMap.put("Sunday", 7);
 		model.put("message", "HowToDoInJava Reader !!");
 		UserProfile profile = null;
 		List<CourseType> courses = null;
@@ -328,7 +338,12 @@ public class IndexController {
 					dayPreferencesList.add(pref);
 			}
 			
-			java.util.Collections.sort(dayPreferencesList);
+			java.util.Collections.sort(dayPreferencesList, new Comparator<DayPreference>() {
+		        @Override
+		        public int compare(DayPreference o1, DayPreference o2) {
+		            return dayMap.get(o1.getDay()).compareTo(dayMap.get(o2.getDay()));
+		        }
+		    });
 			model.put("preferencesData",dayPreferencesList);
 			model.put("otherDetails", userDetails);
 		}

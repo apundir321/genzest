@@ -886,7 +886,7 @@ input[type=file] {
 				<div class="clear clearfix"></div> 
 
  				<div class="form-group col-sm-3 col-xs-12 colbox"> 
- 					<label for="paymentMethod">Payment Method <span>*</span></label> 
+ 					<label for="paymentMethod">Payment Method</label> 
 
 					<form:select  class="form-control" 
  						path="paymentMethod"> 

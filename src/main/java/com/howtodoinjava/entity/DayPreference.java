@@ -1,6 +1,7 @@
 package com.howtodoinjava.entity;
 
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class DayPreference implements Comparable<DayPreference>{
+public class DayPreference{
 	
 	@Id
 	@Column(unique = true, nullable = false)
@@ -21,14 +22,17 @@ public class DayPreference implements Comparable<DayPreference>{
 	int id;
 	
 	private String day;
+
+	
 	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "timeSlot_id")
 	private TimeSlot timeSlot;
 	public int getId() {
 		return id;
 	}
+	
+	 
 	public DayPreference() {
-		super();
 		// TODO Auto-generated constructor stub
 	}
 	public void setId(int id) {
@@ -46,11 +50,7 @@ public class DayPreference implements Comparable<DayPreference>{
 	public void setTimeSlot(TimeSlot timeSlot) {
 		this.timeSlot = timeSlot;
 	}
-	@Override
-	public int compareTo(DayPreference o) {
-		// TODO Auto-generated method stub
-		return this.day.compareTo(o.getDay());
-	}
+	
 	
 
 }
