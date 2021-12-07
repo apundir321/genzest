@@ -96,6 +96,16 @@ public class JobAccount {
 	
 	private String day;
 	
+	@Transient
+	@JsonIgnore
+	private String applied;
+	
+	public String getApplied() {
+		return applied;
+	}
+	public void setApplied(String applied) {
+		this.applied = applied;
+	}
 	@JsonInclude()
 	@Transient
 	private List<TimeSlot> timeSlotsList;

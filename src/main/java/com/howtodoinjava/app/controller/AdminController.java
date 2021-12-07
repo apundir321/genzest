@@ -1811,6 +1811,7 @@ public class AdminController {
 		User user = userRepo.findByEmail(email);
 		int serialNumber = (int) ((Math.random() * (10000 - 1)) + 1);
 		user.setEmail(email + "_DELETED_" + serialNumber);
+		user.setPhoneNo(user.getPhoneNo()+"_DELETED_" + serialNumber);
 		userRepo.save(user);
 		session.setAttribute("successMessage", "Profile Deleted!");
 		res.sendRedirect("/stud-genz.html");

@@ -560,7 +560,7 @@ input[type=file] {
 						</c:if>
 						<c:if test="${not empty otherDetails.mobileNo }">
 						<form:input class="form-control" path="mobileNo"
-							placeholder="Mobile no" id="mobileNo"
+							placeholder="Mobile no" id="mobileNo" readonly="true"
 							 />
 						</c:if>
 						<form:errors path="mobileNo" cssClass="error"></form:errors>

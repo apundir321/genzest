@@ -70,7 +70,7 @@
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b></span>
+					<a class="sidebar-link first" href="profile.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p>
             		</a>
 				</li>
@@ -141,30 +141,37 @@
                 <div class="container-fluid1">
                     <div class="row">
                         <div class="col-lg-4">
+                        <a href="profile.html">
                           <div class="card1">
                             <div class="card-body">
                               <i class="fa fa-user" aria-hidden="true"></i>  
-                              <p class="card-text"><a href="profile.html">My Profile</a></p>
+                              <p class="card-text">My Profile</p>
                              <div style="color: white;font-size: smaller;">(Only Completed profiles are visible to recruiters)</div>
                             </div>
                           </div>
+                          </a>
                         </div>
+                       
                         <div class="col-lg-4">
+                         <a href="searchjobs.html?matching=true">
                           <div class="card1">
                             <div class="card-body">
                               <i class="fa fa-building-o align-middle" ></i>
-                              <p class="card-text"><a href="searchjobs.html?matching=true">Matching Jobs</a></p>
+                              <p class="card-text">Matching Jobs</p>
                               <h5>${matchingJobsCount}</h5>
                             </div>
                           </div>
+                          </a>
                         </div>
                         <div class="col-lg-4">
                             <div class="card1">
+                            <a href="appliedjobs.html">
                               <div class="card-body">
                                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                <p class="card-text"><a href="appliedjobs.html">Applied Jobs</a></p>
+                                <p class="card-text">Applied Jobs</p>
                                 <h5>${appliedJobsCount}</h5>
                               </div>
+                              </a>
                             </div>
                           </div>
                       </div>

@@ -432,7 +432,11 @@ public class IndexController {
 			if (otherDetails != null) {
 
 				for (JobAccount account : jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories())) {
-					if (account.getStatus().equals("Open")  && !appliedJobIds.contains(account.getId())) {
+					if (account.getStatus().equals("Open")) {
+						if(appliedJobIds.contains(account.getId()))
+						{
+							account.setApplied("Applied");
+						}
 						if (userPreferenceList.size() > 0 && (matchingValue!=null && matchingValue.equals("true"))) {
 							boolean isJobMatchedWithUserPreference = false;
 							for (TimeSlot timeSlot : account.getTimeSlots()) {
@@ -444,6 +448,7 @@ public class IndexController {
 									isJobMatchedWithUserPreference = true;
 								}
 							}
+							
 
 							if (isJobMatchedWithUserPreference) {
 								matchingJobs.add(account);

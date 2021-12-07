@@ -115,7 +115,7 @@ jobArray.push('${job.noOfVacancy}');
 jobArray.push('${job.city}');
 jobArray.push('<fmt:formatDate value="${job.jobDate}" var="dateString" pattern="dd/MM/yyyy" />${dateString}');
 jobArray.push('<a href="viewjobs-genz.html?jobId=${job.id}"><i class="fa fa-eye"/></a>');
-jobArray.push('<input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}">')
+jobArray.push('<c:if test="${empty job.applied}"><input class="form-check-input" name="applyJob" type="checkbox" value="${job.id}" id="defaultCheck1_${job.id}"></c:if>   <c:if test="${not empty job.applied}">Applied</c:if>')
 dataSet.push(jobArray);
 </c:forEach>
 
@@ -152,7 +152,7 @@ $(document).ready(function() {
 				<br>
 
 				    <li class="sidebar-item top">
-					<a class="sidebar-link first" href="#"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b></span>
+					<a class="sidebar-link first" href="profile.html"><i class="fa fa-user-circle-o align-middle" aria-hidden="true"></i>&nbsp; <span class="align-middle "><b>${user.firstName}</b></span>
 						<p style="margin-left: 7.5rem; margin-top: -.9rem;">Student</p>
             		</a>
 				</li>
