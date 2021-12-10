@@ -430,7 +430,7 @@ public class IndexController {
 			}
 			OtherUserDetails otherDetails = user.getUserProfile().getOtherDetails();
 			if (otherDetails != null) {
-
+				if(otherDetails.getJobCategories().size()>0) {
 				for (JobAccount account : jobAccountCustomRepo.findJobsByCategories(otherDetails.getJobCategories())) {
 					if (account.getStatus().equals("Open")) {
 						if(appliedJobIds.contains(account.getId()))
@@ -459,7 +459,28 @@ public class IndexController {
 						}
 					}
 				}
+				}else
+				{
+					List<JobAccount> allJobs = jobAccountRepo.findByStatus("Open");
+					for(JobAccount acc: allJobs) {
+					if(appliedJobIds.contains(acc.getId()))
+					{
+						acc.setApplied("Applied");
+					}
+					}
+					matchingJobs.addAll(allJobs);
+				}
 
+			}else
+			{
+				List<JobAccount> allJobs = jobAccountRepo.findByStatus("Open");
+				for(JobAccount acc: allJobs) {
+					if(appliedJobIds.contains(acc.getId()))
+					{
+						acc.setApplied("Applied");
+					}
+					}
+				matchingJobs.addAll(allJobs);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
